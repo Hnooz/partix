@@ -32,4 +32,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
 
 });
 Route::get('/store', 'StoreController@index')->name('store.index');
-Route::get('/orders', 'OrderController@index')->name('orders.index');
+Route::get('/categories', 'CategoryController@index')->name('categories.index');
+Route::get('/items', 'CategoryController@items')->name('categories.items');
+Route::get('/details', 'CategoryController@details')->name('categories.details');
+Route::get('/cart', 'CategoryController@cart')->name('categories.cart');

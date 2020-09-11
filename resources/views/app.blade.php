@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
-<body class="bg-gray-200 min-h-screen font-base">
+<body class="bg-gray-200 font-base">
 @routes
 @inertia
+</
 </body>
 </html>
