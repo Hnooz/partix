@@ -1,174 +1,196 @@
 <template>
     <div>
     <BaseNav/>
-        <!-- <h1 class="font-semibold mt-32 py-10 text-2xl  text-gray-700">Test Item</h1> -->
-        <div class="bg-white container mb-20 md:max-w-4xl md:mx-auto md:mt-64 mt-48 py-4 shadow-lg">
-
-            <!-- item name and shor desc -->
-            <div class="px-3">
-                <h1 class="font-semibold text-xl text-blue-500">item name</h1>
-                <div class="ml-16">
-                    <p class="font-semibold text-gray-800 text-xl">item short description</p>
-                    <p class="font-medium text-gray-600">55W, H7, 12V</p>
-                </div>
+    <SelectSection/>
+         <!-- filter search -->
+    <div class="bg-teal-700 py-5">
+        <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-16 text-white">
+            <div>
+                <h1>filters <span class="font-normal capitalize">| oil filters </span> <span lass="font-normal capitalize">| air filter</span></h1>
             </div>
-
-             <!-- image -->
-            <div class="my-6 w-full">
-                <!-- <div class="bg-center bg-cover h-64 itemImage mx-auto w-64"></div> -->
-                <img class="object-cover object-center h-64 mx-auto w-64" src="../../images/car.jpeg" alt="test">
+            <div class="flex items-center">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <button class="bg-white flex focus:outline-none outline-none h-8 items-center justify-center rounded-full w-8" type="button">
+                    <svg class="text-teal-800 w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                </button>
+                
             </div>
-            
-            <div class="md:flex justify-around my-20 hidden"> 
-                <div class="border mx-4 relative shadow-lg w-1/3">
-                    <h1 class="border-blue-400 pl-3 py-1 text-gray-600">Original</h1>
-                    <img class="h-32 mx-auto my-3 object-center object-cover w-32" src="../../images/car.jpeg" alt="">
-                    <p class="text-gray-700 text-sm pl-3 my-3">$45,8</p>
-                    <button type="button" class="bg-blue-400 flex focus:outline-none justify-center outline-none py-2 rounded text-white w-full">
-                        <svg viewBox="0 0 20 20" fill="currentColor" class="shopping-cart w-8 h-8">
-                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
-                        </svg>
-                    </button>
-                    <span class="absolute bg-blue-400 px-4 py-1 right-0 rounded-bl-lg shadow-lg text-sm text-white top-0 tracking-tighter">-23%</span>
-                </div>
+        </div>
+    </div>
 
-                <div class="border mx-4 relative shadow-lg w-1/3">
-                    <h1 class="border-blue-400 pl-3 py-1 text-gray-600">Improved</h1>
-                    <img class="h-32 mx-auto my-3 object-center object-cover w-32" src="../../images/panda.jpg" alt="">
-                    <p class="text-gray-700 text-sm pl-3 my-3">$45,8</p>
-                    <button type="button" class="bg-blue-400 flex focus:outline-none justify-center outline-none py-2 rounded text-white w-full">
-                        <svg viewBox="0 0 20 20" fill="currentColor" class="shopping-cart w-8 h-8">
-                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
-                        </svg>
-                    </button>
-                    <span class="absolute bg-blue-400 px-4 py-1 right-0 rounded-bl-lg shadow-lg text-sm text-white top-0 tracking-tighter">-23%</span>
-                </div>
-
-                <div class="border mx-4 relative shadow-lg w-1/3">
-                    <h1 class="border-blue-400 mb-20 pl-3 py-1 text-gray-600">Used</h1>
-                    <button type="button" class="bg-blue-400 focus:outline-none mb-10 mx-20 outline-none px-2 py-1 rounded text-white">Order Now</button>
-                    <p class="text-gray-700 text-sm pl-3 mb-3">$45,8</p>
-                    <button type="button" class="bg-blue-400 flex focus:outline-none justify-center outline-none py-2 rounded text-white w-full">
-                        <svg viewBox="0 0 20 20" fill="currentColor" class="shopping-cart w-8 h-8">
-                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <Slide class="md:hidden"/>
-            <!-- item price -->
-            <!-- <div class="flex items-center justify-between px-3">
-                <div class="flex items-center">
-                    <label for="OEM">OEM</label>
-                    <button type="button"
-                            class="bg-orange-600 border-2 border-gray-500 focus:border-blue-300 focus:outline-none h-4 mx-2 outline-none rounded-full w-4">
-                    </button>
-
-                    <label for="OEM" class="whitespace-no-wrap">After Market</label>
-                    <button type="button"
-                            class=" border-2 border-gray-500 focus:border-blue-300 focus:outline-none h-4 mx-2 outline-none rounded-full w-4">
-                    </button>
-                    <label for="OEM">Used</label>
-                    <button type="button"
-                            class="border-2 border-gray-500 focus:border-blue-300 focus:outline-none h-4 mx-2 outline-none rounded-full w-4">
-                    </button>
-                </div>
-                <div class="text-right">
-                    <p>
-                    <span class="line-through mr-3 text-gray-600">$&nbsp;6,40</span>
-                    <span class="bg-orange-700 font-semibold px-1 rounded-full text-white">-26%</span>
-                    </p>
-                    <p class="font-semibold text-2xl text-gray-800">$&nbsp;4,87</p>
-                    <p class="text-gray-600 text-sm">incl, 20% VAT excl<span class="pl-2 text-purple-900">delivery costs</span></p>
-                </div>
-            </div> -->
-
-            <!-- add to cart button -->
-            <!-- <div class="flex px-3 my-6">
-                <div class="border border-gray-500 flex items-center p-2 rounded-lg text-gray-700">
-                    <span class="pr-8">{{count}}</span>
-                    <div class="-my-2">
-                        <button class="outline-none focus:outline-none" type="button" @click="count++">
-                            <svg viewBox="0 0 20 20" fill="currentColor" 
-                                class="chevron-up  w-6 h-6" >
-                                <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
+    <div class="container max-w-6xl mb-20 md:mx-auto mt-16 py-4">
+        <div class="flex justify-between">
+            <div>
+                <div class="flex">
+                    <div>
+                        <div class="bg-white flex h-70 items-center justify-center w-70">
+                            <img class="h-40 object-center object-cover w-40" src="../../images/1223/airfilter.png" alt="">
+                        </div>
+                       <div class="flex justify-around mt-6">
+                        <Slide class="max-w-xs" :arrows="true" :slidesToShow=3>
+                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-1.png" alt=""></div>
+                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-2.png" alt=""></div>
+                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-3.png" alt=""></div>
+                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-2.png" alt=""></div>
+                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-3.png" alt=""></div>      
+                        </Slide> 
+                       </div>
                         
-                        <button class="outline-none focus:outline-none" :disabled="count == 0" type="button" @click="count--">
-                            <svg viewBox="0 0 20 20" fill="currentColor" 
-                                 class="chevron-down h-6  w-6" >
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                        
+
+                    </div>
+                    <div class="mx-8">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="capitalize font-semibold text-3xl text-teal-700">air filter</p>
+                                <p class="capitalize font-medium text-teal-400 text-xl">oil filter</p>
+                                <button class="flex" type="button">
+                                    <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-6 text-gray-400 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                                </button>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-3xl text-gray-900">1.230 <span class="font-hairline text-gray-700 text-xl">QAR</span> </p>
+                                <p class="line-through text-center text-gray-600">3.000 <span>QAR</span> </p>
+                            </div>
+                        </div>
+                        <p class="bg-blue-100 my-5 p-5 text-gray-600 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Fuga, ipsa non perspiciatis quaerat porro eius accusamus 
+                            ipsum modi a ad corporis dolore voluptate iure. 
+                            Magni facere nostrum eum distinctio ea.
+                        </p>
+                        <div class="flex items-center">
+                            <h1 class="capitalize text-teal-900">quantity:</h1>
+                            <span class="bg-teal-500 mx-2 my-2 text-white">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
+
+                            <span class="bg-white flex items-center mx-2 px-4 py-2">1</span>
+
+                            <span class="bg-teal-500 mx-2 my-2 text-white">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">    
+                                    <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="capitalize">
+                            <p class="text-gray-700 my-6">
+                                <span class="font-semibold text-teal-400">in stock . </span>
+                                ships within 24hrs
+                                </p>
+                            <button class="bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white" type="button">
+                                <span class="mx-12">Add to Cart</span> 
+                                <svg class="h-6 mx-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div>
+                    <div class="flex mx-64 px-24">
+                        <div class="sharethis-inline-share-buttons flex my-4" style="z-index:0;"></div>
+                    </div>
+                    
+                    <div class="max-w-xl">
+                        <ul class="flex justify-between capitalize "> 
+                            <li class="text-teal-700 font-semibold">
+                                <a href="#">
+                                    product details
+                                    <span class="absolute block bg-teal-700 h-1 w-16"></span>
+                                </a>
+                                
+                            </li>
+                            <li class="text-gray-600"><a href="#">features</a></li>
+                            <li class="text-gray-600"><a href="#">installation</a></li>
+                            <li class="text-gray-600"><a href="#">warranty</a></li>
+                            <li class="text-gray-600"><a href="#">reviews(2)</a></li>
+                        </ul>
+                        <div class="bg-center bg-cover bottomimage h-40 mt-10 w-full"></div>
                     </div>
                 </div>
-
-                <button  type="button" class="bg-red-700 flex font-semibold items-center justify-center ml-5 rounded-lg text-white uppercase w-full whitespace-no-wrap"> 
-                    <svg viewBox="0 0 20 20" fill="currentColor" class="h-8 mx-3 shopping-cart w-8">
-                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
-                    </svg>
-                    add to cart
-                </button>
-            </div> -->
-
-            <!-- item numbers -->
-            <!-- <div class="border-gray-500 border-t font-medium leading-loose mx-3 pt-3 px-4 text-gray-800 text-sm">
-                <p>Use number:&nbsp;<span>tgskahs t5</span></p>
-                <p>EAN number:&nbsp;<span>tgskahs 45678906545</span></p>
-            </div> -->
-
-            <!-- item details -->
-            <div class="my-4 mx-3">
-                <div class="bg-gray-400 text-xl flex font-semibold justify-between px-4 py-2 rounded-t-lg text-gray-800">
-                    <h1>Details</h1>
-                    <button type="button" class="cursor-pointer focus:outline-none outline-none" @click="isOpen = !isOpen">-</button>
-                </div>
-                <table class="table-auto w-full" v-if="isOpen">
-                    <tbody>
-                        <tr class="bg-gray-300 flex font-semibold justify-between px-4 py-2 text-gray-800">
-                            <td class="capitalize">Product Line</td>
-                            <td class="uppercase">longlife</td>
-                        </tr>
-                        <tr :class="(index + 1)%2 == 1 ? 'bg-gray-100' : 'bg-gray-300'" class="bg-gray-100 text-sm flex font-semibold justify-between px-4 py-2 text-gray-800"
-                            v-for="(item, index) in items = 12" :key="index">
-                            <td>Bulb Type:</td>
-                            <td>H7</td>
-                        </tr>
-                    </tbody>
-                </table>
+                
             </div>
-
+            <div class="bg-center bg-cover h-72 rightimage w-70">
+                
+            </div>
         </div>
+        <div class="flex justify-between mt-10">
+            <p class="max-w-xl px-2 text-gray-600 text-sm">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                Obcaecati, temporibus omnis in fugit non laudantium placeat natus 
+                <br/>
+                <br>
+                cupiditate consectetur facilis repellat, exercitationem quod similique 
+                molestiae enim consequuntur! Voluptas, nobis error
+
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                Obcaecati, temporibus omnis in fugit non laudantium placeat natus 
+                cupiditate consectetur facilis repellat, exercitationem quod similique 
+                molestiae enim consequuntur! Voluptas, nobis error
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                Obcaecati, temporibus omnis in fugit non laudantium placeat natus 
+                cupiditate consectetur facilis repellat, exercitationem quod similique 
+                molestiae enim consequuntur! Voluptas, nobis error
+
+            </p>
+            <div>
+                <h1 class="capitalize font-semibold mb-6 text-2xl text-teal-700">other categories
+                    <span class="absolute block bg-teal-700 h-1 w-24"></span>
+                </h1>
+                <div class="flex">
+                     <a class="" href="#">
+                        <img src="../../images/1223/Groupe 190.png" alt="">
+                    </a>
+                    <a class="mx-3" href="#">
+                        <img src="../../images/1223/Groupe 191.png" alt="">
+                    </a>
+                    <a class="" href="#">
+                        <img src="../../images/1223/Groupe 192.png" alt="">
+                    </a>
+                </div>
+               
+            </div>
+        </div>
+        
+
+    </div>
     <BaseFooter/>
-    <!-- <Cart/> -->
     </div>
 </template>
 
 <script>
 import BaseNav from '../../components/UI/BaseNav'
-import BaseFooter from '../../components/UI/BaseFooter'
+import SelectSection from '../../components/UI/SelectSection'
 import Slide from '../../components/UI/Slide'
-// import Cart from '../Store/Cart'
+import BaseFooter from '../../components/UI/BaseFooter'
+
+
     export default {
         components:{
             BaseNav,
+            SelectSection,
+            Slide,
             BaseFooter,
-            Slide
-            // Cart
-        },
-        data() {
-            return {
-                isOpen:true,
-                count:1
-            }
         },
     }
 </script>
 
 <style>
-.itemImage{
-    background-image: url('../../images/test.jpg');
+#st-1{
+    z-index: 0;
+}
+.rightimage{
+    background-image: url('../../images/1223/rightimage.png');
+}
+.bottomimage{
+    background-image: url('../../images/1223/replace_collage.png');
 }
 </style>

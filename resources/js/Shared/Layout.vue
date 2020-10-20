@@ -19,7 +19,7 @@
                     <a href="#"><img class="h-12 object-center object-cover rounded-full w-12" src="../images/panda.jpg" alt=""></a>
                 </div>
             </nav>
-            <main>
+            <main class="min-h-screen">
                 <!-- Replace with your content -->
                 <div class="px-8 py-6">
                     <slot></slot>
