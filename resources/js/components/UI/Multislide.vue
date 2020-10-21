@@ -1,18 +1,17 @@
 <template>
 <div>
   <VueSlickCarousel v-bind="settings" class="my-6">
-    <div class="" @click="isOpen = !isOpen">
-        <img class="w-20 h-20 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
-        <!-- <h1>test</h1> -->
+    <div @click="isOpen = !isOpen">
+        <img class="w-full h-64 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
     </div>
-    <div>
-        <img class="w-20 h-20 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
+    <div @click="isOpen = !isOpen">
+        <img class="w-full h-64 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
     </div>
-    <div>
-        <img class="w-20 h-20 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
+    <div @click="isOpen = !isOpen">
+        <img class="w-full h-64 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
     </div>
-    <div>
-        <img class="w-20 h-20 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
+    <div @click="isOpen = !isOpen">
+        <img class="w-full h-64 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
     </div>
   </VueSlickCarousel>
   <slot class="mt-5 block" v-if="isOpen"></slot>

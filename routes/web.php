@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn() => redirect()->route('dashboard.index'));
-
 Auth::routes(['register' => false, 'confirm' => false, 'reset' => false]);
 
+Route::redirect('/', '/dashboard');
 
 Route::middleware('auth')->prefix('/dashboard')->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard.index');
@@ -33,8 +32,8 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
     Route::get('/coupons', 'CouponCodeController@index')->name('coupons.index');
     Route::get('/comments', 'CommentController@index')->name('comments.index');
     Route::get('/categories', 'CategoryController@index')->name('categories.index');
-
 });
+
 Route::get('/store', 'StoreController@index')->name('store.index');
 // Route::get('/categories', 'CategoryController@index')->name('categories.index');
 Route::get('/items', 'CategoryController@items')->name('categories.items');
