@@ -2,7 +2,7 @@
     <layout>
         <div class="mx-auto w-full">
             <div>
-                <h1 class="my-2 text-gray-500">Home/Dashboard</h1>
+                <h1 class="my-2 text-gray-500">Dashboard</h1>
                 <!-- Card stats -->
                 <div class="flex flex-wrap -mx-4">
                     <div class="w-full md:w-1/3 px-4">

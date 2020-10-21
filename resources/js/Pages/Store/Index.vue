@@ -103,34 +103,20 @@
 
 
             <div class="flex">
-                <a class="" href="#">
-                    <img src="../../images/1223/Groupe 190.png" alt="">
-                </a>
-                <a class="mx-3" href="#">
-                    <img src="../../images/1223/Groupe 191.png" alt="">
-                </a>
-                <a class="" href="#">
-                    <img src="../../images/1223/Groupe 192.png" alt="">
-                </a>
-                <a class="mx-3" href="#">
-                    <img src="../../images/1223/Groupe 191.png" alt="">
-                </a>
-                <a class="" href="#">
-                    <img src="../../images/1223/Groupe 192.png" alt="">
-                </a>
+                <Multislide class="container max-w-4xl mx-auto">
+                    <div class="flex justify-around mt-6">
+                        <Slide class="max-w-sm" :arrows="true" :slidesToShow=3>
+                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-1.png" alt=""></div>
+                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-2.png" alt=""></div>
+                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-3.png" alt=""></div>
+                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-2.png" alt=""></div>
+                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-3.png" alt=""></div>      
+                        </Slide> 
+                       </div>
+                </Multislide>
             </div>
             
-            <!-- <Slide :arrows="true" :slidesToShow=3 class="max-w-2xl flex container mx-auto">
-                <a class="" href="#">
-                    <img src="../../images/1223/Groupe 190.png" alt="">
-                </a>
-                <a class="" href="#">
-                    <img src="../../images/1223/Groupe 191.png" alt="">
-                </a>
-                <a class="" href="#">
-                    <img src="../../images/1223/Groupe 192.png" alt="">
-                </a>
-            </Slide> -->
+            
 
 
 
@@ -190,7 +176,7 @@
                 </div>
             </div>
         </Slide>
-        <div class="-mt-64 container flex justify-center">
+        <div class="mt-8 container flex justify-center">
             <a class="bg-teal-400 capitalize font-semibold mb-10 px-10 py-2 text-white z-10 overflow-visible" href="#">
                 show all
             </a>
@@ -235,16 +221,12 @@
 </template>
 
 <script>
-  import VueSlickCarousel from 'vue-slick-carousel'
-  import 'vue-slick-carousel/dist/vue-slick-carousel.css'
-  // optional style for arrows & dots
-  import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import BaseNav from "../../components/UI/BaseNav";
 import SelectSection from '../../components/UI/SelectSection'
-// import Multislide from '../../components/UI/Multislide'
+// import ToggleMenu from '../../components/UI/ToggleMenu'
 import Slide from '../../components/UI/Slide'
 import BaseFooter from '../../components/UI/BaseFooter'
-// import Card from '../../components/UI/Card'
+import Multislide from '../../components/UI/Multislide'
 import ToggleMenu from "../../components/UI/ToggleMenu";
 
 export default {
@@ -252,7 +234,8 @@ export default {
         BaseNav,
         SelectSection,
         Slide,
-        // Multislide,
+        // ToggleMenu,
+        Multislide,
         BaseFooter,
         // Card,
         ToggleMenu
@@ -260,7 +243,7 @@ export default {
     data() {
     return {
         search:'',
-       showModal: false,
+        showModal: false,
         items:[
                 {name:'test1',fav:true},
                 {name:'test2',fav:false},{name:'test2',fav:false},

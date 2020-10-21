@@ -1,5 +1,6 @@
 <template>
-    <footer class="md:bg-teal-700 py-4 text-gray-600 w-full bg-center bg-cover  md:bg_image">
+<div>
+    <footer class="md:bg-teal-700 py-4 text-gray-600 w-full bg-center bg-cover bg_image md:block hidden">
         <div class="container md:grid grid-cols-3 items-center mx-auto px-12 text-white hidden">
             <div class="">
                 <div>
@@ -51,8 +52,14 @@
                 </form>
             </div>
         </div>
+        
+    </footer>
+
+    <footer class="py-4 text-gray-600 w-full md:hidden">
         <p class="capitalize text-center md:text-white my-6">&copy;2020. <span class="text-teal-500 uppercase">partix</span> all rights reserved</p>
     </footer>
+</div>
+    
 </template>
 
 <style>

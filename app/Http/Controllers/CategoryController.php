@@ -8,7 +8,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return inertia()->render('Store/Categories');
+        return inertia()->render('Dashboard/categories/index');
     }
 
     public function items()

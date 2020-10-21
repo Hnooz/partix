@@ -27,7 +27,8 @@
             </div>
         </div>
     </div>
-
+    
+    <!-- mobile view search -->
     <div class="md:hidden">
         <form class="bg-teal-500 px-8 py-3">
             <div class="relative">

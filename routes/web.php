@@ -28,11 +28,15 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
     Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
     Route::put('/users/{user}', 'UserController@update')->name('users.update');
     Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
-    
+
+    Route::get('/orders', 'OrderController@index')->name('orders.index');
+    Route::get('/coupons', 'CouponCodeController@index')->name('coupons.index');
+    Route::get('/comments', 'CommentController@index')->name('comments.index');
+    Route::get('/categories', 'CategoryController@index')->name('categories.index');
 
 });
 Route::get('/store', 'StoreController@index')->name('store.index');
-Route::get('/categories', 'CategoryController@index')->name('categories.index');
+// Route::get('/categories', 'CategoryController@index')->name('categories.index');
 Route::get('/items', 'CategoryController@items')->name('categories.items');
 Route::get('/details', 'CategoryController@details')->name('categories.details');
 Route::get('/cart', 'CategoryController@cart')->name('categories.cart');

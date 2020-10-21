@@ -1,10 +1,23 @@
 <template>
-  <VueSlickCarousel v-bind="settings" ref="c1" :asNavFor="$refs.c2" :focusOnSelect="true">
-    
-      <slot></slot>
-    
-   
+<div>
+  <VueSlickCarousel v-bind="settings" class="my-6">
+    <div class="" @click="isOpen = !isOpen">
+        <img class="w-20 h-20 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
+        <!-- <h1>test</h1> -->
+    </div>
+    <div>
+        <img class="w-20 h-20 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
+    </div>
+    <div>
+        <img class="w-20 h-20 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
+    </div>
+    <div>
+        <img class="w-20 h-20 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
+    </div>
   </VueSlickCarousel>
+  <slot class="mt-5 block" v-if="isOpen"></slot>
+</div>
+  
 </template>
 <script>
   import VueSlickCarousel from 'vue-slick-carousel'
@@ -13,27 +26,21 @@
   import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 
   export default {
-    name: 'Mutislide',
-    props:[
-      'arrows',
-      'slidesToShow'
-    ],
+    name: 'Mutlislide',
     components: { VueSlickCarousel },
     data() {
       return {
+        isOpen:false,
         settings: {
-          arrows: this.arrows,
-          // dots: true,
-          slidesToShow:this.slidesToShow,
-          // swipeToSlide:true,
-          slidesToScroll:1,
-          infinite:true,
-          // swipe:true,
-          // dotsClass:'slick-dots',
-          speed:2000,
-          autoPlay:true,
-          autoPlaySpeed:2000,
-          cssEase:"linear"
+          // "dots": true,
+          "focusOnSelect": true,
+          "centerMode": true,
+          "infinite": true,
+          "speed": 500,
+          "slidesToShow": 3,
+          "slidesToScroll": 3,
+          "touchThreshold": 5,
+          "adaptiveHeight": true
         },
       }
     },

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class CouponCodeController extends Controller
 {
     public function index()
     {
-        return inertia()->render('Dashboard/orders/index');
+        return inertia()->render('Dashboard/coupons/index');
     }
 }

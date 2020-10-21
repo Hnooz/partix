@@ -1,9 +1,6 @@
 <template>
   <VueSlickCarousel v-bind="settings">
-    
-      <slot></slot>
-    
-   
+    <slot></slot>
   </VueSlickCarousel>
 </template>
 <script>
@@ -23,24 +20,14 @@
       return {
         settings: {
           arrows: this.arrows,
-          // dots: true,
           slidesToShow:this.slidesToShow,
-          swipeToSlide:true,
-          // slidesToScroll:1,
-          infinite:true,
-          // swipe:true,
-          // dotsClass:'slick-dots',
-          // speed:2000,
-          // autoPlay:true,
-          // autoPlaySpeed:2000,
-          // cssEase:"linear"
+          "centerMode": true,
           "focusOnSelect": true,
-          // "infinite": true,
+          "infinite": true,
           "speed": 500,
-          // "slidesToShow": 3,
           "slidesToScroll": 3,
-          "touchThreshold": 5
-
+          "touchThreshold": 5,
+          "adaptiveHeight": true
         },
       }
     },

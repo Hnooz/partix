@@ -36,29 +36,29 @@
                     <form class="flex items-center justify-center">
                         <div class="grid grid-cols-2">
                             <label class="w-70" for="">
-                                <select class="bg-teal-900 opacity-75 border border-teal-900 capitalize form-select py-4 rounded text-white w-full" name="" id="">
+                                <select class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full" name="" id="">
                                     <option value="">brand</option>
                                 </select>
                             </label>
                             <label for="" class="w-70">
-                                <select class="bg-teal-900 opacity-75 border border-teal-900 capitalize form-select mx-1 py-4 rounded text-white w-full" name="" id="">
+                                <select class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select mx-1 py-4 rounded text-white w-full" name="" id="">
                                     <option value="">model</option>
                                 </select>
                             </label>
                             <label for="" class="w-70">
-                                <select class="bg-teal-900 opacity-75 border border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full" name="" id="">
+                                <select class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full" name="" id="">
                                     <option value="">year</option>
                                 </select>
                             </label>
                             <label for="" class="w-70">
-                                <select class="bg-teal-900 opacity-75 border border-teal-900 capitalize form-select my-1 mx-1 py-4 rounded text-white w-full" name="" id="">
+                                <select class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 mx-1 py-4 rounded text-white w-full" name="" id="">
                                     <option value="">engine</option>
                                 </select>
                             </label>
                         </div>
                         
                         <label class="mx-4" for="">
-                            <input class="bg-teal-500 capitalize px-8 py-1 rounded text-white" type="submit" value="go">
+                            <input class="bg-teal-500 focus:outline-none  capitalize px-8 py-1 rounded text-white" type="submit" value="go">
                         </label>
                     </form>
                 </div>

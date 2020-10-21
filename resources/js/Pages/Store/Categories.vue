@@ -13,22 +13,6 @@
                                 </div>
                             </div>
                         </ToggleMenu>
-                        <!-- <div class="hidden bg-white md:pr-0 my-3 pr-2 shadow-lg md:mx-1 md:block">
-                            <div class=" flex items-center justify-between md:flex-wrap">
-                                <div class="flex md:flex-col md:mx-auto md:w-full">
-                                    <img :src="category.img" alt="" class="h-12 md:h-32 md:mx-auto md:w-32 w-12"> 
-                                    <h1 class="capitalize font-semibold md:bg-gray-400 md:w-full py-3 text-center text-gray-800 text-sm">{{category.name}}</h1>
-                                </div> 
-                                <svg viewBox="0 0 20 20" fill="currentColor" class="chevron-down h-6  w-6"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                            </div>
-
-                            <div v-for="(item, index) in category.sideCategory" :key="index">
-                                <div class="flex items-center md:mx-2 md:text-xs md:my-2">
-                                    <img  :src="item.img" alt="" class="h-12 w-12">
-                                    <a href="/items" class="font-bold ml-2 text-center text-gray-600">{{item.name}}</a>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
