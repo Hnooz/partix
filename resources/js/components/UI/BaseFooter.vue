@@ -1,7 +1,7 @@
 <template>
 <div>
     <footer class="md:bg-teal-700 py-4 text-gray-600 w-full bg-center bg-cover bg_image md:block hidden">
-        <div class="container md:grid grid-cols-3 items-center mx-auto px-12 text-white hidden">
+        <div class="container hidden md:grid md:grid-cols-2 lg:grid-cols-3 items-center mx-auto px-12 text-white">
             <div class="">
                 <div>
                     <img src="../../images/LOGO-1.png" class="w-48" alt="">
@@ -33,7 +33,7 @@
                 </ul>
             </div>
 
-            <div class="mx-auto">
+            <div class="mx-auto mt-4 lg:mt-0">
                 <svg class="mx-auto text-teal-500 w-16" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                 <h1 class="capitalize flex justify-center leading-none text-2xl">newsletter - <span class="text-teal-500">&nbsp;join us!</span></h1>
                 <p class="flex justify-center mb-2 text-sm">subscription to our newsletter</p>
@@ -42,7 +42,7 @@
                     <!-- <label for=""></label> -->
 
                     <label for="">
-                        <input class="focus:outline-none outline-none px-3 py-1 text-gray-700 text-sm w-70" type="email" placeholder="your email">
+                        <input class="focus:outline-none outline-none px-3 py-2 rounded overflow-hidden text-gray-700 text-sm w-70" type="email" placeholder="your email">
                     </label>
                         
                     <label for="" class="block mx-32">

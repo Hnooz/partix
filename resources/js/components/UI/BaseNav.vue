@@ -1,7 +1,7 @@
 <template>
 <div>
     <nav :class="{ 'scrolled': !view.atTopOfPage }" 
-        class="animated bg-teal-700 fixed md:flex hidden flex-wrap items-center justify-between m-auto pb-6 shadow-md top-0 w-full">
+        class="animated bg-teal-700 md:flex hidden flex-wrap items-center justify-between m-auto pb-6 shadow-md top-0 w-full">
         <div class="bg-teal-900 capitalize flex font-medium justify-between px-20 py-4 text-white w-full">
             <div class="flex">
                 <h1>Call <span>78 5439 36</span></h1>
@@ -56,15 +56,15 @@
                                         d="M4 6h16M4 12h16M4 18h16"/>
                                 </svg>
                             </button>
-                            
-                            <label class="">
+
+                            <div class="flex md:flex-col lg:flex-row">
                                 <input type="search" class="bg-teal-900 border-0 focus:outline-none form-input outline-none p-2 py-3 rounded sm:ml-0 text-sm text-white w-70" placeholder="Enter the part number or name">
-                            </label>
-                            
-                            <input type="submit" value="search" class="bg-teal-500 cursor-pointer capitalize focus:outline-none font-medium md:px-10 outline-none p-2 px-2 text-white">
+                                
+                                <button type="submit" class="block bg-teal-500 cursor-pointer capitalize focus:outline-none font-medium md:px-10 outline-none p-2 px-2 text-white">search</button>
+                            </div>
                         </form>
 
-                        <div class="bg-teal-900 flex items-center p-3 rounded text-white whitespace-pre">
+                        <div class="bg-teal-900 flex items-center ml-2 p-3 rounded text-white">
 
                             <a href="#">
                                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -135,7 +135,7 @@
                    @click="logout">Logout</button>
         </div>
     <!-- your cart -->
-    <div :class="cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'" class="fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300">
+    <div :class="cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'" class="fixed right-0 top-0 z-30 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300">
         <div class="flex items-center justify-between">
             <h3 class="text-2xl font-medium text-gray-700">Your cart</h3>
             <button @click="cartOpen = !cartOpen" class="text-gray-600 focus:outline-none">
