@@ -5,7 +5,7 @@
 
         <div class="w-full md:flex-1">
             <nav class="hidden md:flex justify-between items-center bg-white p-4 shadow-md h-24">
-                <div class="flex font-hairline items-end leading-none mx-5 text-teal-700">
+                <div class="flex font-hairline items-center leading-none mx-5 text-teal-700">
                     <!-- <input class="px-4 py-2 bg-gray-200 border border-gray-300 rounded focus:outline-none" type="text"
                            placeholder="Search.."/> -->
                     <div>
@@ -44,7 +44,7 @@
                 </div>
                 <!-- /End replace -->
             </main>
-            <footer class="bg-white font-semibold  py-5 text-center text-teal-500 uppercase">
+            <footer class="bg-white font-semibold py-5 text-sm md:text-base text-center text-teal-500 uppercase">
                <span class="text-teal-700">Partix</span>  &copy; 2020
             </footer>
         </div>

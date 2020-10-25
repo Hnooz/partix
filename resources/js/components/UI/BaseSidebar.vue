@@ -1,14 +1,14 @@
 <template>
     <aside class="w-full md:w-64 md:min-h-screen bg_image bg-center bg-cover">
-        <div :class="isOpen ? 'hidden' : ''" class="flex items-center justify-between p-4 h-16 md:fixed">
+        <div :class="isOpen ? 'hidden' : ''" class="flex h-24 items-baseline justify-between md:fixed md:h-16 md:items-center md:mx-0 md:p-4 mx-5">
             <inertia-link href="/dashboard" class="flex items-center mt-10">
-                <img src="../../images/LOGO-1.png"  class="w-40" alt="">
+                <img src="../../images/LOGO-1.png"  class="w-24 md:w-40" alt="">
             </inertia-link>
             <div class="flex md:hidden">
                 <button type="button" @click="isOpen = !isOpen"
                         class="text-gray-300 hover:text-gray-500 focus:outline-none focus:text-gray-500">
 
-                    <svg v-if="!isOpen" class="fill-current w-8" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    <svg v-if="!isOpen" class="fill-current w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
                          stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -20,20 +20,17 @@
             </div>
         </div>
         <!-- mobile view -->
-        <div class=" hidden  fixed h-full md:block md:pt-24 pr-24 px-2 py-6 top-0 z-10 md:pr-0" :class="isOpen? 'block': 'hidden'">
+        <div :class="isOpen? 'block': 'hidden'" class="bg_image bg-center bg-cover fixed h-full md:block md:pt-24  px-2 py-6 top-0 z-10 md:pr-0" >
 
-            <svg @click="isOpen = !isOpen"  class="-mr-12 md:hidden absolute bg-indigo-900 block cursor-pointer h-6 right-0 rounded-full text-white w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+            <svg @click="isOpen = !isOpen"  class="-mx-12 -mx-24 absolute bg-teal-700 block cursor-pointer h-6 md:hidden mt-5 right-0 rounded-full text-white w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
 
-            <inertia-link href="/dashboard" class="flex md:hidden items-center">
-                <svg class="w-6" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M32.6883 0.335913C32.3407 -0.0248702 31.7929 -0.104067 31.3596 0.142322L19.2249 6.96861L20.3117 1.53926C20.4063 1.06188 20.1797 0.582302 19.7529 0.353512C19.3261 0.126923 18.7981 0.199519 18.455 0.544904L2.96986 16.03C2.94127 16.052 2.91487 16.0762 2.89067 16.1026C1.02735 17.9945 0 20.4804 0 23.1005C0 28.5584 4.4416 33 9.89955 33C12.5218 33 15.0077 31.9727 16.8974 30.1115C16.926 30.0829 16.9502 30.0543 16.9766 30.0235L30.1232 16.8792C30.4532 16.5492 30.539 16.0454 30.3366 15.6252C30.1364 15.205 29.6876 14.9674 29.2235 15.0092L24.4409 15.5394L32.8379 1.67125C33.0975 1.24227 33.0381 0.694497 32.6883 0.335913ZM9.89955 29.7002C6.25431 29.7002 3.29985 26.7457 3.29985 23.1005C3.29985 19.4552 6.25431 16.5008 9.89955 16.5008C13.5448 16.5008 16.4992 19.4552 16.4992 23.1005C16.4992 26.7457 13.5448 29.7002 9.89955 29.7002Z" fill="#667EEA"/>
-                </svg>
-
-                <span class="text-gray-300 text-xl font-semibold mx-2">Dashboard</span>
+            <inertia-link href="/dashboard" class="flex items-center md:hidden mt-6 mx-10">
+                <img src="../../images/LOGO-1.png"  class="w-24 md:hidden md:w-40" alt="">
             </inertia-link>
-            <ul class="md:fixed mt-20">
+
+            <ul class="md:fixed md:mt-16 mt-10 mx-6">
                 <li class="px-4 py-3  rounded" :class="route().current('dashboard.index')? 'text-teal-600' : 'text-white hover:text-teal-600'">
                     <inertia-link href="/dashboard" class="flex items-center">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path></svg>
@@ -103,14 +100,24 @@
                     </a>
                 </li>
 
-            </ul>
-            <ul class="mt-48 md:hidden">
-                <li class="flex px-2 py-3 hover:text-teal-600 rounded mt-2">
-                    <svg class="text-white w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <a href="#" class="mx-2 text-white hover:text-blue-400">Settings</a>
+                <li class="px-2 mt-4 hidden md:block">
+                    <a href="#" class="flex items-center text-white hover:text-teal-600">
+                        <svg class="w-6 h-6 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        <button class="mx-2" @click="logout">Logout</button>
+                    </a>
+                   
                 </li>
-                <li class="px-2 hover:text-teal-600 rounded">
-                    <button class="mx-2 text-white hover:text-blue-400" @click="logout">Logout</button>
+
+            </ul>
+
+            <ul class="md:hidden md:mt-48 mt-10 mx-8">
+                <li class="flex px-2 py-3 text-white hover:text-teal-600 rounded mt-2">
+                    <svg class="w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <a href="#" class="mx-2">Profile</a>
+                </li>
+                <li class="flex px-2 text-white hover:text-teal-600 rounded">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    <button class="mx-2" @click="logout">Logout</button>
                 </li>
             </ul>
         </div>
