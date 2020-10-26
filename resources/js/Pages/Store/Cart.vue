@@ -2,12 +2,12 @@
 <div x-data="{ cartOpen: false , isOpen: false }">
     <main class="mb-10 min-h-full">
         <div class="bg-white container mt-16 mx-auto px-6 shadow-lg">
-            <h3 class="text-gray-700 text-2xl font-medium md:pt-10">Checkout</h3>
+            <h3 class="text-teal-800 text-2xl font-medium md:pt-10">Checkout</h3>
             <div class="flex flex-col lg:flex-row mt-8">
                 <div class="w-full lg:w-1/2 order-2">
                     <form class="mt-8 lg:w-3/4 pb-4">
                         <div class="mt-8">
-                            <h4 class="text-sm text-gray-500 font-medium">Delivery address</h4>
+                            <h4 class="text-sm text-teal-700 font-medium">Delivery address</h4>
                             <div class="mt-6 flex">
                                 <label class="block flex-1">
                                     <input type="text" class="form-input mt-1 block w-full text-gray-700" placeholder="Address">
@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="mt-8">
-                            <h4 class="text-sm text-gray-500 font-medium">Phone</h4>
+                            <h4 class="text-sm text-teal-700 font-medium">Phone</h4>
                             <div class="mt-6 flex">
                                 <label class="block w-3/12">
                                     <select class="form-select text-gray-700 mt-1 block w-full">
@@ -31,11 +31,11 @@
                             </div>
                         </div>
                         <div class="flex items-center justify-between mt-8">
-                            <a href="/store" class="flex items-center text-gray-700 text-sm font-medium rounded hover:underline focus:outline-none">
+                            <a href="/store" class="flex items-center text-teal-700 text-sm font-medium rounded hover:underline focus:outline-none">
                                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
                                 <span class="mx-2">Back To Shop</span>
                             </a>
-                            <button class="flex items-center px-3 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                            <button class="flex items-center px-3 py-2 bg-teal-800 text-white text-sm font-medium rounded-md hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
                                 <span>Payment $5984</span>
                                 <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </button>
@@ -46,10 +46,10 @@
                     <div class="flex justify-center lg:justify-end">
                         <div class="border rounded-md max-w-md w-full px-4 py-3" >
                             <div class="flex items-center justify-between">
-                                <h3 class="text-gray-700 font-medium">Order total (6)</h3>
-                                <span class="text-gray-600 text-sm">Edit</span>
+                                <h3 class="text-teal-700 font-medium">Order total (6)</h3>
+                                <span class="text-teal-600 text-sm">Edit</span>
                             </div>
-                            <div class="flex justify-between mt-6"  v-for="(item ,index) in items = 2" :key="index">
+                            <div class="flex justify-between mt-6"  v-for="(item ,index) in items = 3" :key="index">
                                 <div class="flex">
                                     <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
                                     <div class="mx-3">

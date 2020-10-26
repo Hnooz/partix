@@ -12,7 +12,7 @@
 
         <div class="flex overflow-x-auto">
             <Multislide class="max-w-5xl mx-auto">
-                <div class="flex justify-around mt-6">
+                <div class="flex my-6">
                     <Slide class="max-w-sm" :arrows="true" :slidesToShow=3>
                         <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-1.png" alt=""></div>
                         <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-2.png" alt=""></div>
