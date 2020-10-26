@@ -27,6 +27,7 @@
         "@inertiajs/inertia": "^0.1.9",
         "@inertiajs/inertia-vue": "^0.1.4",
         "chart.js": "^2.9.3",
+        "vue-i18n": "^8.22.1",
         "vue-slick-carousel": "^1.0.6"
     }
 }
