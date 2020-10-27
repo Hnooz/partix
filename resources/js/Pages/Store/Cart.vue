@@ -1,8 +1,8 @@
 <template>
 <div x-data="{ cartOpen: false , isOpen: false }">
     <main class="mb-10 min-h-full">
-        <div class="bg-white container mt-16 mx-auto px-6 shadow-lg">
-            <h3 class="text-teal-800 text-2xl font-medium md:pt-10">Checkout</h3>
+        <div class="bg-white container mt-16 mx-auto px-6 py-8 shadow-lg">
+            <h3 class="text-teal-800 text-2xl font-medium">Checkout</h3>
             <div class="flex flex-col lg:flex-row mt-8">
                 <div class="w-full lg:w-1/2 order-2">
                     <form class="mt-8 lg:w-3/4 pb-4">
@@ -49,23 +49,25 @@
                                 <h3 class="text-teal-700 font-medium">Order total (6)</h3>
                                 <span class="text-teal-600 text-sm">Edit</span>
                             </div>
-                            <div class="flex justify-between mt-6"  v-for="(item ,index) in items = 3" :key="index">
-                                <div class="flex">
-                                    <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
-                                    <div class="mx-3">
-                                        <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
-                                        <div class="flex items-center mt-2">
-                                            <button class="text-gray-500 focus:outline-none focus:text-gray-600">
-                                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                            </button>
-                                            <span class="text-gray-700 mx-2">2</span>
-                                            <button class="text-gray-500 focus:outline-none focus:text-gray-600">
-                                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                            </button>
+                            <div class="overflow-y-auto" style="height:300px;">
+                                <div class="flex justify-between mt-6"  v-for="(item ,index) in items = 10" :key="index">
+                                    <div class="flex">
+                                        <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
+                                        <div class="mx-3">
+                                            <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
+                                            <div class="flex items-center mt-2">
+                                                <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                                                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                </button>
+                                                <span class="text-gray-700 mx-2">2</span>
+                                                <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                                                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
+                                    <span class="text-gray-600">20$</span>
                                 </div>
-                                <span class="text-gray-600">20$</span>
                             </div>
                         </div>
                     </div>
