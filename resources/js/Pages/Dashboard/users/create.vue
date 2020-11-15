@@ -45,7 +45,7 @@
                     password_confirmation: '',
                 }
             }
-        },
+        }, 
         methods: {
             submit() {
                 this.$inertia.post('/dashboard/users', this.form);

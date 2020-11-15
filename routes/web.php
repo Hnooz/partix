@@ -13,9 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['register' => false, 'confirm' => false, 'reset' => false]);
+Auth::routes(['register' => true, 'confirm' => false, 'reset' => false]);
 
 Route::redirect('/', '/dashboard');
+
+//new categories controoler
+//Route::resource('catgories', 'CategoriesController');
 
 Route::middleware('auth')->prefix('/dashboard')->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard.index');
@@ -31,7 +34,10 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
     Route::get('/orders', 'OrderController@index')->name('orders.index');
     Route::get('/coupons', 'CouponCodeController@index')->name('coupons.index');
     Route::get('/comments', 'CommentController@index')->name('comments.index');
-    Route::get('/categories', 'CategoryController@index')->name('categories.index');
+    Route::get('/categories', 'CategoriesController@index')->name('categories.index');
+    Route::post('/categories', 'CategoriesController@store')->name('categories.store');
+    //Route::resource('categories', 'CategoriesController', ['except' => ['index','store']]);
+
 });
 
 Route::get('/store', 'StoreController@index')->name('store.index');

@@ -93,7 +93,7 @@
         data() {
             return {
                 orders:[
-                    {id:'148923hce3',name:'test 1',type:'oem',price:'QAR 2000',status:'delivered',created_at:'14 Dec 2020'},
+                    {id:'148923hce3',name:'man 1',type:'oem',price:'QAR 2000',status:'delivered',created_at:'14 Dec 2020'},
                     {id:'148923hce3',name:'test 1',type:'oem',price:'QAR 2000',status:'delivered',created_at:'14 Dec 2020'},
                     {id:'148923hce3',name:'test 1',type:'oem',price:'QAR 2000',status:'awaiting',created_at:'14 Dec 2020'},
                     {id:'148923hce3',name:'test 1',type:'oem',price:'QAR 2000',status:'delivered',created_at:'14 Dec 2020'},

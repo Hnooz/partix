@@ -6,7 +6,7 @@
                 <div class="items-center md:flex">
                     <h2 class="font-bold md:text-3xl text-xl text-teal-600">Customers</h2>
                     <div class="capitalize flex items-center md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap">
-                         <h1>1.234 total</h1>
+                         <h1>123 total</h1>
                          <div class="flex items-center mx-8">
                              <h1>sort by :</h1>
                              <label for="">

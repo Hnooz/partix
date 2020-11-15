@@ -45,7 +45,9 @@
                     <div class="flex items-center justify-between">
                         <div class="">
                             <div class="flex-shrink-0">
+                                <a href="/store">
                                 <img src="../../images/LOGO-1.png" class="w-48" alt="">
+                                </a>
                             </div>
                             <p class="capitalize font-medium text-white">share part soluation</p>
                         </div>
