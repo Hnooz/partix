@@ -37,7 +37,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
 //fuck this bitch
     Route::get('/categories', 'CategoriesController@index')->name('categories.index');
     Route::get('/categories/create', 'CategoriesController@create')->name('categories.create');
-    Route::post('/categories/store', 'CategoriesController@store')->name('categories.store');
+    Route::post('/categories', 'CategoriesController@store')->name('categories.store');
     //Route::post('/categories', 'CategoriesController@store')->name('categories.store');
     //Route::resource('categories', 'CategoriesController', ['except' => ['index','store']]);
 

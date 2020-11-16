@@ -2573,18 +2573,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this.$inertia.post('/dashboard/categories/store', _this.category);
+                return _this.$inertia.post('/dashboard/categories', _this.category);
 
               case 2:
-                response = _context.sent;
-
-              case 3:
               case "end":
                 return _context.stop();
             }
@@ -21644,7 +21640,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.itemImage{\r\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/car.jpeg */ "./resources/js/images/car.jpeg")) + ");\n}\n.slick-slide{\r\n  margin-left:5px;\r\n  margin-right: 5px;\n}\r\n", ""]);
+exports.push([module.i, "\n.itemImage{\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/car.jpeg */ "./resources/js/images/car.jpeg")) + ");\n}\n.slick-slide{\n  margin-left:5px;\n  margin-right: 5px;\n}\n", ""]);
 
 // exports
 
@@ -21664,7 +21660,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#st-1{\r\n    z-index: 0;\n}\n.rightimage{\r\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/rightimage.png */ "./resources/js/images/1223/rightimage.png")) + ");\n}\n.bottomimage{\r\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/replace_collage.png */ "./resources/js/images/1223/replace_collage.png")) + ");\n}\r\n", ""]);
+exports.push([module.i, "\n#st-1{\n    z-index: 0;\n}\n.rightimage{\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/rightimage.png */ "./resources/js/images/1223/rightimage.png")) + ");\n}\n.bottomimage{\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/replace_collage.png */ "./resources/js/images/1223/replace_collage.png")) + ");\n}\n", ""]);
 
 // exports
 
@@ -21704,7 +21700,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nnav[data-v-f2aaf5fc] {\r\n    z-index: 10\n}\nnav.scrolled[data-v-f2aaf5fc] {\n@apply shadow-2xl;\n@apply border-b-2 ;\n@apply border-teal-500;\n}\n.bg_image[data-v-f2aaf5fc]{\r\n        background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/bg.png */ "./resources/js/images/1223/bg.png")) + ");\n}\r\n", ""]);
+exports.push([module.i, "\nnav[data-v-f2aaf5fc] {\n    z-index: 10\n}\nnav.scrolled[data-v-f2aaf5fc] {\n@apply shadow-2xl;\n@apply border-b-2 ;\n@apply border-teal-500;\n}\n.bg_image[data-v-f2aaf5fc]{\n        background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/bg.png */ "./resources/js/images/1223/bg.png")) + ");\n}\n", ""]);
 
 // exports
 
@@ -46778,9 +46774,9 @@ var render = function() {
       { staticClass: "mt-8" },
       [
         _c("div", { staticClass: "flex" }, [
-          _c("h2", { staticClass: "text-3xl text-indigo-500 font-bold" }, [
-            _vm._v("Category /"),
-            _c("span", { staticClass: "text-gray-700" }, [_vm._v(" Create")])
+          _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
+            _vm._v("Category/"),
+            _c("span", { staticClass: "text-gray-500" }, [_vm._v("Create")])
           ])
         ]),
         _vm._v(" "),
@@ -46852,7 +46848,7 @@ var render = function() {
                 "div",
                 { staticClass: "flex justify-end mt-4" },
                 [
-                  _c("base-button", { attrs: { primary: "" } }, [
+                  _c("base-button", { staticClass: "bg-teal-700" }, [
                     _vm._v("Create Category")
                   ])
                 ],
@@ -48664,9 +48660,9 @@ var render = function() {
       { staticClass: "mt-8" },
       [
         _c("div", { staticClass: "flex" }, [
-          _c("h2", { staticClass: "text-3xl text-indigo-500 font-bold" }, [
-            _vm._v("Users /"),
-            _c("span", { staticClass: "text-gray-700" }, [_vm._v(" Create")])
+          _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
+            _vm._v("Users/"),
+            _c("span", { staticClass: "text-gray-500" }, [_vm._v("Create")])
           ])
         ]),
         _vm._v(" "),
@@ -48775,7 +48771,7 @@ var render = function() {
                 "div",
                 { staticClass: "flex justify-end mt-4" },
                 [
-                  _c("base-button", { attrs: { primary: "" } }, [
+                  _c("base-button", { staticClass: "bg-teal-700" }, [
                     _vm._v("Create user")
                   ])
                 ],
@@ -51910,7 +51906,7 @@ var staticRenderFns = [
         { staticClass: "leading-4 max-w-xs mt-2 text-gray-400 text-sm" },
         [
           _vm._v(
-            "\r\n                    Lorem ipsum dolor,\r\n                    sit amet consectetur adipisicing elit.\r\n                    Fugiat impedit aspernatur ullam deleniti nihil saepe \r\n                    consectetur dolor et nemo perferendis laboriosam quasi autem,\r\n                    vero vitae, natus omnis porro\r\n                "
+            "\n                    Lorem ipsum dolor,\n                    sit amet consectetur adipisicing elit.\n                    Fugiat impedit aspernatur ullam deleniti nihil saepe \n                    consectetur dolor et nemo perferendis laboriosam quasi autem,\n                    vero vitae, natus omnis porro\n                "
           )
         ]
       )
@@ -52137,7 +52133,7 @@ var render = function() {
                       })
                     ]
                   ),
-                  _vm._v("\r\n                     AR\r\n                ")
+                  _vm._v("\n                     AR\n                ")
                 ]
               )
             ]),
@@ -52165,7 +52161,7 @@ var render = function() {
                     })
                   ]
                 ),
-                _vm._v("\r\n                    login\r\n                ")
+                _vm._v("\n                    login\n                ")
               ]),
               _vm._v(" "),
               _c("span", { staticClass: "mx-2" }, [_vm._v("|")]),
@@ -54171,7 +54167,7 @@ var staticRenderFns = [
                     staticClass: "uppercase font-semibold text-3xl text-white"
                   },
                   [
-                    _vm._v("\r\n                        select your "),
+                    _vm._v("\n                        select your "),
                     _c("span", { staticClass: "text-teal-600" }, [
                       _vm._v("car")
                     ])
@@ -80149,8 +80145,8 @@ module.exports = "/images/panda.jpg?7cac8080541b066c5fac3f4ab478b5b5";
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Mazin\Desktop\projects\try\partix\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Mazin\Desktop\projects\try\partix\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /home/hnooz/Documents/Projects/Partix/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/hnooz/Documents/Projects/Partix/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })
