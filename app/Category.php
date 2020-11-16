@@ -10,9 +10,6 @@ class Category extends Model
         'name', 'description',
     ];
     protected $table = 'categories';
-    public function part()
-   {
-       return $this->hasMany('App\Part');
-   }
+   //
 
 }

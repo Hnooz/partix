@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-    public function __construct() {
-        $this->middleware('auth');
-    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +25,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return inertia()->render('Dashboard/categories/create');
     }
 
     /**
@@ -38,23 +36,18 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, array(
+       $postData= $this->validate($request, [
             'name'      =>  'required|unique:part|max:255',
             'description'     =>  'required|max:255',
-            ));
+       ]);
+
+       Category:: create([
+           'name' => $postData['name'],
+           'description' => $postData['description'],
+
+       ]);
+            return redirect()->route('categories.index');
             
-            $ncategory= new Category();
-
-            Category::create([
-                'name'=>$request->name,
-                'description'=>$request->description,
-            ]);
-
-            session()->flash('toast', [
-                'type' => 'success',
-                'message' => 'Category created successfully'
-            ]);
-         return redirect()->route('categories.index');
     }
 
     /**
