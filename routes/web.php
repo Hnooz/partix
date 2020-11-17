@@ -17,30 +17,23 @@ Auth::routes(['register' => true, 'confirm' => false, 'reset' => false]);
 
 Route::redirect('/', '/dashboard');
 
-//new categories controoler
-//Route::resource('catgories', 'CategoriesController');
-
 Route::middleware('auth')->prefix('/dashboard')->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard.index');
     Route::get('/ui', 'DashboardController@ui');
+    // user route 
+    Route::resource('users', 'UserController');
 
-    Route::get('/users', 'UserController@index')->name('users.index');
-    Route::get('/users/create', 'UserController@create')->name('users.create');
-    Route::post('/users', 'UserController@store')->name('users.store');
-    Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
-    Route::put('/users/{user}', 'UserController@update')->name('users.update');
-    Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
-
+    // orders route 
     Route::get('/orders', 'OrderController@index')->name('orders.index');
-    Route::get('/coupons', 'CouponCodeController@index')->name('coupons.index');
-    Route::get('/comments', 'CommentController@index')->name('comments.index');
-//fuck this bitch
-    Route::get('/categories', 'CategoriesController@index')->name('categories.index');
-    Route::get('/categories/create', 'CategoriesController@create')->name('categories.create');
-    Route::post('/categories/store', 'CategoriesController@store')->name('categories.store');
-    //Route::post('/categories', 'CategoriesController@store')->name('categories.store');
-    //Route::resource('categories', 'CategoriesController', ['except' => ['index','store']]);
 
+    // coupons route 
+    Route::get('/coupons', 'CouponCodeController@index')->name('coupons.index');
+
+    // comments route 
+    Route::get('/comments', 'CommentController@index')->name('comments.index');
+
+    // category route
+    Route::resource('categories', 'CategoryController');
 });
 
 Route::get('/store', 'StoreController@index')->name('store.index');

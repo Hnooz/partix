@@ -3,7 +3,7 @@
 
         <div class="mt-8">
             <div class="flex">
-                <h2 class="text-3xl text-indigo-500 font-bold">Category /<span class="text-gray-700"> Create</span></h2>
+                <h2 class="text-3xl text-teal-700 font-bold">Category/<span class="text-gray-500">Create</span></h2>
             </div>
 
             <base-panel class="md:max-w-3xl mt-4">
@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="flex justify-end mt-4">
-                        <base-button primary>Create Category</base-button>
+                        <base-button class="bg-teal-700">Create Category</base-button>
                     </div>
                 </form>
             </base-panel>
@@ -42,7 +42,7 @@
         }, 
         methods: {
            async submit() {
-            let response = await this.$inertia.post('/dashboard/categories/store', this.category);
+             await this.$inertia.post('/dashboard/categories', this.category);
             }
         }
     }
