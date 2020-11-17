@@ -2658,53 +2658,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  data: function data() {
-    return {};
-  }
+  props: ['categories']
 });
 
 /***/ }),
@@ -21640,7 +21599,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.itemImage{\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/car.jpeg */ "./resources/js/images/car.jpeg")) + ");\n}\n.slick-slide{\n  margin-left:5px;\n  margin-right: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.itemImage{\r\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/car.jpeg */ "./resources/js/images/car.jpeg")) + ");\n}\n.slick-slide{\r\n  margin-left:5px;\r\n  margin-right: 5px;\n}\r\n", ""]);
 
 // exports
 
@@ -21660,7 +21619,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#st-1{\n    z-index: 0;\n}\n.rightimage{\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/rightimage.png */ "./resources/js/images/1223/rightimage.png")) + ");\n}\n.bottomimage{\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/replace_collage.png */ "./resources/js/images/1223/replace_collage.png")) + ");\n}\n", ""]);
+exports.push([module.i, "\n#st-1{\r\n    z-index: 0;\n}\n.rightimage{\r\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/rightimage.png */ "./resources/js/images/1223/rightimage.png")) + ");\n}\n.bottomimage{\r\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/replace_collage.png */ "./resources/js/images/1223/replace_collage.png")) + ");\n}\r\n", ""]);
 
 // exports
 
@@ -21700,7 +21659,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nnav[data-v-f2aaf5fc] {\n    z-index: 10\n}\nnav.scrolled[data-v-f2aaf5fc] {\n@apply shadow-2xl;\n@apply border-b-2 ;\n@apply border-teal-500;\n}\n.bg_image[data-v-f2aaf5fc]{\n        background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/bg.png */ "./resources/js/images/1223/bg.png")) + ");\n}\n", ""]);
+exports.push([module.i, "\nnav[data-v-f2aaf5fc] {\r\n    z-index: 10\n}\nnav.scrolled[data-v-f2aaf5fc] {\n@apply shadow-2xl;\n@apply border-b-2 ;\n@apply border-teal-500;\n}\n.bg_image[data-v-f2aaf5fc]{\r\n        background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/bg.png */ "./resources/js/images/1223/bg.png")) + ");\n}\r\n", ""]);
 
 // exports
 
@@ -46945,409 +46904,147 @@ var render = function() {
         _vm._v("click on the category name to modify")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "grid grid-cols-1 md:grid-cols-3" }, [
-        _c("div", { staticClass: "mx-5" }, [
-          _c("h1", { staticClass: "bg-teal-600 px-4 py-3 text-white" }, [
-            _vm._v("category name")
-          ]),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "bg-teal-100 capitalize mt-2 px-4 py-2 text-teal-800"
-            },
-            [
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
+      _c(
+        "div",
+        { staticClass: "grid grid-cols-1 md:grid-cols-3" },
+        _vm._l(_vm.categories, function(category) {
+          return _c("div", { key: category.id, staticClass: "mx-5" }, [
+            _c("h1", { staticClass: "bg-teal-600 px-4 py-3 text-white" }, [
+              _vm._v(_vm._s(category.name))
+            ]),
+            _vm._v(" "),
+            _c(
+              "ul",
+              {
+                staticClass:
+                  "bg-teal-100 capitalize mt-2 px-4 py-2 text-teal-800"
+              },
+              [
+                _c("li", { staticClass: "flex" }, [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "w-6 h-6",
                       attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
+                        fill: "currentColor",
+                        viewBox: "0 0 20 20",
+                        xmlns: "http://www.w3.org/2000/svg"
                       }
-                    })
-                  ]
-                ),
-                _vm._v("\n                        name\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "fill-rule": "evenodd",
+                          d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
+                          "clip-rule": "evenodd"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v("\n                        name\n                    ")
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "flex" }, [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "w-6 h-6",
                       attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
+                        fill: "currentColor",
+                        viewBox: "0 0 20 20",
+                        xmlns: "http://www.w3.org/2000/svg"
                       }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "fill-rule": "evenodd",
+                          d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
+                          "clip-rule": "evenodd"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v("\n                    name\n                    ")
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "flex" }, [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "w-6 h-6",
                       attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
+                        fill: "currentColor",
+                        viewBox: "0 0 20 20",
+                        xmlns: "http://www.w3.org/2000/svg"
                       }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "fill-rule": "evenodd",
+                          d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
+                          "clip-rule": "evenodd"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v("\n                    name\n                    ")
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "flex" }, [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "w-6 h-6",
                       attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
+                        fill: "currentColor",
+                        viewBox: "0 0 20 20",
+                        xmlns: "http://www.w3.org/2000/svg"
                       }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "fill-rule": "evenodd",
+                          d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
+                          "clip-rule": "evenodd"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v("\n                    name\n                    ")
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "flex" }, [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "w-6 h-6",
                       attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
+                        fill: "currentColor",
+                        viewBox: "0 0 20 20",
+                        xmlns: "http://www.w3.org/2000/svg"
                       }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mx-5 my-5 md:my-0" }, [
-          _c("h1", { staticClass: "bg-teal-600 px-4 py-3 text-white" }, [
-            _vm._v("category name")
-          ]),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "bg-teal-100 capitalize mt-2 px-4 py-2 text-teal-800"
-            },
-            [
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
-                      }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
-                      }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
-                      }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
-                      }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
-                      }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mx-5" }, [
-          _c("h1", { staticClass: "bg-teal-600 px-4 py-3 text-white" }, [
-            _vm._v("category name")
-          ]),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "bg-teal-100 capitalize mt-2 px-4 py-2 text-teal-800"
-            },
-            [
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
-                      }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
-                      }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
-                      }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
-                      }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "flex" }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                        "clip-rule": "evenodd"
-                      }
-                    })
-                  ]
-                ),
-                _vm._v("\n                    name\n                    ")
-              ])
-            ]
-          )
-        ])
-      ])
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "fill-rule": "evenodd",
+                          d: "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
+                          "clip-rule": "evenodd"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v("\n                    name\n                    ")
+                ])
+              ]
+            )
+          ])
+        }),
+        0
+      )
     ])
   ])
 }
@@ -51906,7 +51603,7 @@ var staticRenderFns = [
         { staticClass: "leading-4 max-w-xs mt-2 text-gray-400 text-sm" },
         [
           _vm._v(
-            "\n                    Lorem ipsum dolor,\n                    sit amet consectetur adipisicing elit.\n                    Fugiat impedit aspernatur ullam deleniti nihil saepe \n                    consectetur dolor et nemo perferendis laboriosam quasi autem,\n                    vero vitae, natus omnis porro\n                "
+            "\r\n                    Lorem ipsum dolor,\r\n                    sit amet consectetur adipisicing elit.\r\n                    Fugiat impedit aspernatur ullam deleniti nihil saepe \r\n                    consectetur dolor et nemo perferendis laboriosam quasi autem,\r\n                    vero vitae, natus omnis porro\r\n                "
           )
         ]
       )
@@ -52133,7 +51830,7 @@ var render = function() {
                       })
                     ]
                   ),
-                  _vm._v("\n                     AR\n                ")
+                  _vm._v("\r\n                     AR\r\n                ")
                 ]
               )
             ]),
@@ -52161,7 +51858,7 @@ var render = function() {
                     })
                   ]
                 ),
-                _vm._v("\n                    login\n                ")
+                _vm._v("\r\n                    login\r\n                ")
               ]),
               _vm._v(" "),
               _c("span", { staticClass: "mx-2" }, [_vm._v("|")]),
@@ -54167,7 +53864,7 @@ var staticRenderFns = [
                     staticClass: "uppercase font-semibold text-3xl text-white"
                   },
                   [
-                    _vm._v("\n                        select your "),
+                    _vm._v("\r\n                        select your "),
                     _c("span", { staticClass: "text-teal-600" }, [
                       _vm._v("car")
                     ])
@@ -80145,8 +79842,8 @@ module.exports = "/images/panda.jpg?7cac8080541b066c5fac3f4ab478b5b5";
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/hnooz/Documents/Projects/Partix/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/hnooz/Documents/Projects/Partix/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Users\Mazin\Desktop\projects\try\partix\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Mazin\Desktop\projects\try\partix\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

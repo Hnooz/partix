@@ -10,7 +10,12 @@ class CategoryController extends Controller
     
     public function index()
     {
-        return inertia()->render('Dashboard/categories/index');
+        $categories = Category::all();
+        return inertia()->render('Dashboard/categories/index',[
+            'categories' => $categories
+
+
+        ]);
     }
 
     public function create()
@@ -31,6 +36,12 @@ class CategoryController extends Controller
            'description' => $request->description,
 
        ]);
+
+       session()->flash('toast', [
+        'type' => 'success',
+        'message' => 'Category created successfully'
+        ]);
+
             return redirect()->route('categories.index');
             
     }
