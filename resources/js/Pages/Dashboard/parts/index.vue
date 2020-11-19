@@ -114,7 +114,7 @@
         components: {Layout},
          props: ['parts'],
             methods: {
-            Delete(user) {
+            Delete(part) {
                 this.$inertia.delete(`/dashboard/parts/${part.id}`);
             },
             Edit(user){

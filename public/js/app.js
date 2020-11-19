@@ -3289,7 +3289,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this.$inertia.post('/dashboard/parts', _this.category);
+                return _this.$inertia.post('/dashboard/parts', _this.part);
 
               case 2:
               case "end":
@@ -3430,7 +3430,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: ['parts'],
   methods: {
-    Delete: function Delete(user) {
+    Delete: function Delete(part) {
       this.$inertia["delete"]("/dashboard/parts/".concat(part.id));
     },
     Edit: function Edit(user) {
@@ -48690,6 +48690,7 @@ var render = function() {
                         attrs: {
                           label: "Part Number",
                           name: "number",
+                          error: _vm.$page.errors.number,
                           tabindex: "2",
                           required: ""
                         },
@@ -48712,6 +48713,7 @@ var render = function() {
                         attrs: {
                           label: "Description",
                           name: "comment",
+                          error: _vm.$page.errors.comment,
                           tabindex: "3",
                           required: ""
                         },
@@ -48734,6 +48736,7 @@ var render = function() {
                         attrs: {
                           label: "Price",
                           name: "price",
+                          error: _vm.$page.errors.price,
                           tabindex: "4",
                           required: ""
                         },

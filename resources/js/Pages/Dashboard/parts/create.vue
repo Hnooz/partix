@@ -13,13 +13,13 @@
                             <base-input label="Name" name="name" v-model="part.name" :error="$page.errors.name" tabindex="1" required></base-input>
                         </div>
                         <div>
-                            <base-input label="Part Number" name="number" v-model="part.number"  tabindex="2" required></base-input>
+                            <base-input label="Part Number" name="number" v-model="part.number" :error="$page.errors.number" tabindex="2" required></base-input>
                         </div>
                         <div>
-                            <base-input label="Description" name="comment" v-model="part.comment"  tabindex="3" required></base-input>
+                            <base-input label="Description" name="comment" v-model="part.comment" :error="$page.errors.comment" tabindex="3" required></base-input>
                         </div>
                         <div>
-                            <base-input label="Price" name="price" v-model="part.price"  tabindex="4" required></base-input>
+                            <base-input label="Price" name="price" v-model="part.price" :error="$page.errors.price" tabindex="4" required></base-input>
                         </div>
                         
                     </div>
@@ -51,7 +51,7 @@
         }, 
         methods: {
            async submit() {
-             await this.$inertia.post('/dashboard/parts', this.category);
+             await this.$inertia.post('/dashboard/parts', this.part);
             }
         }
     }
