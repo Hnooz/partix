@@ -34,6 +34,8 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
 
     // category route
     Route::resource('categories', 'CategoryController');
+    // part route
+    Route::resource('parts', 'PartController');
 });
 
 Route::get('/store', 'StoreController@index')->name('store.index');

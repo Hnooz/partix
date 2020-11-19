@@ -27,7 +27,7 @@ class CategoryController extends Controller
     {
 
        $request->validate([
-            'name'      =>  'required|max:255',
+            'name'      =>  'required|unique:categories|max:255',
             'description'     =>  'required|max:255',
        ]);
 
@@ -62,8 +62,14 @@ class CategoryController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        session()->flash('toast', [
+            'type' => 'success',
+            'message' => 'Category Deleted successfully'
+        ]);
+
+      return redirect()->back();
     }
 }

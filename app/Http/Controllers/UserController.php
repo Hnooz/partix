@@ -77,5 +77,12 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        session()->flash('toast', [
+            'type' => 'success',
+            'message' => 'User Deleted successfully'
+        ]);
+
+      return redirect()->back();
+
     }
 }
