@@ -36,6 +36,8 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
     Route::resource('categories', 'CategoryController');
     // part route
     Route::resource('parts', 'PartController');
+    //exports
+    Route::get('/parts/export', 'ExportController@parts');
 });
 
 Route::get('/store', 'StoreController@index')->name('store.index');
