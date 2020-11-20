@@ -19,7 +19,7 @@ Vue.mixin({
         route: route
     }
 });
-
+Vue.mixin(require('./base'))
 const app = document.getElementById('app')
 
 if (app) {

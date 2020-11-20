@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Part;
+use App\Exports\PartsExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PartController extends Controller
 {
+    
+    public function export(){
+        return Excel::download(new PartsExport, 'Parts.xlsx');
+    }
     
     public function index()
     {
         $parts = Part::all();
         return inertia()->render('Dashboard/parts/index',[
             'parts' => $parts
-
-
         ]);
     }
 

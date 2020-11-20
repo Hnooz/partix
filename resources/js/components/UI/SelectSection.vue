@@ -5,22 +5,22 @@
             <ul class="flex font-semibold py-3 text-white uppercase">
 
                 <li class="text-teal-500">
-                    <a href="#">home</a>
+                    <a href="#">{{__('home')}}</a>
                     <span class="absolute bg-teal-600 block h-1 w-5"></span>
                 </li>
 
                 <li class="hover:text-teal-500 mx-3">
-                    <a href="#">blog</a>
+                    <a href="#">{{__('blog')}}</a>
                     <span class="absolute bg-teal-600 h-1 w-5 hidden"></span>
                 </li>
 
                 <li class="hover:text-teal-500">
-                    <a href="#">about us</a>
+                    <a href="#">{{__('about us')}}</a>
                     <span class="absolute bg-teal-600 h-1 w-5 hidden"></span>
                 </li>
 
                 <li class="hover:text-teal-500 mx-3">
-                    <a href="#">contact</a>
+                    <a href="#">{{__('contact')}}</a>
                     <span class="absolute bg-teal-600 h-1 w-5 hidden"></span>
                 </li>
 
@@ -28,31 +28,31 @@
             <div class="my-16 text-center">
                 <div class="leading-none my-8">
                     <h1 class="uppercase font-semibold text-3xl text-white">
-                        select your <span class="text-teal-600">car</span> 
+                        {{__('select your')}} <span class="text-teal-600">{{__('car')}}</span> 
                     </h1>
-                    <p class="font-medium text-gray-300">Get your parts as fast as you can imagine</p>
+                    <p class="font-medium text-gray-300">{{__('Get your parts as fast as you can imagine')}}</p>
                 </div>
                 <div>
                     <form class="flex flex-col lg:flex-row items-center justify-center">
                         <div class="grid gap-3 md:grid-cols-2">
                             <label class="w-70" for="">
                                 <select class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full" name="" id="">
-                                    <option value="">brand</option>
+                                    <option value="">{{__('brand')}}</option>
                                 </select>
                             </label>
                             <label for="" class="w-70">
                                 <select class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full" name="" id="">
-                                    <option value="">model</option>
+                                    <option value="">{{__('model')}}</option>
                                 </select>
                             </label>
                             <label for="" class="w-70">
                                 <select class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full" name="" id="">
-                                    <option value="">year</option>
+                                    <option value="">{{__('year')}}</option>
                                 </select>
                             </label>
                             <label for="" class="w-70">
                                 <select class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full" name="" id="">
-                                    <option value="">engine</option>
+                                    <option value="">{{__('engine')}}</option>
                                 </select>
                             </label>
                         </div>

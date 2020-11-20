@@ -4,20 +4,17 @@
         class="animated bg-teal-700 md:flex hidden flex-wrap items-center justify-between m-auto pb-6 shadow-md top-0 w-full">
         <div class="bg-teal-900 capitalize flex font-medium justify-between px-20 py-4 text-white w-full">
             <div class="flex">
-                <h1>Call <span>78 5439 36</span></h1>
+                <h1>{{__('Call')}} <span>{{__('78 5439 36')}}</span></h1>
                 <span class="mx-2">|</span>
-                <button class="flex outline-none focus:outline-none" type="button">
-                    <svg class="w-6 h-6 mx-2" viewBox="1 -79 511.999 511" xmlns="http://www.w3.org/2000/svg"><path d="m397.242188 353.601562h97.101562c9.75 0 17.65625-7.902343 17.65625-17.652343v-317.792969c0-9.753906-7.90625-17.65625-17.65625-17.65625h-476.6875c-9.753906 0-17.65625 7.90625-17.65625 17.65625v317.792969c0 9.75 7.902344 17.652343 17.65625 17.652343zm0 0" fill="#802d40"/><path d="m203.035156 93.191406-61.792968 30.894532 61.792968 30.898437-61.792968 30.894531 61.792968 30.898438-61.792968 30.898437 61.792968 30.894531-61.792968 30.898438 61.792968 30.898438-26.484375 13.238281h-158.894531c-9.742188-.03125-17.6289062-7.917969-17.65625-17.65625v-317.792969c.0273438-9.742188 7.914062-17.628906 17.65625-17.65625h123.585938l61.792968 30.898438-61.792968 30.894531zm0 0" fill="#e6e7e8"/></svg>
-                     AR
-                </button>
+                <LanguageSelector />
             </div>
             <div class="flex">
                 <a href="#" class="flex">
                     <svg class="w-5 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                    login
+                    {{__('log in')}}
                 </a>
                 <span class="mx-2">|</span>
-                <a href="#">register</a>
+                <a href="#">{{__('register')}}</a>
             </div>
         </div>
         <div class="container mx-auto p-4 sm:px-6 lg:px-8">
@@ -49,9 +46,9 @@
                                 <img src="../../images/LOGO-1.png" class="w-48" alt="">
                                 </a>
                             </div>
-                            <p class="capitalize font-medium text-white">share part soluation</p>
+                            <p class="capitalize font-medium text-white">{{__('share part soluation')}}</p>
                         </div>
-                        <form action="#" method="post" class="flex items-center pl-3 whitespace-pre">
+                        <form action="#" method="post" class="flex items-center pl-3 whitespace-pre" dir="auto">
                             <button class="focus:outline-none mx-2 outline-none" type="button">
                                 <svg  class="h-10 text-white w-10" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -60,9 +57,10 @@
                             </button>
 
                             <div class="flex md:flex-col lg:flex-row">
-                                <input type="search" class="bg-teal-900 border-0 focus:outline-none form-input outline-none p-2 py-3 rounded sm:ml-0 text-sm text-white w-70" placeholder="Enter the part number or name">
+                                <input type="search" class="bg-teal-900 border-0 focus:outline-none form-input outline-none p-2 py-3 rounded sm:ml-0 text-sm text-white w-70" :placeholder="__('Enter the part number or name')" >
                                 
-                                <button type="submit" class="block bg-teal-500 cursor-pointer capitalize focus:outline-none font-medium md:px-10 outline-none p-2 px-2 text-white">search</button>
+                                <button type="submit" class="block bg-teal-500 cursor-pointer capitalize focus:outline-none font-medium md:px-10 outline-none p-2 px-2 text-white" >{{__('search')}}</button>
+
                             </div>
                         </form>
 
@@ -72,7 +70,6 @@
                                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0122 5.57169L10.9252 4.48469C8.77734 2.33681 5.29493 2.33681 3.14705 4.48469C0.999162 6.63258 0.999162 10.115 3.14705 12.2629L11.9859 21.1017L11.9877 21.0999L12.014 21.1262L20.8528 12.2874C23.0007 10.1395 23.0007 6.65711 20.8528 4.50923C18.705 2.36134 15.2226 2.36134 13.0747 4.50923L12.0122 5.57169ZM11.9877 18.2715L16.9239 13.3352L18.3747 11.9342L18.3762 11.9356L19.4386 10.8732C20.8055 9.50635 20.8055 7.29028 19.4386 5.92344C18.0718 4.55661 15.8557 4.55661 14.4889 5.92344L12.0133 8.39904L12.006 8.3918L12.005 8.39287L9.51101 5.89891C8.14417 4.53207 5.92809 4.53207 4.56126 5.89891C3.19442 7.26574 3.19442 9.48182 4.56126 10.8487L7.10068 13.3881L7.10248 13.3863L11.9877 18.2715Z" fill="currentColor" />
                                 </svg>
-                                
                             </a>
                             <span class="-mt-12 absolute bg-red-400 flex font-bold h-5 justify-center rounded-full text-sm w-5">3</span>
                             
@@ -124,22 +121,22 @@
             </svg>
     
             <a href="/store"
-                   class="block bg-blue-400 focus:outline-none focus:text-white font-medium  px-3 py-2 rounded-md text-base text-white">Home</a>
+                   class="block bg-blue-400 focus:outline-none focus:text-white font-medium  px-3 py-2 rounded-md text-base text-white">{{__('Home')}}</a>
                 <a href="/categories"
-                   class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">Categories</a>
+                   class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">{{__('Categories')}}</a>
                 <a href="#"
-                   class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">Another Link</a>
+                   class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">{{__('Another Link')}}</a>
                 <a href="#"
-                   class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">Another one</a>
+                   class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">{{__('Another one')}}</a>
                 <a href="#"
-                   class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">Reports</a>
+                   class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">{{__('Reports')}}</a>
                 <button class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white hover:bg-blue-400 focus:outline-none focus:text-white focus:bg-gray-700"
                    @click="logout">Logout</button>
         </div>
     <!-- your cart -->
     <div :class="cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'" class="fixed right-0 top-0 z-30 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300">
         <div class="flex items-center justify-between">
-            <h3 class="text-2xl font-medium text-teal-800">Your cart</h3>
+            <h3 class="text-2xl font-medium text-teal-800">{{__('Your cart')}}</h3>
             <button @click="cartOpen = !cartOpen" class="text-gray-600 focus:outline-none">
                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
@@ -149,7 +146,7 @@
             <div class="flex">
                 <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
                 <div class="mx-3">
-                    <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
+                    <h3 class="text-sm text-gray-600">{{__('Mac Book Pro')}}</h3>
                     <div class="flex items-center mt-2">
                         <button class="text-gray-500 focus:outline-none focus:text-gray-600">
                             <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -167,7 +164,7 @@
             <div class="flex">
                 <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
                 <div class="mx-3">
-                    <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
+                    <h3 class="text-sm text-gray-600">{{__('Mac Book Pro')}}</h3>
                     <div class="flex items-center mt-2">
                         <button class="text-gray-500 focus:outline-none focus:text-gray-600">
                             <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -185,7 +182,7 @@
             <div class="flex">
                 <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
                 <div class="mx-3">
-                    <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
+                    <h3 class="text-sm text-gray-600">{{__('Mac Book Pro')}}</h3>
                     <div class="flex items-center mt-2">
                         <button class="text-gray-500 focus:outline-none focus:text-gray-600">
                             <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -203,12 +200,12 @@
             <form class="flex items-center justify-center">
                 <input class="form-input w-48" type="text" placeholder="Add promocode">
                 <button class="ml-3 flex items-center px-3 py-2 bg-teal-800 text-white text-sm uppercase font-medium rounded hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
-                    <span>Apply</span>
+                    <span>{{__('Apply')}}</span>
                 </button>
             </form>
         </div>
         <a href="/cart" class="flex items-center justify-center mt-4 px-3 py-2 bg-teal-800 text-white text-sm uppercase font-medium rounded hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
-            <span>Chechout</span>
+            <span>{{__('Chechout')}}</span>
             <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </a>
     </div>
@@ -219,7 +216,7 @@
             <img src="../../images/LOGO-1.png" class="container mb-3 mx-auto pt-10 w-32" alt="">
             <div class="text-center">
                 <span class="-mx-8 -mt-1 absolute bg-teal-600 h-1 w-16"></span>
-                <h1 class="font-medium text-sm text-teal-500 uppercase">store</h1>
+                <h1 class="font-medium text-sm text-teal-500 uppercase">{{__('store')}}</h1>
             </div>
         </div>
         <div class="container flex justify-between mx-auto px-6 py-5">
@@ -249,8 +246,10 @@
 </template>
 
 <script>
+import LanguageSelector from '../../Shared/LanguageSelector'
 export default {
     name: "BaseNav",
+    components:{LanguageSelector},
     data() {
         return {
             cartOpen:false,

@@ -31,6 +31,14 @@ class AppServiceProvider extends ServiceProvider
                     ? Session::get('errors')->getBag('default')->getMessages()
                     : (object)[];
             },
+            'locale' => function () {
+                return app()->getLocale();
+            },
+            'language' => function () {
+                return translations(
+                    resource_path('lang/'. app()->getLocale() .'.json')
+                );
+            },        
             'flash' => function () {
                 return Session::get('toast');
             },

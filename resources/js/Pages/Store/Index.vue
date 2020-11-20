@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div :dir="this.$page.locale == 'ar' ? 'rtl' : 'ltr'">
         <BaseNav/>
         <SelectSection/>
 
          <!-- filter search -->
         <div class="bg-teal-700 py-5">
             <h1 class="capitalize text-2xl sm:text-4xl text-center text-white">
-                car parts <span class="font-semibold">catalogue</span> 
+                {{__('car parts')}} <span class="font-semibold">{{__('catalogue')}}</span> 
             </h1>
         </div>
 
@@ -26,18 +26,18 @@
             
         <div class="bg-teal-700 py-5">
             <div class="capitalize container sm:flex font-semibold items-center justify-between mx-auto px-10 text-white">
-                <h1>filters <span class="font-normal lowercase">| oil filters</span></h1>
+                <h1>{{__('filters')}} | <span class="font-normal lowercase" dir="auto">{{__('oil filters')}}</span></h1>
 
                 <form class="mt-2 sm:mt-0">
                     <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                        <span class="absolute inset-y-0  flex items-center px-2">
                             <button type="submit" class="p-1 focus:outline-none text-gray-400">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
                                     <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
                             </button>
                         </span>
-                        <input type="search" v-model="search" class="w-full bg-teal-900 focus:outline-none pl-10 placeholder-gray-400 py-2 rounded-md text-sm text-white" placeholder="Search..." autocomplete="off">
+                        <input type="search" v-model="search" class="w-full bg-teal-900 focus:outline-none px-10 placeholder-gray-400 py-2 rounded-md text-sm text-white" :placeholder="__('search')" autocomplete="off">
                     </div>
                 </form>
             </div>
@@ -64,13 +64,13 @@
 
                 <div class="px-4 py-2">
                     <a href="/details" class="font-bold text-teal-500 uppercase">Oil Test</a>
-                    <p class="break-all font-medium text-gray-600 text-xs">item number:&nbsp;245166h</p>
+                    <p class="break-all font-medium text-gray-600 text-xs">{{__('item number')}}:&nbsp;245166h</p>
                     <p class="text-gray-800 text-xl font-semibold">3.800&nbsp;<span class="px-2 text-gray-500 text-sm">QAR</span></p>
                 </div>
 
                 <div class="bg-teal-700 py-2">
                     <a href="#" class="flex focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white text-xs uppercase w-full">
-                        Buy
+                        {{__('Buy')}}
                     </a>
                 </div>
             </div>
@@ -78,7 +78,7 @@
 
         <div class="mt-8 container flex justify-center">
             <a class="bg-teal-400 capitalize font-semibold mb-10 px-10 py-2 text-white z-10 overflow-visible" href="#">
-                show all
+                {{__('show all')}}
             </a>
         </div>
 
