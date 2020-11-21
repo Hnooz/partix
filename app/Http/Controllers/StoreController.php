@@ -10,4 +10,14 @@ class StoreController extends Controller
     {
         return inertia()->render('Store/Index');
     }
+
+    public function items()
+    {
+        return inertia()->render('Store/Items');
+    }
+
+    public function details()
+    {
+        return inertia()->render('Store/ItemDetails');
+    }
 }

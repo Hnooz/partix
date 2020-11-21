@@ -44,7 +44,7 @@
         </div>
 
         <div class="max-w-6xl container mx-auto mt-10 overflow-auto whitespace-no-wrap">
-            <div class="bg-white rounded-tr-lg shadow-lg max-w-xs w-full inline-block overflow-hidden mx-4" v-for="(item, index) in filteredList" :key="index">
+            <div class="bg-white rounded-t-lg shadow-lg max-w-xs w-full inline-block overflow-hidden mx-4" v-for="(item, index) in filteredList" :key="index">
                 <div class="flex justify-between">
 
                     <svg @click="fave(item)" v-if="item.fav == false" class="h-6 m-2 mx-4 text-gray-400 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +64,7 @@
 
                 <div class="px-4 py-2">
                     <a href="/details" class="font-bold text-teal-500 uppercase">Oil Test</a>
-                    <p class="break-all font-medium text-gray-600 text-xs">{{__('item number')}}:&nbsp;245166h</p>
+                    <p class="break-all font-medium text-gray-600 text-xs "><span dir="auto">{{__('item number')}}</span>:&nbsp;245166h</p>
                     <p class="text-gray-800 text-xl font-semibold">3.800&nbsp;<span class="px-2 text-gray-500 text-sm">QAR</span></p>
                 </div>
 
@@ -77,7 +77,7 @@
         </div>
 
         <div class="mt-8 container flex justify-center">
-            <a class="bg-teal-400 capitalize font-semibold mb-10 px-10 py-2 text-white z-10 overflow-visible" href="#">
+            <a class="bg-teal-400 capitalize font-semibold mb-10 px-10 py-2 text-white z-10 overflow-visible" href="/items">
                 {{__('show all')}}
             </a>
         </div>

@@ -90,7 +90,7 @@
             <div class="bg-white mb-16 md:mb-0 md:w-72 rounded-lg shadow-lg">
                 <div class="border-b-2 flex items-center relative">
                     <i class="absolute bg-red-500 h-3 mx-3 rounded-full w-3"></i>
-                    <p class="pl-8 py-4 text-indigo-900">Sales Statistical Overview</p>
+                    <p class="px-8 py-4 text-indigo-900">Sales Statistical Overview</p>
                 </div>
                 <div class="flex m-6">
                     <button class="hover:bg-gray-400 focus:outline-none outline-none  mr-3 px-3 text-sm" type="button">1D</button>
@@ -106,7 +106,7 @@
                         <p>4,559</p>
                     </div>
                     <div class="flex items-center mx-6">
-                        <i class="-ml-12 absolute bg-teal-300 h-2 rounded-full w-10"></i>
+                        <i class="-mx-12 absolute bg-teal-300 h-2 rounded-full w-10"></i>
                         <h1>Sales</h1>
                     </div>
                 </div>
@@ -136,28 +136,28 @@
                                 <i class="absolute bg-gray-400 h-2 mt-6 rounded-full w-12"></i>
                                 <h1>Pendinig</h1>
                             </div>
-                            <span class="font-semibold ml-2 text-2xl text-gray-700">382</span>
+                            <span class="font-semibold mx-2 text-2xl text-gray-700">382</span>
                         </div>
                         <div class="mx-6 flex">
                             <div class="text-orange-400 text-xs">
                                 <i class="absolute bg-orange-400 h-2 mt-6 rounded-full w-12"></i>
                                 <h1>Awaiting</h1>
                             </div>
-                            <span class="font-semibold ml-2 text-2xl text-gray-700">82</span>
+                            <span class="font-semibold mx-2 text-2xl text-gray-700">82</span>
                         </div>
                         <div class="mx-6 flex">
                             <div class="text-teal-300 text-xs">
                                 <i class="absolute bg-teal-300 h-2 mt-6 rounded-full w-12"></i>
                                 <h1>Delivered</h1>
                             </div>
-                            <span class="font-semibold ml-2 text-2xl text-gray-700">1,382</span>
+                            <span class="font-semibold mx-2 text-2xl text-gray-700">1,382</span>
                         </div>
                         <div class="mx-6 flex">
                             <div class="text-red-400 text-xs">
                                 <i class="absolute bg-red-400 h-2 mt-6 rounded-full w-12"></i>
                                 <h1>Rejected</h1>
                             </div>
-                            <span class="font-semibold ml-2 text-2xl text-gray-700">382</span>
+                            <span class="font-semibold mx-2 text-2xl text-gray-700">382</span>
                         </div>
                     </div>
                 <!-- </div> -->
@@ -166,7 +166,7 @@
             <div class="bg-white rounded-lg md:w-70 shadow-lg">
                 <div class="border-b-2 flex items-center relative">
                     <i class="absolute bg-blue-400 h-3 mx-3 rounded-full w-3"></i>
-                    <p class="pl-8 py-4 text-indigo-900">Top Salling Brands</p>
+                    <p class="px-8 py-4 text-indigo-900">Top Salling Brands</p>
                 </div>
                 <chart class="chartjs-render-monitor max-w-xs mt-24 mb-24"
                 width="200" height="164"
@@ -186,7 +186,7 @@
                         <div class="mx-4">
                             <div class="text-gray-600 text-xs flex items-center relative">
                                 <i class="absolute bg-red-400 h-2 rounded-full w-2"></i>
-                                <h1 class="ml-3 text-xs">Total Sales</h1>
+                                <h1 class="mx-3 text-xs">Total Sales</h1>
                             </div>
                             <span class="font-semibold text-xl text-gray-700">QAR 7,382</span>
                             <div class="absolute bg-gray-300 h-2 rounded-full w-64">
@@ -196,102 +196,6 @@
                         
                     </div>
             </div>
-
-            <!-- <h2 class="text-2xl font-medium">Tables</h2> -->
-            <!-- <div class="mt-4">
-                <div class="flex flex-col">
-                    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6">
-                        <div
-                            class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-                            <table class="min-w-full">
-                                <thead class="bg-gray-100">
-                                <tr>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                                        style="text-align: start">
-                                        Name
-                                    </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                                        style="text-align: start">
-                                        Title
-                                    </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                                        style="text-align: start">
-                                        Status
-                                    </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                                        style="text-align: start">
-                                        Role
-                                    </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
-                                </tr>
-                                </thead>
-                                <tbody class="bg-white">
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10">
-                                                <img class="h-10 w-10 rounded-full"
-                                                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                     alt=""/>
-                                            </div>
-                                            <div class="mx-2">
-                                                <div class="text-sm leading-5 font-medium text-gray-900">Jone Doe</div>
-                                                <div class="text-sm leading-5 text-gray-500">bernardlane@example.com</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        Software Engineer
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                  <span
-                                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                    Active
-                                  </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                        Owner
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10">
-                                                <img class="h-10 w-10 rounded-full"
-                                                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                     alt=""/>
-                                            </div>
-                                            <div class="mx-2">
-                                                <div class="text-sm leading-5 font-medium text-gray-900">Jone Doe</div>
-                                                <div class="text-sm leading-5 text-gray-500">bernardlane@example.com</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        Actor
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                  <span
-                                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                    Active
-                                  </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                        Owner
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
 
 

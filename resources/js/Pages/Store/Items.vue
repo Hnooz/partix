@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <store-layout>
     <BaseNav/>
     <!-- select section -->
     <SelectSection class="hidden md:block"/>
@@ -8,7 +8,7 @@
     <div class="bg-teal-700 py-5 hidden md:block">
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-10 text-white">
             <div>
-                <h1>filters <span class="font-normal lowercase">| oil filters</span></h1>
+                <h1>{{__('filters')}} | <span class="font-normal lowercase" dir="auto">{{__('oil filters')}}</span></h1>
                 
             </div>
             <div>
@@ -21,7 +21,7 @@
                             </svg>
                         </button>
                     </span>
-                    <input type="search" v-model="search" class="bg-teal-900 focus:outline-none pl-10 placeholder-gray-400 py-2 rounded-md text-sm text-white" placeholder="Search..." autocomplete="off">
+                    <input type="search" v-model="search" class="bg-teal-900 focus:outline-none px-10 placeholder-gray-400 py-2 rounded-md text-sm text-white" :placeholder="__('search')" autocomplete="off">
                     </div>
                 </form>
             </div>
@@ -39,7 +39,7 @@
                     </svg>
                 </button>
             </span>
-            <input type="search" v-model="search" class="bg-transparent border-b focus:outline-none placeholder-white px-10 py-2 text-sm text-white w-full" placeholder="Search..." autocomplete="off">
+            <input type="search" v-model="search" class="bg-transparent border-b focus:outline-none placeholder-white px-10 py-2 text-sm text-white w-full" :placeholder="__('search')" autocomplete="off">
             </div>
         </form>
     </div>
@@ -65,18 +65,18 @@
 
             <div class="px-4 py-2">
                 <a href="/details" class="font-bold text-sm md:text-base text-teal-500 uppercase">Oil Test</a>
-                <p class="break-all font-medium text-gray-600 text-xs">item number</p>
+                <p class="break-all font-medium text-gray-600 text-xs">{{__('item number')}}</p>
                 <p class="text-gray-800 md:text-xl font-semibold">3.800&nbsp;<span class="px-2 text-gray-500 text-sm">QAR</span></p>
                 <!-- <p class="text-gray-600 text-xs">incl. 20% VAT, <span class="text-gray-800 underline">delivery.</span> from &euro;8,45</p> -->
             </div>
 
             <div class="bg-teal-700 py-2">
                 <button class="flex md:hidden focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white md:text-xs uppercase w-full">
-                    Buy
+                    {{__('Buy')}}
                 </button>
 
                 <button class="md:flex hidden focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white text-xs uppercase w-full">
-                    add to cart
+                    {{__('add to cart')}}
                     <svg viewBox="0 0 20 20" fill="currentColor" class="shopping-cart w-6">
                         <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
                     </svg>
@@ -86,18 +86,21 @@
     </div>
         
 <BaseFooter/>
-    </div>
+    </store-layout>
 </template>
 
 <script>
+import StoreLayout from '../../Shared/StoreLayout'
 import BaseNav from "../../components/UI/BaseNav";
 import SelectSection from '../../components/UI/SelectSection'
 import BaseFooter from '../../components/UI/BaseFooter'
 export default {
     components: {
+        StoreLayout,
         BaseNav,
         SelectSection,
-        BaseFooter
+        BaseFooter,
+        
     },
     data() {
         return {

@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <store-layout>
     <BaseNav/>
     <SelectSection class="hidden md:block"/>
          <!-- filter search -->
     <div class="bg-teal-700 py-5 hidden md:block">
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-16 text-white">
-            <div>
-                <h1>filters <span class="font-normal capitalize">| oil filters </span> <span lass="font-normal capitalize">| air filter</span></h1>
+            <div class="flex">
+                <h1>{{__('filters')}} |</h1><span class="font-normal capitalize">&nbsp;{{__('oil filters')}}&nbsp;</span> <span lass="font-normal capitalize"> | {{__('air filter')}}</span>
             </div>
             <div class="flex items-center">
                 <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -59,8 +59,8 @@
                     <div class="mx-8">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="capitalize font-semibold text-3xl text-teal-700">air filter</p>
-                                <p class="capitalize font-medium text-teal-400 text-xl">oil filter</p>
+                                <p class="capitalize font-semibold text-3xl text-teal-700">{{__('air filter')}}</p>
+                                <p class="capitalize font-medium text-teal-400 text-xl">{{__('oil filter')}}</p>
                                 <button class="flex" type="button">
                                     <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                     <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
@@ -80,7 +80,7 @@
                             Magni facere nostrum eum distinctio ea.
                         </p>
                         <div class="flex items-center">
-                            <h1 class="capitalize text-teal-900">quantity:</h1>
+                            <h1 class="capitalize text-teal-900">{{__('quantity')}}:</h1>
                             <span class="bg-teal-500 mx-2 my-2 text-white">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
@@ -97,11 +97,11 @@
                         </div>
                         <div class="capitalize">
                             <p class="text-gray-700 my-6">
-                                <span class="font-semibold text-teal-400">in stock . </span>
-                                ships within 24hrs
-                                </p>
+                                <span class="font-semibold text-teal-400" dir="auto">{{__('in stock')}} . </span>
+                                {{__('ships within 24hrs')}}
+                            </p>
                             <button class="bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white" type="button">
-                                <span class="mx-12">Add to Cart</span> 
+                                <span class="mx-12 capitalize">{{__('add to cart')}}</span> 
                                 <svg class="h-6 mx-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                                 </svg>
@@ -119,15 +119,15 @@
                         <ul class="flex justify-between capitalize "> 
                             <li class="text-teal-700 font-semibold">
                                 <a href="#">
-                                    product details
+                                    {{__('product details')}}
                                     <span class="absolute block bg-teal-700 h-1 w-16"></span>
                                 </a>
                                 
                             </li>
-                            <li class="text-gray-600"><a href="#">features</a></li>
-                            <li class="text-gray-600"><a href="#">installation</a></li>
-                            <li class="text-gray-600"><a href="#">warranty</a></li>
-                            <li class="text-gray-600"><a href="#">reviews(2)</a></li>
+                            <li class="text-gray-600"><a href="#">{{__('features')}}</a></li>
+                            <li class="text-gray-600"><a href="#">{{__('installation')}}</a></li>
+                            <li class="text-gray-600"><a href="#">{{__('warranty')}}</a></li>
+                            <li class="text-gray-600"><a href="#">{{__('reviews')}}</a></li>
                         </ul>
                         <div class="bg-center bg-cover bottomimage h-40 mt-10 w-full"></div>
                     </div>
@@ -156,7 +156,7 @@
 
             </p>
             <div>
-                <h1 class="capitalize font-semibold mb-6 text-2xl text-teal-700">other categories
+                <h1 class="capitalize font-semibold mb-6 text-2xl text-teal-700">{{__('other categories')}}
                     <span class="absolute block bg-teal-700 h-1 w-24"></span>
                 </h1>
                 <div class="flex">
@@ -207,15 +207,14 @@
 
         <div class="-mt-6 px-4">
             <a href="/details" class="font-bold text-sm md:text-base text-teal-500 uppercase">Oil Test</a>
-            <p class="break-all font-medium text-gray-600 text-xs">item number</p>
+            <p class="break-all font-medium text-gray-600 text-xs">{{__('item number')}}</p>
             <p class="font-semibold md:text-xl text-gray-800 text-sm">
                 3.800<span class="text-gray-500 text-xs">QAR</span>
                 <span class="line-through px-2 text-gray-500 text-xs">3.800 QAR</span> </p>
-            <!-- <p class="text-gray-600 text-xs">incl. 20% VAT, <span class="text-gray-800 underline">delivery.</span> from &euro;8,45</p> -->
         </div>
 
         <div class="flex items-center px-4">
-            <h1 class="text-teal-900 text-sm">quantity:</h1>
+            <h1 class="text-teal-900 text-sm">{{__('quantity')}}:</h1>
             <span class="bg-teal-500 text-white">
                 <svg class="w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
@@ -243,11 +242,11 @@
             <svg viewBox="0 0 20 20" fill="currentColor" class="shopping-cart w-6">
                 <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
             </svg>
-            add to cart
+            {{__('add to cart')}}
         </button>
     </div>
     <BaseFooter/>
-    </div>
+    </store-layout>
 </template>
 
 <script>
@@ -255,14 +254,17 @@ import BaseNav from '../../components/UI/BaseNav'
 import SelectSection from '../../components/UI/SelectSection'
 import Slide from '../../components/UI/Slide'
 import BaseFooter from '../../components/UI/BaseFooter'
+import StoreLayout from '../../Shared/StoreLayout.vue'
 
 
     export default {
         components:{
+            StoreLayout,
             BaseNav,
             SelectSection,
             Slide,
             BaseFooter,
+            
         },
         data() {
             return {

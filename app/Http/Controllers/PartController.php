@@ -9,11 +9,6 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class PartController extends Controller
 {
-    
-    public function export(){
-        return Excel::download(new PartsExport, 'Parts.xlsx');
-    }
-    
     public function index()
     {
         $parts = Part::all();
