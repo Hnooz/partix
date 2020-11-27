@@ -9,21 +9,22 @@
                 
 
                 <div class="flex items-center justify-center my-6 uppercase font-medium text-sm">
-                    <form class="md:flex">
+                    <form class="md:grid md:grid-cols-3" @submit.prevent="submit">
                         <div class="text-teal-600">
                             <label >
                                 Discount Type
                             </label>
                             <label class="block mt-3">
-                                <select class="form-select text-gray-500 w-full">
-                                    <option>percentage discount</option>
+                                <select name="descount_type_id" class="form-select text-gray-500 w-full"  v-model="form.descount_type_id" :error="$page.errors.descount_type_id" required>
+                                    <option value="">e.g Fixed or Percentage</option>
+                                    <option v-for="type in descountType" :key="type.index" :value="type.id">{{type.name}}</option>
                                 </select>
                             </label>
                         </div>
                         <div class="my-5 md:my-0 md:mx-10 text-teal-600">
                             <label for="value">value</label>
                             <label class="block mt-3 text-gray-500">
-                                <input type="text" class="form-input" value="% 15">
+                                <input type="text" name="value" class="form-input"  v-model="form.value" :error="$page.errors.value" placeholder="e.g 200 QAR or 20%"  required>
                             </label> 
                         </div>
                         <div class="text-teal-600">
@@ -31,18 +32,19 @@
                                 code Expiration date
                             </label>
                             <label class="block mt-3 text-gray-500">
-                                <input type="date" class="form-input w-full">
+                                <input type="date" name="expiration_at" class="form-input w-full"  v-model="form.expiration_at" :error="$page.errors.expiration_at" placeholder="12/3/2020" required>
                             </label>
-                        </div>                        
+                        </div> 
+                            <div class="my-6">
+                                <base-button
+                                            class="bg-teal-800 flex items-center font-medium hover:bg-teal-700 mx-1 px-4 py-2 rounded text-white">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                                    Add Coupon
+                                </base-button>
+                            </div>                   
                     </form>                
                 </div>
-                <div class="flex justify-center my-6">
-                     <inertia-link href="#"
-                                  class="bg-teal-800 flex items-center font-medium hover:bg-teal-700 mx-1 px-4 py-2 rounded text-white">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                        Add Coupon
-                    </inertia-link>
-                </div>
+                
                    
             </div>
             <div class="mt-4">
@@ -84,27 +86,27 @@
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white text-gray-500">
-                                <tr v-for="coupon in coupons" :key="coupon.index" :class="coupon.used == false ? 'hover:bg-red-300 hover:text-white' : 'hover:bg-teal-200 hover:text-white'">
+                                <tr v-for="coupon in coupons" :key="coupon.index" :class="coupon.used == 0 ? 'hover:bg-red-300 hover:text-white' : 'hover:bg-teal-200 hover:text-white'">
                                     <td class="px-6 py-4 whitespace-no-wrap">
                                         <label for="">
                                             <input type="checkbox" class="form-checkbox border-2">
                                         </label>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap capitalize">
-                                        {{coupon.discount_type}}
+                                        {{coupon.descount_type_id}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap uppercase">
                                         {{ coupon.value }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap"> 
-                                        {{ coupon.create_date }}
+                                        {{ coupon.created_at }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap">
-                                        {{ coupon.exp_date }}
+                                        {{ coupon.expiration_at }}
                                     </td>
                                      <td  class="px-6 py-4 whitespace-no-wrap">
-                                         <svg v-if="coupon.used == false" class="text-red-500 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path><path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                                         <svg v-if="coupon.used == true" class="text-teal-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path><path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                                         <svg v-if="coupon.used == 0" class="text-red-500 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path><path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                                         <svg v-if="coupon.used == 1" class="text-teal-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path><path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                                     </td>
                                     <td class="flex px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium">
                                         <a href="#"><svg class="w-6 h-6 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></a>
@@ -126,18 +128,24 @@
     import Layout from "../../../Shared/Layout";
 
     export default {
+        props:[
+                'coupons',
+                'descountType'
+            ],
         components: {Layout},
         data() {
             return {
-                coupons:[
-                    {discount_type:'fixed discount',value:'QAR 200',used:true,create_date:'14 Dec 2020',exp_date:'24 Dec 2020'},
-                    {discount_type:'percentage discount',value:'50 %',used:true,create_date:'14 Dec 2020',exp_date:'24 Dec 2020'},
-                    {discount_type:'fixed discount',value:'QAR 200',used:false,create_date:'14 Dec 2020',exp_date:'24 Dec 2020'},
-                    {discount_type:'percentage discount',value:'50 %',used:true,create_date:'14 Dec 2020',exp_date:'24 Dec 2021'},
-                    {discount_type:'fixed discount',value:'QAR 2900',used:false,create_date:'14 Dec 2020',exp_date:'24 Dec 2020'},
-                    {discount_type:'percentage discount',value:'5 %',used:true,create_date:'14 Dec 2020',exp_date:'24 Dec 2020'},
-                ]
+                form: {
+                    value: '',
+                    expiration_at: '',
+                    descount_type_id: '',
+                },
             }
         },
+        methods: {
+            submit() {
+                this.$inertia.post('/dashboard/coupons', this.form);
+            }
+        }
     }
 </script>

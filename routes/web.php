@@ -20,7 +20,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
     Route::get('/orders', 'OrderController@index')->name('orders.index');
 
     // coupons route 
-    Route::get('/coupons', 'CouponCodeController@index')->name('coupons.index');
+    Route::resource('coupons', 'CouponCodeController')->except(['show','create']);
 
     // comments route 
     Route::get('/comments', 'CommentController@index')->name('comments.index');
@@ -31,6 +31,8 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
     // part route
     Route::get('parts/export', 'ExportController@parts');
     Route::resource('parts', 'PartController');
+
+    Route::resource('cars', 'CarController');
 });
 
 Route::get('/store', 'StoreController@index')->name('store.index');
