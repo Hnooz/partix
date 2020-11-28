@@ -22,7 +22,6 @@ class PartController extends Controller
     public function create()
     {
         $cars = Car::all();
-        // dd($cars);
         return inertia()->render('Dashboard/parts/create', ['cars' => $cars]);
     }
 
@@ -35,7 +34,8 @@ class PartController extends Controller
             'description'     =>  'required|max:255',
             'price'     =>  'required|max:255',
             'slug'     =>  'required|max:255',
-            'car_id' => 'required|max:255'
+            'car_id' => 'required|max:255',
+            // 'image' => 'sometimes'
        ]);
 
      $part =  Part::create([
@@ -49,14 +49,11 @@ class PartController extends Controller
 
        ]);
 
-    //    dd($part);
-    //    if ($request->hasFile('image')) {
-    //     $part->addMedia($request->file('image'))
-    //     ->toMediaCollection('images');
-    //     dd($part->getUrl());
-    //     }
-
-        $part->save();
+        // dd($request->hasFile('image'));
+       if ($request->hasFile('image')) {
+        $part->addMedia($request->file('image'))
+        ->toMediaCollection('images');
+        };
 
        session()->flash('toast', [
         'type' => 'success',
@@ -67,21 +64,39 @@ class PartController extends Controller
     }
 
     
-    public function show($id)
+    public function show(Part $part)
     {
         //
     }
 
    
-    public function edit($id)
+    public function edit(Part $part)
     {
-        //
+        $cars = Car::all();
+        return inertia()->render('Dashboard/parts/edit', ['part' => $part, 'cars' => $cars]);
     }
 
    
-    public function update(Request $request, $id)
+    public function update(Request $request, Part $part)
     {
-        //
+       $data = $request->validate([
+            'name'      =>  'required|min:4',
+            'number'     =>  'required|max:255',
+            'description'     =>  'required|max:255',
+            'price'     =>  'required|max:255',
+            'slug'     =>  'required|max:255',
+            'car_id' => 'required|max:255',
+       ]);
+
+       $part->update($data);
+
+       session()->flash('toast', [
+        'type' => 'success',
+        'message' => 'Part Updated successfully'
+        ]);
+
+        return redirect()->route('parts.index');
+
     }
 
     

@@ -41,19 +41,16 @@ class CouponCodeController extends Controller
         return redirect()->back();
     }
 
-    public function edit()
+    public function destroy(CouponCode $coupon)
     {
-        
-    }
+        $coupon->delete();
 
-    public function update()
-    {
-        
-    }
+        session()->flash('toast', [
+            'type' => 'error',
+            'message' => 'coupon deleted successfully'
+        ]);
 
-    public function delete()
-    {
-        
+        return redirect()->back();
     }
 
 }

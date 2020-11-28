@@ -3,7 +3,7 @@
 
         <div class="mt-8">
             <div class="flex">
-                <h2 class="text-3xl text-indigo-500 font-bold">Users /<span class="text-gray-700"> Edit</span></h2>
+                <h2 class="text-3xl text-teal-700 font-bold">Customer /<span class="text-gray-700"> Edit</span></h2>
             </div>
 
             <base-panel class="md:max-w-3xl mt-4">
@@ -16,7 +16,7 @@
                                     v-model="form.password_confirmation"></base-input>
                     </div>
                     <div class="flex justify-end mt-4">
-                        <base-button primary>Update user</base-button>
+                        <base-button class="bg-teal-700">Update user</base-button>
                     </div>
                 </form>
             </base-panel>

@@ -12,7 +12,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Part extends Model implements HasMedia
 {
-    use Notifiable, InteractsWithMedia,AppendImage;
+    use Notifiable,AppendImage, InteractsWithMedia;
 
     protected $guarded = [];
     protected $appends = ['url'];

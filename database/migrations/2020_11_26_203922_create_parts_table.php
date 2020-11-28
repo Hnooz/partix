@@ -19,7 +19,8 @@ class CreatePartsTable extends Migration
             $table->text('description');
             $table->string('number');
             $table->string('slug');
-            $table->integer('price');
+            $table->string('price');
+            // $table->string('image');
             $table->foreignId('car_id');
             $table->foreignId('supplier_id');
             $table->timestamps();
