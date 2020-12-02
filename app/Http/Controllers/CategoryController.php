@@ -7,14 +7,11 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    
     public function index()
     {
         $categories = Category::all();
-        return inertia()->render('Dashboard/categories/index',[
+        return inertia()->render('Dashboard/categories/index', [
             'categories' => $categories
-
-
         ]);
     }
 
@@ -25,25 +22,23 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-
-       $request->validate([
+        $request->validate([
             'name'      =>  'required|unique:categories|max:255',
             'description'     =>  'required|max:255',
        ]);
 
-       Category::create([
+        Category::create([
            'name' => $request->name,
            'description' => $request->description,
 
        ]);
 
-       session()->flash('toast', [
+        session()->flash('toast', [
         'type' => 'success',
         'message' => 'Category created successfully'
         ]);
 
-            return redirect()->route('categories.index');
-            
+        return redirect()->route('categories.index');
     }
 
     public function show($id)
@@ -70,6 +65,6 @@ class CategoryController extends Controller
             'message' => 'Category Deleted successfully'
         ]);
 
-      return redirect()->back();
+        return redirect()->back();
     }
 }
