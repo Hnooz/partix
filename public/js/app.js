@@ -3508,7 +3508,7 @@ __webpack_require__.r(__webpack_exports__);
       // data.append('slug', this.part.slug);
       // data.append('car_id', this.part.car_id);
       // data.append('image', this.part.image);
-      this.$inertia.put(this.$route('parts.update', this.part.id), this.form);
+      this.$inertia.put("/dashboard/parts/".concat(this.part.id), this.form);
     } // handleFileUpload(event){
     //     this.part.image = event.target.files[0];
     // }
@@ -50303,7 +50303,7 @@ var render = function() {
                           type: "file",
                           label: "Image",
                           name: "image",
-                          error: _vm.$page.errors.file,
+                          error: _vm.$page.errors.image,
                           tabindex: "7",
                           required: ""
                         },
@@ -54724,7 +54724,7 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticClass: "flex" }, [
-              _c("a", { staticClass: "flex", attrs: { href: "#" } }, [
+              _c("a", { staticClass: "flex", attrs: { href: "/login" } }, [
                 _c(
                   "svg",
                   {

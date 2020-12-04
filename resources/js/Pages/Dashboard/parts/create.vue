@@ -31,7 +31,7 @@
                                 </select>
                         </div>
                         <div>
-                            <base-input id="image" type="file" ref="image" label="Image" name="image" @change="handleFileUpload()" :error="$page.errors.file" tabindex="7" required></base-input>
+                            <base-input id="image" type="file" ref="image" label="Image" name="image" @change="handleFileUpload()" :error="$page.errors.image" tabindex="7" required></base-input>
                         </div>
                         
                     </div>

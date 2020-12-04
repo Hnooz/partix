@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use App\Part;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -65,6 +66,17 @@ class CarController extends Controller
 
     public function destroy(Car $car)
     {
-        //
+        // $car->delete();
+
+        $parts = Part::where(['car_id' => $car->id])->get();
+
+        dd($parts);
+        session()->flash('toast', [
+            'type' => 'error',
+            'message' => 'Car Deleted successfully'
+            ]);
+
+        return redirect()->back();
+    
     }
 }
