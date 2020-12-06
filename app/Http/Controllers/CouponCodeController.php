@@ -12,11 +12,14 @@ class CouponCodeController extends Controller
     {
         $coupons = CouponCode::all();
         $descountType = DiscountType::all();
-        return inertia()->render('Dashboard/coupons/index',
-        [
-            'coupons' => $coupons,
-            'descountType' => $descountType
-        ]);
+
+        return inertia()->render(
+            'Dashboard/coupons/index',
+            [
+                'coupons' => $coupons,
+                'descountType' => $descountType,
+            ]
+        );
     }
 
     public function store(Request $request)
@@ -35,7 +38,7 @@ class CouponCodeController extends Controller
 
         session()->flash('toast', [
             'type' => 'success',
-            'message' => 'coupon created successfully'
+            'message' => 'coupon created successfully',
         ]);
 
         return redirect()->back();
@@ -47,10 +50,9 @@ class CouponCodeController extends Controller
 
         session()->flash('toast', [
             'type' => 'error',
-            'message' => 'coupon deleted successfully'
+            'message' => 'coupon deleted successfully',
         ]);
 
         return redirect()->back();
     }
-
 }

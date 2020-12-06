@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Exports\PartsExport;
 use App\Exports\UsersExport;
-use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ExportController extends Controller
 {
-    public function parts(){
+    public function parts()
+    {
         return Excel::download(new PartsExport, 'Parts.xlsx');
     }
 
-    public function users() 
+    public function users()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }

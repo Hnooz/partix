@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use Inertia\Inertia;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
-use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,11 +38,11 @@ class AppServiceProvider extends ServiceProvider
                 return translations(
                     resource_path('lang/'. app()->getLocale() .'.json')
                 );
-            },        
+            },
             'flash' => function () {
                 return Session::get('toast');
             },
-            'popstate' => false
+            'popstate' => false,
         ]);
     }
 }

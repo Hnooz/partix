@@ -3,10 +3,8 @@
 namespace Tests\Feature\Dashboard;
 
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use function MongoDB\BSON\toJSON;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
@@ -35,7 +33,7 @@ class UserTest extends TestCase
             'name' => 'Jone Doe',
             'email' => 'test@test.com',
             'password' => 'password',
-            'password_confirmation' => 'password'
+            'password_confirmation' => 'password',
         ]);
 
         $this->assertDatabaseHas('users', ['name' => 'Jone Doe']);
@@ -51,14 +49,13 @@ class UserTest extends TestCase
             'email' => 'test@test.com',
         ]);
 
-
         $this->login();
 
         $this->put("/dashboard/users/$user->id", [
             'name' => 'Updated name',
             'email' => 'test@test.com',
             'password' => 'password',
-            'password_confirmation' => 'password'
+            'password_confirmation' => 'password',
         ]);
 
         $this->assertDatabaseHas('users', ['name' => 'Updated name']);
@@ -74,12 +71,10 @@ class UserTest extends TestCase
             'email' => 'test@test.com',
         ]);
 
-
         $this->login();
 
         $this->delete("/dashboard/users/$user->id");
 
         $this->assertDatabaseMissing('users', ['name' => $user->name]);
     }
-
 }

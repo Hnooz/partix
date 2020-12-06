@@ -10,6 +10,4 @@ class Category extends Model
     use Notifiable;
 
     protected $guarded = [];
-   //
-
 }

@@ -8,13 +8,12 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
-
     public function index()
     {
         $cars = Car::all();
 
-        return inertia()->render('Dashboard/cars/index',[
-            'cars' => $cars
+        return inertia()->render('Dashboard/cars/index', [
+            'cars' => $cars,
         ]);
     }
 
@@ -26,23 +25,23 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'brand'      =>  'required|min:4',
-            'model'      =>  'required|max:255',
-            'engine'     =>  'required|max:255',
-            'year'       =>  'required|max:255',
-       ]);
+            'brand' => 'required|min:4',
+            'model' => 'required|max:255',
+            'engine' => 'required|max:255',
+            'year' => 'required|max:255',
+        ]);
 
-            Car::create([
-           'brand' => $request->brand,
-           'model' => $request->model,
-           'engine' => $request->engine,
-           'year' => $request->year,
+        Car::create([
+            'brand' => $request->brand,
+            'model' => $request->model,
+            'engine' => $request->engine,
+            'year' => $request->year,
 
-       ]);
+        ]);
 
-       session()->flash('toast', [
-        'type' => 'success',
-        'message' => 'Car created successfully'
+        session()->flash('toast', [
+            'type' => 'success',
+            'message' => 'Car created successfully',
         ]);
 
         return redirect()->route('cars.index');
@@ -52,7 +51,6 @@ class CarController extends Controller
     {
         //
     }
-
 
     public function edit(Car $car)
     {
@@ -73,10 +71,9 @@ class CarController extends Controller
         dd($parts);
         session()->flash('toast', [
             'type' => 'error',
-            'message' => 'Car Deleted successfully'
-            ]);
+            'message' => 'Car Deleted successfully',
+        ]);
 
         return redirect()->back();
-    
     }
 }

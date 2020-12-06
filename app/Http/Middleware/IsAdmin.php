@@ -16,13 +16,12 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() == !null) {
-            if(Auth::user()->is_admin == 1){
-            return $next($request);
+        if (Auth::user() == ! null) {
+            if (Auth::user()->is_admin == 1) {
+                return $next($request);
             }
         }
         
-   
-        return redirect('store')->with('error',"You don't have admin access.");
+        return redirect('store')->with('error', "You don't have admin access.");
     }
 }

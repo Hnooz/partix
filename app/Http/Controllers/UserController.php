@@ -3,20 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Exports\UsersExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
-    
     public function index()
     {
         $users = User::all();
 
         return inertia()->render('Dashboard/users/index', [
-            'users' => $users
+            'users' => $users,
         ]);
     }
 
@@ -30,7 +27,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8|confirmed'
+            'password' => 'required|min:8|confirmed',
         ]);
 
         User::create([
@@ -41,11 +38,10 @@ class UserController extends Controller
 
         session()->flash('toast', [
             'type' => 'success',
-            'message' => 'User created successfully'
+            'message' => 'User created successfully',
         ]);
 
         return redirect()->route('users.index');
-
     }
 
     public function edit(User $user)
@@ -58,7 +54,7 @@ class UserController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'sometimes|min:8|confirmed'
+            'password' => 'sometimes|min:8|confirmed',
         ]);
 
         if ($request->filled('password')) {
@@ -69,11 +65,10 @@ class UserController extends Controller
 
         session()->flash('toast', [
             'type' => 'success',
-            'message' => 'User updated successfully'
+            'message' => 'User updated successfully',
         ]);
 
         return redirect()->route('users.index');
-
     }
 
     public function destroy(User $user)
@@ -81,10 +76,9 @@ class UserController extends Controller
         $user->delete();
         session()->flash('toast', [
             'type' => 'success',
-            'message' => 'User Deleted successfully'
+            'message' => 'User Deleted successfully',
         ]);
 
-      return redirect()->back();
-
+        return redirect()->back();
     }
 }
