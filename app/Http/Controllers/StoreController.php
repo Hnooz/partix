@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Part;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
     public function index()
     {
-        return inertia()->render('Store/Index');
+        $parts = Part::all();
+        return inertia()->render('Store/Index', ['parts' => $parts]);
     }
 
     public function items()
@@ -16,8 +18,9 @@ class StoreController extends Controller
         return inertia()->render('Store/Items');
     }
 
-    public function details()
+    public function details(Part $part)
     {
-        return inertia()->render('Store/ItemDetails');
+
+        return inertia()->render('Store/ItemDetails', ['part' => $part]);
     }
 }

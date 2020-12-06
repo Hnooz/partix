@@ -33,6 +33,7 @@ class PartController extends Controller
             'number'     =>  'required|unique:parts|max:255',
             'description'     =>  'required|max:255',
             'price'     =>  'required|max:255',
+            'second_price' => 'required|max:255',
             'slug'     =>  'required|max:255',
             'car_id' => 'required|max:255',
             // 'image' => 'sometimes'
@@ -43,6 +44,7 @@ class PartController extends Controller
            'number' => $request->number,
            'description' => $request->description,
            'price'  => $request->price,
+           'second_price' => $request->second_price,
            'slug'   => $request->slug,
            'car_id' =>$request->car_id ,
            'supplier_id' => 1
@@ -84,6 +86,7 @@ class PartController extends Controller
             'number'     =>  'required|max:255',
             'description'     =>  'required|max:255',
             'price'     =>  'required|max:255',
+            'second_price' => 'required|max:255',
             'slug'     =>  'required|max:255',
             'car_id' => 'required|max:255',
        ]);

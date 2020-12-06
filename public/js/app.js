@@ -3375,6 +3375,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3388,6 +3391,7 @@ __webpack_require__.r(__webpack_exports__);
         number: '',
         description: '',
         price: '',
+        second_price: '',
         slug: '',
         car_id: '',
         image: null
@@ -3402,6 +3406,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('number', this.part.number);
       data.append('description', this.part.description);
       data.append('price', this.part.price);
+      data.append('second_price', this.part.second_price);
       data.append('slug', this.part.slug);
       data.append('car_id', this.part.car_id);
       data.append('image', this.part.image);
@@ -4275,6 +4280,7 @@ __webpack_require__.r(__webpack_exports__);
     BaseFooter: _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__["default"],
     ToggleMenu: _components_UI_ToggleMenu__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
+  props: ['parts'],
   data: function data() {
     return {
       search: '',
@@ -4404,8 +4410,8 @@ __webpack_require__.r(__webpack_exports__);
     filteredList: function filteredList() {
       var _this = this;
 
-      return this.items.filter(function (item) {
-        return item.name.toLowerCase().includes(_this.search.toLowerCase());
+      return this.parts.filter(function (part) {
+        return part.name.toLowerCase().includes(_this.search.toLowerCase());
       });
     }
   },
@@ -4689,6 +4695,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -4702,6 +4713,7 @@ __webpack_require__.r(__webpack_exports__);
     Slide: _components_UI_Slide__WEBPACK_IMPORTED_MODULE_2__["default"],
     BaseFooter: _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
+  props: ['part'],
   data: function data() {
     return {
       fav: false
@@ -50221,6 +50233,30 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
+                          type: "number",
+                          label: "Price for used part",
+                          name: "second_price",
+                          error: _vm.$page.errors.second_price,
+                          tabindex: "4",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.part.second_price,
+                          callback: function($$v) {
+                            _vm.$set(_vm.part, "second_price", $$v)
+                          },
+                          expression: "part.second_price"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
                           label: "Slug",
                           name: "slug",
                           error: _vm.$page.errors.slug,
@@ -52413,7 +52449,7 @@ var render = function() {
           staticClass:
             "max-w-6xl container mx-auto mt-10 overflow-auto whitespace-no-wrap"
         },
-        _vm._l(_vm.filteredList, function(item, index) {
+        _vm._l(_vm.filteredList, function(part, index) {
           return _c(
             "div",
             {
@@ -52422,86 +52458,27 @@ var render = function() {
                 "bg-white rounded-t-lg shadow-lg max-w-xs w-full inline-block overflow-hidden mx-4"
             },
             [
-              _c("div", { staticClass: "flex justify-between" }, [
-                item.fav == false
-                  ? _c(
-                      "svg",
-                      {
-                        staticClass: "h-6 m-2 mx-4 text-gray-400 w-6",
-                        attrs: {
-                          viewBox: "0 0 24 24",
-                          fill: "none",
-                          xmlns: "http://www.w3.org/2000/svg"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.fave(item)
-                          }
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            "fill-rule": "evenodd",
-                            "clip-rule": "evenodd",
-                            d:
-                              "M12.0122 5.57169L10.9252 4.48469C8.77734 2.33681 5.29493 2.33681 3.14705 4.48469C0.999162 6.63258 0.999162 10.115 3.14705 12.2629L11.9859 21.1017L11.9877 21.0999L12.014 21.1262L20.8528 12.2874C23.0007 10.1395 23.0007 6.65711 20.8528 4.50923C18.705 2.36134 15.2226 2.36134 13.0747 4.50923L12.0122 5.57169ZM11.9877 18.2715L16.9239 13.3352L18.3747 11.9342L18.3762 11.9356L19.4386 10.8732C20.8055 9.50635 20.8055 7.29028 19.4386 5.92344C18.0718 4.55661 15.8557 4.55661 14.4889 5.92344L12.0133 8.39904L12.006 8.3918L12.005 8.39287L9.51101 5.89891C8.14417 4.53207 5.92809 4.53207 4.56126 5.89891C3.19442 7.26574 3.19442 9.48182 4.56126 10.8487L7.10068 13.3881L7.10248 13.3863L11.9877 18.2715Z",
-                            fill: "currentColor"
-                          }
-                        })
-                      ]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                item.fav == true
-                  ? _c(
-                      "svg",
-                      {
-                        staticClass: "h-6 m-2 mx-4 text-red-600 w-6",
-                        attrs: {
-                          fill: "currentColor",
-                          viewBox: "0 0 20 20",
-                          xmlns: "http://www.w3.org/2000/svg"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.fave(item)
-                          }
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            "fill-rule": "evenodd",
-                            d:
-                              "M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z",
-                            "clip-rule": "evenodd"
-                          }
-                        })
-                      ]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  {
-                    staticClass:
-                      "bg-teal-400  font-semibold h-12 px-1 py-3 shadow-lg text-white w-12"
-                  },
-                  [_vm._v("-26%")]
-                )
-              ]),
-              _vm._v(" "),
               _vm._m(0, true),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "/details/" + part.id } }, [
+                _c("img", {
+                  staticClass:
+                    "h-24 mt-12 mx-auto object-cover object-center w-24",
+                  attrs: {
+                    src: __webpack_require__(/*! ../../images/10102.png */ "./resources/js/images/10102.png"),
+                    alt: "item name"
+                  }
+                })
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "px-4 py-2" }, [
                 _c(
                   "a",
                   {
                     staticClass: "font-bold text-teal-500 uppercase",
-                    attrs: { href: "/details" }
+                    attrs: { href: "/details/" + part.id }
                   },
-                  [_vm._v("Oil Test")]
+                  [_vm._v(_vm._s(part.name))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -52513,11 +52490,20 @@ var render = function() {
                     _c("span", { attrs: { dir: "auto" } }, [
                       _vm._v(_vm._s(_vm.__("item number")))
                     ]),
-                    _vm._v(": 245166h")
+                    _vm._v(_vm._s(part.number))
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(1, true)
+                _c(
+                  "p",
+                  { staticClass: "text-gray-800 text-xl font-semibold" },
+                  [
+                    _vm._v(_vm._s(part.price)),
+                    _c("span", { staticClass: "px-2 text-gray-500 text-sm" }, [
+                      _vm._v("QAR")
+                    ])
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "bg-teal-700 py-2" }, [
@@ -52565,20 +52551,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "/details" } }, [
-      _c("img", {
-        staticClass: "h-24 mt-12 mx-auto object-cover object-center w-24",
-        attrs: { src: __webpack_require__(/*! ../../images/10102.png */ "./resources/js/images/10102.png"), alt: "item name" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "text-gray-800 text-xl font-semibold" }, [
-      _vm._v("3.800 "),
-      _c("span", { staticClass: "px-2 text-gray-500 text-sm" }, [_vm._v("QAR")])
+    return _c("div", { staticClass: "flex justify-between" }, [
+      _c(
+        "p",
+        {
+          staticClass:
+            "bg-teal-400  font-semibold h-12 px-1 py-3 shadow-lg text-white w-12"
+        },
+        [_vm._v("-26%")]
+      )
     ])
   }
 ]
@@ -52892,7 +52873,7 @@ var render = function() {
                             staticClass:
                               "capitalize font-medium text-teal-400 text-xl"
                           },
-                          [_vm._v(_vm._s(_vm.__("oil filter")))]
+                          [_vm._v(_vm._s(_vm.part.name))]
                         ),
                         _vm._v(" "),
                         _c(
@@ -53013,7 +52994,7 @@ var render = function() {
                             staticClass: "font-semibold text-3xl text-gray-900"
                           },
                           [
-                            _vm._v("1.230 "),
+                            _vm._v(_vm._s(_vm.part.price) + " "),
                             _c(
                               "span",
                               {
@@ -53037,17 +53018,20 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      staticClass: "bg-blue-100 my-5 p-5 text-gray-600 text-sm"
-                    },
-                    [
-                      _vm._v(
-                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. \n                        Fuga, ipsa non perspiciatis quaerat porro eius accusamus \n                        ipsum modi a ad corporis dolore voluptate iure. \n                        Magni facere nostrum eum distinctio ea.\n                    "
-                      )
-                    ]
-                  ),
+                  _c("div", {}, [
+                    _c(
+                      "p",
+                      {
+                        staticClass:
+                          "bg-blue-100 my-5 p-5 text-gray-600 text-sm"
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Lorem ipsum dolor sit amet consectetur adipisicing elit. \n                            Fuga, ipsa non perspiciatis quaerat porro eius accusamus \n                            ipsum modi a ad corporis dolore voluptate iure. \n                            Magni facere nostrum eum distinctio ea.\n                        "
+                        )
+                      ]
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "flex items-center" }, [
                     _c("h1", { staticClass: "capitalize text-teal-900" }, [

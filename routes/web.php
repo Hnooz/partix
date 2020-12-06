@@ -37,5 +37,5 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
 
 Route::get('/store', 'StoreController@index')->name('store.index');
 Route::get('/items', 'StoreController@items')->name('store.items');
-Route::get('/details', 'StoreController@details')->name('store.details');
+Route::get('/details/{part}', 'StoreController@details')->name('store.details');
 Route::get('/cart', 'CategoryController@cart')->name('categories.cart');

@@ -22,6 +22,9 @@
                             <base-input type="number" label="Price"  name="price"  v-model="part.price" :error="$page.errors.price" tabindex="4" required></base-input>
                         </div>
                         <div>
+                            <base-input type="number" label="Price for used part"  name="second_price"  v-model="part.second_price" :error="$page.errors.second_price" tabindex="4" required></base-input>
+                        </div>
+                        <div>
                             <base-input label="Slug"  name="slug"  v-model="part.slug" :error="$page.errors.slug" tabindex="5" required></base-input>
                         </div>
                         <div>
@@ -59,6 +62,7 @@
                     number: '',
                     description: '',
                     price: '',
+                    second_price:'',
                     slug: '',
                     car_id: '',
                     image:null
@@ -77,6 +81,7 @@
             data.append('number', this.part.number);
             data.append('description', this.part.description);
             data.append('price', this.part.price);
+            data.append('second_price', this.part.second_price);
             data.append('slug', this.part.slug);
             data.append('car_id', this.part.car_id);
             data.append('image', this.part.image);
