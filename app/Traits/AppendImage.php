@@ -3,7 +3,6 @@
 
 namespace App\Traits;
 
-
 trait AppendImage
 {
     public function getUrlAttribute()

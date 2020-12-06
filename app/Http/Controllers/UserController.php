@@ -10,7 +10,6 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
-    
     public function index()
     {
         $users = User::all();
@@ -45,7 +44,6 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('users.index');
-
     }
 
     public function edit(User $user)
@@ -73,7 +71,6 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('users.index');
-
     }
 
     public function destroy(User $user)
@@ -84,7 +81,6 @@ class UserController extends Controller
             'message' => 'User Deleted successfully'
         ]);
 
-      return redirect()->back();
-
+        return redirect()->back();
     }
 }

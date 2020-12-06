@@ -9,20 +9,20 @@ Auth::routes(['register' => true, 'confirm' => false, 'reset' => false]);
 Route::redirect('/', '/dashboard');
 
 Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
-    // dashboard 
+    // dashboard
     Route::get('/', 'DashboardController@index')->name('dashboard.index');
     Route::get('/ui', 'DashboardController@ui');
-    // user route 
+    // user route
     Route::get('users/export/', 'ExportController@users');
     Route::resource('users', 'UserController');
     
-    // orders route 
+    // orders route
     Route::get('/orders', 'OrderController@index')->name('orders.index');
 
-    // coupons route 
+    // coupons route
     Route::resource('coupons', 'CouponCodeController')->except(['show','create']);
 
-    // comments route 
+    // comments route
     Route::get('/comments', 'CommentController@index')->name('comments.index');
 
     // category route

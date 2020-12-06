@@ -12,11 +12,13 @@ class CouponCodeController extends Controller
     {
         $coupons = CouponCode::all();
         $descountType = DiscountType::all();
-        return inertia()->render('Dashboard/coupons/index',
-        [
+        return inertia()->render(
+            'Dashboard/coupons/index',
+            [
             'coupons' => $coupons,
             'descountType' => $descountType
-        ]);
+        ]
+        );
     }
 
     public function store(Request $request)
@@ -52,5 +54,4 @@ class CouponCodeController extends Controller
 
         return redirect()->back();
     }
-
 }

@@ -8,12 +8,11 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
-
     public function index()
     {
         $cars = Car::all();
 
-        return inertia()->render('Dashboard/cars/index',[
+        return inertia()->render('Dashboard/cars/index', [
             'cars' => $cars
         ]);
     }
@@ -32,7 +31,7 @@ class CarController extends Controller
             'year'       =>  'required|max:255',
        ]);
 
-            Car::create([
+        Car::create([
            'brand' => $request->brand,
            'model' => $request->model,
            'engine' => $request->engine,
@@ -40,7 +39,7 @@ class CarController extends Controller
 
        ]);
 
-       session()->flash('toast', [
+        session()->flash('toast', [
         'type' => 'success',
         'message' => 'Car created successfully'
         ]);
@@ -77,6 +76,5 @@ class CarController extends Controller
             ]);
 
         return redirect()->back();
-    
     }
 }

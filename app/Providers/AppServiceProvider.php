@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
                 return translations(
                     resource_path('lang/'. app()->getLocale() .'.json')
                 );
-            },        
+            },
             'flash' => function () {
                 return Session::get('toast');
             },
