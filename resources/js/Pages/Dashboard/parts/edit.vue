@@ -86,7 +86,7 @@
             // data.append('car_id', this.part.car_id);
             // data.append('image', this.part.image);
 
-            this.$inertia.put(this.$route('parts.update', this.part.id), this.form);
+            this.$inertia.put(`/dashboard/parts/${this.part.id}`, this.form);
             },
 
             // handleFileUpload(event){

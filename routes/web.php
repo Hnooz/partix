@@ -8,7 +8,7 @@ Auth::routes(['register' => true, 'confirm' => false, 'reset' => false]);
 
 Route::redirect('/', '/dashboard');
 
-Route::middleware('auth')->prefix('/dashboard')->group(function () {
+Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     // dashboard 
     Route::get('/', 'DashboardController@index')->name('dashboard.index');
     Route::get('/ui', 'DashboardController@ui');

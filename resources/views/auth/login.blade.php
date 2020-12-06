@@ -4,9 +4,9 @@
     <div class="min-h-screen flex items-center">
         <div class="bg-white w-full max-w-lg rounded-lg shadow overflow-hidden mx-auto">
             <div class="py-4 px-6">
-                <div class="text-center font-bold text-gray-700 text-3xl">Brand</div>
-                <div class="mt-1 text-center font-bold text-gray-600 text-xl">Welcome Back</div>
-                <div class="mt-1 text-center text-gray-600">Login or Register</div>
+                <div class="text-center font-bold text-teal-700 text-3xl">Partix</div>
+                <div class="mt-1 text-center font-bold text-teal-600 text-xl">Welcome Back</div>
+                <div class="mt-1 text-center text-teal-600">Login or Register</div>
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="mt-4 w-full">
@@ -28,9 +28,9 @@
                         @enderror
                     </div>
                     <div class="flex justify-between items-center mt-6">
-                        <a href="#" class="text-gray-600 text-sm hover:text-gray-500">Forget password?</a>
+                        <a href="#" class="text-teal-600 text-sm hover:text-teal-500">Forget password?</a>
                         <button type="submit"
-                                class="py-2 px-4 bg-gray-700 text-white rounded hover:bg-gray-600 focus:outline-none">
+                                class="py-2 px-4 bg-teal-700 text-white rounded hover:bg-gray-600 focus:outline-none">
                             Login
                         </button>
                     </div>
@@ -38,7 +38,7 @@
             </div>
             <div class="flex items-center justify-center py-4 bg-gray-100 text-center">
                 <h1 class="text-gray-600 text-sm">Don't have an account</h1>
-                <a href="/register" class="text-blue-600 font-bold mx-2 text-sm hover:text-blue-500">Register now</a>
+                <a href="/register" class="text-teal-600 font-bold mx-2 text-sm hover:text-teal-500">Register now</a>
             </div>
         </div>
     </div>
