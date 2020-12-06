@@ -4,41 +4,38 @@ namespace App\Http\Controllers;
 
 use App\Car;
 use App\Part;
-use App\Exports\PartsExport;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
 class PartController extends Controller
 {
     public function index()
     {
-        $parts = Part::all();
-        return inertia()->render('Dashboard/parts/index',[
-            'parts' => $parts
+        return inertia()->render('Dashboard/parts/index', [
+            'parts' => Part::all()
         ]);
     }
 
     
     public function create()
     {
-        $cars = Car::all();
-        return inertia()->render('Dashboard/parts/create', ['cars' => $cars]);
+        return inertia()->render('Dashboard/parts/create', [
+            'cars' => Car::all()
+        ]);
     }
 
    
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'name'      =>  'required|min:4',
             'number'     =>  'required|unique:parts|max:255',
             'description'     =>  'required|max:255',
             'price'     =>  'required|max:255',
             'slug'     =>  'required|max:255',
             'car_id' => 'required|max:255',
-            // 'image' => 'sometimes'
        ]);
 
-     $part =  Part::create([
+        $part =  Part::create([
            'name'   => $request->name,
            'number' => $request->number,
            'description' => $request->description,
@@ -46,29 +43,19 @@ class PartController extends Controller
            'slug'   => $request->slug,
            'car_id' =>$request->car_id ,
            'supplier_id' => 1
-
        ]);
 
-        // dd($request->hasFile('image'));
-       if ($request->hasFile('image')) {
-        $part->addMedia($request->file('image'))
-        ->toMediaCollection('images');
+        if ($request->hasFile('image')) {
+            $part->addMedia($request->file('image'))->toMediaCollection('images');
         };
 
-       session()->flash('toast', [
-        'type' => 'success',
-        'message' => 'Part created successfully'
+        session()->flash('toast', [
+            'type' => 'success',
+            'message' => 'Part created successfully'
         ]);
 
-            return redirect()->route('parts.index');
+        return redirect()->route('parts.index');
     }
-
-    
-    public function show(Part $part)
-    {
-        //
-    }
-
    
     public function edit(Part $part)
     {
@@ -79,7 +66,7 @@ class PartController extends Controller
    
     public function update(Request $request, Part $part)
     {
-       $data = $request->validate([
+        $data = $request->validate([
             'name'      =>  'required|min:4',
             'number'     =>  'required|max:255',
             'description'     =>  'required|max:255',
@@ -88,15 +75,14 @@ class PartController extends Controller
             'car_id' => 'required|max:255',
        ]);
 
-       $part->update($data);
+        $part->update($data);
 
-       session()->flash('toast', [
+        session()->flash('toast', [
         'type' => 'success',
         'message' => 'Part Updated successfully'
         ]);
 
         return redirect()->route('parts.index');
-
     }
 
     
@@ -108,6 +94,6 @@ class PartController extends Controller
             'message' => 'Part Deleted successfully'
         ]);
 
-      return redirect()->back();
+        return redirect()->back();
     }
 }
