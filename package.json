@@ -15,6 +15,7 @@
         "browser-sync": "^2.26.13",
         "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^7.0",
+        "husky": "^4.3.4",
         "laravel-mix": "^5.0.1",
         "laravel-mix-purgecss": "^5.0.0",
         "lodash": "^4.17.13",
@@ -31,5 +32,10 @@
         "chart.js": "^2.9.3",
         "vue-i18n": "^8.22.1",
         "vue-slick-carousel": "^1.0.6"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "./bin/pre-commit.sh"
+        }
     }
 }
