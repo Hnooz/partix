@@ -36,23 +36,23 @@
                     <form class="flex flex-col lg:flex-row items-center justify-center">
                         <div class="grid gap-3 md:grid-cols-2">
                             <label class="w-70" for="">
-                                <select class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full" name="" id="">
-                                    <option value="">{{__('brand')}}</option>
+                                <select name="brand" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full" id="">
+                                    <option v-for="car in carItem" :key="car.index" :value="car.id">{{car.brand}}</option>
+                                </select>
+                            </label>
+                            <label for="model" class="w-70">
+                                <select name="" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full" id="">
+                                    <option v-for="car in carItem" :key="car.index" :value="car.id">{{car.model}}</option>
                                 </select>
                             </label>
                             <label for="" class="w-70">
-                                <select class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full" name="" id="">
-                                    <option value="">{{__('model')}}</option>
+                                <select name="year" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full" id="">
+                                    <option v-for="car in carItem" :key="car.index" :value="car.id">{{car.year}}</option>
                                 </select>
                             </label>
                             <label for="" class="w-70">
-                                <select class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full" name="" id="">
-                                    <option value="">{{__('year')}}</option>
-                                </select>
-                            </label>
-                            <label for="" class="w-70">
-                                <select class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full" name="" id="">
-                                    <option value="">{{__('engine')}}</option>
+                                <select name="engine" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full" id="">
+                                    <option v-for="car in carItem" :key="car.index" :value="car.id">{{car.engine}}</option>
                                 </select>
                             </label>
                         </div>
@@ -76,7 +76,9 @@ import BaseInput from '../UI/BaseInput'
 import BaseButton from '../UI/BaseButton'
 
     export default {
-        
+        props:{
+            carItem:Array,
+        }
     }
 </script>
 

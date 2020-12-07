@@ -25,7 +25,7 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'brand' => 'required|min:4',
+            'brand' => 'required|min:3',
             'model' => 'required|max:255',
             'engine' => 'required|max:255',
             'year' => 'required|max:255',

@@ -8,6 +8,14 @@ Auth::routes(['register' => true, 'confirm' => false, 'reset' => false]);
 
 Route::redirect('/', '/dashboard');
 
+// Route::middleware('is_delivery')->prefix('/dashboard')->group(function () {
+    
+// });
+
+Route::group(['middleware' => ['is_delivery'], 'prefix' => '/dashboard'], function () {
+    Route::get('/orders', 'OrderController@index')->name('orders.index');
+});
+
 Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     // dashboard
     Route::get('/', 'DashboardController@index')->name('dashboard.index');
@@ -17,7 +25,7 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     Route::resource('users', 'UserController');
     
     // orders route
-    Route::get('/orders', 'OrderController@index')->name('orders.index');
+    // Route::get('/orders', 'OrderController@index')->name('orders.index');
 
     // coupons route
     Route::resource('coupons', 'CouponCodeController')->except(['show','create']);
@@ -38,4 +46,10 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
 Route::get('/store', 'StoreController@index')->name('store.index');
 Route::get('/items', 'StoreController@items')->name('store.items');
 Route::get('/details/{part}', 'StoreController@details')->name('store.details');
-Route::get('/cart', 'CategoryController@cart')->name('categories.cart');
+
+// cart
+Route::get('/carts', 'CartController@index')->name('carts.index');
+Route::post('/carts', 'CartController@store')->name('carts.store');
+Route::put('/cart/{id}', 'CartController@update')->name('carts.update');
+Route::delete('/cart', 'CartController@destroy')->name('carts.destroy');
+Route::delete('/clear', 'CartController@clear')->name('carts.clear');

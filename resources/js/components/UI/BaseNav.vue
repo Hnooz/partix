@@ -8,13 +8,17 @@
                 <span class="mx-2">|</span>
                 <LanguageSelector />
             </div>
-            <div class="flex">
+            <div class="flex" v-if="!$page.auth.user.loggedIn">
                 <a href="/login" class="flex">
                     <svg class="w-5 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
                     {{__('log in')}}
                 </a>
                 <span class="mx-2">|</span>
-                <a href="#">{{__('register')}}</a>
+                <a href="/register">{{__('register')}}</a>
+            </div>
+            <div v-else>
+                <button class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white hover:bg-blue-400 focus:outline-none focus:text-white focus:bg-gray-700"
+                   @click="logout">Logout</button>
             </div>
         </div>
         <div class="container mx-auto p-4 sm:px-6 lg:px-8">
@@ -78,7 +82,7 @@
                                     <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
                                 </svg>                                
                             </a>
-                            <span class="-mt-12 mx-10 absolute bg-red-400 flex font-bold h-5 justify-center rounded-full text-sm w-5">3</span>
+                            <span class="-mt-12 mx-10 absolute bg-red-400 flex font-bold h-5 justify-center rounded-full text-sm w-5">{{this.cartItemQuantity}}</span>
                             
 
                             <span class="font-bold text-sm">&nbsp; $33,45 &nbsp; QAR</span>
@@ -142,60 +146,28 @@
             </button>
         </div>
         <hr class="my-3">
-        <div class="flex justify-between mt-6">
-            <div class="flex">
-                <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
-                <div class="mx-3">
-                    <h3 class="text-sm text-gray-600">{{__('Mac Book Pro')}}</h3>
-                    <div class="flex items-center mt-2">
-                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
-                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </button>
-                        <span class="text-gray-700 mx-2">2</span>
-                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
-                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </button>
+        <form>
+            <div class="flex justify-between mt-6" v-for="item in cartItem" :key="item.index">
+                <div class="flex">
+                    <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
+                    <div class="mx-3">
+                        <h3 class="text-sm text-gray-600">{{item.name}}</h3>
+                        <div class="flex items-center mt-2">
+                            <button type="button" @click="increment(item)" class="text-gray-500 focus:outline-none focus:text-gray-600">
+                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </button>
+                            <span class="text-gray-700 mx-2">{{item.quantity}}</span>
+                            <button type="button" @click="decrement(item)" class="text-gray-500 focus:outline-none focus:text-gray-600" :disabled="item.quantity == 0">
+                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
+                <span class="text-gray-600">{{item.price}}$</span>
             </div>
-            <span class="text-gray-600">20$</span>
-        </div>
-        <div class="flex justify-between mt-6">
-            <div class="flex">
-                <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
-                <div class="mx-3">
-                    <h3 class="text-sm text-gray-600">{{__('Mac Book Pro')}}</h3>
-                    <div class="flex items-center mt-2">
-                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
-                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </button>
-                        <span class="text-gray-700 mx-2">2</span>
-                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
-                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <span class="text-gray-600">20$</span>
-        </div>
-        <div class="flex justify-between mt-6">
-            <div class="flex">
-                <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
-                <div class="mx-3">
-                    <h3 class="text-sm text-gray-600">{{__('Mac Book Pro')}}</h3>
-                    <div class="flex items-center mt-2">
-                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
-                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </button>
-                        <span class="text-gray-700 mx-2">2</span>
-                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
-                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <span class="text-gray-600">20$</span>
-        </div>
+        </form>
+        
+    
         <div class="mt-8">
             <form class="flex items-center justify-center">
                 <input class="form-input w-48" type="text" placeholder="Add promocode">
@@ -204,7 +176,7 @@
                 </button>
             </form>
         </div>
-        <a href="/cart" class="flex items-center justify-center mt-4 px-3 py-2 bg-teal-800 text-white text-sm uppercase font-medium rounded hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
+        <a href="/carts" class="flex items-center justify-center mt-4 px-3 py-2 bg-teal-800 text-white text-sm uppercase font-medium rounded hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
             <span>{{__('Chechout')}}</span>
             <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </a>
@@ -250,10 +222,15 @@ import LanguageSelector from '../../Shared/LanguageSelector'
 export default {
     name: "BaseNav",
     components:{LanguageSelector},
+    props:{
+        cartItemQuantity:Number,
+        cartItem:Object
+    },
     data() {
         return {
             cartOpen:false,
             isOpen:false,
+            // quantity:1,
             view: {
                 atTopOfPage: true
             }
@@ -263,17 +240,27 @@ export default {
         window.addEventListener('scroll', this.handleScroll);
     },
         methods: {
+            increment(item){
+                item.quantity++;
+                // item.price = item.price*item.quantity
+                this.$inertia.put(`/cart/${item.id}`, item);
+            },
+
+            decrement(item){
+                item.quantity--;
+                // item.price = item.price/item.quantity
+                this.$inertia.put(`/cart/${item.id}`, item);
+            },
             logout() {
                 axios.post('logout')
                     .then(() => location.reload());
             },
             handleScroll(){
-                // when the user scrolls, check the pageYOffset
                 if(window.pageYOffset>0){
-                    // user is scrolled
+
                     if(this.view.atTopOfPage) this.view.atTopOfPage = false
                 }else{
-                    // user is at top of page
+
                     if(!this.view.atTopOfPage) this.view.atTopOfPage = true
                 }
             },

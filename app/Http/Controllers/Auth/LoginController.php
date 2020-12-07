@@ -51,8 +51,15 @@ class LoginController extends Controller
         ]);
    
         if (auth()->attempt(['email' => $input['email'], 'password' => $input['password']])) {
-            if (auth()->user()->is_admin == 1) {
-                return redirect()->route('dashboard.index');
+            if (auth()->user()) {
+                if (auth()->user()->is_admin == 1) {
+                    return redirect()->route('dashboard.index');
+                }
+
+                if (auth()->user()->is_delivery == 1) {
+                    // dd(redirect()->route('orders.index'));
+                    return redirect()->route('orders.index');
+                }
             } else {
                 return redirect()->route('store.index');
             }
