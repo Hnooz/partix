@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Car;
-use App\Supplier;
 use App\Traits\AppendImage;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
@@ -22,8 +20,13 @@ class Part extends Model implements HasMedia
         return $this->belongsToMany(Car::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function supplier()
     {
-        return $this->belongsToMany(Supplier::class);
+        return $this->belongsToMany(Supplier::class, 'supplier_id');
     }
 }

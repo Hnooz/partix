@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Car;
 use App\Part;
+use App\Category;
+use App\Supplier;
 use Illuminate\Http\Request;
 
 class PartController extends Controller
@@ -17,8 +19,14 @@ class PartController extends Controller
 
     public function create()
     {
+        $cars = Car::all();
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+
         return inertia()->render('Dashboard/parts/create', [
-            'cars' => Car::all(),
+            'cars' => $cars,
+            'categories' => $categories,
+            'suppliers' => $suppliers,
         ]);
     }
 
@@ -32,6 +40,8 @@ class PartController extends Controller
             'second_price' => 'required|max:255',
             'slug' => 'required|max:255',
             'car_id' => 'required|max:255',
+            'category_id' => 'required|max:255',
+            'supplier_id' => 'required|max:255',
         ]);
 
         $part = Part::create([
@@ -42,7 +52,8 @@ class PartController extends Controller
             'second_price' => $request->second_price,
             'slug' => $request->slug,
             'car_id' => $request->car_id,
-            'supplier_id' => 1,
+            'category_id' => $request->category_id,
+            'supplier_id' => $request->supplier_id,
         ]);
 
         if ($request->hasFile('image')) {
@@ -60,8 +71,13 @@ class PartController extends Controller
     public function edit(Part $part)
     {
         $cars = Car::all();
+        $categories = Category::all();
+        $suppliers = Supplier::all();
 
-        return inertia()->render('Dashboard/parts/edit', ['part' => $part, 'cars' => $cars]);
+        return inertia()->render('Dashboard/parts/edit', [
+            'part' => $part, 'cars' => $cars,
+            'categories' => $categories, 'suppliers' => $suppliers,
+        ]);
     }
 
     public function update(Request $request, Part $part)
@@ -74,6 +90,8 @@ class PartController extends Controller
             'second_price' => 'required|max:255',
             'slug' => 'required|max:255',
             'car_id' => 'required|max:255',
+            'category_id' => 'required|max:255',
+            'supplier_id' => 'required|max:255',
         ]);
 
         $part->update($data);

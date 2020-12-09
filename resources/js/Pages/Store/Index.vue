@@ -68,7 +68,7 @@
                         <p class="break-all font-medium text-gray-600 text-xs "><span dir="auto">{{__('item number')}}</span>{{part.number}}</p>
                         <p class="text-gray-800 text-xl font-semibold">{{part.price}}<span class="px-2 text-gray-500 text-sm">QAR</span></p>
                     </div>
-
+                    <input type="text" name="supplier_id"  hidden>
                     <div class="bg-teal-700 py-2">
                         <button type="button" @click="addCart(part)" class="flex focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white text-xs uppercase w-full">
                             {{__('Buy')}}
@@ -116,6 +116,7 @@ export default {
             name:'',
             price:'',
             slug:'',
+            supplier:''
         }
        
     }

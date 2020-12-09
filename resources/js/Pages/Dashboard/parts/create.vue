@@ -34,6 +34,18 @@
                                 </select>
                         </div>
                         <div>
+                            <label class="text-gray-700">Category</label>
+                                <select  name="category_id"  v-model="part.category_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.category_id" required tabindex="7">
+                                    <option v-for="category in categories" :key="category.index" :value="category.id">{{category.name}}</option>
+                                </select>
+                        </div>
+                        <div>
+                            <label class="text-gray-700">Supplier</label>
+                                <select  name="supplier_id"  v-model="part.supplier_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.supplier_id" required tabindex="8">
+                                    <option v-for="supplier in suppliers" :key="supplier.index" :value="supplier.id">{{supplier.name}}</option>
+                                </select>
+                        </div>
+                        <div>
                             <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full" :error="$page.errors.file" tabindex="7" multiple required>
                         </div>
                         
@@ -54,7 +66,7 @@
 
     export default {
         components: {Layout},
-        props:['cars'],
+        props:['cars','suppliers','categories'],
         data() {
             return {
                 part: {
@@ -65,6 +77,8 @@
                     second_price:'',
                     slug: '',
                     car_id: '',
+                    supplier_id:'',
+                    category_id:'',
                     image:null
                 },
                    
@@ -84,6 +98,8 @@
             data.append('second_price', this.part.second_price);
             data.append('slug', this.part.slug);
             data.append('car_id', this.part.car_id);
+            data.append('supplier_id', this.part.supplier_id);
+            data.append('category_id', this.part.category_id);
             data.append('image', this.part.image);
 
             this.$inertia.post('/dashboard/parts', data);

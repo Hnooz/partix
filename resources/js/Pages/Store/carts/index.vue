@@ -47,6 +47,7 @@
                         <div class="border rounded-md max-w-md w-full px-4 py-3" >
                             <div class="flex items-center justify-between">
                                 <h3 class="text-teal-700 font-medium">{{__('Order total')}} {{cartQuantity}}</h3>
+                                <span class="text-gray-600">{{cartTotalPrice}}$</span>
                                 <button @click="clearCart" type="submit" class="text-teal-600 text-sm">{{__('clear')}}</button>
                             </div>
                             <div class="overflow-y-auto" style="height:300px;">
@@ -88,7 +89,7 @@ import BaseFooter from '../../../components/UI/BaseFooter'
             BaseNav,
             BaseFooter
         },
-        props:['cartCollection','cartQuantity'],
+        props:['cartCollection','cartQuantity', 'cartTotalPrice'],
 
         methods: {
             increment(item){

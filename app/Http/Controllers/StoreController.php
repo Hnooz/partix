@@ -27,11 +27,30 @@ class StoreController extends Controller
 
     public function items()
     {
-        return inertia()->render('Store/Items');
+        $parts = Part::all();
+        $cars = Car::all();
+        $cartQuantity = Cart::getTotalQuantity();
+        $cartCollection = Cart::getContent();
+
+        return inertia()->render(
+            'Store/Items',
+            [
+                'parts' => $parts,
+                'cars' => $cars,
+                'cartQuantity' => $cartQuantity,
+                'cartCollection' => $cartCollection, ]
+        );
     }
 
     public function details(Part $part)
     {
-        return inertia()->render('Store/ItemDetails', ['part' => $part]);
+        $cars = Car::all();
+        $cartQuantity = Cart::getTotalQuantity();
+        $cartCollection = Cart::getContent();
+
+        return inertia()->render('Store/ItemDetails', ['part' => $part,
+            'cars' => $cars,
+            'cartQuantity' => $cartQuantity,
+            'cartCollection' => $cartCollection,]);
     }
 }

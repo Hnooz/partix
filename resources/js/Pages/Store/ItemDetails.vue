@@ -1,7 +1,7 @@
 <template>
     <store-layout>
-    <BaseNav/>
-    <SelectSection class="hidden md:block"/>
+    <BaseNav :cartItemQuantity="cartQuantity" :cartItem="cartCollection" />
+    <SelectSection :carItem="cars" class="hidden md:block"/>
          <!-- filter search -->
     <div class="bg-teal-700 py-5 hidden md:block">
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-16 text-white">
@@ -270,7 +270,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             Slide,
             BaseFooter,
         },
-        props:['part'],
+        props:['part', 'cars', 'cartQuantity', 'cartCollection'],
         data() {
             return {
                 fav:false

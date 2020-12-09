@@ -20,20 +20,34 @@
                         </div>
                         <div>
                             <base-input type="number" label="Price"  name="price"  v-model="form.price" :error="$page.errors.price" tabindex="4" required></base-input>
-                            <!-- <input type="number" name="price" id="price" class="form-input" ref="price"> -->
                         </div>
                         <div>
-                            <base-input label="Slug"  name="slug"  v-model="form.slug" :error="$page.errors.slug" tabindex="5" required></base-input>
+                            <base-input type="number" label="Price for used part"  name="second_price"  v-model="form.second_price" :error="$page.errors.second_price" tabindex="5" required></base-input>
+                        </div>
+                        <div>
+                            <base-input label="Slug"  name="slug"  v-model="form.slug" :error="$page.errors.slug" tabindex="6" required></base-input>
                         </div>
                         <div>
                             <label class="text-gray-700">Car</label>
-                                <select  name="car_id"  v-model="form.car_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.car_id" required tabindex="6">
+                                <select  name="car_id"  v-model="form.car_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.car_id" required tabindex="7">
                                     <option v-for="car in cars" :key="car.index" :value="car.id">{{car.brand}}</option>
                                 </select>
                         </div>
                         <div>
+                            <label class="text-gray-700">Category</label>
+                                <select  name="category_id"  v-model="form.category_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.category_id" required tabindex="8">
+                                    <option v-for="category in categories" :key="category.index" :value="category.id">{{category.name}}</option>
+                                </select>
+                        </div>
+                        <div>
+                            <label class="text-gray-700">Supplier</label>
+                                <select  name="supplier_id"  v-model="form.supplier_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.supplier_id" required tabindex="9">
+                                    <option v-for="supplier in suppliers" :key="supplier.index" :value="supplier.id">{{supplier.name}}</option>
+                                </select>
+                        </div>
+                        <div>
                             <!-- <input type="image"> -->
-                            <!-- <base-input id="image" type="file" ref="image" label="Image" name="image" @change="handleFileUpload()" :error="$page.errors.file" tabindex="7" required></base-input> -->
+                            <base-input id="image" type="file" ref="image" label="Image" name="image" @change="handleFileUpload()" :error="$page.errors.file" tabindex="7" required></base-input>
                         </div>
                         
                     </div>
@@ -53,7 +67,7 @@
 
     export default {
         components: {Layout},
-        props:['part','cars'],
+        props:['part','cars', 'suppliers','categories'],
         data() {
             return {
                 form: {
@@ -61,9 +75,12 @@
                     number: '',
                     description: '',
                     price: '',
+                    second_price:'',
                     slug: '',
                     car_id: '',
-                    // image:null
+                    supplier_id:'',
+                    category_id:'',
+                    image:null
                 },
                    
                 // },

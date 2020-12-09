@@ -10,4 +10,9 @@ class Category extends Model
     use Notifiable;
 
     protected $guarded = [];
+
+    public function parts()
+    {
+        return $this->hasMany(Part::class);
+    }
 }

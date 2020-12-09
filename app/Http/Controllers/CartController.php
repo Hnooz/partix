@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Cart;
-use App\Part;
+use App\Supplier;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -12,19 +12,22 @@ class CartController extends Controller
     {
         $cartCollection = Cart::getContent();
         $cartQuantity = Cart::getTotalQuantity();
+        $cartTotalPrice = Cart::getTotal();
 
         return inertia()->render(
             'Store/carts/index',
             [
                 'cartCollection' => $cartCollection,
-                'cartQuantity' => $cartQuantity, ]
+                'cartQuantity' => $cartQuantity,
+                'cartTotalPrice' => $cartTotalPrice,
+            ]
         );
     }
 
     public function store(Request $request)
     {
-        // dd($request);
-        // add the product to cart
+        $supplier = Supplier::find($request->supplier_id);
+        
         \Cart::add([
             'id' => $request->id,
             'name' => $request->name,
@@ -32,10 +35,10 @@ class CartController extends Controller
             'quantity' => 1,
             'attributes' => [
                 'slug' => $request->slug,
+                'supplier' => $supplier->name,
             ],
-            // 'associatedModel' => Part,
         ]);
-        // dd($cart);
+
         return redirect()->back();
     }
 
