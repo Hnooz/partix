@@ -15,6 +15,13 @@
                         <div>
                             <base-input type="text" label="Description" name="description" v-model="category.description"  tabindex="2" required></base-input>
                         </div>
+                        <div>
+                            <label class="text-gray-700">Super Category</label>
+                                <select  name="super_category_id"  v-model="category.super_category_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.super_category_id" required tabindex="3">
+                                   <option value="0">select super</option>
+                                    <option v-for="super_category in super_categories" :key="super_category.index" :value="super_category.id">{{super_category.name}}</option>
+                                </select>
+                        </div>
                     </div>
                     <div class="flex justify-end mt-4">
                         <base-button class="bg-teal-700">Create Category</base-button>
@@ -32,17 +39,19 @@
 
     export default {
         components: {Layout},
+        props:['super_categories'],
         data() {
             return {
                 category: {
                     name: '',
                     description: '',
+                    super_category_id:0
                 }
             }
         }, 
         methods: {
-           async submit() {
-             await this.$inertia.post('/dashboard/categories', this.category);
+            submit() {
+                this.$inertia.post('/dashboard/categories', this.category);
             }
         }
     }

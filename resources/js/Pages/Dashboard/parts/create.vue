@@ -30,19 +30,29 @@
                         <div>
                             <label class="text-gray-700">Car</label>
                                 <select  name="car_id"  v-model="part.car_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.car_id" required tabindex="6">
+                                    <option value="0">select car</option>
                                     <option v-for="car in cars" :key="car.index" :value="car.id">{{car.brand}}</option>
                                 </select>
                         </div>
                         <div>
                             <label class="text-gray-700">Category</label>
                                 <select  name="category_id"  v-model="part.category_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.category_id" required tabindex="7">
+                                    <option value="0">select category</option>
                                     <option v-for="category in categories" :key="category.index" :value="category.id">{{category.name}}</option>
                                 </select>
                         </div>
                         <div>
                             <label class="text-gray-700">Supplier</label>
                                 <select  name="supplier_id"  v-model="part.supplier_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.supplier_id" required tabindex="8">
+                                    <option value="0">select supplier</option>
                                     <option v-for="supplier in suppliers" :key="supplier.index" :value="supplier.id">{{supplier.name}}</option>
+                                </select>
+                        </div>
+                        <div>
+                            <label class="text-gray-700">Type</label>
+                                <select  name="part_type_id"  v-model="part.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type_id" required tabindex="9">
+                                    <option value="0">select type</option>
+                                    <option v-for="type in part_types" :key="type.index" :value="type.id">{{type.name}}</option>
                                 </select>
                         </div>
                         <div>
@@ -66,7 +76,7 @@
 
     export default {
         components: {Layout},
-        props:['cars','suppliers','categories'],
+        props:['cars','suppliers','categories','part_types'],
         data() {
             return {
                 part: {
@@ -76,14 +86,13 @@
                     price: '',
                     second_price:'',
                     slug: '',
-                    car_id: '',
-                    supplier_id:'',
-                    category_id:'',
-                    image:null
+                    car_id:0,
+                    supplier_id:0,
+                    category_id:0,
+                    part_type_id:0,
+                    images:''
                 },
-                   
-                // },
-               
+
             }
         }, 
         methods: {
@@ -100,13 +109,32 @@
             data.append('car_id', this.part.car_id);
             data.append('supplier_id', this.part.supplier_id);
             data.append('category_id', this.part.category_id);
-            data.append('image', this.part.image);
+            data.append('part_type_id', this.part.part_type_id);
+            
+            data.append('images', this.part.images);
 
-            this.$inertia.post('/dashboard/parts', data);
+            axios.post( '/dashboard/parts',
+                data,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then(function(response){
+               const status = JSON.parse(response.status);
+
+                    if (status == '200') {
+                        window.location.pathname = response.data.redirect;
+                    }
+            })
+            .catch(function(){
+            console.log('FAILURE!!');
+            });
+
             },
 
-            handleFileUpload(event){
-                this.part.image = event.target.files[0];
+            handleFileUpload(){
+                this.part.images = this.$refs.images.files[0];
             }
         }
     }

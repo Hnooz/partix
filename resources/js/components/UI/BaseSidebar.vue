@@ -44,7 +44,6 @@
                             <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
                         </svg>
                         <h1 class="mx-2  whitespace-no-wrap">Orders <span class="bg-red-600 font-semibold p-1 rounded-md text-white text-xs">56</span></h1>
-                        
                     </inertia-link>
                 </li>
 
@@ -52,16 +51,14 @@
                 <li class="px-2 pb-4 rounded" :class="route().current('users.*')? 'text-teal-600' : 'text-white hover:text-teal-600'">
                     <inertia-link href="/dashboard/users" class="flex items-center">
                         <svg class="w-6 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                        <span class="mx-2">Customers</span>
-                        
+                        <span class="mx-2">Customers</span>   
                     </inertia-link>
                 </li>
 
                 <li class="px-2 pb-4 rounded" :class="route().current('suppliers.*')? 'text-teal-600' : 'text-white hover:text-teal-600'">
                     <inertia-link href="/dashboard/suppliers" class="flex items-center">
-                        <svg class="w-6 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        <svg class="w-6 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         <span class="mx-2">Suppliers</span>
-                        
                     </inertia-link>
                 </li>
                 
@@ -79,12 +76,20 @@
                     </inertia-link>
                 </li>
 
+                <li class="px-2 pb-4" :class="route().current('super_categories.*')? 'text-teal-600' : 'text-white hover:text-teal-600'">
+                    <inertia-link href="/dashboard/super_categories" class="flex items-center">
+                        <svg class="w-6 mx-2 transform rotate-45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.7572 6.3431L11.9998 2.10046L16.2425 6.3431L11.9998 10.5857L7.7572 6.3431ZM10.5856 6.3431L11.9998 4.92889L13.4141 6.3431L11.9998 7.75732L10.5856 6.3431Z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M2.10046 11.9999L6.3431 7.75726L10.5857 11.9999L6.3431 16.2425L2.10046 11.9999ZM4.92889 11.9999L6.3431 10.5857L7.75732 11.9999L6.3431 13.4141L4.92889 11.9999Z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M13.4142 11.9999L17.6568 16.2425L21.8995 11.9999L17.6568 7.75726L13.4142 11.9999ZM17.6568 10.5857L16.2426 11.9999L17.6568 13.4141L19.071 11.9999L17.6568 10.5857Z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M7.7572 17.6569L11.9998 13.4142L16.2425 17.6569L11.9998 21.8995L7.7572 17.6569ZM10.5856 17.6569L11.9998 16.2427L13.4141 17.6569L11.9998 19.0711L10.5856 17.6569Z" fill="currentColor" /></svg>
+                        <span class="mr-3 mx-2">Super Categories</span>  
+                    </inertia-link>
+                </li>
+
                 <li class="px-2 pb-4" :class="route().current('categories.*')? 'text-teal-600' : 'text-white hover:text-teal-600'">
                     <inertia-link href="/dashboard/categories" class="flex items-center">
                         <svg class="w-6 mx-2 transform rotate-45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.7572 6.3431L11.9998 2.10046L16.2425 6.3431L11.9998 10.5857L7.7572 6.3431ZM10.5856 6.3431L11.9998 4.92889L13.4141 6.3431L11.9998 7.75732L10.5856 6.3431Z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M2.10046 11.9999L6.3431 7.75726L10.5857 11.9999L6.3431 16.2425L2.10046 11.9999ZM4.92889 11.9999L6.3431 10.5857L7.75732 11.9999L6.3431 13.4141L4.92889 11.9999Z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M13.4142 11.9999L17.6568 16.2425L21.8995 11.9999L17.6568 7.75726L13.4142 11.9999ZM17.6568 10.5857L16.2426 11.9999L17.6568 13.4141L19.071 11.9999L17.6568 10.5857Z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M7.7572 17.6569L11.9998 13.4142L16.2425 17.6569L11.9998 21.8995L7.7572 17.6569ZM10.5856 17.6569L11.9998 16.2427L13.4141 17.6569L11.9998 19.0711L10.5856 17.6569Z" fill="currentColor" /></svg>
                         <span class="mr-3 mx-2">Categories</span>  
                     </inertia-link>
                 </li>
+                
 
                 <li class="px-2 pb-4" :class="route().current('coupons.*')? 'text-teal-600' : 'text-white hover:text-teal-600'">
                     <inertia-link href="/dashboard/coupons" class="flex items-center">

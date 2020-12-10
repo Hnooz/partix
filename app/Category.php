@@ -11,6 +11,11 @@ class Category extends Model
 
     protected $guarded = [];
 
+    public function superCategory()
+    {
+        return $this->belongsTo(SuperCategory::class, 'super_category_id');
+    }
+
     public function parts()
     {
         return $this->hasMany(Part::class);

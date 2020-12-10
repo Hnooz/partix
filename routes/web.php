@@ -35,6 +35,7 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     Route::get('/comments', 'CommentController@index')->name('comments.index');
 
     // category route
+    Route::resource('super_categories', 'SuperCategoryController')->except(['show','create','edit']);
     Route::resource('categories', 'CategoryController');
 
     // part route

@@ -29,4 +29,9 @@ class Part extends Model implements HasMedia
     {
         return $this->belongsToMany(Supplier::class, 'supplier_id');
     }
+
+    public function type()
+    {
+        return $this->belongsTo(PartType::class);
+    }
 }

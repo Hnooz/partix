@@ -62,7 +62,7 @@
                         </div>
                         
                         <label class="mx-4 mt-4 lg:mt-0 block" for="">
-                            <base-button class="bg-teal-500 focus:outline-none  capitalize px-8 py-1 rounded text-white">Create Car</base-button>
+                            <base-button class="bg-teal-500 focus:outline-none  capitalize px-8 py-1 rounded text-white">Go</base-button>
                             <!-- <button class="bg-teal-500 focus:outline-none  capitalize px-8 py-1 rounded text-white">Go</button> -->
                         </label>
                     </form>
@@ -102,16 +102,7 @@ import BaseButton from '../UI/BaseButton'
         methods: {
             submit(){
                 let self = this;
-                // console.log(true);
-                // this.$inertia.post(`/filtered_parts`, this.brand);
-                // axios.post('/filtered_parts',{
-                //     params: {
-                //         brand_id: this.brand,
-                //         model_id: this.model,
-                //         year_id: this.year,
-                //         engine_id: this.engine
-                //     }
-                // });
+
                 axios({
                     method: 'post',
                     url: '/filtered_parts',
@@ -122,9 +113,7 @@ import BaseButton from '../UI/BaseButton'
                      const status = JSON.parse(response.status);
 
                     if (status == '200') {
-                        // console.log(window.location.pathname);
                         window.location.pathname = response.data.redirect;
-                        
                     }
                 });
             },
