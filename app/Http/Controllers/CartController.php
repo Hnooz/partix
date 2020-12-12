@@ -27,8 +27,7 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $supplier = Supplier::find($request->supplier_id);
-        
-        \Cart::add([
+        \Cart::session($request->id)->add([
             'id' => $request->id,
             'name' => $request->name,
             'price' => $request->price,
@@ -51,7 +50,7 @@ class CartController extends Controller
                     'relative' => false,
                     'value' => $request->quantity,
                 ],
-        ]
+            ]
         );
 
         return redirect()->back();

@@ -10,11 +10,12 @@ class StoreController extends Controller
 {
     public function index()
     {
-        $parts = Part::all();
+        $parts = Part::with('category')->get();
+        
         $cars = Car::all();
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
-
+        // \dd($cartCollection);
         return inertia()->render(
             'Store/Index',
             [
@@ -27,7 +28,7 @@ class StoreController extends Controller
 
     public function items()
     {
-        $parts = Part::all();
+        $parts = Part::with('category')->get();
         $cars = Car::all();
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
@@ -47,10 +48,13 @@ class StoreController extends Controller
         $cars = Car::all();
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
-
+        $cartItem = Cart::get($part->id);
+        // dd($cartItem);
         return inertia()->render('Store/ItemDetails', ['part' => $part,
             'cars' => $cars,
             'cartQuantity' => $cartQuantity,
-            'cartCollection' => $cartCollection,]);
+            'cartCollection' => $cartCollection,
+            'cartItem' => $cartItem,
+        ]);
     }
 }

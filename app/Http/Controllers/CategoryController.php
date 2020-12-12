@@ -11,9 +11,11 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
+        $super_categories = SuperCategory::all();
 
         return inertia()->render('Dashboard/categories/index', [
             'categories' => $categories,
+            'super_categories' => $super_categories,
         ]);
     }
 
@@ -31,35 +33,64 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|unique:categories|max:255',
             'description' => 'required|max:255',
+            'super_category_id' => 'sometimes|nullable|max:255',
         ]);
 
-        Category::create([
+        $category = Category::create([
             'name' => $request->name,
             'description' => $request->description,
+            'super_category_id' => $request->super_category_id,
 
         ]);
+
+        if ($request->file('images')) {
+            $category->addMedia($request->file('images'))->toMediaCollection('images');
+        };
 
         session()->flash('toast', [
             'type' => 'success',
             'message' => 'Category created successfully',
         ]);
 
-        return redirect()->route('categories.index');
+        return response()->json(['data' => $category,
+            'redirect' => 'dashboard/categories', ]);
+        // return redirect()->route('categories.index');
     }
 
-    public function show($id)
+    public function edit(Category $category)
     {
-        //
+        $super_categories = SuperCategory::all();
+
+        return inertia()->render('Dashboard/categories/edit', [
+            'category' => $category,
+            'super_categories' => $super_categories,
+        ]);
     }
 
-    public function edit($id)
+    public function update(Request $request, Category $category)
     {
-        //
-    }
+        $data = $request->validate([
+            'name' => 'required|unique:categories|max:255',
+            'description' => 'required|max:255',
+            'super_category_id' => 'sometimes|nullable|max:255',
+        ]);
 
-    public function update(Request $request, $id)
-    {
-        //
+        if ($request->file('images')) {
+            $category->clearMediaCollection('images')
+                ->addMedia($request->file('images'))
+                ->toMediaCollection('images');
+        };
+
+        $category->update($data);
+        session()->flash('toast', [
+            'type' => 'success',
+            'message' => 'Category updated successfully',
+        ]);
+
+        return response()->json(['data' => $category,
+            'redirect' => 'dashboard/categories', ]);
+
+        // return redirect()->route('categories.index');
     }
 
     public function destroy(Category $category)

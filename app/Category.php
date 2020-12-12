@@ -2,14 +2,19 @@
 
 namespace App;
 
+use App\Traits\AppendImage;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Category extends Model
+class Category extends Model implements HasMedia
 {
-    use Notifiable;
+    use Notifiable, AppendImage, InteractsWithMedia;
 
     protected $guarded = [];
+    protected $appends = ['url'];
+    protected $with = ['superCategory'];
 
     public function superCategory()
     {

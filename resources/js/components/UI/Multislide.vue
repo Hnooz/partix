@@ -31,8 +31,6 @@
       return {
         isOpen:false,
         settings: {
-          // "dots": true,
-          "focusOnSelect": true,
           "centerMode": true,
           "infinite": true,
           "speed": 500,

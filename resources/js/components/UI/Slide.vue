@@ -22,7 +22,6 @@
           arrows: this.arrows,
           slidesToShow:this.slidesToShow,
           "centerMode": true,
-          "focusOnSelect": true,
           "infinite": true,
           "speed": 500,
           "slidesToScroll": 3,

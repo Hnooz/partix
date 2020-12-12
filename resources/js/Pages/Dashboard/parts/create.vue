@@ -98,7 +98,7 @@
         methods: {
             submit() {
             
-             const data = new FormData();
+            const data = new FormData();
 
             data.append('name', this.part.name);
             data.append('number', this.part.number);
@@ -110,8 +110,11 @@
             data.append('supplier_id', this.part.supplier_id);
             data.append('category_id', this.part.category_id);
             data.append('part_type_id', this.part.part_type_id);
-            
-            data.append('images', this.part.images);
+            for( let i = 0; i < this.part.images.length; i++ ){
+            let images = this.part.images[i];
+
+            data.append('images[' + i + ']', images);
+            }
 
             axios.post( '/dashboard/parts',
                 data,
@@ -134,7 +137,7 @@
             },
 
             handleFileUpload(){
-                this.part.images = this.$refs.images.files[0];
+                this.part.images = this.$refs.images.files;
             }
         }
     }

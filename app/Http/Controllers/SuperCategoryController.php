@@ -16,18 +16,30 @@ class SuperCategoryController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return inertia()->render('Dashboard/super_categories/create');
+    }
+
     public function store(Request $request)
     {
         $data = $request->validate(['name' => 'required']);
 
-        SuperCategory::create($data);
+        $super_category = SuperCategory::create($data);
+
+        if ($request->file('images')) {
+            $super_category->addMedia($request->file('images'))->toMediaCollection('images');
+        };
 
         session()->flash('toast', [
             'type' => 'success',
             'message' => 'Super category created successfully',
         ]);
 
-        return redirect()->back();
+        return response()->json(['data' => $super_category,
+            'redirect' => 'dashboard/super_categories', ]);
+
+        // return redirect()->back();
     }
 
     public function update(Request $request, SuperCategory $superCategory)
@@ -36,6 +48,10 @@ class SuperCategoryController extends Controller
         
         $superCategory->update($data);
         
+        if ($request->file('images')) {
+            $superCategory->addMedia($request->file('images'))->toMediaCollection('images');
+        };
+
         session()->flash('toast', [
             'type' => 'success',
             'message' => 'Super category updated successfully',

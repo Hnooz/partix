@@ -6,7 +6,9 @@
     <div class="bg-teal-700 py-5 hidden md:block">
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-16 text-white">
             <div class="flex">
-                <h1>{{__('filters')}} |</h1><span class="font-normal capitalize">&nbsp;{{__('oil filters')}}&nbsp;</span> <span lass="font-normal capitalize"> | {{__('air filter')}}</span>
+                <h1>{{part.category.super_category.name}} |</h1>
+                <span class="font-normal capitalize">&nbsp;{{part.category.name}}&nbsp;</span> 
+                <span lass="font-normal capitalize"> | {{part.name}}</span>
             </div>
             <div class="flex items-center">
                 <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +44,7 @@
                 <div class="flex">
                     <div>
                         <div class="bg-white flex h-70 items-center justify-center w-70">
-                            <img class="h-40 object-center object-cover w-40" src="../../images/1223/airfilter.png" alt="">
+                            <img class="h-40 object-center object-cover w-40" :src="part.url" alt="">
                         </div>
                        <div class="flex justify-around mt-6">
                         <Slide class="max-w-xs" :arrows="true" :slidesToShow=3>
@@ -59,7 +61,7 @@
                     <div class="mx-8">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="capitalize font-semibold text-3xl text-teal-700">{{__('air filter')}}</p>
+                                <p class="capitalize font-semibold text-3xl text-teal-700">{{part.category.name}}</p>
                                 <p class="capitalize font-medium text-teal-400 text-xl">{{part.name}}</p>
                                 <button class="flex" type="button">
                                     <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
@@ -69,115 +71,69 @@
                                     <svg class="w-6 text-gray-400 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
                                 </button>
                             </div>
-                            <div>
-                                <p class="font-semibold text-3xl text-gray-900">{{part.price}} <span class="font-hairline text-gray-700 text-xl">QAR</span> </p>
-                                <p class="line-through text-center text-gray-600">3.000 <span>QAR</span> </p>
-                            </div>
                         </div>
                         <div class="">
                             <p class="bg-blue-100 my-5 p-5 text-gray-600 text-sm">
-                                <!-- {{part.description}} -->
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Fuga, ipsa non perspiciatis quaerat porro eius accusamus 
-                                ipsum modi a ad corporis dolore voluptate iure. 
-                                Magni facere nostrum eum distinctio ea.
+                                {{part.description}}
                             </p>
                         </div>
                         
                         <div class="flex items-center">
                             <h1 class="capitalize text-teal-900">{{__('quantity')}}:</h1>
-                            <span class="bg-teal-500 mx-2 my-2 text-white">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-                                </svg>
-                            </span>
+                            <button type="button" @click="increment(cartItem)" class="bg-teal-500 mx-2 my-2 text-white">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path> </svg>
+                            </button>
 
-                            <span class="bg-white flex items-center mx-2 px-4 py-2">1</span>
+                            <span class="bg-white flex items-center mx-2 px-4 py-2">{{cartItem.quantity}}</span>
 
-                            <span class="bg-teal-500 mx-2 my-2 text-white">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">    
-                                    <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                                </svg>
-                            </span>
+                            <button type="button" @click="decrement(cartItem)" class="bg-teal-500 mx-2 my-2 text-white">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                            </button>
                         </div>
-                        <div class="capitalize">
-                            <p class="text-gray-700 my-6">
-                                <span class="font-semibold text-teal-400" dir="auto">{{__('in stock')}} . </span>
-                                {{__('ships within 24hrs')}}
-                            </p>
-                            <button class="bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white" type="button">
+                        <div class="capitalize my-8">
+                            <button  @click="addCart(part)" class="bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white" type="button">
                                 <span class="mx-12 capitalize">{{__('add to cart')}}</span> 
                                 <svg class="h-6 mx-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                                 </svg>
                             </button>
                         </div>
+                        <div class="flex">
+                            <a href="#" class="bg-blue-700 flex items-center p-2 rounded text-white"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.19795 21.5H13.198V13.4901H16.8021L17.198 9.50977H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H17.198V2.5H14.198C11.4365 2.5 9.19795 4.73858 9.19795 7.5V9.50977H7.19795L6.80206 13.4901H9.19795V21.5Z" fill="currentColor" /></svg></a>
+                            <a href="#" class="bg-blue-400 flex items-center mx-1 p-2 rounded text-white"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 3C9.10457 3 10 3.89543 10 5V8H16C17.1046 8 18 8.89543 18 10C18 11.1046 17.1046 12 16 12H10V14C10 15.6569 11.3431 17 13 17H16C17.1046 17 18 17.8954 18 19C18 20.1046 17.1046 21 16 21H13C9.13401 21 6 17.866 6 14V5C6 3.89543 6.89543 3 8 3Z" fill="currentColor" /></svg></a>
+                            <a href="#" class="bg-green-500 p-2 rounded"><svg class="h-6 w-6" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 418.135 418.135" style="enable-background:new 0 0 418.135 418.135;" xml:space="preserve"><g>	<path style="fill:#fff;" d="M198.929,0.242C88.5,5.5,1.356,97.466,1.691,208.02c0.102,33.672,8.231,65.454,22.571,93.536L2.245,408.429c-1.191,5.781,4.023,10.843,9.766,9.483l104.723-24.811c26.905,13.402,57.125,21.143,89.108,21.631c112.869,1.724,206.982-87.897,210.5-200.724C420.113,93.065,320.295-5.538,198.929,0.242z M323.886,322.197c-30.669,30.669-71.446,47.559-114.818,47.559c-25.396,0-49.71-5.698-72.269-16.935l-14.584-7.265l-64.206,15.212l13.515-65.607l-7.185-14.07c-11.711-22.935-17.649-47.736-17.649-73.713c0-43.373,16.89-84.149,47.559-114.819c30.395-30.395,71.837-47.56,114.822-47.56C252.443,45,293.218,61.89,323.887,92.558c30.669,30.669,47.559,71.445,47.56,114.817C371.446,250.361,354.281,291.803,323.886,322.197z"/><path style="fill:#fff;" d="M309.712,252.351l-40.169-11.534c-5.281-1.516-10.968-0.018-14.816,3.903l-9.823,10.008c-4.142,4.22-10.427,5.576-15.909,3.358c-19.002-7.69-58.974-43.23-69.182-61.007c-2.945-5.128-2.458-11.539,1.158-16.218l8.576-11.095c3.36-4.347,4.069-10.185,1.847-15.21l-16.9-38.223c-4.048-9.155-15.747-11.82-23.39-5.356c-11.211,9.482-24.513,23.891-26.13,39.854c-2.851,28.144,9.219,63.622,54.862,106.222c52.73,49.215,94.956,55.717,122.449,49.057c15.594-3.777,28.056-18.919,35.921-31.317C323.568,266.34,319.334,255.114,309.712,252.351z"/></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></a>
+                            <a href="#" class="bg-red-600 flex items-center mx-1 p-2 rounded text-white"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 7H19C19.5523 7 20 7.44771 20 8V16C20 16.5523 19.5523 17 19 17H5C4.44772 17 4 16.5523 4 16V8C4 7.44772 4.44772 7 5 7ZM2 8C2 6.34315 3.34315 5 5 5H19C20.6569 5 22 6.34315 22 8V16C22 17.6569 20.6569 19 19 19H5C3.34315 19 2 17.6569 2 16V8ZM10 9L14 12L10 15V9Z" fill="currentColor" /></svg></a>
+                        </div>
                     </div>
                     
-                </div>
-                <div>
-                    <div class="flex mx-64 px-24">
-                        <div class="sharethis-inline-share-buttons flex my-4" style="z-index:0;"></div>
-                    </div>
-                    
-                    <div class="max-w-xl">
-                        <ul class="flex justify-between capitalize "> 
-                            <li class="text-teal-700 font-semibold">
-                                <a href="#">
-                                    {{__('product details')}}
-                                    <span class="absolute block bg-teal-700 h-1 w-16"></span>
-                                </a>
-                                
-                            </li>
-                            <li class="text-gray-600"><a href="#">{{__('features')}}</a></li>
-                            <li class="text-gray-600"><a href="#">{{__('installation')}}</a></li>
-                            <li class="text-gray-600"><a href="#">{{__('warranty')}}</a></li>
-                            <li class="text-gray-600"><a href="#">{{__('reviews')}}</a></li>
-                        </ul>
-                        <div class="bg-center bg-cover bottomimage h-40 mt-10 w-full"></div>
-                    </div>
                 </div>
                 
-            </div>
-            <div class="bg-center bg-cover h-72 rightimage w-70"> </div>
-        </div>
-        <div class="flex justify-between mt-10">
-            <p class="max-w-xl px-2 text-gray-600 text-sm">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                Obcaecati, temporibus omnis in fugit non laudantium placeat natus 
-                <br/>
-                <br>
-                cupiditate consectetur facilis repellat, exercitationem quod similique 
-                molestiae enim consequuntur! Voluptas, nobis error
-
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                Obcaecati, temporibus omnis in fugit non laudantium placeat natus 
-                cupiditate consectetur facilis repellat, exercitationem quod similique 
-                molestiae enim consequuntur! Voluptas, nobis error
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                Obcaecati, temporibus omnis in fugit non laudantium placeat natus 
-                cupiditate consectetur facilis repellat, exercitationem quod similique 
-                molestiae enim consequuntur! Voluptas, nobis error
-
-            </p>
-            <div>
-                <h1 class="capitalize font-semibold mb-6 text-2xl text-teal-700">{{__('other categories')}}
-                    <span class="absolute block bg-teal-700 h-1 w-24"></span>
-                </h1>
-                <div class="flex">
-                     <a class="" href="#">
-                        <img src="../../images/1223/Groupe 190.png" alt="">
-                    </a>
-                    <a class="mx-3" href="#">
-                        <img src="../../images/1223/Groupe 191.png" alt="">
-                    </a>
-                    <a class="" href="#">
-                        <img src="../../images/1223/Groupe 192.png" alt="">
-                    </a>
+                <div>
+                    <h1 class="capitalize font-semibold mb-6 text-2xl text-teal-700">{{__('other categories')}}
+                        <span class="absolute block bg-teal-700 h-1 w-24"></span>
+                    </h1>
+                    <div class="flex">
+                        <a class="" href="#">
+                            <img src="../../images/1223/Groupe 190.png" alt="">
+                        </a>
+                        <a class="mx-3" href="#">
+                            <img src="../../images/1223/Groupe 191.png" alt="">
+                        </a>
+                        <a class="" href="#">
+                            <img src="../../images/1223/Groupe 192.png" alt="">
+                        </a>
+                    </div>
                 </div>
-               
+            </div>
+            <div class="flex">
+                <div class="mx-2">
+                    <p class="font-semibold text-3xl text-gray-900">{{part.price}} <span class="font-hairline text-gray-700 text-xl">QAR</span> </p>
+                    <p class="line-through text-center text-gray-600">3.000 <span>QAR</span> </p>
+                </div>
+                <img src="../../images/1223/rightimage.png" class="h-72 object-center object-cover w-5/12">
             </div>
         </div>
+       
         
 
     </div>
@@ -270,13 +226,25 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             Slide,
             BaseFooter,
         },
-        props:['part', 'cars', 'cartQuantity', 'cartCollection'],
+        props:['part', 'cars', 'category', 'cartQuantity', 'cartCollection' ,'cartItem'],
         data() {
             return {
                 fav:false
             }
         },
         methods: {
+        addCart(part) {
+            this.$inertia.post('/carts', part);
+        },
+         increment(cartItem){
+            cartItem.quantity++;            
+            this.$inertia.put(`/cart/${cartItem.id}`, cartItem);
+        },
+
+        decrement(cartItem){
+            cartItem.quantity--;            
+            this.$inertia.put(`/cart/${cartItem.id}`, cartItem);
+        },
         fave(){
             this.fav = !this.fav
         }
@@ -288,9 +256,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
 #st-1{
     z-index: 0;
 }
-.rightimage{
-    background-image: url('../../images/1223/rightimage.png');
-}
+
 .bottomimage{
     background-image: url('../../images/1223/replace_collage.png');
 }

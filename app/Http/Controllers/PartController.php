@@ -13,8 +13,10 @@ class PartController extends Controller
 {
     public function index()
     {
+        $parts = Part::all();
+        // dd($parts);
         return inertia()->render('Dashboard/parts/index', [
-            'parts' => Part::all(),
+            'parts' => $parts,
         ]);
     }
 
@@ -38,7 +40,7 @@ class PartController extends Controller
         $data = $request->validate([
             'name' => 'required|min:4',
             'number' => 'required|unique:parts|max:255',
-            'description' => 'required|max:255',
+            'description' => 'required|max:255|min:45',
             'price' => 'required|max:255',
             'second_price' => 'required|max:255',
             'slug' => 'required|max:255',
@@ -62,7 +64,10 @@ class PartController extends Controller
         ]);
 
         if ($request->file('images')) {
-            $part->addMedia($request->file('images'))->toMediaCollection('images');
+            $images = $request->file('images');
+            foreach ($images as $image) {
+                $part->addMedia($image)->toMediaCollection('images');
+            }
         };
 
         session()->flash('toast', [
@@ -79,19 +84,22 @@ class PartController extends Controller
         $cars = Car::all();
         $categories = Category::all();
         $suppliers = Supplier::all();
+        $part_types = PartType::all();
 
         return inertia()->render('Dashboard/parts/edit', [
             'part' => $part, 'cars' => $cars,
             'categories' => $categories, 'suppliers' => $suppliers,
+            'part_types' => $part_types,
         ]);
     }
 
     public function update(Request $request, Part $part)
     {
+        // dd($request);
         $data = $request->validate([
             'name' => 'required|min:4',
             'number' => 'required|max:255',
-            'description' => 'required|max:255',
+            'description' => 'required|max:255|min:45',
             'price' => 'required|max:255',
             'second_price' => 'required|max:255',
             'slug' => 'required|max:255',
@@ -101,6 +109,14 @@ class PartController extends Controller
             'part_type_id' => 'required|max:255',
         ]);
 
+        if ($request->file('images')) {
+            $images = $request->file('images');
+            foreach ($images as $image) {
+                $part->clearMediaCollection('images')
+                    ->addMedia($image)
+                    ->toMediaCollection('images');
+            }
+        };
         $part->update($data);
 
         session()->flash('toast', [
@@ -108,7 +124,10 @@ class PartController extends Controller
             'message' => 'Part Updated successfully',
         ]);
 
-        return redirect()->route('parts.index');
+        return response()->json(['data' => $part,
+            'redirect' => 'dashboard/parts', ]);
+
+        // return redirect()->route('parts.index');
     }
 
     public function destroy(Part $part)

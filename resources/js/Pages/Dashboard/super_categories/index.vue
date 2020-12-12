@@ -4,7 +4,7 @@
         <div class="mt-8">
             <div class="flex justify-between">
                 <h2 class="text-3xl text-teal-600 font-bold">Super Category</h2>
-                <div>
+                <!-- <div>
                     <form class="flex items-end" @submit.prevent="submit">
                         <div class="mx-2">
                             <base-input  name="name" v-model="form.name" :error="$page.errors.name" placeholder="Supplier name" required></base-input>
@@ -13,7 +13,14 @@
                             <base-button class="bg-teal-700 hover:bg-teal-600">Create</base-button>
                         </div>
                     </form>
-                </div>
+                </div> -->
+            <div class="flex items-center">
+                    <inertia-link href="/dashboard/super_categories/create"
+                                  class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                        Add Super
+                    </inertia-link>
+            </div>
             </div>
             <h1 class="font-medium text-gray-500 text-xs">
                 <span class="font-semibold text-red-400">Hint</span> double click on name to modify

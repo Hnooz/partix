@@ -46,8 +46,15 @@
                                 </select>
                         </div>
                         <div>
-                            <!-- <input type="image"> -->
-                            <base-input id="image" type="file" ref="image" label="Image" name="image" @change="handleFileUpload()" :error="$page.errors.file" tabindex="7" required></base-input>
+                            <label class="text-gray-700">Type</label>
+                                <select  name="part_type_id"  v-model="part.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type_id" required tabindex="9">
+                                    <option value="0">select type</option>
+                                    <option v-for="type in part_types" :key="type.index" :value="type.id">{{type.name}}</option>
+                                </select>
+                        </div>
+                        <div>
+                            <label for="image">Image</label>
+                            <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full" :error="$page.errors.file" tabindex="10" multiple>
                         </div>
                         
                     </div>
@@ -67,7 +74,7 @@
 
     export default {
         components: {Layout},
-        props:['part','cars', 'suppliers','categories'],
+        props:['part','cars', 'suppliers','categories', 'part_types'],
         data() {
             return {
                 form: {
@@ -80,35 +87,64 @@
                     car_id: '',
                     supplier_id:'',
                     category_id:'',
-                    image:null
+                    part_type_id:'',
+                    images:''
                 },
                    
                 // },
                
             }
         }, 
-        created() {
-            this.form = this.part;
-        },
+        // created() {
+        //     this.form = this.part;
+        // },
         methods: {
             submit() {
+
+                const data = new FormData();
+
+            data.append('name', this.form.name);
+            data.append('number', this.form.number);
+            data.append('description', this.form.description);
+            data.append('price', this.form.price);
+            data.append('second_price', this.form.second_price);
+            data.append('slug', this.form.slug);
+            data.append('car_id', this.form.car_id);
+            data.append('supplier_id', this.form.supplier_id);
+            data.append('category_id', this.form.category_id);
+            data.append('part_type_id', this.form.part_type_id);
+            if (this.form.images) {
+                for( let i = 0; i < this.form.images.length; i++ ){
+            let images = this.form.images[i];
+
+            data.append('images[' + i + ']', images);
+            }
+            }
             
-            //  const data = new FormData();
+            axios.put('/dashboard/parts/'+this.part.id,
+                data,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              },
+            ).then(function(response){
+               const status = JSON.parse(response.status);
 
-            // data.append('name', this.part.name);
-            // data.append('number', this.part.number);
-            // data.append('description', this.part.description);
-            // data.append('price', this.part.price);
-            // data.append('slug', this.part.slug);
-            // data.append('car_id', this.part.car_id);
-            // data.append('image', this.part.image);
+                    if (status == '200') {
+                        window.location.pathname = response.data.redirect;
+                    }
+            })
+            .catch(function(){
+            console.log(data);
+            });
 
-            this.$inertia.put(`/dashboard/parts/${this.part.id}`, this.form);
+            // this.$inertia.put(`/dashboard/parts/${this.part.id}`, this.form);
             },
 
-            // handleFileUpload(event){
-            //     this.part.image = event.target.files[0];
-            // }
+            handleFileUpload(){
+                this.form.images = this.$refs.images.files;
+            }
         }
     }
 </script>
