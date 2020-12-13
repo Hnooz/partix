@@ -26,7 +26,7 @@
             
         <div class="bg-teal-700 py-5">
             <div class="capitalize container sm:flex font-semibold items-center justify-between mx-auto px-10 text-white">
-                <h1>{{__('filters')}} | <span class="font-normal lowercase" dir="auto">{{__('oil filters')}}</span></h1>
+                <h1>{{__('Home')}}</h1>
 
                 <form class="mt-2 sm:mt-0">
                     <div class="relative">
@@ -62,7 +62,7 @@
                     </div>
                     <input type="text" name="supplier_id"  hidden>
                     <div class="bg-teal-700 py-2">
-                        <button type="submit" @click="addCart(part)" class="flex focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white text-xs uppercase w-full">
+                        <button type="button" @click="addCart(part)" class="flex focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white text-xs uppercase w-full">
                             {{__('Buy')}}
                         </button>
                     </div>
@@ -99,18 +99,11 @@ export default {
         BaseFooter,
         ToggleMenu
         },
-        props:['parts', 'cars', 'cartQuantity', 'cartCollection'],
+        props:['parts', 'cars', 'cartQuantity', 'cartCollection', 'categories', 'super_category'],
     data() {
     return {
         search:'',
         showModal: false,
-        carts:{
-            name:'',
-            price:'',
-            slug:'',
-            supplier:''
-        }
-       
     }
 },
 computed: {
@@ -122,8 +115,8 @@ computed: {
   },
 methods: {
     addCart(part) {
-        console.log(true);
-        // this.$inertia.post('/carts', part);
+        // console.log(true);
+        this.$inertia.post('/carts', part);
     },
     toggleModal(){
       this.showModal = !this.showModal;

@@ -96,6 +96,7 @@ class PartController extends Controller
     public function update(Request $request, Part $part)
     {
         // dd($request);
+        // dd(true);
         $data = $request->validate([
             'name' => 'required|min:4',
             'number' => 'required|max:255',
@@ -108,12 +109,12 @@ class PartController extends Controller
             'supplier_id' => 'required|max:255',
             'part_type_id' => 'required|max:255',
         ]);
-
+        // dd($data);
+        $part->clearMediaCollection('images');
         if ($request->file('images')) {
             $images = $request->file('images');
             foreach ($images as $image) {
-                $part->clearMediaCollection('images')
-                    ->addMedia($image)
+                $part->addMedia($image)
                     ->toMediaCollection('images');
             }
         };

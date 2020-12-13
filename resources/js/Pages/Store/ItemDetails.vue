@@ -77,6 +77,17 @@
                                 {{part.description}}
                             </p>
                         </div>
+                        <div>
+                            <form @submit.prevent="submit">
+                                <label for="">oem</label>
+                            <input class="form-radio" type="radio" name="part_type" id="">
+                            <label for="">aftermarket</label>
+                            <input class="form-radio" type="radio" name="part_type" id="">
+                            <label for="">used</label>
+                            <input class="form-radio" type="radio" name="part_type" id="">
+                            </form>
+                            
+                        </div>
                         
                         <div class="flex items-center">
                             <h1 class="capitalize text-teal-900">{{__('quantity')}}:</h1>
@@ -137,7 +148,7 @@
         
 
     </div>
-
+     <!-- mobile views -->
     <div class="bg-white md:hidden md:rounded-tr-lg mx-6 mt-8 overflow-hidden rounded-t-lg shadow-lg">
         <div class="flex justify-between">
 
@@ -212,6 +223,7 @@
 
 <script>
 import BaseNav from '../../components/UI/BaseNav'
+import BaseInput from '../../components/UI/BaseInput'
 import SelectSection from '../../components/UI/SelectSection'
 import Slide from '../../components/UI/Slide'
 import BaseFooter from '../../components/UI/BaseFooter'
@@ -222,6 +234,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
         components:{
             StoreLayout,
             BaseNav,
+            BaseInput,
             SelectSection,
             Slide,
             BaseFooter,

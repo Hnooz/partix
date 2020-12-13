@@ -2795,7 +2795,8 @@ __webpack_require__.r(__webpack_exports__);
       data.append('description', this.form.description);
       data.append('super_category_id', this.form.super_category_id);
       data.append('images', this.form.images);
-      axios.put('/dashboard/categories/' + this.category.id, data, {
+      data.append('_method', 'put');
+      axios.post('/dashboard/categories/' + this.category.id, data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -3659,9 +3660,9 @@ __webpack_require__.r(__webpack_exports__);
 
     };
   },
-  // created() {
-  //     this.form = this.part;
-  // },
+  created: function created() {
+    this.form = this.part;
+  },
   methods: {
     submit: function submit() {
       var data = new FormData();
@@ -3683,7 +3684,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      axios.put('/dashboard/parts/' + this.part.id, data, {
+      data.append('_method', 'put');
+      axios.post('/dashboard/parts/' + this.part.id, data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -4746,17 +4748,11 @@ __webpack_require__.r(__webpack_exports__);
     BaseFooter: _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__["default"],
     ToggleMenu: _components_UI_ToggleMenu__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
-  props: ['parts', 'cars', 'cartQuantity', 'cartCollection'],
+  props: ['parts', 'cars', 'cartQuantity', 'cartCollection', 'categories', 'super_category'],
   data: function data() {
     return {
       search: '',
-      showModal: false,
-      carts: {
-        name: '',
-        price: '',
-        slug: '',
-        supplier: ''
-      }
+      showModal: false
     };
   },
   computed: {
@@ -4770,7 +4766,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addCart: function addCart(part) {
-      console.log(true); // this.$inertia.post('/carts', part);
+      // console.log(true);
+      this.$inertia.post('/carts', part);
     },
     toggleModal: function toggleModal() {
       this.showModal = !this.showModal;
@@ -4796,10 +4793,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_UI_BaseNav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/UI/BaseNav */ "./resources/js/components/UI/BaseNav.vue");
-/* harmony import */ var _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/UI/SelectSection */ "./resources/js/components/UI/SelectSection.vue");
-/* harmony import */ var _components_UI_Slide__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/UI/Slide */ "./resources/js/components/UI/Slide.vue");
-/* harmony import */ var _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/UI/BaseFooter */ "./resources/js/components/UI/BaseFooter.vue");
-/* harmony import */ var _Shared_StoreLayout_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Shared/StoreLayout.vue */ "./resources/js/Shared/StoreLayout.vue");
+/* harmony import */ var _components_UI_BaseInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/UI/BaseInput */ "./resources/js/components/UI/BaseInput.vue");
+/* harmony import */ var _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/UI/SelectSection */ "./resources/js/components/UI/SelectSection.vue");
+/* harmony import */ var _components_UI_Slide__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/UI/Slide */ "./resources/js/components/UI/Slide.vue");
+/* harmony import */ var _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/UI/BaseFooter */ "./resources/js/components/UI/BaseFooter.vue");
+/* harmony import */ var _Shared_StoreLayout_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Shared/StoreLayout.vue */ "./resources/js/Shared/StoreLayout.vue");
 //
 //
 //
@@ -5012,6 +5010,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -5019,11 +5029,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    StoreLayout: _Shared_StoreLayout_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    StoreLayout: _Shared_StoreLayout_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     BaseNav: _components_UI_BaseNav__WEBPACK_IMPORTED_MODULE_0__["default"],
-    SelectSection: _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Slide: _components_UI_Slide__WEBPACK_IMPORTED_MODULE_2__["default"],
-    BaseFooter: _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__["default"]
+    BaseInput: _components_UI_BaseInput__WEBPACK_IMPORTED_MODULE_1__["default"],
+    SelectSection: _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Slide: _components_UI_Slide__WEBPACK_IMPORTED_MODULE_3__["default"],
+    BaseFooter: _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   props: ['part', 'cars', 'category', 'cartQuantity', 'cartCollection', 'cartItem'],
   data: function data() {
@@ -6054,7 +6065,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     cartItemQuantity: Number,
-    cartItem: Array
+    cartItem: Object
   },
   data: function data() {
     return {
@@ -48670,8 +48681,7 @@ var render = function() {
                         name: "images[]",
                         error: _vm.$page.errors.images,
                         tabindex: "4",
-                        multiple: "",
-                        required: ""
+                        multiple: ""
                       },
                       on: {
                         change: function($event) {
@@ -53433,17 +53443,7 @@ var render = function() {
               "capitalize container sm:flex font-semibold items-center justify-between mx-auto px-10 text-white"
           },
           [
-            _c("h1", [
-              _vm._v(_vm._s(_vm.__("filters")) + " | "),
-              _c(
-                "span",
-                {
-                  staticClass: "font-normal lowercase",
-                  attrs: { dir: "auto" }
-                },
-                [_vm._v(_vm._s(_vm.__("oil filters")))]
-              )
-            ]),
+            _c("h1", [_vm._v(_vm._s(_vm.__("Home")))]),
             _vm._v(" "),
             _c("form", { staticClass: "mt-2 sm:mt-0" }, [
               _c("div", { staticClass: "relative" }, [
@@ -53604,7 +53604,7 @@ var render = function() {
                       {
                         staticClass:
                           "flex focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white text-xs uppercase w-full",
-                        attrs: { type: "submit" },
+                        attrs: { type: "button" },
                         on: {
                           click: function($event) {
                             return _vm.addCart(part)
@@ -54109,6 +54109,44 @@ var render = function() {
                             _vm._s(_vm.part.description) +
                             "\n                        "
                         )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.submit($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("label", { attrs: { for: "" } }, [_vm._v("oem")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-radio",
+                          attrs: { type: "radio", name: "part_type", id: "" }
+                        }),
+                        _vm._v(" "),
+                        _c("label", { attrs: { for: "" } }, [
+                          _vm._v("aftermarket")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-radio",
+                          attrs: { type: "radio", name: "part_type", id: "" }
+                        }),
+                        _vm._v(" "),
+                        _c("label", { attrs: { for: "" } }, [_vm._v("used")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-radio",
+                          attrs: { type: "radio", name: "part_type", id: "" }
+                        })
                       ]
                     )
                   ]),

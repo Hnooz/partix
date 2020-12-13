@@ -95,9 +95,9 @@
                
             }
         }, 
-        // created() {
-        //     this.form = this.part;
-        // },
+        created() {
+            this.form = this.part;
+        },
         methods: {
             submit() {
 
@@ -120,13 +120,12 @@
             data.append('images[' + i + ']', images);
             }
             }
-            
-            axios.put('/dashboard/parts/'+this.part.id,
-                data,
-                {
+            data.append('_method', 'put');
+            axios.post('/dashboard/parts/'+this.part.id,  data,
+            {
                 headers: {
                     'Content-Type': 'multipart/form-data'
-                }
+                },
               },
             ).then(function(response){
                const status = JSON.parse(response.status);

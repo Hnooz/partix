@@ -27,7 +27,7 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $supplier = Supplier::find($request->supplier_id);
-        \Cart::session($request->id)->add([
+        Cart::add([
             'id' => $request->id,
             'name' => $request->name,
             'price' => $request->price,

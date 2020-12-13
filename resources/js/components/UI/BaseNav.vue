@@ -267,7 +267,7 @@ export default {
     components:{LanguageSelector},
     props:{
         cartItemQuantity:Number,
-        cartItem:Array
+        cartItem:Object
     },
     data() {
         return {

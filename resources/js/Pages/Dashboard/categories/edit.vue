@@ -24,7 +24,7 @@
                         </div>
                          <div>
                              <label for="image" class="text-gray-700">Upload Image</label>
-                            <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white  block w-full" :error="$page.errors.images" tabindex="4" multiple required>
+                            <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white  block w-full" :error="$page.errors.images" tabindex="4" multiple>
                         </div>
                     </div>
                     <div class="flex justify-end mt-4">
@@ -66,10 +66,9 @@
                 data.append('description', this.form.description);
                 data.append('super_category_id', this.form.super_category_id);
                 data.append('images', this.form.images);
+                data.append('_method', 'put');
 
-                axios.put( '/dashboard/categories/'+this.category.id,
-                data,
-                {
+                axios.post( '/dashboard/categories/'+this.category.id, data,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

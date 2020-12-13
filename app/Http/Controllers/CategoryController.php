@@ -70,14 +70,13 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $data = $request->validate([
-            'name' => 'required|unique:categories|max:255',
+            'name' => 'required|max:255',
             'description' => 'required|max:255',
             'super_category_id' => 'sometimes|nullable|max:255',
         ]);
-
+        $category->clearMediaCollection('images');
         if ($request->file('images')) {
-            $category->clearMediaCollection('images')
-                ->addMedia($request->file('images'))
+            $category->addMedia($request->file('images'))
                 ->toMediaCollection('images');
         };
 
@@ -89,8 +88,6 @@ class CategoryController extends Controller
 
         return response()->json(['data' => $category,
             'redirect' => 'dashboard/categories', ]);
-
-        // return redirect()->route('categories.index');
     }
 
     public function destroy(Category $category)

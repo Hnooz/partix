@@ -5,21 +5,27 @@ namespace App\Http\Controllers;
 use Cart;
 use App\Car;
 use App\Part;
+use App\Category;
+use App\SuperCategory;
 
 class StoreController extends Controller
 {
     public function index()
     {
-        $parts = Part::with('category')->get();
+        $parts = Part::all();
         
         $cars = Car::all();
+        $categories = Category::all();
+        $super_category = SuperCategory::all();
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
-        // \dd($cartCollection);
+        
         return inertia()->render(
             'Store/Index',
             [
                 'parts' => $parts,
+                'categories' => $categories,
+                'super_category' => $super_category,
                 'cars' => $cars,
                 'cartQuantity' => $cartQuantity,
                 'cartCollection' => $cartCollection, ]
