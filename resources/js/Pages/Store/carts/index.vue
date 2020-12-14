@@ -5,12 +5,12 @@
             <h3 class="text-teal-800 text-2xl font-medium">{{__('Checkout')}}</h3>
             <div class="flex flex-col lg:flex-row mt-8">
                 <div class="w-full lg:w-1/2 order-2">
-                    <form class="mt-8 lg:w-3/4 pb-4">
+                    <form class="mt-8 lg:w-3/4 pb-4" @submit.prevent="submit">
                         <div class="mt-8">
                             <h4 class="text-sm text-teal-700 font-medium">{{__('Delivery address')}}</h4>
                             <div class="mt-6 flex">
                                 <label class="block flex-1">
-                                    <input type="text" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('Address')">
+                                    <input type="text" name="address" v-model="form.address" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('Address')">
                                 </label>
                             </div>
                         </div>
@@ -19,14 +19,11 @@
                             <div class="mt-6 flex">
                                 <label class="block w-3/12">
                                     <select class="form-select text-gray-700 mt-1 block w-full">
-                                        <option>+249</option>
-                                        <option>DC</option>
-                                        <option>MH</option>
-                                        <option>MD</option>
+                                        <option>+974</option>
                                     </select>
                                 </label>
                                 <label class="block flex-1 ml-3">
-                                    <input type="text" class="form-input mt-1 block w-full text-gray-700" placeholder="your number">
+                                    <input type="text" name="customer_phone" v-model="form.customer_phone" class="form-input mt-1 block w-full text-gray-700" placeholder="your number">
                                 </label>
                             </div>
                         </div>
@@ -36,7 +33,7 @@
                                 <span class="mx-2">{{__('Back To Shop')}}</span>
                             </a>
                             <button class="flex items-center px-3 py-2 bg-teal-800 text-white text-sm font-medium rounded-md hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
-                                <span>{{__('Payment')}} $5984</span>
+                                <span>{{__('Payment')}} {{cartTotalPrice}}$</span>
                                 <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </button>
                         </div>
@@ -46,7 +43,7 @@
                     <div class="flex justify-center lg:justify-end">
                         <div class="border rounded-md max-w-md w-full px-4 py-3" >
                             <div class="flex items-center justify-between">
-                                <h3 class="text-teal-700 font-medium">{{__('Order total')}} {{cartQuantity}}</h3>
+                                <h3 class="text-teal-700 font-medium">{{__('Order total')}}({{cartQuantity}})</h3>
                                 <span class="text-gray-600">{{cartTotalPrice}}$</span>
                                 <button @click="clearCart" type="submit" class="text-teal-600 text-sm">{{__('clear')}}</button>
                             </div>
@@ -90,17 +87,26 @@ import BaseFooter from '../../../components/UI/BaseFooter'
             BaseFooter
         },
         props:['cartCollection','cartQuantity', 'cartTotalPrice'],
-
+        data() {
+            return {
+                form:{
+                    customer_phone:'',
+                    address:'',
+                }
+            }
+        },
         methods: {
+            submit()
+            {
+                this.$inertia.post('/orders', this.form);
+            },
             increment(item){
                 item.quantity++;
-                // item.price = item.price*item.quantity
                 this.$inertia.put(`/cart/${item.id}`, item);
             },
 
             decrement(item){
                 item.quantity--;
-                // item.price = item.price/item.quantity
                 this.$inertia.put(`/cart/${item.id}`, item);
             },
             clearCart(){

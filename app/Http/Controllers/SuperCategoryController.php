@@ -42,12 +42,17 @@ class SuperCategoryController extends Controller
         // return redirect()->back();
     }
 
+    public function edit(SuperCategory $superCategory)
+    {
+        return inertia()->render('Dashboard/super_categories/edit', ['superCategory' => $superCategory]);
+    }
+
     public function update(Request $request, SuperCategory $superCategory)
     {
         $data = $request->validate(['name' => 'required']);
         
         $superCategory->update($data);
-        
+        $superCategory->clearMediaCollection('images');
         if ($request->file('images')) {
             $superCategory->addMedia($request->file('images'))->toMediaCollection('images');
         };
@@ -57,7 +62,8 @@ class SuperCategoryController extends Controller
             'message' => 'Super category updated successfully',
         ]);
 
-        return redirect()->back();
+        return response()->json(['data' => $superCategory,
+            'redirect' => 'dashboard/super_categories', ]);
     }
 
     public function destroy(SuperCategory $superCategory)

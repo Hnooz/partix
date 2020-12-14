@@ -77,25 +77,27 @@
                                 {{part.description}}
                             </p>
                         </div>
-                        <div>
+                        <!-- <div> -->
                             <form @submit.prevent="submit">
-                                <label for="">oem</label>
-                            <input class="form-radio" type="radio" name="part_type" id="">
-                            <label for="">aftermarket</label>
-                            <input class="form-radio" type="radio" name="part_type" id="">
-                            <label for="">used</label>
-                            <input class="form-radio" type="radio" name="part_type" id="">
-                            </form>
+                                <div>
+                                    <label class="text-gray-700">Part Type</label>
+                                        <select  name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
+                                        <option value="0">Select Type</option>
+                                            <option v-for="type in part_type" :key="type.index" :value="type.id">{{type.name}}</option>
+                                        </select>
+                                </div>
                             
-                        </div>
+                            
+                        <!-- </div> -->
                         
                         <div class="flex items-center">
                             <h1 class="capitalize text-teal-900">{{__('quantity')}}:</h1>
                             <button type="button" @click="increment(cartItem)" class="bg-teal-500 mx-2 my-2 text-white">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path> </svg>
                             </button>
-
-                            <span class="bg-white flex items-center mx-2 px-4 py-2">{{cartItem.quantity}}</span>
+                            
+                            <span class="bg-white flex items-center mx-2 px-4 py-2">{{quantity}}</span>
+                            <input type="text" v-model="quantity" hidden >
 
                             <button type="button" @click="decrement(cartItem)" class="bg-teal-500 mx-2 my-2 text-white">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
@@ -109,6 +111,7 @@
                                 </svg>
                             </button>
                         </div>
+                        </form>
                         <div class="flex">
                             <a href="#" class="bg-blue-700 flex items-center p-2 rounded text-white"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.19795 21.5H13.198V13.4901H16.8021L17.198 9.50977H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H17.198V2.5H14.198C11.4365 2.5 9.19795 4.73858 9.19795 7.5V9.50977H7.19795L6.80206 13.4901H9.19795V21.5Z" fill="currentColor" /></svg></a>
                             <a href="#" class="bg-blue-400 flex items-center mx-1 p-2 rounded text-white"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 3C9.10457 3 10 3.89543 10 5V8H16C17.1046 8 18 8.89543 18 10C18 11.1046 17.1046 12 16 12H10V14C10 15.6569 11.3431 17 13 17H16C17.1046 17 18 17.8954 18 19C18 20.1046 17.1046 21 16 21H13C9.13401 21 6 17.866 6 14V5C6 3.89543 6.89543 3 8 3Z" fill="currentColor" /></svg></a>
@@ -151,14 +154,6 @@
      <!-- mobile views -->
     <div class="bg-white md:hidden md:rounded-tr-lg mx-6 mt-8 overflow-hidden rounded-t-lg shadow-lg">
         <div class="flex justify-between">
-
-            <svg @click="fave()" v-if="fav == false" class="h-6 m-2 md:mx-4 text-gray-400 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0122 5.57169L10.9252 4.48469C8.77734 2.33681 5.29493 2.33681 3.14705 4.48469C0.999162 6.63258 0.999162 10.115 3.14705 12.2629L11.9859 21.1017L11.9877 21.0999L12.014 21.1262L20.8528 12.2874C23.0007 10.1395 23.0007 6.65711 20.8528 4.50923C18.705 2.36134 15.2226 2.36134 13.0747 4.50923L12.0122 5.57169ZM11.9877 18.2715L16.9239 13.3352L18.3747 11.9342L18.3762 11.9356L19.4386 10.8732C20.8055 9.50635 20.8055 7.29028 19.4386 5.92344C18.0718 4.55661 15.8557 4.55661 14.4889 5.92344L12.0133 8.39904L12.006 8.3918L12.005 8.39287L9.51101 5.89891C8.14417 4.53207 5.92809 4.53207 4.56126 5.89891C3.19442 7.26574 3.19442 9.48182 4.56126 10.8487L7.10068 13.3881L7.10248 13.3863L11.9877 18.2715Z" fill="currentColor" />
-            </svg>
-
-            <svg @click="fave()" v-if="fav == true" class="h-6 m-2 md:mx-4 text-red-600 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
-            </svg>
 
             <p class="bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-bl-lg shadow-lg text-sm text-white w-12">-26%</p>
         </div>
@@ -239,28 +234,57 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             Slide,
             BaseFooter,
         },
-        props:['part', 'cars', 'category', 'cartQuantity', 'cartCollection' ,'cartItem'],
+        props:[
+            'part', 'cars',
+            'category', 
+            'cartQuantity', 
+            'cartCollection' 
+            ,'cartItem',
+            'part_type'],
         data() {
             return {
-                fav:false
+                // fav:false,
+                quantity:this.cartItem.quantity,
+                form: {
+                    name: '',
+                    number: '',
+                    description: '',
+                    price: '',
+                    second_price:'',
+                    slug: '',
+                    car_id: '',
+                    supplier_id:'',
+                    category_id:'',
+                    part_type_id:'',
+                    
+                },
             }
         },
+        created() {
+            this.form = this.part
+        },
         methods: {
-        addCart(part) {
-            this.$inertia.post('/carts', part);
+            
+        addCart() {
+            const form = this.form;
+            const quantity = this.cartItem;
+
+            const both = Object.assign(form , quantity);
+
+            // console.log(both);
+            this.$inertia.put(`/cart/${this.cartItem.id}`, both);
+            // this.$inertia.post('/carts', part);
         },
          increment(cartItem){
-            cartItem.quantity++;            
-            this.$inertia.put(`/cart/${cartItem.id}`, cartItem);
+            cartItem.quantity = this.quantity++ ;            
         },
 
         decrement(cartItem){
-            cartItem.quantity--;            
-            this.$inertia.put(`/cart/${cartItem.id}`, cartItem);
+            cartItem.quantity = this.quantity--;            
         },
-        fave(){
-            this.fav = !this.fav
-        }
+        // fave(){
+        //     this.fav = !this.fav
+        // }
     },
     }
 </script>

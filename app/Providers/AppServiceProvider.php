@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Order;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -50,6 +51,12 @@ class AppServiceProvider extends ServiceProvider
         Inertia::share('auth.user', function () {
             return[
                 'loggedIn' => Auth::check(),
+            ];
+        });
+
+        Inertia::share('order', function () {
+            return[
+                'total' => Order::all()->count(),
             ];
         });
     }

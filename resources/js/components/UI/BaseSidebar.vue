@@ -43,7 +43,7 @@
                         <svg viewBox="0 0 20 20" fill="currentColor" class="w-6 mx-2 ">
                             <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
                         </svg>
-                        <h1 class="mx-2  whitespace-no-wrap">Orders <span class="bg-red-600 font-semibold p-1 rounded-md text-white text-xs">56</span></h1>
+                        <h1 class="mx-2  whitespace-no-wrap">Orders <span class="bg-red-600 font-semibold p-1 rounded-md text-white text-xs">{{this.$page.order.total}}</span></h1>
                     </inertia-link>
                 </li>
 
@@ -99,7 +99,7 @@
                     </inertia-link>
                 </li>
 
-                <li class="px-2 pb-4" :class="route().current('comments.*')? 'text-teal-600' : 'text-white hover:text-teal-600'">
+                <!-- <li class="px-2 pb-4" :class="route().current('comments.*')? 'text-teal-600' : 'text-white hover:text-teal-600'">
                     <inertia-link href="/dashboard/comments" class="flex items-center">
                         <svg class="w-6 h-6 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
                         <span class="mr-3 mx-2">Comments</span>  
@@ -118,7 +118,7 @@
                         <svg class="w-6 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         <span class="mx-2">Profile</span>
                     </a>
-                </li>
+                </li> -->
 
                 <li class="px-2 mt-4 hidden md:block">
                     <a href="#" class="flex items-center text-white hover:text-teal-600">

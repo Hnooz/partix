@@ -6,6 +6,7 @@ use Cart;
 use App\Car;
 use App\Part;
 use App\Category;
+use App\PartType;
 use App\SuperCategory;
 
 class StoreController extends Controller
@@ -55,12 +56,14 @@ class StoreController extends Controller
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
         $cartItem = Cart::get($part->id);
+        $part_type = PartType::all();
         // dd($cartItem);
         return inertia()->render('Store/ItemDetails', ['part' => $part,
             'cars' => $cars,
             'cartQuantity' => $cartQuantity,
             'cartCollection' => $cartCollection,
             'cartItem' => $cartItem,
+            'part_type' => $part_type,
         ]);
     }
 }

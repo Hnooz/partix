@@ -4,16 +4,6 @@
         <div class="mt-8">
             <div class="flex justify-between">
                 <h2 class="text-3xl text-teal-600 font-bold">Super Category</h2>
-                <!-- <div>
-                    <form class="flex items-end" @submit.prevent="submit">
-                        <div class="mx-2">
-                            <base-input  name="name" v-model="form.name" :error="$page.errors.name" placeholder="Supplier name" required></base-input>
-                        </div>
-                        <div>
-                            <base-button class="bg-teal-700 hover:bg-teal-600">Create</base-button>
-                        </div>
-                    </form>
-                </div> -->
             <div class="flex items-center">
                     <inertia-link href="/dashboard/super_categories/create"
                                   class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap">
@@ -22,9 +12,9 @@
                     </inertia-link>
             </div>
             </div>
-            <h1 class="font-medium text-gray-500 text-xs">
+            <!-- <h1 class="font-medium text-gray-500 text-xs">
                 <span class="font-semibold text-red-400">Hint</span> double click on name to modify
-            </h1>
+            </h1> -->
             <div class="mt-4">
                 <div class="flex flex-col">
                     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6">
@@ -52,11 +42,11 @@
                                     </td>
 
                                     <td  class="px-6 py-4 whitespace-no-wrap">
-                                        <Edit :super_category="super_category" />
+                                        {{super_category.name}}
                                     </td>
 
                                     <td  class="flex px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium">
-                                        <!-- <svg @click="showInput(category)" class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg> -->
+                                       <inertia-link :href="'/dashboard/super_categories/'+super_category.id+'/edit'" ><svg class="h-6 text-blue-500 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg></inertia-link>
                                         <button @click="Delete(super_category)" class="focus:outline-none outline-none">
                                             <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                         </button>
@@ -75,9 +65,8 @@
 
 <script>
 import Layout from '../../../Shared/Layout'
-import Edit from '../super_categories/Edit'
     export default {
-        components: {Layout,Edit},
+        components: {Layout},
         props:['super_categories'],
         data() {
             return {

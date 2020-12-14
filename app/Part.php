@@ -14,7 +14,7 @@ class Part extends Model implements HasMedia
 
     protected $guarded = [];
     protected $appends = ['url'];
-    protected $with = ['category'];
+    protected $with = ['category','type'];
     
     public function cars()
     {
@@ -33,6 +33,11 @@ class Part extends Model implements HasMedia
 
     public function type()
     {
-        return $this->belongsTo(PartType::class);
+        return $this->belongsTo(PartType::class, 'part_type_id');
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetails::class);
     }
 }

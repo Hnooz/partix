@@ -8,12 +8,10 @@ Auth::routes(['register' => true, 'confirm' => false, 'reset' => false]);
 
 Route::redirect('/', '/dashboard');
 
-// Route::middleware('is_delivery')->prefix('/dashboard')->group(function () {
-    
-// });
-
 Route::group(['middleware' => ['is_delivery'], 'prefix' => '/dashboard'], function () {
     Route::get('/orders', 'OrderController@index')->name('orders.index');
+    Route::get('/orders/{order}/edit', 'OrderController@edit')->name('orders.edit');
+    Route::put('/orders/{order}', 'OrderController@update')->name('orders.update');
 });
 
 Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
@@ -44,7 +42,7 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     
     Route::resource('cars', 'CarController');
 });
-
+Route::post('/orders', 'OrderController@store')->name('orders.store');
 Route::get('/store', 'StoreController@index')->name('store.index');
 Route::get('/items', 'StoreController@items')->name('store.items');
 Route::get('/details/{part}', 'StoreController@details')->name('store.details');
