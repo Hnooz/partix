@@ -27,6 +27,9 @@
                         <div>
                             <base-input label="Slug"  name="slug"  v-model="part.slug" :error="$page.errors.slug" tabindex="5" required></base-input>
                         </div>
+                         <div>
+                            <base-input label="Sale"  name="sale"  v-model="part.sale" :error="$page.errors.sale" tabindex="5" required></base-input>
+                        </div>
                         <div>
                             <label class="text-gray-700">Car</label>
                                 <select  name="car_id"  v-model="part.car_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.car_id" required tabindex="6">
@@ -86,6 +89,7 @@
                     price: '',
                     second_price:'',
                     slug: '',
+                    sale:'',
                     car_id:0,
                     supplier_id:0,
                     category_id:0,

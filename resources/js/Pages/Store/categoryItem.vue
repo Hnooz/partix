@@ -8,7 +8,11 @@
     <div class="bg-teal-700 py-5 hidden md:block">
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-10 text-white">
             <div>
-                <h1>{{__('filtered item')}}</h1>
+                <div class="flex">
+                
+                <span class="font-normal capitalize">&nbsp;{{category.super_category.name}}&nbsp;</span> 
+                <span lass="font-normal capitalize"> | {{category.name}}</span>
+            </div>
                 
             </div>
             <div>
@@ -47,6 +51,7 @@
     <div class="container grid grid-cols-2 md:grid-cols-4 md:px-16 mx-auto py-10">            
         <div class="bg-white mb-10 mx-3 overflow-hidden md:rounded-tr-lg shadow-lg rounded-lg" v-for="(part, index) in filteredList" :key="index">
             <div class="flex justify-between">
+
                 <p v-if="part.sale > 0" class="bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-bl-full shadow-lg text-sm text-white w-12">-{{part.sale}}%</p>
             </div>
             
@@ -65,7 +70,7 @@
                     {{__('Buy')}}
                 </button>
 
-                <button type="submit" @click="addCart(part)" class="md:flex hidden focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white text-xs uppercase w-full">
+                <button type="button" @click="addCart(part)" class="md:flex hidden focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white text-xs uppercase w-full">
                     {{__('add to cart')}}
                     <svg viewBox="0 0 20 20" fill="currentColor" class="shopping-cart w-6">
                         <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
@@ -73,8 +78,14 @@
                 </button>
             </div>
         </div>
-    </div>
         
+    </div>
+
+        <p v-if="parts.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">there is no parts in this category ~_~!</p>
+        <div v-if="parts.length == 0" class="flex justify-center mb-10">
+            <img class="w-70 h-70" src="../../images/empty-animate.svg" alt="">
+        </div>
+
 <BaseFooter/>
     </store-layout>
 </template>
@@ -92,7 +103,7 @@ export default {
         BaseFooter,
         
     },
-    props:['parts', 'cars', 'cartQuantity', 'cartCollection', 'cartTotalPrice'],
+    props:['parts', 'category', 'cars', 'cartQuantity', 'cartCollection', 'cartTotalPrice'],
     data() {
         return {
             search:'',
@@ -111,6 +122,7 @@ export default {
         addCart(part) {
         this.$inertia.post('/carts', part);
         },
+
     },
 }
 </script>

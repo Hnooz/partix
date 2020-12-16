@@ -25,12 +25,14 @@ class CouponCodeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'name' => 'required',
             'value' => 'required',
             'expiration_at' => 'required',
             'descount_type_id' => 'required',
         ]);
 
         CouponCode::create([
+            'name' => $request->name,
             'value' => $request->value,
             'expiration_at' => $request->expiration_at,
             'descount_type_id' => $request->descount_type_id,

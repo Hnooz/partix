@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Cart;
 use App\Order;
+use App\CouponCode;
 use App\OrderStatus;
 use App\OrderDetails;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class OrderController extends Controller
     
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::latest()->get();
 
         return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
     }
@@ -33,15 +34,26 @@ class OrderController extends Controller
         $data = $request->validate([
             'customer_phone' => 'required',
             'address' => 'required',
-
         ]);
-
-        $order = Order::create([
-            'customer_phone' => $request->customer_phone,
-            'address' => $request->address,
-            'order_status_id' => 1,
-        ]);
-
+        $coupon = CouponCode::where('name', $request->coupon)->get();
+        // $coupon = CouponCode::find($request->coupon);
+        $cartTotalPrice = Cart::getTotal();
+       
+        if (sizeOf($coupon) == 0) {
+            $order = Order::create([
+                'customer_phone' => $request->customer_phone,
+                'address' => $request->address,
+                'order_status_id' => 1,
+            ]);
+        } else {
+            $order = Order::create([
+                'customer_phone' => $request->customer_phone,
+                'address' => $request->address,
+                'order_status_id' => 1,
+                'coupon_id' => $coupon[0]->id,
+            ]);
+        }
+        
         $cartCollection = Cart::getContent();
 
         foreach ($cartCollection as $cart) {

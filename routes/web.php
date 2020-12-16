@@ -48,7 +48,9 @@ Route::post('/orders', 'OrderController@store')->name('orders.store');
 Route::get('/store', 'StoreController@index')->name('store.index');
 Route::get('/categories', 'StoreController@category')->name('store.category');
 Route::get('/items', 'StoreController@items')->name('store.items');
+Route::get('/items/{category}', 'StoreController@categoryItems')->name('store.categoryItems');
 Route::get('/details/{part}', 'StoreController@details')->name('store.details');
+Route::post('/search', 'StoreController@search')->name('store.search');
 
 Route::get('/filtered_part/{id}', 'FilterController@getFilteredParts')->name('filtered_part');
 Route::post('/filtered_parts', 'FilterController@filteredParts')->name('filtered_parts');

@@ -2,6 +2,7 @@
 <div>
     <nav :class="{ 'scrolled': !view.atTopOfPage }" 
         class="animated bg-teal-700 md:flex hidden flex-wrap items-center justify-between m-auto pb-6 shadow-md top-0 w-full">
+        <!-- top nav -->
         <div class="bg-teal-900 capitalize flex font-medium justify-between px-20 py-4 text-white w-full">
             <div class="flex">
                 <h1>{{__('Call')}} <span>{{__('78 5439 36')}}</span></h1>
@@ -52,7 +53,7 @@
                             </div>
                             <p class="capitalize font-medium text-white">{{__('share part soluation')}}</p>
                         </div>
-                        <form action="#" method="post" class="flex items-center pl-3 whitespace-pre" dir="auto">
+                        <form @submit.prevent="submit" class="flex items-center pl-3 whitespace-pre" dir="auto">
                             <button class="focus:outline-none mx-2 outline-none" type="button">
                                 <svg  class="h-10 text-white w-10" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -61,9 +62,9 @@
                             </button>
 
                             <div class="flex md:flex-col lg:flex-row">
-                                <input type="search" class="bg-teal-900 border-0 focus:outline-none form-input outline-none p-2 py-3 rounded sm:ml-0 text-sm text-white w-70" :placeholder="__('Enter the part number or name')" >
+                                <input v-model="form.name" type="search" class="bg-teal-900 border-0 focus:outline-none form-input outline-none p-2 py-3 rounded sm:ml-0 text-sm text-white w-70" :placeholder="__('Enter the part number or name')" >
                                 
-                                <button type="submit" class="block bg-teal-500 cursor-pointer capitalize focus:outline-none font-medium md:px-10 outline-none p-2 px-2 text-white" >{{__('search')}}</button>
+                                <button  class="block bg-teal-500 cursor-pointer capitalize focus:outline-none font-medium md:px-10 outline-none p-2 px-2 text-white" >{{__('search')}}</button>
 
                             </div>
                         </form>
@@ -167,15 +168,6 @@
             </div>
         </form>
         
-    
-        <div class="mt-8">
-            <form class="flex items-center justify-center">
-                <input class="form-input w-48" type="text" placeholder="Add promocode">
-                <button class="ml-3 flex items-center px-3 py-2 bg-teal-800 text-white text-sm uppercase font-medium rounded hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
-                    <span>{{__('Apply')}}</span>
-                </button>
-            </form>
-        </div>
         <a href="/carts" class="flex items-center justify-center mt-4 px-3 py-2 bg-teal-800 text-white text-sm uppercase font-medium rounded hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
             <span>{{__('Chechout')}}</span>
             <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
@@ -277,6 +269,9 @@ export default {
             // quantity:1,
             view: {
                 atTopOfPage: true
+            },
+            form:{
+                name:'',
             }
         }
     },
@@ -284,6 +279,9 @@ export default {
         window.addEventListener('scroll', this.handleScroll);
     },
         methods: {
+            submit(){
+                this.$inertia.post(`/search`, this.form);
+            },
             increment(item){
                 item.quantity++;
                 // item.price = item.price*item.quantity

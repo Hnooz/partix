@@ -9,7 +9,13 @@
                 
 
                 <div class="flex items-center justify-center my-6 uppercase font-medium text-sm">
-                    <form class="md:grid md:grid-cols-3" @submit.prevent="submit">
+                    <form class="md:grid md:grid-cols-4" @submit.prevent="submit">
+                        <div class="my-5 md:my-0 text-teal-600">
+                            <label for="name">name</label>
+                            <label class="block mt-3 text-gray-500">
+                                <input type="text" name="name" class="form-input"  v-model="form.name" :error="$page.errors.name" placeholder="e.g free_sale"  required>
+                            </label> 
+                        </div>
                         <div class="text-teal-600">
                             <label >
                                 Discount Type
@@ -21,7 +27,7 @@
                                 </select>
                             </label>
                         </div>
-                        <div class="my-5 md:my-0 md:mx-10 text-teal-600">
+                        <div class="my-5 md:my-0 text-teal-600">
                             <label for="value">value</label>
                             <label class="block mt-3 text-gray-500">
                                 <input type="text" name="value" class="form-input"  v-model="form.value" :error="$page.errors.value" placeholder="e.g 200 QAR or 20%"  required>
@@ -59,6 +65,10 @@
                                         style="text-align: start">
                                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                                     </th>
+                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4  uppercase tracking-wider"
+                                        style="text-align: start">
+                                        Name
+                                    </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 uppercase tracking-wider"
                                         style="text-align: start">
                                         Discount Type
@@ -93,7 +103,10 @@
                                         </label>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap capitalize">
-                                        {{coupon.descount_type_id}}
+                                        {{ coupon.name }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap capitalize">
+                                        {{coupon.descount_type.name}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap uppercase">
                                         {{ coupon.value }}
@@ -145,6 +158,7 @@
         methods: {
             submit() {
                 this.$inertia.post('/dashboard/coupons', this.form);
+                this.form = '';
             },
             Delete(coupon) {
                 this.$inertia.delete(`/dashboard/coupons/${coupon.id}`);

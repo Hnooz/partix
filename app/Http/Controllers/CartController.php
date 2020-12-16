@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Cart;
 use App\Part;
+use App\Category;
 use App\Supplier;
 use Illuminate\Http\Request;
 
@@ -28,10 +29,19 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $supplier = Supplier::find($request->supplier_id);
+        
+        $category = Category::find($request->category_id);
+
+        if ($category->sale > 0) {
+            $price = $request->price - (($category->sale / 100) * $request->price);
+        } else {
+            $price = $request->price - (($request->sale / 100) * $request->price);
+        }
+        
         Cart::add([
             'id' => $request->id,
             'name' => $request->name,
-            'price' => $request->price,
+            'price' => $price,
             'quantity' => 1,
             'attributes' => [
                 'slug' => $request->slug,

@@ -48,7 +48,7 @@
         <div class="bg-white mb-10 mx-3 overflow-hidden md:rounded-tr-lg shadow-lg rounded-lg" v-for="(part, index) in filteredList" :key="index">
             <div class="flex justify-between">
 
-                <p class="bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-bl-full shadow-lg text-sm text-white w-12">-26%</p>
+                <p v-if="part.sale" class="bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-bl-full shadow-lg text-sm text-white w-12">{{part.sale}}%</p>
             </div>
             
             <a :href="`/details/${part.id}`">
@@ -75,7 +75,10 @@
             </div>
         </div>
     </div>
-        
+         <p  v-if="parts.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">there is no parts ~_~!</p>
+        <div v-if="parts.length == 0" class="flex justify-center mb-10">
+            <img class="w-70 h-70" src="../../images/empty-animate.svg" alt="">
+        </div>
 <BaseFooter/>
     </store-layout>
 </template>

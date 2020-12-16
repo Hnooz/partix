@@ -11,17 +11,8 @@
         </div>
 
         <div class="flex overflow-x-auto">
-            <Multislide class="max-w-5xl mx-auto" :super_category="super_category" :categories="categories">
-                <!-- <div class="flex justify-center my-6">
-                    <Slide class="max-w-sm" :arrows="true" :slidesToShow=3>
-                        <div class="flex justify-center bg-white mx-2" v-for="category in categories" :key="category.index">
-                            <img class="h-12 mx-auto my-2 object-center object-cover w-12" :src="category.url[0]" alt=""></div>
-                        <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-2.png" alt=""></div>
-                        <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-3.png" alt=""></div>
-                        <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-2.png" alt=""></div>
-                        <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-3.png" alt=""></div>      
-                    </Slide> 
-                </div> -->
+            <Multislide class="max-w-6xl mx-auto" :super_category="super_category" :categories="categories">
+            
             </Multislide>
         </div>
             
@@ -49,7 +40,7 @@
                 <form @submit.prevent="submit" enctype="multipart/form-data">
                      <div class="flex justify-between">
 
-                    <p class="bg-teal-400  font-semibold h-12 px-1 py-3 shadow-lg text-white w-12">-26%</p>
+                    <p v-if="part.sale > 0" class="bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-bl-full shadow-lg text-sm text-white w-12">-{{part.sale}}%</p>
                     </div>
                     
                     <a :href="'/details/' + part.id">
