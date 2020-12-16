@@ -17,7 +17,7 @@
                 <a href="/register">{{__('register')}}</a>
             </div>
             <div v-else>
-                <button class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white hover:bg-blue-400 focus:outline-none focus:text-white focus:bg-gray-700"
+                <button class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white hover:bg-teal-500 focus:outline-none focus:text-white focus:bg-gray-700"
                    @click="logout">Logout</button>
             </div>
         </div>
@@ -82,10 +82,10 @@
                                     <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
                                 </svg>                                
                             </button>
-                            <span class="-mt-12 mx-10 absolute bg-red-400 flex font-bold h-5 justify-center rounded-full text-sm w-5">{{this.cartItemQuantity}}</span>
+                            <span class="-mt-12 mx-10 absolute bg-red-400 flex font-bold h-5 justify-center rounded-full text-sm w-5">{{cartItemQuantity}}</span>
                             
 
-                            <span class="font-bold text-sm">&nbsp; $33,45 &nbsp; QAR</span>
+                            <span class="font-bold text-sm">{{cartTotalPrice}} QAR</span>
 
                         </div>
                     </div>
@@ -267,7 +267,8 @@ export default {
     components:{LanguageSelector},
     props:{
         cartItemQuantity:Number,
-        cartItem:Object
+        cartItem:Object,
+        cartTotalPrice:Number
     },
     data() {
         return {

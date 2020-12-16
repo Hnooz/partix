@@ -20,6 +20,7 @@ class StoreController extends Controller
         $super_category = SuperCategory::all();
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
+        $cartTotalPrice = Cart::getTotal();
         
         return inertia()->render(
             'Store/Index',
@@ -29,6 +30,7 @@ class StoreController extends Controller
                 'super_category' => $super_category,
                 'cars' => $cars,
                 'cartQuantity' => $cartQuantity,
+                'cartTotalPrice' => $cartTotalPrice,
                 'cartCollection' => $cartCollection, ]
         );
     }
@@ -39,6 +41,7 @@ class StoreController extends Controller
         $cars = Car::all();
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
+        $cartTotalPrice = Cart::getTotal();
 
         return inertia()->render(
             'Store/Items',
@@ -46,24 +49,33 @@ class StoreController extends Controller
                 'parts' => $parts,
                 'cars' => $cars,
                 'cartQuantity' => $cartQuantity,
+                'cartTotalPrice' => $cartTotalPrice,
                 'cartCollection' => $cartCollection, ]
         );
     }
 
+    public function category()
+    {
+        return inertia()->render('Store/Categories');
+    }
     public function details(Part $part)
     {
         $cars = Car::all();
         $cartQuantity = Cart::getTotalQuantity();
+        $cartTotalPrice = Cart::getTotal();
         $cartCollection = Cart::getContent();
         $cartItem = Cart::get($part->id);
         $part_type = PartType::all();
-        // dd($cartItem);
+        $latest_category = Category::latest()->limit(3)->get();
+        // dd($cat);
         return inertia()->render('Store/ItemDetails', ['part' => $part,
             'cars' => $cars,
             'cartQuantity' => $cartQuantity,
             'cartCollection' => $cartCollection,
+            'cartTotalPrice' => $cartTotalPrice,
             'cartItem' => $cartItem,
             'part_type' => $part_type,
+            'latest_category' => $latest_category,
         ]);
     }
 }

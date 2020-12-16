@@ -22,6 +22,12 @@ class OrderController extends Controller
         return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
     }
 
+    public function show(Order $order)
+    {
+        $order_details = OrderDetails::where('order_id', $order->id)->get();
+
+        return inertia()->render('Dashboard/orders/show', ['order_details' => $order_details]);
+    }
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -76,5 +82,17 @@ class OrderController extends Controller
         ]);
 
         return redirect()->route('orders.index');
+    }
+
+    public function getTotalPrice(Request $request)
+    {
+        $details = OrderDetails::where('order_id', $request->id)->get();
+        $total = 0;
+        dd($details);
+        foreach ($details as $detail) {
+            $total = $total + $detail->price * $detail->quantity;
+        }
+
+        return response()->json($total);
     }
 }

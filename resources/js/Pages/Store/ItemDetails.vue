@@ -1,6 +1,6 @@
 <template>
     <store-layout>
-    <BaseNav :cartItemQuantity="cartQuantity" :cartItem="cartCollection" />
+    <BaseNav :cartItemQuantity="cartQuantity" :cartItem="cartCollection" :cartTotalPrice="cartTotalPrice" />
     <SelectSection :carItem="cars" class="hidden md:block"/>
          <!-- filter search -->
     <div class="bg-teal-700 py-5 hidden md:block">
@@ -44,15 +44,13 @@
                 <div class="flex">
                     <div>
                         <div class="bg-white flex h-70 items-center justify-center w-70">
-                            <img class="h-40 object-center object-cover w-40" :src="part.url" alt="">
+                            <img class="h-40 object-center object-cover w-40" :src="part.url[0]" alt="">
                         </div>
                        <div class="flex justify-around mt-6">
-                        <Slide class="max-w-xs" :arrows="true" :slidesToShow=3>
-                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-1.png" alt=""></div>
-                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-2.png" alt=""></div>
-                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-3.png" alt=""></div>
-                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-2.png" alt=""></div>
-                            <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-3.png" alt=""></div>      
+                        <Slide class="max-w-xs" :arrows="true" :slidesToShow=2>
+                            <div class="flex justify-center bg-white mx-2" v-for="url in part.url" :key="url.index">
+                                <img class="h-12 mx-auto my-2 object-center object-cover w-12" :src="url" alt="">
+                            </div>
                         </Slide> 
                        </div>
                         
@@ -77,41 +75,37 @@
                                 {{part.description}}
                             </p>
                         </div>
-                        <!-- <div> -->
                             <form @submit.prevent="submit">
                                 <div>
                                     <label class="text-gray-700">Part Type</label>
-                                        <select  name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
+                                    <select  name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
                                         <option value="0">Select Type</option>
-                                            <option v-for="type in part_type" :key="type.index" :value="type.id">{{type.name}}</option>
-                                        </select>
+                                        <option v-for="type in part_type" :key="type.index" :value="type.id">{{type.name}}</option>
+                                    </select>
                                 </div>
-                            
-                            
-                        <!-- </div> -->
-                        
-                        <div class="flex items-center">
-                            <h1 class="capitalize text-teal-900">{{__('quantity')}}:</h1>
-                            <button type="button" @click="increment(cartItem)" class="bg-teal-500 mx-2 my-2 text-white">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path> </svg>
-                            </button>
-                            
-                            <span class="bg-white flex items-center mx-2 px-4 py-2">{{quantity}}</span>
-                            <input type="text" v-model="quantity" hidden >
 
-                            <button type="button" @click="decrement(cartItem)" class="bg-teal-500 mx-2 my-2 text-white">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                            </button>
-                        </div>
-                        <div class="capitalize my-8">
-                            <button  @click="addCart(part)" class="bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white" type="button">
-                                <span class="mx-12 capitalize">{{__('add to cart')}}</span> 
-                                <svg class="h-6 mx-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        </form>
+                                <div class="flex items-center">
+                                    <h1 class="capitalize text-teal-900">{{__('quantity')}}:</h1>
+                                    <button type="button" @click="increment(cartItem)" class="bg-teal-500 mx-2 my-2 text-white">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path> </svg>
+                                    </button>
+                                    
+                                    <span class="bg-white flex items-center mx-2 px-4 py-2">{{quantity}}</span>
+                                    <input type="text" v-model="quantity" hidden >
+
+                                    <button type="button" @click="decrement(cartItem)" class="bg-teal-500 mx-2 my-2 text-white">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                                    </button>
+                                </div>
+                                <div class="capitalize my-8">
+                                    <button  @click="addCart(part)" class="bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white" type="button">
+                                        <span class="mx-12 capitalize">{{__('add to cart')}}</span> 
+                                        <svg class="h-6 mx-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
                         <div class="flex">
                             <a href="#" class="bg-blue-700 flex items-center p-2 rounded text-white"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.19795 21.5H13.198V13.4901H16.8021L17.198 9.50977H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H17.198V2.5H14.198C11.4365 2.5 9.19795 4.73858 9.19795 7.5V9.50977H7.19795L6.80206 13.4901H9.19795V21.5Z" fill="currentColor" /></svg></a>
                             <a href="#" class="bg-blue-400 flex items-center mx-1 p-2 rounded text-white"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 3C9.10457 3 10 3.89543 10 5V8H16C17.1046 8 18 8.89543 18 10C18 11.1046 17.1046 12 16 12H10V14C10 15.6569 11.3431 17 13 17H16C17.1046 17 18 17.8954 18 19C18 20.1046 17.1046 21 16 21H13C9.13401 21 6 17.866 6 14V5C6 3.89543 6.89543 3 8 3Z" fill="currentColor" /></svg></a>
@@ -127,14 +121,8 @@
                         <span class="absolute block bg-teal-700 h-1 w-24"></span>
                     </h1>
                     <div class="flex">
-                        <a class="" href="#">
-                            <img src="../../images/1223/Groupe 190.png" alt="">
-                        </a>
-                        <a class="mx-3" href="#">
-                            <img src="../../images/1223/Groupe 191.png" alt="">
-                        </a>
-                        <a class="" href="#">
-                            <img src="../../images/1223/Groupe 192.png" alt="">
+                        <a class="" href="#" v-for="latest in latest_category" :key="latest.index">
+                            <img :src="latest.url[0]" alt="">
                         </a>
                     </div>
                 </div>
@@ -159,53 +147,49 @@
         </div>
         <div class="flex items-center justify-center">
             <a class="-mt-10 px-10" href="/details">
-                <img class="h-32 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-32" src="../../images/10102.png" alt="item name">
+                <img class="h-32 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-32" :src="part.url[0]" alt="item name">
             </a>
             <div>
                 <a href="/details">
-                <img class="border border-teal-400 h-16 md:h-24 md:mt-12 md:w-24 mx-auto my-1 object-center object-cover w-16" src="../../images/10102.png" alt="item name">
+                <img class="border border-teal-400 h-16 md:h-24 md:mt-12 md:w-24 mx-auto my-1 object-center object-cover w-16" :src="part.url[1]" alt="item name">
             </a>
             <a href="/details">
-                <img class="border border-teal-400 h-16 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-16" src="../../images/10102.png" alt="item name">
+                <img class="border border-teal-400 h-16 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-16" :src="part.url[2]" alt="item name">
             </a>
             </div>
         </div>
         
 
         <div class="-mt-6 px-4">
-            <a href="/details" class="font-bold text-sm md:text-base text-teal-500 uppercase">Oil Test</a>
-            <p class="break-all font-medium text-gray-600 text-xs">{{__('item number')}}</p>
+            <a href="/details" class="font-bold text-sm md:text-base text-teal-500 uppercase">{{part.name}}</a>
+            <p class="break-all font-medium text-gray-600 text-xs">{{__('item number')}}:{{part.number}}</p>
             <p class="font-semibold md:text-xl text-gray-800 text-sm">
-                3.800<span class="text-gray-500 text-xs">QAR</span>
+                {{part.price}}<span class="text-gray-500 text-xs">QAR</span>
                 <span class="line-through px-2 text-gray-500 text-xs">3.800 QAR</span> </p>
         </div>
 
         <div class="flex items-center px-4">
             <h1 class="text-teal-900 text-sm">{{__('quantity')}}:</h1>
-            <span class="bg-teal-500 text-white">
+            <button type="button" @click="increment(cartItem)" class="bg-teal-500 text-white">
                 <svg class="w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                 </svg>
-            </span>
+            </button>
 
-            <span class="bg-white flex items-center mx-2 py-2">1</span>
+            <span class="bg-white flex items-center mx-2 py-2">{{quantity}}</span>
 
-            <span class="bg-teal-500 my-2 text-white">
+            <button type="button" @click="decrement(cartItem)" class="bg-teal-500 my-2 text-white">
                 <svg class="w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">    
                     <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
                 </svg>
-            </span>
+            </button>
         </div>
         
-        <p class="px-4 py-5 text-gray-600 text-xs">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-             Porro iure ipsum magni, sequi, eveniet dignissimos omnis
-              aperiam vero cum sint natus earum veniam debitis commodi
-        </p>
+        <p class="px-4 py-5 text-gray-600 text-xs">{{part.description}}</p>
     </div>
 
     <div class="bg-teal-500 py-4 md:hidden" >
-        <button class="flex focus:outline-none font-semibold items-center justify-center outline-none px-2 py-1 rounded text-white uppercase w-full">
+        <button  @click="addCart(part)" class="flex focus:outline-none font-semibold items-center justify-center outline-none px-2 py-1 rounded text-white uppercase w-full">
             <svg viewBox="0 0 20 20" fill="currentColor" class="shopping-cart w-6">
                 <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
             </svg>
@@ -240,10 +224,13 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             'cartQuantity', 
             'cartCollection' 
             ,'cartItem',
-            'part_type'],
+            'part_type',
+            'latest_category',
+            'cartTotalPrice'],
         data() {
             return {
                 // fav:false,
+
                 quantity:this.cartItem.quantity,
                 form: {
                     name: '',
@@ -272,8 +259,13 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             const both = Object.assign(form , quantity);
 
             // console.log(both);
-            this.$inertia.put(`/cart/${this.cartItem.id}`, both);
-            // this.$inertia.post('/carts', part);
+            if (this.cartItem) {
+                this.$inertia.put(`/cart/${this.cartItem.id}`, both);
+            } else {
+                this.$inertia.post('/carts', this.form);
+            }
+            
+            
         },
          increment(cartItem){
             cartItem.quantity = this.quantity++ ;            

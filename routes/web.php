@@ -12,6 +12,8 @@ Route::group(['middleware' => ['is_delivery'], 'prefix' => '/dashboard'], functi
     Route::get('/orders', 'OrderController@index')->name('orders.index');
     Route::get('/orders/{order}/edit', 'OrderController@edit')->name('orders.edit');
     Route::put('/orders/{order}', 'OrderController@update')->name('orders.update');
+    Route::get('/orders/{order}', 'OrderController@show')->name('orders.show');
+    Route::get('/order_total_price', 'OrderController@getTotalPrice')->name('orders.total');
 });
 
 Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
@@ -44,6 +46,7 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
 });
 Route::post('/orders', 'OrderController@store')->name('orders.store');
 Route::get('/store', 'StoreController@index')->name('store.index');
+Route::get('/categories', 'StoreController@category')->name('store.category');
 Route::get('/items', 'StoreController@items')->name('store.items');
 Route::get('/details/{part}', 'StoreController@details')->name('store.details');
 

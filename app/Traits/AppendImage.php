@@ -6,6 +6,14 @@ trait AppendImage
 {
     public function getUrlAttribute()
     {
-        return $this->getFirstMediaUrl('images');
+        $urls = [];
+
+        $mediaItem = $this->getMedia('images');
+
+        for ($i = 0; $i < sizeOf($mediaItem); $i++) {
+            $urls[$i] = $mediaItem[$i]->getUrl();
+        }
+        
+        return $urls;
     }
 }

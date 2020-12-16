@@ -14,7 +14,7 @@
                                             Orders
                                         </h5>
                                         <span class="font-semibold text-xl text-gray-800">
-                                        2,356
+                                        {{$page.order.total}}
                                         </span>
                                     </div>
                                     <div class="relative w-auto px-2 flex-initial">
@@ -65,7 +65,7 @@
                                     <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
 
                                         <h5 class="text-gray-500 uppercase font-bold text-xs">Car Brands</h5>
-                                        <span class="font-semibold text-xl text-gray-800">49</span>
+                                        <span class="font-semibold text-xl text-gray-800">{{brands}}</span>
 
                                     </div>
                                     <div class="relative w-auto px-2 flex-initial">
@@ -103,7 +103,7 @@
                 <div class="flex items-center justify-between">
                     <div class="mx-6 text-gray-600">
                         <h1>Total Sales</h1>
-                        <p>4,559</p>
+                        <p>{{total}}</p>
                     </div>
                     <div class="flex items-center mx-6">
                         <i class="-mx-12 absolute bg-teal-300 h-2 rounded-full w-10"></i>
@@ -136,28 +136,28 @@
                                 <i class="absolute bg-gray-400 h-2 mt-6 rounded-full w-12"></i>
                                 <h1>Pendinig</h1>
                             </div>
-                            <span class="font-semibold mx-2 text-2xl text-gray-700">382</span>
+                            <span class="font-semibold mx-2 text-2xl text-gray-700">{{pending_order}}</span>
                         </div>
                         <div class="mx-6 flex">
                             <div class="text-orange-400 text-xs">
                                 <i class="absolute bg-orange-400 h-2 mt-6 rounded-full w-12"></i>
                                 <h1>Awaiting</h1>
                             </div>
-                            <span class="font-semibold mx-2 text-2xl text-gray-700">82</span>
+                            <span class="font-semibold mx-2 text-2xl text-gray-700">{{awaiting_order}}</span>
                         </div>
                         <div class="mx-6 flex">
                             <div class="text-teal-300 text-xs">
                                 <i class="absolute bg-teal-300 h-2 mt-6 rounded-full w-12"></i>
                                 <h1>Delivered</h1>
                             </div>
-                            <span class="font-semibold mx-2 text-2xl text-gray-700">1,382</span>
+                            <span class="font-semibold mx-2 text-2xl text-gray-700">{{delivered_order}}</span>
                         </div>
                         <div class="mx-6 flex">
                             <div class="text-red-400 text-xs">
                                 <i class="absolute bg-red-400 h-2 mt-6 rounded-full w-12"></i>
                                 <h1>Rejected</h1>
                             </div>
-                            <span class="font-semibold mx-2 text-2xl text-gray-700">382</span>
+                            <span class="font-semibold mx-2 text-2xl text-gray-700">{{rejected_order}}</span>
                         </div>
                     </div>
                 <!-- </div> -->
@@ -188,7 +188,7 @@
                                 <i class="absolute bg-red-400 h-2 rounded-full w-2"></i>
                                 <h1 class="mx-3 text-xs">Total Sales</h1>
                             </div>
-                            <span class="font-semibold text-xl text-gray-700">QAR 7,382</span>
+                            <span class="font-semibold text-xl text-gray-700">QAR {{total}}</span>
                             <div class="absolute bg-gray-300 h-2 rounded-full w-64">
                                 <i class="absolute bg-red-400 h-2 rounded-full w-20"></i>
                             </div>
@@ -212,6 +212,10 @@
         components: {
             Layout,
             Chart
-            }
+            },
+        props:[
+        'brands','pending_order', 
+        'delivered_order', 'awaiting_order', 
+        'rejected_order', 'total'],
     }
 </script>

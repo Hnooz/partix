@@ -1,6 +1,6 @@
 <template>
     <div :dir="this.$page.locale == 'ar' ? 'rtl' : 'ltr'">
-        <BaseNav :cartItemQuantity="cartQuantity" :cartItem="cartCollection" />
+        <BaseNav :cartItemQuantity="cartQuantity" :cartItem="cartCollection" :cartTotalPrice="cartTotalPrice" />
         <SelectSection :carItem="cars"/>
 
          <!-- filter search -->
@@ -11,16 +11,17 @@
         </div>
 
         <div class="flex overflow-x-auto">
-            <Multislide class="max-w-5xl mx-auto">
-                <div class="flex justify-center my-6">
+            <Multislide class="max-w-5xl mx-auto" :super_category="super_category" :categories="categories">
+                <!-- <div class="flex justify-center my-6">
                     <Slide class="max-w-sm" :arrows="true" :slidesToShow=3>
-                        <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-1.png" alt=""></div>
+                        <div class="flex justify-center bg-white mx-2" v-for="category in categories" :key="category.index">
+                            <img class="h-12 mx-auto my-2 object-center object-cover w-12" :src="category.url[0]" alt=""></div>
                         <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-2.png" alt=""></div>
                         <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-3.png" alt=""></div>
                         <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-2.png" alt=""></div>
                         <div class="flex justify-center bg-white mx-2"><img class="h-12 mx-auto my-2 object-center object-cover w-12" src="../../images/1223/asset-3.png" alt=""></div>      
                     </Slide> 
-                </div>
+                </div> -->
             </Multislide>
         </div>
             
@@ -52,7 +53,7 @@
                     </div>
                     
                     <a :href="'/details/' + part.id">
-                        <img class="h-24 mt-12 mx-auto object-cover object-center w-24" src="../../images/10102.png" alt="item name">
+                        <img class="h-24 mt-12 mx-auto object-cover object-center w-24" :src="part.url[0]" alt="item name">
                     </a>
 
                     <div class="px-4 py-2">
@@ -99,7 +100,7 @@ export default {
         BaseFooter,
         ToggleMenu
         },
-        props:['parts', 'cars', 'cartQuantity', 'cartCollection', 'categories', 'super_category'],
+        props:['parts', 'cars', 'cartQuantity', 'cartCollection','cartTotalPrice', 'categories', 'super_category'],
     data() {
     return {
         search:'',

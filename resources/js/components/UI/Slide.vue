@@ -24,8 +24,8 @@
           "centerMode": true,
           "infinite": true,
           "speed": 500,
-          "slidesToScroll": 3,
-          "touchThreshold": 5,
+          "slidesToScroll": 2,
+          "touchThreshold": 3,
           "adaptiveHeight": true
         },
       }

@@ -1,20 +1,21 @@
 <template>
 <div>
   <VueSlickCarousel v-bind="settings" class="my-6">
-    <div @click="isOpen = !isOpen">
-        <img class="w-full h-64 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
+    <div @click="(isOpen = !isOpen) && (cat = super_cat)" v-for="super_cat in super_category" :key="super_cat.index">
+        <img class="w-full h-64 object-center object-cover mx-auto" :src="super_cat.url[0]" alt="">
     </div>
-    <div @click="isOpen = !isOpen">
-        <img class="w-full h-64 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
-    </div>
-    <div @click="isOpen = !isOpen">
-        <img class="w-full h-64 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
-    </div>
-    <div @click="isOpen = !isOpen">
-        <img class="w-full h-64 object-center object-cover mx-auto" src="../../images/1223/Groupe 192.png" alt="">
-    </div>
+
   </VueSlickCarousel>
-  <slot class="mt-5 block" v-if="isOpen"></slot>
+
+  <div v-if="isOpen" class="flex justify-center">
+    <div  v-for="category in categories" :key="category.index">
+      <inertia-link href="/items" class="flex justify-center mx-2">
+        <img v-if="category.super_category_id == cat.id" class="h-12 mx-auto my-2 object-center object-cover w-12" :src="category.url[0]" alt="">
+      </inertia-link>
+    </div>
+  </div>
+  
+  <!-- <slot class="mt-5 block" v-if="isOpen"></slot> -->
 </div>
   
 </template>
@@ -27,9 +28,14 @@
   export default {
     name: 'Mutlislide',
     components: { VueSlickCarousel },
+    props:{
+      super_category:Array,
+      categories:Array,
+    },
     data() {
       return {
         isOpen:false,
+        cat:[],
         settings: {
           "centerMode": true,
           "infinite": true,

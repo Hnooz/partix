@@ -44,11 +44,7 @@ class CartController extends Controller
 
     public function update(Request $request)
     {
-        
-    //    $test =  array_merge($request);
-        
         $data = $request->validate(['part_type_id' => 'max:10']);
-        // dd($request);
         $part = Part::find($request->id);
 
         $part->update($data);
