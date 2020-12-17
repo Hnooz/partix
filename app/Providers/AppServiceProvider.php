@@ -56,7 +56,7 @@ class AppServiceProvider extends ServiceProvider
 
         Inertia::share('order', function () {
             return[
-                'total' => Order::all()->count(),
+                'total' => Order::where('order_status_id', 1)->count(),
             ];
         });
     }

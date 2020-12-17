@@ -143,31 +143,38 @@
     <div class="bg-white md:hidden md:rounded-tr-lg mx-6 mt-8 overflow-hidden rounded-t-lg shadow-lg">
         <div class="flex justify-between">
 
-            <p class="bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-bl-lg shadow-lg text-sm text-white w-12">-26%</p>
+            <p class="flex bg-teal-400 font-semibold h-10 w-10 md:h-12 md:px-1 md:rounded-none px-1 py-3 rounded-br-lg shadow-lg text-sm text-white md:w-12">{{part.sale}}%</p>
         </div>
         <div class="flex items-center justify-center">
             <a class="-mt-10 px-10" href="/details">
-                <img class="h-32 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-32" :src="part.url[0]" alt="item name">
+                <img class="h-24 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-24" :src="part.url[0]" alt="item name">
             </a>
             <div>
                 <a href="/details">
-                <img class="border border-teal-400 h-16 md:h-24 md:mt-12 md:w-24 mx-auto my-1 object-center object-cover w-16" :src="part.url[1]" alt="item name">
+                <img class="border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto my-1 object-center object-cover w-12" :src="part.url[1]" alt="item name">
             </a>
             <a href="/details">
-                <img class="border border-teal-400 h-16 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-16" :src="part.url[2]" alt="item name">
+                <img class="border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-12" :src="part.url[2]" alt="item name">
             </a>
             </div>
         </div>
         
-
+        <form @submit.prevent="submit">
         <div class="-mt-6 px-4">
-            <a href="/details" class="font-bold text-sm md:text-base text-teal-500 uppercase">{{part.name}}</a>
+            <a href="/details" class="font-bold  text-xs md:text-base text-teal-500 capitalize">{{part.name}}</a>
             <p class="break-all font-medium text-gray-600 text-xs">{{__('item number')}}:{{part.number}}</p>
-            <p class="font-semibold md:text-xl text-gray-800 text-sm">
+            <p class="font-semibold md:text-xl text-gray-800 text-xs">
                 {{part.price}}<span class="text-gray-500 text-xs">QAR</span>
                 <span class="line-through px-2 text-gray-500 text-xs">3.800 QAR</span> </p>
         </div>
 
+        <div class=" px-4">
+            <label class="text-gray-700 text-xs">Part Type</label>
+            <select  name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
+                <option value="0">Select Type</option>
+                <option v-for="type in part_type" :key="type.index" :value="type.id">{{type.name}}</option>
+            </select>
+        </div>
         <div class="flex items-center px-4">
             <h1 class="text-teal-900 text-sm">{{__('quantity')}}:</h1>
             <button type="button" @click="increment(cartItem)" class="bg-teal-500 text-white">
@@ -186,9 +193,8 @@
         </div>
         
         <p class="px-4 py-5 text-gray-600 text-xs">{{part.description}}</p>
-    </div>
 
-    <div class="bg-teal-500 py-4 md:hidden" >
+         <div class="bg-teal-500 py-4 md:hidden" >
         <button  @click="addCart(part)" class="flex focus:outline-none font-semibold items-center justify-center outline-none px-2 py-1 rounded text-white uppercase w-full">
             <svg viewBox="0 0 20 20" fill="currentColor" class="shopping-cart w-6">
                 <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
@@ -196,6 +202,10 @@
             {{__('add to cart')}}
         </button>
     </div>
+    </form>
+    </div>
+
+   
     <BaseFooter/>
     </store-layout>
 </template>

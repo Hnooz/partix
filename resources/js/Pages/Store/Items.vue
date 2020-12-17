@@ -48,7 +48,7 @@
         <div class="bg-white mb-10 mx-3 overflow-hidden md:rounded-tr-lg shadow-lg rounded-lg" v-for="(part, index) in filteredList" :key="index">
             <div class="flex justify-between">
 
-                <p v-if="part.sale" class="bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-bl-full shadow-lg text-sm text-white w-12">{{part.sale}}%</p>
+                <p v-if="part.sale" class="bg-teal-400 font-semibold md:h-12 md:px-1 md:rounded-none px-2 md:py-3 rounded-br-lg shadow-lg md:text-base text-xs text-white md:w-12">{{part.sale}}%</p>
             </div>
             
             <a :href="`/details/${part.id}`">
@@ -56,13 +56,13 @@
             </a>
 
             <div class="px-4 py-2">
-                <a :href="`/details/${part.id}`" class="font-bold text-sm md:text-base text-teal-500 uppercase">{{part.name}}</a>
+                <a :href="`/details/${part.id}`" class="font-bold text-xs md:text-base text-teal-500 capitalize">{{part.name}}</a>
                 <p class="break-all font-medium text-gray-600 text-xs">{{__('item number')}}:{{part.number}}</p>
-                <p class="text-gray-800 md:text-xl font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">QAR</span></p>
+                <p class="text-gray-800 md:text-xl text-xs font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">QAR</span></p>
             </div>
 
             <div class="bg-teal-700 py-2">
-                <button type="button" @click="addCart(part)" class="flex md:hidden focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white md:text-xs uppercase w-full">
+                <button type="button" @click="addCart(part)" class="flex md:hidden focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white text-xs capitalize w-full">
                     {{__('Buy')}}
                 </button>
 

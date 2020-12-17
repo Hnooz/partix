@@ -12,7 +12,11 @@
 
         <div class="flex overflow-x-auto">
             <Multislide class="max-w-6xl mx-auto" :super_category="super_category" :categories="categories">
-            
+                <template v-slot="slotProps" class="my-10">
+                    <div class="max-w-3xl mx-auto">
+                        <Slide :slidesToShow=3 :arrows=true :categories="categories" :super_category="slotProps.super_id" />
+                    </div>
+                </template>
             </Multislide>
         </div>
             
@@ -40,7 +44,7 @@
                 <form @submit.prevent="submit" enctype="multipart/form-data">
                      <div class="flex justify-between">
 
-                    <p v-if="part.sale > 0" class="bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-bl-full shadow-lg text-sm text-white w-12">-{{part.sale}}%</p>
+                    <p v-if="part.sale > 0" class="bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-br-lg shadow-lg text-sm text-white w-12">-{{part.sale}}%</p>
                     </div>
                     
                     <a :href="'/details/' + part.id">

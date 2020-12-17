@@ -5,7 +5,7 @@
             <ul class="flex font-semibold py-3 text-white uppercase">
 
                 <li class="text-teal-500">
-                    <a href="#">{{__('home')}}</a>
+                    <a href="/store">{{__('home')}}</a>
                     <span class="absolute bg-teal-600 block h-1 w-5"></span>
                 </li>
 

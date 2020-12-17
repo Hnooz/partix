@@ -104,24 +104,19 @@ class StoreController extends Controller
     {
         $part = Part::where('name', $request->name)->orWhere('number', $request->name)->get();
 
-        $cars = Car::all();
+        return response()->json(['data' => $part, 'redirect' => 'details/']);
+    }
+
+    public function notfound()
+    {
         $cartQuantity = Cart::getTotalQuantity();
         $cartTotalPrice = Cart::getTotal();
         $cartCollection = Cart::getContent();
-        $cartItem = Cart::get($part[0]->id);
-        $part_type = PartType::all();
-        $latest_category = Category::latest()->limit(3)->get();
-        // dd($cat);
-        return inertia()->render('Store/ItemDetails', ['part' => $part,
-            'cars' => $cars,
+
+        return inertia()->render('Store/404', [
             'cartQuantity' => $cartQuantity,
             'cartCollection' => $cartCollection,
             'cartTotalPrice' => $cartTotalPrice,
-            'cartItem' => $cartItem,
-            'part_type' => $part_type,
-            'latest_category' => $latest_category,
         ]);
-        // return redirect()->url("/details/{$part[0]->id}");
-        // dd($part);
     }
 }

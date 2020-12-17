@@ -1,14 +1,14 @@
 <template>
     <layout>
-        <h1 class="md:text-base my-2 text-gray-500 text-sm">Dashboard/Parts</h1>
+        <h1 class="md:text-base my-2 text-gray-500 text-sm capitalize">{{__('dashboard')}}/{{__('parts')}}</h1>
         <div class="mx-5">
             <div class="justify-between md:flex">
                 <div class="items-center md:flex">
-                    <h2 class="font-bold md:text-3xl text-xl text-teal-600">Parts</h2>
+                    <h2 class="font-bold md:text-3xl text-xl text-teal-600 capitalize">{{__('parts')}}</h2>
                     <div class="capitalize flex items-center md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap">
-                         <h1>123 total</h1>
+                         <h1>123 {{__('part')}}</h1>
                          <div class="flex items-center mx-8">
-                             <h1>sort by :</h1>
+                             <h1>{{__('sort by')}} :</h1>
                              <label for="">
                                  <select class="bg-transparent border-0 capitalize font-medium form-select text-gray-600 text-xs md:text-base">
                                      <option>date created</option>
@@ -19,18 +19,25 @@
                 </div>
                 
 
-                <div class="flex items-center">
+                <div class="flex items-center capitalize">
                     <inertia-link href="/dashboard/parts/create"
                                   class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                        Add Part
+                        {{__('add part')}}
                     </inertia-link>
                     <!-- <form @submit.prevent="submit"> -->
-                        <button class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white" type="submit">
+                        <button class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white" type="submit">
                             <a href="/dashboard/parts/export">
                                 <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg> 
                             </a>
                         </button>
+
+                         <button class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white" type="submit">
+                            <a href="#">
+                                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </a>
+                        </button>
+                        
                     <!-- </form> -->
                     
                     
@@ -52,21 +59,21 @@
                                         style="text-align: start">
                                         #ID
                                     </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                    <th class="px-6  py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Name
+                                        {{__('name')}}
                                     </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                    <th class="px-6  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Part Number
+                                     {{__('part number')}}
                                     </th>
-                                      <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                      <th class="px-6  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Price
+                                        {{__('price')}}
                                     </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                    <th class="px-6  py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Action
+                                        {{__('action')}}
                                     </th>
                                     <!-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th> -->
                                 </tr>

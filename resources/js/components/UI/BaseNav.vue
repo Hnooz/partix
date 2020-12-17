@@ -64,7 +64,7 @@
                             <div class="flex md:flex-col lg:flex-row">
                                 <input v-model="form.name" type="search" class="bg-teal-900 border-0 focus:outline-none form-input outline-none p-2 py-3 rounded sm:ml-0 text-sm text-white w-70" :placeholder="__('Enter the part number or name')" >
                                 
-                                <button  class="block bg-teal-500 cursor-pointer capitalize focus:outline-none font-medium md:px-10 outline-none p-2 px-2 text-white" >{{__('search')}}</button>
+                                <button @click="submit()"  class="block bg-teal-500 cursor-pointer capitalize focus:outline-none font-medium md:px-10 outline-none p-2 px-2 text-white" >{{__('search')}}</button>
 
                             </div>
                         </form>
@@ -233,15 +233,6 @@
             </div>
         </form>
         
-    
-        <div class="mt-8">
-            <form class="flex items-center justify-center">
-                <input class="form-input w-48" type="text" placeholder="Add promocode">
-                <button class="ml-3 flex items-center px-3 py-2 bg-teal-800 text-white text-sm uppercase font-medium rounded hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
-                    <span>{{__('Apply')}}</span>
-                </button>
-            </form>
-        </div>
         <a href="/carts" class="flex items-center justify-center mt-4 px-3 py-2 bg-teal-800 text-white text-sm uppercase font-medium rounded hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
             <span>{{__('Chechout')}}</span>
             <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
@@ -280,7 +271,22 @@ export default {
     },
         methods: {
             submit(){
-                this.$inertia.post(`/search`, this.form);
+                let self = this;
+
+                axios({
+                    method: 'post',
+                    url: '/search',
+                    data: {
+                        name: this.form.name,
+                    }
+                }).then((response) => {
+                     const status = JSON.parse(response.status);
+                        if (status == '200') {
+                        window.location.pathname = response.data.redirect + response.data.data[0].id;
+                    }
+                }).catch(function() {
+                     window.location.pathname = '/404';
+                });
             },
             increment(item){
                 item.quantity++;
