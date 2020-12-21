@@ -7285,10 +7285,9 @@ __webpack_require__.r(__webpack_exports__);
       settings: {
         arrows: this.arrows,
         slidesToShow: this.slidesToShow,
-        "centerMode": false,
+        // "centerMode": false,
         "speed": 500,
-        "slidesToScroll": 2,
-        "touchThreshold": 3 // "adaptiveHeight": true
+        "slidesToScroll": 1 // "adaptiveHeight": true
 
       }
     };
@@ -56343,7 +56342,7 @@ var render = function() {
                       [
                         _c("Slide", {
                           attrs: {
-                            slidesToShow: 3,
+                            slidesToShow: 1,
                             arrows: true,
                             categories: _vm.categories,
                             super_category: slotProps.super_id

@@ -14,7 +14,7 @@
             <Multislide class="max-w-6xl mx-auto" :super_category="super_category" :categories="categories">
                 <template v-slot="slotProps" class="my-10">
                     <div class="max-w-3xl mx-auto">
-                        <Slide :slidesToShow=3 :arrows=true :categories="categories" :super_category="slotProps.super_id" />
+                        <Slide :slidesToShow="1" :arrows="true" :categories="categories" :super_category="slotProps.super_id" />
                     </div>
                 </template>
             </Multislide>
