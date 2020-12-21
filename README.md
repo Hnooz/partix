@@ -1,1 +1,1 @@
-# Laravel Inertia dashboard starter
+# store for ordring car parts
