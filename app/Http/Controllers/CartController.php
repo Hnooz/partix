@@ -31,11 +31,21 @@ class CartController extends Controller
         $supplier = Supplier::find($request->supplier_id);
         
         $category = Category::find($request->category_id);
-
-        if ($category->sale > 0) {
-            $price = $request->price - (($category->sale / 100) * $request->price);
+        $part = Part::where('id', $request->id)->get();
+        if ($part[0]->type->name == 'oem') {
+            if ($category->sale > 0) {
+                $price = $request->price - (($category->sale / 100) * $request->price);
+            } else {
+                $price = $request->price - (($request->sale / 100) * $request->price);
+            }
+        } elseif ($part[0]->type->name == 'aftermarket') {
+            if ($category->sale > 0) {
+                $price = $request->second_price - (($category->sale / 100) * $request->second_price);
+            } else {
+                $price = $request->second_price - (($request->sale / 100) * $request->second_price);
+            }
         } else {
-            $price = $request->price - (($request->sale / 100) * $request->price);
+            $price = 0;
         }
         
         Cart::add([
@@ -56,11 +66,31 @@ class CartController extends Controller
     {
         $data = $request->validate(['part_type_id' => 'max:10']);
         $part = Part::find($request->id);
-
+    
         $part->update($data);
+
+        $category = Category::find($part->category_id);
+        // dd($category);
+        if ($part->type->name == 'oem') {
+            if ($category->sale > 0) {
+                $price = $part->price - (($category->sale / 100) * $part->price);
+            } else {
+                $price = $part->price - (($part->sale / 100) * $part->price);
+            }
+        } elseif ($part->type->name == 'aftermarket') {
+            if ($category->sale > 0) {
+                $price = $part->second_price - (($category->sale / 100) * $part->second_price);
+            } else {
+                $price = $part->second_price - (($part->sale / 100) * $part->second_price);
+            }
+        } else {
+            $price = 0;
+        }
+
         \Cart::update(
             $request->id,
             [
+                'price' => $price,
                 'quantity' => [
                     'relative' => false,
                     'value' => $request->quantity,

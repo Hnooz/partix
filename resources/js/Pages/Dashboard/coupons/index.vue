@@ -111,8 +111,8 @@
                                     <td class="px-6 py-4 whitespace-no-wrap uppercase">
                                         {{ coupon.value }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap"> 
-                                        {{ coupon.created_at }}
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        {{ ago(coupon) }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap">
                                         {{ coupon.expiration_at }}
@@ -139,6 +139,7 @@
 
 <script>
     import Layout from "../../../Shared/Layout";
+    import moment from 'moment';
 
     export default {
         props:[
@@ -163,6 +164,10 @@
             Delete(coupon) {
                 this.$inertia.delete(`/dashboard/coupons/${coupon.id}`);
             },
+             ago(order) {
+            
+            return moment(order.created_at).format('lll');
+        }
         }
     }
 </script>

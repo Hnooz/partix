@@ -14,8 +14,6 @@
                     <svg class="w-5 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
                     {{__('log in')}}
                 </a>
-                <span class="mx-2">|</span>
-                <a href="/register">{{__('register')}}</a>
             </div>
             <div v-else>
                 <button class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white hover:bg-teal-500 focus:outline-none focus:text-white focus:bg-gray-700"
@@ -86,7 +84,7 @@
                             <span class="-mt-12 mx-10 absolute bg-red-400 flex font-bold h-5 justify-center rounded-full text-sm w-5">{{cartItemQuantity}}</span>
                             
 
-                            <span class="font-bold text-sm">{{cartTotalPrice}} QAR</span>
+                            <span class="font-bold text-sm">{{cartTotalPrice.toFixed()}} QAR</span>
 
                         </div>
                     </div>
@@ -164,7 +162,7 @@
                         </div>
                     </div>
                 </div>
-                <span class="text-gray-600">{{item.price}}$</span>
+                <span class="text-gray-600">{{item.price.toFixed()}}$</span>
             </div>
         </form>
         

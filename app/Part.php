@@ -12,6 +12,7 @@ class Part extends Model implements HasMedia
 {
     use Notifiable,AppendImage, InteractsWithMedia;
 
+    protected $table = 'parts';
     protected $guarded = [];
     protected $appends = ['url'];
     protected $with = ['category','type'];
@@ -28,7 +29,7 @@ class Part extends Model implements HasMedia
 
     public function supplier()
     {
-        return $this->belongsToMany(Supplier::class, 'supplier_id');
+        return $this->belongsToMany(Supplier::class);
     }
 
     public function type()

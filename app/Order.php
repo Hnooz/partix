@@ -20,12 +20,16 @@ class Order extends Model
         }
         if (sizeof($coupon) >= 1) {
             if ($coupon[0]->descountType->name == 'fixied') {
-                return $totalPrice - $coupon[0]->value;
+                if (round($totalPrice - $coupon[0]->value, 2) < 0) {
+                    return round($totalPrice - $coupon[0]->value, 2) + $coupon[0]->value;
+                }
+
+                return round($totalPrice - $coupon[0]->value, 2);
             } else {
-                return $totalPrice - (($coupon[0]->value / 100) * $totalPrice);
+                return round($totalPrice - (($coupon[0]->value / 100) * $totalPrice), 2);
             }
         } else {
-            return $totalPrice;
+            return round($totalPrice, 2);
         }
     }
     public function orderDetails()

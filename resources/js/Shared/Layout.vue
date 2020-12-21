@@ -14,13 +14,14 @@
 
                 
                 <div class="flex items-center mx-6 text-teal-700">
-                    <!-- for test only -->
+                    <a href="/store">store</a>
                     <LanguageSelector />
 
                     <button class="focus:outline-none mx-2">
                         <i class="absolute bg-red-700 flex h-4 items-center justify-center mx-4 rounded-full text-white text-xs w-4">{{$page.order.total}}</i>
                         <svg class="w-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path></svg>
                     </button>
+                    
                     <!-- <a href="#" class="mx-1"><img class="h-12 object-center object-cover rounded-full w-12" src="../images/panda.jpg" alt=""></a> -->
                     <!-- <svg class="w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.34317 7.75732L4.92896 9.17154L12 16.2426L19.0711 9.17157L17.6569 7.75735L12 13.4142L6.34317 7.75732Z" fill="currentColor" /></svg> -->
                 </div>

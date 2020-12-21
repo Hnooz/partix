@@ -8,7 +8,7 @@ Auth::routes(['register' => true, 'confirm' => false, 'reset' => false]);
 
 Route::redirect('/', '/dashboard');
 
-Route::group(['middleware' => ['is_delivery'], 'prefix' => '/dashboard'], function () {
+Route::group(['middleware' => 'is_delivery', 'prefix' => '/dashboard'], function () {
     Route::get('/orders', 'OrderController@index')->name('orders.index');
     Route::get('/orders/{order}/edit', 'OrderController@edit')->name('orders.edit');
     Route::put('/orders/{order}', 'OrderController@update')->name('orders.update');
@@ -39,12 +39,14 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     Route::resource('categories', 'CategoryController');
 
     // part route
-    Route::get('parts/export', 'ExportController@parts');
+    Route::post('parts/import', 'ImportController@parts')->name('parts.import');
+    Route::get('parts/export', 'ExportController@parts')->name('parts.export');
     Route::resource('parts', 'PartController');
-    
+    Route::get('parts/sort_by_name_desc', 'SortController@sortByNameDesc')->name('parts.desc');
     Route::resource('cars', 'CarController');
 });
 Route::post('/orders', 'OrderController@store')->name('orders.store');
+
 Route::get('/store', 'StoreController@index')->name('store.index');
 Route::get('/categories', 'StoreController@category')->name('store.category');
 Route::get('/items', 'StoreController@items')->name('store.items');

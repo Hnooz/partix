@@ -2,7 +2,7 @@ require('./bootstrap');
 
 import {InertiaApp} from '@inertiajs/inertia-vue'
 import Vue from 'vue'
-
+Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('base-nav', require('./components/UI/BaseNav').default);
 Vue.component('base-sidebar', require('./components/UI/BaseSidebar').default);
 Vue.component('base-panel', require('./components/UI/BasePanel').default);

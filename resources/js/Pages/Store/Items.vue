@@ -46,13 +46,15 @@
         <!-- main section -->
     <div class="container grid grid-cols-2 md:grid-cols-4 md:px-16 mx-auto py-10">            
         <div class="bg-white mb-10 mx-3 overflow-hidden md:rounded-tr-lg shadow-lg rounded-lg" v-for="(part, index) in filteredList" :key="index">
-            <div class="flex justify-between">
+            <div class="flex justify-between" :class="part.sale > 0 ? '':'pt-12'">
 
-                <p v-if="part.sale" class="bg-teal-400 font-semibold md:h-12 md:px-1 md:rounded-none px-2 md:py-3 rounded-br-lg shadow-lg md:text-base text-xs text-white md:w-12">{{part.sale}}%</p>
+                <p v-if="part.sale > 0" class="bg-teal-400 font-semibold md:h-12 md:px-1 md:rounded-none px-2 md:py-3 rounded-br-lg shadow-lg md:text-base text-xs text-white md:w-12">{{part.sale}}%</p>
             </div>
             
             <a :href="`/details/${part.id}`">
-                <img class="h-20 md:h-24 md:mt-12 mx-auto object-center object-cover w-20 md:w-24" :src="part.url[0]" alt="item name">
+                <img v-if="!part.url[0]" class="h-20 md:h-24 md:mt-12 mx-auto object-center object-cover w-20 md:w-24" src="../../images/oops-404-error-with-a-broken-robot-animate.svg" alt="noo">
+                <img v-else class="h-20 md:h-24 md:mt-12 mx-auto object-center object-cover w-20 md:w-24" :src="part.url[0]">
+                <!-- <img class="h-20 md:h-24 md:mt-12 mx-auto object-center object-cover w-20 md:w-24" :src="part.url[0]" alt="item name"> -->
             </a>
 
             <div class="px-4 py-2">

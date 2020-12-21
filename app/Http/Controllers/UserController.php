@@ -28,12 +28,16 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
+            'is_admin' => 'required|integer',
+            'is_delivery' => 'required|integer',
         ]);
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_admin' => $request->is_admin,
+            'is_delivery' => $request->is_delivery,
         ]);
 
         session()->flash('toast', [
@@ -55,6 +59,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'sometimes|min:8|confirmed',
+            'is_admin' => 'required|integer',
+            'is_delivery' => 'required|integer',
         ]);
 
         if ($request->filled('password')) {

@@ -1,4 +1,5 @@
 <template>
+<store-layout>
 <div x-data="{ cartOpen: false , isOpen: false }">
     <main class="mb-10 min-h-full">
         <div class="bg-white container mt-16 mx-auto px-6 py-8 shadow-lg">
@@ -10,7 +11,7 @@
                             <h4 class="text-sm text-teal-700 font-medium">{{__('Delivery address')}}</h4>
                             <div class="mt-6 flex">
                                 <label class="block flex-1">
-                                    <input type="text" name="address" v-model="form.address" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('Address')">
+                                    <input type="text" name="address" v-model="form.address" :error="$page.errors.address" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('Address')" required>
                                 </label>
                             </div>
                         </div>
@@ -23,7 +24,7 @@
                                     </select>
                                 </label>
                                 <label class="block flex-1 ml-3">
-                                    <input type="text" name="customer_phone" v-model="form.customer_phone" class="form-input mt-1 block w-full text-gray-700" placeholder="your number">
+                                    <input type="text" name="customer_phone" v-model="form.customer_phone" :error="$page.errors.customer_phone" class="form-input mt-1 block w-full text-gray-700" placeholder="your number" required>
                                 </label>
                             </div>
                         </div>
@@ -31,7 +32,7 @@
                             <h4 class="text-sm text-teal-700 font-medium capitalize">{{__('coupon code')}}</h4>
                             <div class="mt-6 flex">
                                 <label class="block flex-1">
-                                    <input type="text" name="coupon" v-model="form.coupon" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('add promocode')">
+                                    <input type="text" name="coupon" v-model="form.coupon" :error="$page.errors.coupon" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('add promocode')">
                                 </label>
                             </div>
                         </div>
@@ -41,7 +42,7 @@
                                 <span class="mx-2">{{__('Back To Shop')}}</span>
                             </a>
                             <button class="flex items-center px-3 py-2 bg-teal-800 text-white text-sm font-medium rounded-md hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
-                                <span>{{__('Payment')}} {{cartTotalPrice}}$</span>
+                                <span>{{__('Payment')}} {{cartTotalPrice.toFixed()}}$</span>
                                 <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </button>
                         </div>
@@ -52,7 +53,7 @@
                         <div class="border rounded-md max-w-md w-full px-4 py-3" >
                             <div class="flex items-center justify-between">
                                 <h3 class="text-teal-700 font-medium">{{__('Order total')}}({{cartQuantity}})</h3>
-                                <span class="text-gray-600">{{cartTotalPrice}}$</span>
+                                <span class="text-gray-600">{{cartTotalPrice.toFixed()}}$</span>
                                 <button @click="clearCart" type="submit" class="text-teal-600 text-sm">{{__('clear')}}</button>
                             </div>
                             <div class="overflow-y-auto" style="height:300px;">
@@ -72,7 +73,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="text-gray-600">{{item.price}}$</span>
+                                    <span class="text-gray-600">{{item.price.toFixed()}}$</span>
                                 </div>
                             </div>
                         </div>
@@ -84,15 +85,18 @@
 
     <BaseFooter class="mt-32"/>
 </div>
+</store-layout>
 </template>
 
 <script>
 import BaseNav from '../../../components/UI/BaseNav'
 import BaseFooter from '../../../components/UI/BaseFooter'
+import StoreLayout from '../../../Shared/StoreLayout'
     export default {
         components:{
             BaseNav,
-            BaseFooter
+            BaseFooter,
+            StoreLayout
         },
         props:['cartCollection','cartQuantity', 'cartTotalPrice'],
         data() {
@@ -100,6 +104,7 @@ import BaseFooter from '../../../components/UI/BaseFooter'
                 form:{
                     customer_phone:'',
                     address:'',
+                    coupon:''
                 }
             }
         },
@@ -107,6 +112,10 @@ import BaseFooter from '../../../components/UI/BaseFooter'
             submit()
             {
                 this.$inertia.post('/orders', this.form);
+            },
+            Apply(coupon)
+            {
+                this.$inertia.post('/orders/checkCoupons', coupon);
             },
             increment(item){
                 item.quantity++;

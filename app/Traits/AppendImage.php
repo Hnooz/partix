@@ -13,7 +13,7 @@ trait AppendImage
         for ($i = 0; $i < sizeOf($mediaItem); $i++) {
             $urls[$i] = $mediaItem[$i]->getUrl();
         }
-        
+        // dd($urls);
         return $urls;
     }
 }

@@ -62,7 +62,7 @@
                         </div>
                         
                         <label class="mx-4 mt-4 lg:mt-0 block" for="">
-                            <base-button class="bg-teal-500 focus:outline-none  capitalize px-8 py-1 rounded text-white">Go</base-button>
+                            <base-button class="bg-teal-600 hover:bg-teal-500 focus:outline-none capitalize px-8 py-1 rounded text-white">{{__('search')}}</base-button>
                             <!-- <button class="bg-teal-500 focus:outline-none  capitalize px-8 py-1 rounded text-white">Go</button> -->
                         </label>
                     </form>

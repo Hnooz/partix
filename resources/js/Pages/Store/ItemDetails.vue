@@ -128,9 +128,13 @@
                 </div>
             </div>
             <div class="flex">
-                <div class="mx-2">
-                    <p class="font-semibold text-3xl text-gray-900">{{part.price}} <span class="font-hairline text-gray-700 text-xl">QAR</span> </p>
-                    <p class="line-through text-center text-gray-600">3.000 <span>QAR</span> </p>
+                <div class="mx-2" v-if="part.type.name == 'oem'">
+                    <p class="font-semibold text-3xl text-gray-900">{{calcOemPrice}} <span class="font-hairline text-gray-700 text-xl">QAR</span> </p>
+                    <p v-if="part.sale > 0" class="line-through text-center text-gray-600">{{part.price}} <span>QAR</span> </p>
+                </div>
+                <div class="mx-2" v-if="part.type.name == 'aftermarket'">
+                    <p class="font-semibold text-3xl text-gray-900">{{calcAftermarketPrice}} <span class="font-hairline text-gray-700 text-xl">QAR</span> </p>
+                    <p v-if="part.sale > 0" class="line-through text-center text-gray-600">{{part.second_price}} <span>QAR</span> </p>
                 </div>
                 <img src="../../images/1223/rightimage.png" class="h-72 object-center object-cover w-5/12">
             </div>
@@ -259,6 +263,16 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
         },
         created() {
             this.form = this.part
+        },
+        computed: {
+            calcOemPrice()
+            {
+              return  this.part.price - (this.part.sale / 100) * this.part.price;
+            },
+            calcAftermarketPrice()
+            {
+              return  this.part.second_price - (this.part.sale / 100) * this.part.second_price;
+            }
         },
         methods: {
             
