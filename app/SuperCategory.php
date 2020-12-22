@@ -14,6 +14,7 @@ class SuperCategory extends Model implements HasMedia
 
     protected $guarded = [];
     protected $appends = ['url'];
+    protected $with = ['categories'];
 
     public function categories()
     {

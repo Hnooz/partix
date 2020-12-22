@@ -16,7 +16,7 @@ class AddTypeIdAndChangePriceToNullOnPartsTable extends Migration
         Schema::table('parts', function (Blueprint $table) {
             $table->decimal('price')->nullable()->change();
             $table->decimal('second_price')->nullable()->change();
-            $table->foreignId('part_type_id');
+            $table->foreignId('part_type_id')->nullable();
         });
     }
 

@@ -1,6 +1,6 @@
 <template>
   <VueSlickCarousel v-bind="settings">
-    <div v-for="category in categories" :key="category.index"   class="bg-teal-900" v-show="category.super_category_id == super_category.id">
+    <div v-for="category in categories" :key="category.index" class="bg-teal-900" v-show="category.super_category_id == super_category.id">
       
       <inertia-link :href="'/items/'+category.id" class="">
         <h1> {{category.name}}</h1>
@@ -29,11 +29,10 @@
         settings: {
           arrows: this.arrows,
           slidesToShow:this.slidesToShow,
-          "centerMode": false,
+          // "centerMode": false,
           
           "speed": 500,
-          "slidesToScroll": 2,
-          "touchThreshold": 3,
+          "slidesToScroll": 1,
           // "adaptiveHeight": true
         },
       }

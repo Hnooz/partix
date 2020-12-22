@@ -14,7 +14,7 @@ class AddNameToCouponOnCouponTable extends Migration
     public function up()
     {
         Schema::table('coupon_codes', function (Blueprint $table) {
-            $table->string('name');
+            $table->string('name')->nullable();
         });
     }
 
