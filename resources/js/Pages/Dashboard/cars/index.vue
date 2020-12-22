@@ -1,11 +1,11 @@
 <template>
     <layout>
-        <h1 class="md:text-base my-2 text-gray-500 text-sm">Dashboard/Cars</h1>
+        <h1 class="md:text-base my-2 text-gray-500 text-sm capitalize">{{__('dashboard')}}/{{__('cars')}}</h1>
         <div class="mx-5">
             <div class="justify-between md:flex">
                 <div class="items-center md:flex">
-                    <h2 class="font-bold md:text-3xl text-xl text-teal-600">Cars</h2>
-                    <div class="capitalize flex items-center md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap">
+                    <h2 class="font-bold md:text-3xl text-xl text-teal-600 capitalize">{{__('cars')}}</h2>
+                    <!-- <div class="capitalize flex items-center md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap">
                          <h1>123 total</h1>
                          <div class="flex items-center mx-8">
                              <h1>sort by :</h1>
@@ -15,15 +15,15 @@
                                  </select>
                              </label>
                          </div>
-                    </div>
+                    </div> -->
                 </div>
                 
 
                 <div class="flex items-center">
                     <inertia-link href="/dashboard/cars/create"
-                                  class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap">
+                                  class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap capitalize">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                        Add Car
+                        {{__('add')}} {{__('car')}}
                     </inertia-link>
                     <!-- <form @submit.prevent="submit"> -->
                         <button class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white" type="submit">
@@ -54,24 +54,24 @@
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Brand
+                                        {{__('brand')}}
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Model
+                                        {{__('model')}}
                                     </th>
                                       <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Engine
+                                        {{__('engine')}}
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Year
+                                        {{__('year')}}
                                     </th>
 
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                         Action
+                                         {{__('action')}}
                                     </th>
                                     <!-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th> -->
                                 </tr>

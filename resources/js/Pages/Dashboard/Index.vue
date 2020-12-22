@@ -1,8 +1,8 @@
 <template>
     <layout>
-        <div class="mx-auto w-full">
+        <div class="mx-auto w-full capitalize">
             <div>
-                <h1 class="my-2 text-gray-500">Dashboard</h1>
+                <h1 class="my-2 text-gray-500">{{__('dashboard')}}</h1>
                 <!-- Card stats -->
                 <div class="flex flex-wrap -mx-4">
                     <div class="w-full md:w-1/3 px-4">
@@ -11,7 +11,7 @@
                                 <div class="flex flex-wrap">
                                     <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
                                         <h5 class="text-gray-500 uppercase font-bold text-xs">
-                                            Orders
+                                            {{__('orders')}}
                                         </h5>
                                         <span class="font-semibold text-xl text-gray-800">
                                         {{$page.order.total}}
@@ -29,7 +29,7 @@
                                 </div>
                                 <p class="text-sm text-green-600 mt-4">
                                     <span class="text-green-600">+3.48%</span>
-                                    <span class="whitespace-no-wrap">this week</span>
+                                    <span class="whitespace-no-wrap">{{__('this week')}}</span>
                                 </p>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                             <div class="flex-auto p-4">
                                 <div class="flex flex-wrap">
                                     <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                        <h5 class="text-gray-500 uppercase font-bold text-xs">Customers</h5>
+                                        <h5 class="text-gray-500 uppercase font-bold text-xs">{{__('customers')}}</h5>
 
                                         <span class="font-semibold text-xl text-gray-800">924</span>
 
@@ -53,7 +53,7 @@
                                 </div>
                                 <p class="text-sm text-green-600 mt-4">
                                     <span class="text-green-600"><i class="fas fa-arrow-down"></i>+35</span>
-                                    <span class="whitespace-no-wrap">this week</span>
+                                    <span class="whitespace-no-wrap">{{__('this week')}}</span>
                                 </p>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                                 <div class="flex flex-wrap">
                                     <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
 
-                                        <h5 class="text-gray-500 uppercase font-bold text-xs">Car Brands</h5>
+                                        <h5 class="text-gray-500 uppercase font-bold text-xs">{{__('car brands')}}</h5>
                                         <span class="font-semibold text-xl text-gray-800">{{brands}}</span>
 
                                     </div>
@@ -77,7 +77,7 @@
                                 </div>
                                 <p class="text-sm text-green-500 mt-4">
                                     <span class="mr-2"><i class="fas fa-arrow-up"></i>+12</span>
-                                    <span class="whitespace-no-wrap">this week</span>
+                                    <span class="whitespace-no-wrap">{{__('this week')}}</span>
                                 </p>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
             <div class="bg-white mb-16 md:mb-0 md:w-72 rounded-lg shadow-lg">
                 <div class="border-b-2 flex items-center relative">
                     <i class="absolute bg-red-500 h-3 mx-3 rounded-full w-3"></i>
-                    <p class="px-8 py-4 text-indigo-900">Sales Statistical Overview</p>
+                    <p class="px-8 py-4 text-indigo-900">{{__('sales statistical overview')}}</p>
                 </div>
                 <div class="flex m-6">
                     <button class="hover:bg-gray-400 focus:outline-none outline-none  mr-3 px-3 text-sm" type="button">1D</button>
@@ -102,12 +102,12 @@
 
                 <div class="flex items-center justify-between">
                     <div class="mx-6 text-gray-600">
-                        <h1>Total Sales</h1>
+                        <h1>{{__('total sales')}}</h1>
                         <p>{{total}}</p>
                     </div>
                     <div class="flex items-center mx-6">
                         <i class="-mx-12 absolute bg-teal-300 h-2 rounded-full w-10"></i>
-                        <h1>Sales</h1>
+                        <h1>{{__('sales')}}</h1>
                     </div>
                 </div>
                 <!-- chart1 -->
@@ -134,28 +134,28 @@
                         <div class="mx-6 flex">
                             <div class="text-gray-600 text-xs">
                                 <i class="absolute bg-gray-400 h-2 mt-6 rounded-full w-12"></i>
-                                <h1>Pendinig</h1>
+                                <h1>{{__('pending')}}</h1>
                             </div>
                             <span class="font-semibold mx-2 text-2xl text-gray-700">{{pending_order}}</span>
                         </div>
                         <div class="mx-6 flex">
                             <div class="text-orange-400 text-xs">
                                 <i class="absolute bg-orange-400 h-2 mt-6 rounded-full w-12"></i>
-                                <h1>Awaiting</h1>
+                                <h1>{{__('awaiting')}}</h1>
                             </div>
                             <span class="font-semibold mx-2 text-2xl text-gray-700">{{awaiting_order}}</span>
                         </div>
                         <div class="mx-6 flex">
                             <div class="text-teal-300 text-xs">
                                 <i class="absolute bg-teal-300 h-2 mt-6 rounded-full w-12"></i>
-                                <h1>Delivered</h1>
+                                <h1>{{__('delivered')}}</h1>
                             </div>
                             <span class="font-semibold mx-2 text-2xl text-gray-700">{{delivered_order}}</span>
                         </div>
                         <div class="mx-6 flex">
                             <div class="text-red-400 text-xs">
                                 <i class="absolute bg-red-400 h-2 mt-6 rounded-full w-12"></i>
-                                <h1>Rejected</h1>
+                                <h1>{{__('rejected')}}</h1>
                             </div>
                             <span class="font-semibold mx-2 text-2xl text-gray-700">{{rejected_order}}</span>
                         </div>
@@ -166,12 +166,12 @@
             <div class="bg-white rounded-lg md:w-70 shadow-lg">
                 <div class="border-b-2 flex items-center relative">
                     <i class="absolute bg-blue-400 h-3 mx-3 rounded-full w-3"></i>
-                    <p class="px-8 py-4 text-indigo-900">Top Salling Brands</p>
+                    <p class="px-8 py-4 text-indigo-900">{{__('top salling brands')}}</p>
                 </div>
                 <chart class="chartjs-render-monitor max-w-xs mt-24 mb-24"
                 width="200" height="164"
                 id="chart1"
-                title="Top Salling Brands"
+                :title="__('top salling brands')"
                 :labels='["BMW", "Chevrelet", "Alfa Romeo", "Cilroen","Chrysler", "GMC"]'
                 :data='[45, 75, 150, 90, 75, 30]'
                 :top="20"
@@ -186,7 +186,7 @@
                         <div class="mx-4">
                             <div class="text-gray-600 text-xs flex items-center relative">
                                 <i class="absolute bg-red-400 h-2 rounded-full w-2"></i>
-                                <h1 class="mx-3 text-xs">Total Sales</h1>
+                                <h1 class="mx-3 text-xs">{{__('total sales')}}</h1>
                             </div>
                             <span class="font-semibold text-xl text-gray-700">QAR {{total}}</span>
                             <div class="absolute bg-gray-300 h-2 rounded-full w-64">

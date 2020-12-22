@@ -1,20 +1,17 @@
 <template>
     <layout>
-        <h1 class="md:text-base my-2 text-gray-500 text-sm">Dashboard/Super Category</h1>
-        <div class="mt-8">
+        <h1 class="md:text-base my-2 text-gray-500 text-sm capitalize">{{__('dashboard')}}/{{__('super categories')}}</h1>
+        <div class="mt-8 capitalize">
             <div class="flex justify-between">
-                <h2 class="text-3xl text-teal-600 font-bold">Super Category</h2>
+                <h2 class="text-3xl text-teal-600 font-bold">{{__('super categories')}}</h2>
             <div class="flex items-center">
                     <inertia-link href="/dashboard/super_categories/create"
                                   class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                        Add Super
+                        {{__('add')}} {{__('super')}}
                     </inertia-link>
             </div>
             </div>
-            <!-- <h1 class="font-medium text-gray-500 text-xs">
-                <span class="font-semibold text-red-400">Hint</span> double click on name to modify
-            </h1> -->
             <div class="mt-4">
                 <div class="flex flex-col">
                     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6">
@@ -29,7 +26,7 @@
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Name
+                                        {{__('name')}}
                                     </th>
 
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>

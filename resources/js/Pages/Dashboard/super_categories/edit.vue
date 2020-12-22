@@ -3,22 +3,22 @@
 
         <div class="mt-8">
             <div class="flex">
-                <h2 class="text-3xl text-teal-700 font-bold">Super Category/<span class="text-gray-500">Edit</span></h2>
+                <h2 class="text-3xl text-teal-700 font-bold">{{__('super categories')}}/<span class="text-gray-500">{{__('Edit')}}</span></h2>
             </div>
 
             <base-panel class="md:max-w-3xl mt-4">
                 <form @submit.prevent="submit">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <base-input label="Name" name="name" v-model="form.name" :error="$page.errors.name" tabindex="1" required></base-input>
+                            <base-input :label="__('name')" name="name" v-model="form.name" :error="$page.errors.name" tabindex="1" required></base-input>
                         </div>
                          <div>
-                             <label class="text-gray-700" for="Upload Image">Upload Image</label>
+                             <label class="text-gray-700" for="Upload Image">I{{__('images')}}</label>
                             <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full" :error="$page.errors.images" tabindex="4" multiple required>
                         </div>
                     </div>
                     <div class="flex justify-end mt-4">
-                        <base-button class="bg-teal-700">Update Super</base-button>
+                        <base-button class="bg-teal-700">{{__('Edit')}}</base-button>
                     </div>
                 </form>
             </base-panel>

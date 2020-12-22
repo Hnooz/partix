@@ -2516,7 +2516,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3289,7 +3288,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3710,11 +3708,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
  // import moment from 'moment';
 
 
@@ -3897,6 +3890,13 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4525,9 +4525,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -4796,6 +4793,13 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7364,9 +7368,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
- * Chart.js v2.9.4
+ * Chart.js v2.9.3
  * https://www.chartjs.org
- * (c) 2020 Chart.js Contributors
+ * (c) 2019 Chart.js Contributors
  * Released under the MIT License
  */
 (function (global, factory) {
@@ -9467,10 +9471,6 @@ if (typeof window !== 'undefined') {
 
 var chartjsColor = Color;
 
-function isValidKey(key) {
-	return ['__proto__', 'prototype', 'constructor'].indexOf(key) === -1;
-}
-
 /**
  * @namespace Chart.helpers
  */
@@ -9646,7 +9646,7 @@ var helpers = {
 		}
 
 		if (helpers.isObject(source)) {
-			var target = Object.create(source);
+			var target = {};
 			var keys = Object.keys(source);
 			var klen = keys.length;
 			var k = 0;
@@ -9667,12 +9667,6 @@ var helpers = {
 	 * @private
 	 */
 	_merger: function(key, target, source, options) {
-		if (!isValidKey(key)) {
-			// We want to ensure we do not copy prototypes over
-			// as this can pollute global namespaces
-			return;
-		}
-
 		var tval = target[key];
 		var sval = source[key];
 
@@ -9688,12 +9682,6 @@ var helpers = {
 	 * @private
 	 */
 	_mergerIf: function(key, target, source) {
-		if (!isValidKey(key)) {
-			// We want to ensure we do not copy prototypes over
-			// as this can pollute global namespaces
-			return;
-		}
-
 		var tval = target[key];
 		var sval = source[key];
 
@@ -11192,7 +11180,7 @@ helpers$1.extend(DatasetController.prototype, {
 	 */
 	_configure: function() {
 		var me = this;
-		me._config = helpers$1.merge(Object.create(null), [
+		me._config = helpers$1.merge({}, [
 			me.chart.options.datasets[me._type],
 			me.getDataset(),
 		], {
@@ -14462,8 +14450,7 @@ function updateDims(chartArea, params, layout) {
 		chartArea.h = newHeight;
 
 		// return true if chart area changed in layout's direction
-		var sizes = layout.horizontal ? [newWidth, chartArea.w] : [newHeight, chartArea.h];
-		return sizes[0] !== sizes[1] && (!isNaN(sizes[0]) || !isNaN(sizes[1]));
+		return layout.horizontal ? newWidth !== chartArea.w : newHeight !== chartArea.h;
 	}
 }
 
@@ -14767,7 +14754,7 @@ var platform_basic = {
 	}
 };
 
-var platform_dom = "/*\r\n * DOM element rendering detection\r\n * https://davidwalsh.name/detect-node-insertion\r\n */\r\n@keyframes chartjs-render-animation {\r\n\tfrom { opacity: 0.99; }\r\n\tto { opacity: 1; }\r\n}\r\n\r\n.chartjs-render-monitor {\r\n\tanimation: chartjs-render-animation 0.001s;\r\n}\r\n\r\n/*\r\n * DOM element resizing detection\r\n * https://github.com/marcj/css-element-queries\r\n */\r\n.chartjs-size-monitor,\r\n.chartjs-size-monitor-expand,\r\n.chartjs-size-monitor-shrink {\r\n\tposition: absolute;\r\n\tdirection: ltr;\r\n\tleft: 0;\r\n\ttop: 0;\r\n\tright: 0;\r\n\tbottom: 0;\r\n\toverflow: hidden;\r\n\tpointer-events: none;\r\n\tvisibility: hidden;\r\n\tz-index: -1;\r\n}\r\n\r\n.chartjs-size-monitor-expand > div {\r\n\tposition: absolute;\r\n\twidth: 1000000px;\r\n\theight: 1000000px;\r\n\tleft: 0;\r\n\ttop: 0;\r\n}\r\n\r\n.chartjs-size-monitor-shrink > div {\r\n\tposition: absolute;\r\n\twidth: 200%;\r\n\theight: 200%;\r\n\tleft: 0;\r\n\ttop: 0;\r\n}\r\n";
+var platform_dom = "/*\n * DOM element rendering detection\n * https://davidwalsh.name/detect-node-insertion\n */\n@keyframes chartjs-render-animation {\n\tfrom { opacity: 0.99; }\n\tto { opacity: 1; }\n}\n\n.chartjs-render-monitor {\n\tanimation: chartjs-render-animation 0.001s;\n}\n\n/*\n * DOM element resizing detection\n * https://github.com/marcj/css-element-queries\n */\n.chartjs-size-monitor,\n.chartjs-size-monitor-expand,\n.chartjs-size-monitor-shrink {\n\tposition: absolute;\n\tdirection: ltr;\n\tleft: 0;\n\ttop: 0;\n\tright: 0;\n\tbottom: 0;\n\toverflow: hidden;\n\tpointer-events: none;\n\tvisibility: hidden;\n\tz-index: -1;\n}\n\n.chartjs-size-monitor-expand > div {\n\tposition: absolute;\n\twidth: 1000000px;\n\theight: 1000000px;\n\tleft: 0;\n\ttop: 0;\n}\n\n.chartjs-size-monitor-shrink > div {\n\tposition: absolute;\n\twidth: 200%;\n\theight: 200%;\n\tleft: 0;\n\ttop: 0;\n}\n";
 
 var platform_dom$1 = /*#__PURE__*/Object.freeze({
 __proto__: null,
@@ -15475,7 +15462,7 @@ var core_scaleService = {
 	},
 	getScaleDefaults: function(type) {
 		// Return the scale defaults merged with the global settings so that we always use the latest ones
-		return this.defaults.hasOwnProperty(type) ? helpers$1.merge(Object.create(null), [core_defaults.scale, this.defaults[type]]) : {};
+		return this.defaults.hasOwnProperty(type) ? helpers$1.merge({}, [core_defaults.scale, this.defaults[type]]) : {};
 	},
 	updateScaleDefaults: function(type, additions) {
 		var me = this;
@@ -16550,7 +16537,7 @@ core_defaults._set('global', {
  * returns a deep copy of the result, thus doesn't alter inputs.
  */
 function mergeScaleConfig(/* config objects ... */) {
-	return helpers$1.merge(Object.create(null), [].slice.call(arguments), {
+	return helpers$1.merge({}, [].slice.call(arguments), {
 		merger: function(key, target, source, options) {
 			if (key === 'xAxes' || key === 'yAxes') {
 				var slen = source[key].length;
@@ -16590,9 +16577,9 @@ function mergeScaleConfig(/* config objects ... */) {
  * a deep copy of the result, thus doesn't alter inputs.
  */
 function mergeConfig(/* config objects ... */) {
-	return helpers$1.merge(Object.create(null), [].slice.call(arguments), {
+	return helpers$1.merge({}, [].slice.call(arguments), {
 		merger: function(key, target, source, options) {
-			var tval = target[key] || Object.create(null);
+			var tval = target[key] || {};
 			var sval = source[key];
 
 			if (key === 'scales') {
@@ -16609,7 +16596,7 @@ function mergeConfig(/* config objects ... */) {
 }
 
 function initConfig(config) {
-	config = config || Object.create(null);
+	config = config || {};
 
 	// Do NOT use mergeConfig for the data object because this method merges arrays
 	// and so would change references to labels and datasets, preventing data updates.
@@ -18590,8 +18577,6 @@ function computeLabelSizes(ctx, tickFonts, ticks, caches) {
 	var widths = [];
 	var heights = [];
 	var offsets = [];
-	var widestLabelSize = 0;
-	var highestLabelSize = 0;
 	var i, j, jlen, label, tickFont, fontString, cache, lineHeight, width, height, nestedLabel, widest, highest;
 
 	for (i = 0; i < length; ++i) {
@@ -18619,13 +18604,11 @@ function computeLabelSizes(ctx, tickFonts, ticks, caches) {
 		widths.push(width);
 		heights.push(height);
 		offsets.push(lineHeight / 2);
-		widestLabelSize = Math.max(width, widestLabelSize);
-		highestLabelSize = Math.max(height, highestLabelSize);
 	}
 	garbageCollect(caches, length);
 
-	widest = widths.indexOf(widestLabelSize);
-	highest = heights.indexOf(highestLabelSize);
+	widest = widths.indexOf(Math.max.apply(null, widths));
+	highest = heights.indexOf(Math.max.apply(null, heights));
 
 	function valueAt(idx) {
 		return {
@@ -47807,9 +47790,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("layout", [
-    _c("div", { staticClass: "mx-auto w-full" }, [
+    _c("div", { staticClass: "mx-auto w-full capitalize" }, [
       _c("div", [
-        _c("h1", { staticClass: "my-2 text-gray-500" }, [_vm._v("Dashboard")]),
+        _c("h1", { staticClass: "my-2 text-gray-500" }, [
+          _vm._v(_vm._s(_vm.__("dashboard")))
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "flex flex-wrap -mx-4" }, [
           _c("div", { staticClass: "w-full md:w-1/3 px-4" }, [
@@ -47837,7 +47822,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                        Orders\n                                    "
+                              "\n                                        " +
+                                _vm._s(_vm.__("orders")) +
+                                "\n                                    "
                             )
                           ]
                         ),
@@ -47899,7 +47886,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("span", { staticClass: "whitespace-no-wrap" }, [
-                      _vm._v("this week")
+                      _vm._v(_vm._s(_vm.__("this week")))
                     ])
                   ])
                 ])
@@ -47930,7 +47917,7 @@ var render = function() {
                             staticClass:
                               "text-gray-500 uppercase font-bold text-xs"
                           },
-                          [_vm._v("Customers")]
+                          [_vm._v(_vm._s(_vm.__("customers")))]
                         ),
                         _vm._v(" "),
                         _c(
@@ -47990,7 +47977,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("span", { staticClass: "whitespace-no-wrap" }, [
-                      _vm._v("this week")
+                      _vm._v(_vm._s(_vm.__("this week")))
                     ])
                   ])
                 ])
@@ -48021,7 +48008,7 @@ var render = function() {
                             staticClass:
                               "text-gray-500 uppercase font-bold text-xs"
                           },
-                          [_vm._v("Car Brands")]
+                          [_vm._v(_vm._s(_vm.__("car brands")))]
                         ),
                         _vm._v(" "),
                         _c(
@@ -48087,7 +48074,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("span", { staticClass: "whitespace-no-wrap" }, [
-                      _vm._v("this week")
+                      _vm._v(_vm._s(_vm.__("this week")))
                     ])
                   ])
                 ])
@@ -48109,7 +48096,7 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("p", { staticClass: "px-8 py-4 text-indigo-900" }, [
-              _vm._v("Sales Statistical Overview")
+              _vm._v(_vm._s(_vm.__("sales statistical overview")))
             ])
           ]),
           _vm._v(" "),
@@ -48167,7 +48154,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "flex items-center justify-between" }, [
             _c("div", { staticClass: "mx-6 text-gray-600" }, [
-              _c("h1", [_vm._v("Total Sales")]),
+              _c("h1", [_vm._v(_vm._s(_vm.__("total sales")))]),
               _vm._v(" "),
               _c("p", [_vm._v(_vm._s(_vm.total))])
             ]),
@@ -48177,7 +48164,7 @@ var render = function() {
                 staticClass: "-mx-12 absolute bg-teal-300 h-2 rounded-full w-10"
               }),
               _vm._v(" "),
-              _c("h1", [_vm._v("Sales")])
+              _c("h1", [_vm._v(_vm._s(_vm.__("sales")))])
             ])
           ]),
           _vm._v(" "),
@@ -48216,7 +48203,7 @@ var render = function() {
                       "absolute bg-gray-400 h-2 mt-6 rounded-full w-12"
                   }),
                   _vm._v(" "),
-                  _c("h1", [_vm._v("Pendinig")])
+                  _c("h1", [_vm._v(_vm._s(_vm.__("pending")))])
                 ]),
                 _vm._v(" "),
                 _c(
@@ -48233,7 +48220,7 @@ var render = function() {
                       "absolute bg-orange-400 h-2 mt-6 rounded-full w-12"
                   }),
                   _vm._v(" "),
-                  _c("h1", [_vm._v("Awaiting")])
+                  _c("h1", [_vm._v(_vm._s(_vm.__("awaiting")))])
                 ]),
                 _vm._v(" "),
                 _c(
@@ -48250,7 +48237,7 @@ var render = function() {
                       "absolute bg-teal-300 h-2 mt-6 rounded-full w-12"
                   }),
                   _vm._v(" "),
-                  _c("h1", [_vm._v("Delivered")])
+                  _c("h1", [_vm._v(_vm._s(_vm.__("delivered")))])
                 ]),
                 _vm._v(" "),
                 _c(
@@ -48267,7 +48254,7 @@ var render = function() {
                       "absolute bg-red-400 h-2 mt-6 rounded-full w-12"
                   }),
                   _vm._v(" "),
-                  _c("h1", [_vm._v("Rejected")])
+                  _c("h1", [_vm._v(_vm._s(_vm.__("rejected")))])
                 ]),
                 _vm._v(" "),
                 _c(
@@ -48292,7 +48279,7 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("p", { staticClass: "px-8 py-4 text-indigo-900" }, [
-              _vm._v("Top Salling Brands")
+              _vm._v(_vm._s(_vm.__("top salling brands")))
             ])
           ]),
           _vm._v(" "),
@@ -48302,7 +48289,7 @@ var render = function() {
               width: "200",
               height: "164",
               id: "chart1",
-              title: "Top Salling Brands",
+              title: _vm.__("top salling brands"),
               labels: [
                 "BMW",
                 "Chevrelet",
@@ -48337,7 +48324,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("h1", { staticClass: "mx-3 text-xs" }, [
-                    _vm._v("Total Sales")
+                    _vm._v(_vm._s(_vm.__("total sales")))
                   ])
                 ]
               ),
@@ -48958,8 +48945,10 @@ var render = function() {
       [
         _c("div", { staticClass: "flex" }, [
           _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
-            _vm._v("Cars/"),
-            _c("span", { staticClass: "text-gray-500" }, [_vm._v("Create")])
+            _vm._v(_vm._s(_vm.__("cars")) + "/"),
+            _c("span", { staticClass: "text-gray-500 capitalize" }, [
+              _vm._v(_vm._s(_vm.__("create")))
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -48985,11 +48974,11 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Brand",
+                          label: _vm.__("brand"),
                           name: "brand",
                           error: _vm.$page.errors.brand,
                           tabindex: "1",
-                          placeholder: "e.g Toyota",
+                          placeholder: _vm.__("e.g Toyota"),
                           required: ""
                         },
                         model: {
@@ -49009,11 +48998,11 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Model",
+                          label: _vm.__("model"),
                           name: "model",
                           error: _vm.$page.errors.model,
                           tabindex: "2",
-                          placeholder: "e.g Brado",
+                          placeholder: _vm.__("e.g Brado"),
                           required: ""
                         },
                         model: {
@@ -49033,11 +49022,11 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Engine",
+                          label: _vm.__("engine"),
                           name: "engine",
                           error: _vm.$page.errors.engine,
                           tabindex: "3",
-                          placeholder: "e.g jas",
+                          placeholder: _vm.__("e.g jas"),
                           required: ""
                         },
                         model: {
@@ -49057,11 +49046,11 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Year",
+                          label: _vm.__("year"),
                           name: "year",
                           error: _vm.$page.errors.year,
                           tabindex: "4",
-                          placeholder: "e.g 2018",
+                          placeholder: _vm.__("e.g 2018"),
                           required: ""
                         },
                         model: {
@@ -49082,8 +49071,10 @@ var render = function() {
                 "div",
                 { staticClass: "flex justify-end mt-4" },
                 [
-                  _c("base-button", { staticClass: "bg-teal-700" }, [
-                    _vm._v("Create Car")
+                  _c("base-button", { staticClass: "bg-teal-700 capitalize" }, [
+                    _vm._v(
+                      _vm._s(_vm.__("create")) + " " + _vm._s(_vm.__("car"))
+                    )
                   ])
                 ],
                 1
@@ -49123,10 +49114,12 @@ var render = function() {
       "div",
       { staticClass: "mt-8" },
       [
-        _c("div", { staticClass: "flex" }, [
+        _c("div", { staticClass: "flex capitalize" }, [
           _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
-            _vm._v("Cars/"),
-            _c("span", { staticClass: "text-gray-500" }, [_vm._v("Edit")])
+            _vm._v(_vm._s(_vm.__("cars")) + "/"),
+            _c("span", { staticClass: "text-gray-500" }, [
+              _vm._v(_vm._s(_vm.__("Edit")))
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -49145,26 +49138,29 @@ var render = function() {
             [
               _c(
                 "div",
-                { staticClass: "grid grid-cols-1 sm:grid-cols-2 gap-6" },
+                {
+                  staticClass:
+                    "grid grid-cols-1 sm:grid-cols-2 gap-6 capitalize"
+                },
                 [
                   _c(
                     "div",
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Brand",
+                          label: _vm.__("brand"),
                           name: "brand",
                           error: _vm.$page.errors.brand,
                           tabindex: "1",
-                          placeholder: "e.g Toyota",
+                          placeholder: _vm.__("e.g Toyota"),
                           required: ""
                         },
                         model: {
-                          value: _vm.form.brand,
+                          value: _vm.car.brand,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "brand", $$v)
+                            _vm.$set(_vm.car, "brand", $$v)
                           },
-                          expression: "form.brand"
+                          expression: "car.brand"
                         }
                       })
                     ],
@@ -49176,19 +49172,19 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Model",
+                          label: _vm.__("model"),
                           name: "model",
                           error: _vm.$page.errors.model,
                           tabindex: "2",
-                          placeholder: "e.g Brado",
+                          placeholder: _vm.__("e.g Brado"),
                           required: ""
                         },
                         model: {
-                          value: _vm.form.model,
+                          value: _vm.car.model,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "model", $$v)
+                            _vm.$set(_vm.car, "model", $$v)
                           },
-                          expression: "form.model"
+                          expression: "car.model"
                         }
                       })
                     ],
@@ -49200,19 +49196,19 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Engine",
+                          label: _vm.__("engine"),
                           name: "engine",
                           error: _vm.$page.errors.engine,
                           tabindex: "3",
-                          placeholder: "e.g jas",
+                          placeholder: _vm.__("e.g jas"),
                           required: ""
                         },
                         model: {
-                          value: _vm.form.engine,
+                          value: _vm.car.engine,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "engine", $$v)
+                            _vm.$set(_vm.car, "engine", $$v)
                           },
-                          expression: "form.engine"
+                          expression: "car.engine"
                         }
                       })
                     ],
@@ -49224,19 +49220,19 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Year",
+                          label: _vm.__("year"),
                           name: "year",
                           error: _vm.$page.errors.year,
                           tabindex: "4",
-                          placeholder: "e.g 2018",
+                          placeholder: _vm.__("e.g 2018"),
                           required: ""
                         },
                         model: {
-                          value: _vm.form.year,
+                          value: _vm.car.year,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "year", $$v)
+                            _vm.$set(_vm.car, "year", $$v)
                           },
-                          expression: "form.year"
+                          expression: "car.year"
                         }
                       })
                     ],
@@ -49249,8 +49245,8 @@ var render = function() {
                 "div",
                 { staticClass: "flex justify-end mt-4" },
                 [
-                  _c("base-button", { staticClass: "bg-teal-700" }, [
-                    _vm._v("Update Car")
+                  _c("base-button", { staticClass: "bg-teal-700 capitalize" }, [
+                    _vm._v(_vm._s(_vm.__("Edit")) + " " + _vm._s(_vm.__("car")))
                   ])
                 ],
                 1
@@ -49286,43 +49282,22 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("layout", [
-    _c("h1", { staticClass: "md:text-base my-2 text-gray-500 text-sm" }, [
-      _vm._v("Dashboard/Cars")
-    ]),
+    _c(
+      "h1",
+      { staticClass: "md:text-base my-2 text-gray-500 text-sm capitalize" },
+      [_vm._v(_vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("cars")))]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "mx-5" }, [
       _c("div", { staticClass: "justify-between md:flex" }, [
         _c("div", { staticClass: "items-center md:flex" }, [
           _c(
             "h2",
-            { staticClass: "font-bold md:text-3xl text-xl text-teal-600" },
-            [_vm._v("Cars")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
             {
               staticClass:
-                "capitalize flex items-center md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap"
+                "font-bold md:text-3xl text-xl text-teal-600 capitalize"
             },
-            [
-              _c("h1", [_vm._v("123 total")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex items-center mx-8" }, [
-                _c("h1", [_vm._v("sort by :")]),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "" } }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass:
-                        "bg-transparent border-0 capitalize font-medium form-select text-gray-600 text-xs md:text-base"
-                    },
-                    [_c("option", [_vm._v("date created")])]
-                  )
-                ])
-              ])
-            ]
+            [_vm._v(_vm._s(_vm.__("cars")))]
           )
         ]),
         _vm._v(" "),
@@ -49334,7 +49309,7 @@ var render = function() {
               "inertia-link",
               {
                 staticClass:
-                  "bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap",
+                  "bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap capitalize",
                 attrs: { href: "/dashboard/cars/create" }
               },
               [
@@ -49359,7 +49334,13 @@ var render = function() {
                     })
                   ]
                 ),
-                _vm._v("\n                    Add Car\n                ")
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.__("add")) +
+                    " " +
+                    _vm._s(_vm.__("car")) +
+                    "\n                "
+                )
               ]
             ),
             _vm._v(" "),
@@ -49474,7 +49455,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Brand\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("brand")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -49488,7 +49471,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Model\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("model")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -49502,7 +49487,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Engine\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("engine")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -49516,7 +49503,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Year\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("year")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -49530,7 +49519,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                     Action\n                                "
+                              "\n                                     " +
+                                _vm._s(_vm.__("action")) +
+                                "\n                                "
                             )
                           ]
                         )
@@ -49757,10 +49748,12 @@ var render = function() {
       "div",
       { staticClass: "mt-8" },
       [
-        _c("div", { staticClass: "flex" }, [
+        _c("div", { staticClass: "flex capitalize" }, [
           _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
-            _vm._v("Category/"),
-            _c("span", { staticClass: "text-gray-500" }, [_vm._v("Create")])
+            _vm._v(_vm._s(_vm.__("category")) + "/"),
+            _c("span", { staticClass: "text-gray-500" }, [
+              _vm._v(_vm._s(_vm.__("create")))
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -49785,10 +49778,11 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Name",
+                          label: _vm.__("name"),
                           name: "name",
                           error: _vm.$page.errors.name,
                           tabindex: "1",
+                          placeholder: _vm.__("filters"),
                           required: ""
                         },
                         model: {
@@ -49809,9 +49803,10 @@ var render = function() {
                       _c("base-input", {
                         attrs: {
                           type: "text",
-                          label: "Description",
+                          label: _vm.__("description"),
                           name: "description",
                           tabindex: "2",
+                          placeholder: _vm.__("category description"),
                           required: ""
                         },
                         model: {
@@ -49827,8 +49822,8 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("div", [
-                    _c("label", { staticClass: "text-gray-700" }, [
-                      _vm._v("Super Category")
+                    _c("label", { staticClass: "text-gray-700 capitalize" }, [
+                      _vm._v(_vm._s(_vm.__("super categories")))
                     ]),
                     _vm._v(" "),
                     _c(
@@ -49871,7 +49866,7 @@ var render = function() {
                       },
                       [
                         _c("option", { attrs: { value: "0" } }, [
-                          _vm._v("select super")
+                          _vm._v(_vm._s(_vm.__("select super")))
                         ]),
                         _vm._v(" "),
                         _vm._l(_vm.super_categories, function(super_category) {
@@ -49892,8 +49887,11 @@ var render = function() {
                   _c("div", [
                     _c(
                       "label",
-                      { staticClass: "text-gray-700", attrs: { for: "image" } },
-                      [_vm._v("Upload Image")]
+                      {
+                        staticClass: "text-gray-700 capitalize",
+                        attrs: { for: "image" }
+                      },
+                      [_vm._v(_vm._s(_vm.__("images")))]
                     ),
                     _vm._v(" "),
                     _c("input", {
@@ -49925,8 +49923,12 @@ var render = function() {
                 "div",
                 { staticClass: "flex justify-end mt-4" },
                 [
-                  _c("base-button", { staticClass: "bg-teal-700" }, [
-                    _vm._v("Create Category")
+                  _c("base-button", { staticClass: "bg-teal-700 capitalize" }, [
+                    _vm._v(
+                      _vm._s(_vm.__("create")) +
+                        " " +
+                        _vm._s(_vm.__("category"))
+                    )
                   ])
                 ],
                 1
@@ -49967,13 +49969,19 @@ var render = function() {
       { staticClass: "mt-8" },
       [
         _c("div", { staticClass: "flex" }, [
-          _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
-            _vm._v("Category/"),
-            _c("span", { staticClass: "text-gray-500" }, [_vm._v("Edit")])
-          ])
+          _c(
+            "h2",
+            { staticClass: "text-3xl text-teal-700 font-bold capitalize" },
+            [
+              _vm._v(_vm._s(_vm.__("category")) + "/"),
+              _c("span", { staticClass: "text-gray-500" }, [
+                _vm._v(_vm._s(_vm.__("Edit")))
+              ])
+            ]
+          )
         ]),
         _vm._v(" "),
-        _c("base-panel", { staticClass: "md:max-w-3xl mt-4" }, [
+        _c("base-panel", { staticClass: "md:max-w-3xl mt-4 capitalize" }, [
           _c(
             "form",
             {
@@ -49994,18 +50002,19 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Name",
+                          label: _vm.__("name"),
                           name: "name",
                           error: _vm.$page.errors.name,
                           tabindex: "1",
+                          placeholder: _vm.__("filters"),
                           required: ""
                         },
                         model: {
-                          value: _vm.form.name,
+                          value: _vm.category.name,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "name", $$v)
+                            _vm.$set(_vm.category, "name", $$v)
                           },
-                          expression: "form.name"
+                          expression: "category.name"
                         }
                       })
                     ],
@@ -50018,17 +50027,18 @@ var render = function() {
                       _c("base-input", {
                         attrs: {
                           type: "text",
-                          label: "Description",
+                          label: _vm.__("description"),
                           name: "description",
                           tabindex: "2",
+                          placeholder: _vm.__("category description"),
                           required: ""
                         },
                         model: {
-                          value: _vm.form.description,
+                          value: _vm.category.description,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "description", $$v)
+                            _vm.$set(_vm.category, "description", $$v)
                           },
-                          expression: "form.description"
+                          expression: "category.description"
                         }
                       })
                     ],
@@ -50036,8 +50046,8 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("div", [
-                    _c("label", { staticClass: "text-gray-700" }, [
-                      _vm._v("Super Category")
+                    _c("label", { staticClass: "text-gray-700 capitalize" }, [
+                      _vm._v(_vm._s(_vm.__("super categories")))
                     ]),
                     _vm._v(" "),
                     _c(
@@ -50047,8 +50057,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.form.super_category_id,
-                            expression: "form.super_category_id"
+                            value: _vm.category.super_category_id,
+                            expression: "category.super_category_id"
                           }
                         ],
                         staticClass: "form-select text-gray-500 w-full mt-1",
@@ -50069,7 +50079,7 @@ var render = function() {
                                 return val
                               })
                             _vm.$set(
-                              _vm.form,
+                              _vm.category,
                               "super_category_id",
                               $event.target.multiple
                                 ? $$selectedVal
@@ -50080,7 +50090,7 @@ var render = function() {
                       },
                       [
                         _c("option", { attrs: { value: "0" } }, [
-                          _vm._v("select super")
+                          _vm._v(_vm._s(_vm.__("select super")))
                         ]),
                         _vm._v(" "),
                         _vm._l(_vm.super_categories, function(super_category) {
@@ -50101,8 +50111,11 @@ var render = function() {
                   _c("div", [
                     _c(
                       "label",
-                      { staticClass: "text-gray-700", attrs: { for: "image" } },
-                      [_vm._v("Upload Image")]
+                      {
+                        staticClass: "text-gray-700 capitalize",
+                        attrs: { for: "image" }
+                      },
+                      [_vm._v(_vm._s(_vm.__("images")))]
                     ),
                     _vm._v(" "),
                     _c("input", {
@@ -50117,7 +50130,8 @@ var render = function() {
                         name: "images[]",
                         error: _vm.$page.errors.images,
                         tabindex: "4",
-                        multiple: ""
+                        multiple: "",
+                        required: ""
                       },
                       on: {
                         change: function($event) {
@@ -50133,8 +50147,10 @@ var render = function() {
                 "div",
                 { staticClass: "flex justify-end mt-4" },
                 [
-                  _c("base-button", { staticClass: "bg-teal-700" }, [
-                    _vm._v("Edit Category")
+                  _c("base-button", { staticClass: "bg-teal-700 capitalize" }, [
+                    _vm._v(
+                      _vm._s(_vm.__("Edit")) + " " + _vm._s(_vm.__("category"))
+                    )
                   ])
                 ],
                 1
@@ -50170,8 +50186,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("layout", [
-    _c("h1", { staticClass: "my-2 text-gray-500" }, [
-      _vm._v("Dashboard/Category")
+    _c("h1", { staticClass: "my-2 text-gray-500 capitalize" }, [
+      _vm._v(_vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("category")))
     ]),
     _vm._v(" "),
     _c("div", {}, [
@@ -50179,14 +50195,17 @@ var render = function() {
         _c("div", { staticClass: "items-center md:flex" }, [
           _c(
             "h2",
-            { staticClass: "font-bold md:text-3xl text-xl text-teal-600" },
-            [_vm._v("Categories")]
+            {
+              staticClass:
+                "font-bold md:text-3xl text-xl text-teal-600 capitalize"
+            },
+            [_vm._v(_vm._s(_vm.__("categories")))]
           )
         ]),
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "flex items-center" },
+          { staticClass: "flex items-center capitalize" },
           [
             _c(
               "inertia-link",
@@ -50217,7 +50236,13 @@ var render = function() {
                     })
                   ]
                 ),
-                _vm._v("\n                    Add Category\n                ")
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.__("add")) +
+                    " " +
+                    _vm._s(_vm.__("category")) +
+                    "\n                "
+                )
               ]
             )
           ],
@@ -50225,14 +50250,9 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "text-teal-700 mx-5 my-5 text-sm md:text-base" }, [
-        _c("span", { staticClass: "font-semibold" }, [_vm._v("Note: ")]),
-        _vm._v("click on the category name to modify")
-      ]),
-      _vm._v(" "),
       _c(
         "div",
-        { staticClass: "grid grid-cols-1 md:grid-cols-3" },
+        { staticClass: "grid grid-cols-1 md:grid-cols-3 my-5" },
         _vm._l(_vm.super_categories, function(super_category) {
           return _c("div", { key: super_category.id, staticClass: "mx-5" }, [
             _c("h1", { staticClass: "bg-teal-600 px-4 py-3 text-white" }, [
@@ -50836,7 +50856,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("layout", [
     _c("h1", { staticClass: "my-2 text-gray-500" }, [
-      _vm._v("Dashboard/Coupon Code")
+      _vm._v(_vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("coupon code")))
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "mx-5" }, [
@@ -50845,7 +50865,7 @@ var render = function() {
           _c(
             "h2",
             { staticClass: "md:text-3xl text-xl text-teal-600 font-bold" },
-            [_vm._v("Coupon Code")]
+            [_vm._v(_vm._s(_vm.__("coupon code")))]
           )
         ]),
         _vm._v(" "),
@@ -50853,7 +50873,7 @@ var render = function() {
           "div",
           {
             staticClass:
-              "flex items-center justify-center my-6 uppercase font-medium text-sm"
+              "flex items-center justify-center my-6 font-medium text-sm capitalize"
           },
           [
             _c(
@@ -50869,7 +50889,9 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "my-5 md:my-0 text-teal-600" }, [
-                  _c("label", { attrs: { for: "name" } }, [_vm._v("name")]),
+                  _c("label", { attrs: { for: "name" } }, [
+                    _vm._v(_vm._s(_vm.__("name")))
+                  ]),
                   _vm._v(" "),
                   _c("label", { staticClass: "block mt-3 text-gray-500" }, [
                     _c("input", {
@@ -50886,7 +50908,7 @@ var render = function() {
                         type: "text",
                         name: "name",
                         error: _vm.$page.errors.name,
-                        placeholder: "e.g free_sale",
+                        placeholder: _vm.__("e.g free sale"),
                         required: ""
                       },
                       domProps: { value: _vm.form.name },
@@ -50905,7 +50927,9 @@ var render = function() {
                 _c("div", { staticClass: "text-teal-600" }, [
                   _c("label", [
                     _vm._v(
-                      "\n                            Discount Type\n                        "
+                      "\n                            " +
+                        _vm._s(_vm.__("discount type")) +
+                        "\n                        "
                     )
                   ]),
                   _vm._v(" "),
@@ -50949,7 +50973,7 @@ var render = function() {
                       },
                       [
                         _c("option", { attrs: { value: "" } }, [
-                          _vm._v("e.g Fixed or Percentage")
+                          _vm._v(_vm._s(_vm.__("e.g Fixed or Percentage")))
                         ]),
                         _vm._v(" "),
                         _vm._l(_vm.descountType, function(type) {
@@ -50966,7 +50990,9 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "my-5 md:my-0 text-teal-600" }, [
-                  _c("label", { attrs: { for: "value" } }, [_vm._v("value")]),
+                  _c("label", { attrs: { for: "value" } }, [
+                    _vm._v(_vm._s(_vm.__("value")))
+                  ]),
                   _vm._v(" "),
                   _c("label", { staticClass: "block mt-3 text-gray-500" }, [
                     _c("input", {
@@ -51002,7 +51028,9 @@ var render = function() {
                 _c("div", { staticClass: "text-teal-600" }, [
                   _c("label", { attrs: { for: "code Expiration date" } }, [
                     _vm._v(
-                      "\n                            code Expiration date\n                        "
+                      "\n                            " +
+                        _vm._s(_vm.__("expiration date")) +
+                        "\n                        "
                     )
                   ]),
                   _vm._v(" "),
@@ -51074,7 +51102,11 @@ var render = function() {
                           ]
                         ),
                         _vm._v(
-                          "\n                                Add Coupon\n                            "
+                          "\n                                " +
+                            _vm._s(_vm.__("add")) +
+                            " " +
+                            _vm._s(_vm.__("coupon")) +
+                            "\n                            "
                         )
                       ]
                     )
@@ -51087,7 +51119,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "mt-4" }, [
+      _c("div", { staticClass: "mt-4 capitalize" }, [
         _c("div", { staticClass: "flex flex-col" }, [
           _c(
             "div",
@@ -51114,40 +51146,10 @@ var render = function() {
                               staticStyle: { "text-align": "start" }
                             },
                             [
-                              _c(
-                                "svg",
-                                {
-                                  staticClass: "w-6 h-6",
-                                  attrs: {
-                                    fill: "currentColor",
-                                    viewBox: "0 0 20 20",
-                                    xmlns: "http://www.w3.org/2000/svg"
-                                  }
-                                },
-                                [
-                                  _c("path", {
-                                    attrs: {
-                                      "fill-rule": "evenodd",
-                                      d:
-                                        "M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z",
-                                      "clip-rule": "evenodd"
-                                    }
-                                  })
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "th",
-                            {
-                              staticClass:
-                                "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4  uppercase tracking-wider",
-                              staticStyle: { "text-align": "start" }
-                            },
-                            [
                               _vm._v(
-                                "\n                                    Name\n                                "
+                                "\n                                    " +
+                                  _vm._s(_vm.__("name")) +
+                                  "\n                                "
                               )
                             ]
                           ),
@@ -51161,7 +51163,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                                    Discount Type\n                                "
+                                "\n                                    " +
+                                  _vm._s(_vm.__("discount type")) +
+                                  "\n                                "
                               )
                             ]
                           ),
@@ -51175,7 +51179,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                                    Value\n                                "
+                                "\n                                    " +
+                                  _vm._s(_vm.__("value")) +
+                                  "\n                                "
                               )
                             ]
                           ),
@@ -51189,7 +51195,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                                    Creation Date\n                                "
+                                "\n                                    " +
+                                  _vm._s(_vm.__("created at")) +
+                                  "\n                                "
                               )
                             ]
                           ),
@@ -51203,7 +51211,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                                    Expiration Date\n                                "
+                                "\n                                    " +
+                                  _vm._s(_vm.__("expiration date")) +
+                                  "\n                                "
                               )
                             ]
                           ),
@@ -51217,7 +51227,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                                    Used\n                                "
+                                "\n                                    " +
+                                  _vm._s(_vm.__("used")) +
+                                  "\n                                "
                               )
                             ]
                           ),
@@ -51231,7 +51243,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                                    Action\n                                "
+                                "\n                                    " +
+                                  _vm._s(_vm.__("action")) +
+                                  "\n                                "
                               )
                             ]
                           )
@@ -51253,19 +51267,6 @@ var render = function() {
                                 : "hover:bg-teal-200 hover:text-white"
                           },
                           [
-                            _c(
-                              "td",
-                              { staticClass: "px-6 py-4 whitespace-no-wrap" },
-                              [
-                                _c("label", { attrs: { for: "" } }, [
-                                  _c("input", {
-                                    staticClass: "form-checkbox border-2",
-                                    attrs: { type: "checkbox" }
-                                  })
-                                ])
-                              ]
-                            ),
-                            _vm._v(" "),
                             _c(
                               "td",
                               {
@@ -51408,32 +51409,6 @@ var render = function() {
                                   "flex px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium"
                               },
                               [
-                                _c("a", { attrs: { href: "#" } }, [
-                                  _c(
-                                    "svg",
-                                    {
-                                      staticClass: "w-6 h-6 text-teal-700",
-                                      attrs: {
-                                        fill: "none",
-                                        stroke: "currentColor",
-                                        viewBox: "0 0 24 24",
-                                        xmlns: "http://www.w3.org/2000/svg"
-                                      }
-                                    },
-                                    [
-                                      _c("path", {
-                                        attrs: {
-                                          "stroke-linecap": "round",
-                                          "stroke-linejoin": "round",
-                                          "stroke-width": "2",
-                                          d:
-                                            "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
                                 _c(
                                   "button",
                                   {
@@ -51686,17 +51661,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("layout", [
-    _c("h1", { staticClass: "my-2 text-gray-500" }, [
-      _vm._v("Dashboard/Orders")
+    _c("h1", { staticClass: "my-2 text-gray-500 capitalize" }, [
+      _vm._v(_vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("orders")))
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "mx-5" }, [
+    _c("div", { staticClass: "mx-5 capitalize" }, [
       _c("div", { staticClass: "justify-between md:flex" }, [
         _c("div", { staticClass: "items-center md:flex" }, [
           _c(
             "h2",
             { staticClass: "font-bold md:text-3xl text-xl text-teal-600" },
-            [_vm._v("Orders")]
+            [_vm._v(_vm._s(_vm.__("orders")))]
           ),
           _vm._v(" "),
           _c(
@@ -51706,7 +51681,11 @@ var render = function() {
                 "capitalize flex items-center md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap"
             },
             [
-              _c("h1", [_vm._v(_vm._s(this.$page.order.total) + " total")]),
+              _c("h1", [
+                _vm._v(
+                  _vm._s(this.$page.order.total) + " " + _vm._s(_vm.__("order"))
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "flex items-center mx-8" }, [
                 _c("label", { attrs: { for: "" } }, [
@@ -51796,7 +51775,7 @@ var render = function() {
                                         role: "menuitem"
                                       }
                                     },
-                                    [_vm._v("pending")]
+                                    [_vm._v(_vm._s(_vm.__("pending")))]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -51809,7 +51788,7 @@ var render = function() {
                                         role: "menuitem"
                                       }
                                     },
-                                    [_vm._v("delivered")]
+                                    [_vm._v(_vm._s(_vm.__("delivered")))]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -51822,7 +51801,7 @@ var render = function() {
                                         role: "menuitem"
                                       }
                                     },
-                                    [_vm._v("awaiting")]
+                                    [_vm._v(_vm._s(_vm.__("awaiting")))]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -51835,7 +51814,7 @@ var render = function() {
                                         role: "menuitem"
                                       }
                                     },
-                                    [_vm._v("rejected")]
+                                    [_vm._v(_vm._s(_vm.__("rejected")))]
                                   )
                                 ]
                               )
@@ -51883,7 +51862,13 @@ var render = function() {
                     })
                   ]
                 ),
-                _vm._v("\n                    Add Order\n                ")
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.__("add")) +
+                    " " +
+                    _vm._s(_vm.__("order")) +
+                    "\n                "
+                )
               ]
             ),
             _vm._v(" "),
@@ -51949,38 +51934,6 @@ var render = function() {
                             staticStyle: { "text-align": "start" }
                           },
                           [
-                            _c(
-                              "svg",
-                              {
-                                staticClass: "w-6 h-6",
-                                attrs: {
-                                  fill: "currentColor",
-                                  viewBox: "0 0 20 20",
-                                  xmlns: "http://www.w3.org/2000/svg"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    "fill-rule": "evenodd",
-                                    d:
-                                      "M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z",
-                                    "clip-rule": "evenodd"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
                             _vm._v(
                               "\n                                    #\n                                "
                             )
@@ -51996,7 +51949,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Customer Address\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("customer address")) +
+                                " \n                                "
                             )
                           ]
                         ),
@@ -52010,7 +51965,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Customer Phone\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("customer phone")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -52024,7 +51981,11 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Total Price\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("total")) +
+                                " " +
+                                _vm._s(_vm.__("price")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -52038,7 +51999,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Order Status\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("order status")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -52052,7 +52015,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Created At\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("created at")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -52066,7 +52031,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Action\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("action")) +
+                                "\n                                "
                             )
                           ]
                         )
@@ -52081,19 +52048,6 @@ var render = function() {
                       },
                       _vm._l(_vm.orders, function(order) {
                         return _c("tr", { key: order.index }, [
-                          _c(
-                            "td",
-                            { staticClass: "px-6 py-4 whitespace-no-wrap" },
-                            [
-                              _c("label", { attrs: { for: "" } }, [
-                                _c("input", {
-                                  staticClass: "form-checkbox border-2",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
                           _c(
                             "td",
                             { staticClass: "px-6 py-4 whitespace-no-wrap" },
@@ -52348,43 +52302,19 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("layout", [
-    _c("h1", { staticClass: "my-2 text-gray-500" }, [
-      _vm._v("Dashboard/Order Details")
+    _c("h1", { staticClass: "my-2 text-gray-500 capitalize" }, [
+      _vm._v(
+        _vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("order details"))
+      )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "mx-5" }, [
+    _c("div", { staticClass: "mx-5 capitalize" }, [
       _c("div", { staticClass: "justify-between md:flex" }, [
         _c("div", { staticClass: "items-center md:flex" }, [
           _c(
             "h2",
             { staticClass: "font-bold md:text-3xl text-xl text-teal-600" },
-            [_vm._v("Details")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "capitalize flex items-center md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap"
-            },
-            [
-              _c("h1"),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex items-center mx-8" }, [
-                _c("h1", [_vm._v("sort by :")]),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "" } }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass:
-                        "bg-transparent border-0 capitalize font-medium form-select text-gray-600 text-xs md:text-base"
-                    },
-                    [_c("option", [_vm._v("date created")])]
-                  )
-                ])
-              ])
-            ]
+            [_vm._v(_vm._s(_vm.__("order details")))]
           )
         ]),
         _vm._v(" "),
@@ -52449,38 +52379,6 @@ var render = function() {
                             staticStyle: { "text-align": "start" }
                           },
                           [
-                            _c(
-                              "svg",
-                              {
-                                staticClass: "w-6 h-6",
-                                attrs: {
-                                  fill: "currentColor",
-                                  viewBox: "0 0 20 20",
-                                  xmlns: "http://www.w3.org/2000/svg"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    "fill-rule": "evenodd",
-                                    d:
-                                      "M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z",
-                                    "clip-rule": "evenodd"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
                             _vm._v(
                               "\n                                    #\n                                "
                             )
@@ -52496,7 +52394,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Part Name\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("name")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -52510,7 +52410,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Part Type\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("type")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -52524,7 +52426,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Price\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("price")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -52538,7 +52442,11 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Total Price\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("total")) +
+                                " " +
+                                _vm._s(_vm.__("price")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -52552,7 +52460,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Quantity\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("quantity")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -52566,7 +52476,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Order Created At\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("created at")) +
+                                "\n                                "
                             )
                           ]
                         )
@@ -52581,19 +52493,6 @@ var render = function() {
                       },
                       _vm._l(_vm.order_details, function(details) {
                         return _c("tr", { key: details.index }, [
-                          _c(
-                            "td",
-                            { staticClass: "px-6 py-4 whitespace-no-wrap" },
-                            [
-                              _c("label", { attrs: { for: "" } }, [
-                                _c("input", {
-                                  staticClass: "form-checkbox border-2",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
                           _c(
                             "td",
                             { staticClass: "px-6 py-4 whitespace-no-wrap" },
@@ -52776,7 +52675,7 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: _vm.__("part number"),
+                          label: _vm.__("number"),
                           name: "number",
                           error: _vm.$page.errors.number,
                           tabindex: "2",
@@ -53192,7 +53091,7 @@ var render = function() {
                 { staticClass: "flex justify-end mt-4" },
                 [
                   _c("base-button", { staticClass: "bg-teal-700" }, [
-                    _vm._v(_vm._s(_vm.__("create part")))
+                    _vm._v(_vm._s(_vm.__("create")))
                   ])
                 ],
                 1
@@ -53230,12 +53129,14 @@ var render = function() {
   return _c("layout", [
     _c(
       "div",
-      { staticClass: "mt-8" },
+      { staticClass: "mt-8 capitalize" },
       [
         _c("div", { staticClass: "flex" }, [
           _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
-            _vm._v("Part/"),
-            _c("span", { staticClass: "text-gray-500" }, [_vm._v("Edit")])
+            _vm._v(_vm._s(_vm.__("parts")) + "/"),
+            _c("span", { staticClass: "text-gray-500" }, [
+              _vm._v(_vm._s(_vm.__("Edit")))
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -53261,18 +53162,18 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Name",
+                          label: _vm.__("name"),
                           name: "name",
                           error: _vm.$page.errors.name,
                           tabindex: "1",
                           required: ""
                         },
                         model: {
-                          value: _vm.form.name,
+                          value: _vm.part.name,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "name", $$v)
+                            _vm.$set(_vm.part, "name", $$v)
                           },
-                          expression: "form.name"
+                          expression: "part.name"
                         }
                       })
                     ],
@@ -53284,18 +53185,18 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Part Number",
+                          label: _vm.__("number"),
                           name: "number",
                           error: _vm.$page.errors.number,
                           tabindex: "2",
                           required: ""
                         },
                         model: {
-                          value: _vm.form.number,
+                          value: _vm.part.number,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "number", $$v)
+                            _vm.$set(_vm.part, "number", $$v)
                           },
-                          expression: "form.number"
+                          expression: "part.number"
                         }
                       })
                     ],
@@ -53307,18 +53208,18 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Description",
+                          label: _vm.__("description"),
                           name: "description",
                           error: _vm.$page.errors.description,
                           tabindex: "3",
                           required: ""
                         },
                         model: {
-                          value: _vm.form.description,
+                          value: _vm.part.description,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "description", $$v)
+                            _vm.$set(_vm.part, "description", $$v)
                           },
-                          expression: "form.description"
+                          expression: "part.description"
                         }
                       })
                     ],
@@ -53331,18 +53232,18 @@ var render = function() {
                       _c("base-input", {
                         attrs: {
                           type: "number",
-                          label: "Price",
+                          label: _vm.__("price"),
                           name: "price",
                           error: _vm.$page.errors.price,
                           tabindex: "4",
                           required: ""
                         },
                         model: {
-                          value: _vm.form.price,
+                          value: _vm.part.price,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "price", $$v)
+                            _vm.$set(_vm.part, "price", $$v)
                           },
-                          expression: "form.price"
+                          expression: "part.price"
                         }
                       })
                     ],
@@ -53355,18 +53256,18 @@ var render = function() {
                       _c("base-input", {
                         attrs: {
                           type: "number",
-                          label: "Price for used part",
+                          label: _vm.__("second price"),
                           name: "second_price",
                           error: _vm.$page.errors.second_price,
-                          tabindex: "5",
+                          tabindex: "4",
                           required: ""
                         },
                         model: {
-                          value: _vm.form.second_price,
+                          value: _vm.part.second_price,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "second_price", $$v)
+                            _vm.$set(_vm.part, "second_price", $$v)
                           },
-                          expression: "form.second_price"
+                          expression: "part.second_price"
                         }
                       })
                     ],
@@ -53378,18 +53279,41 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Slug",
+                          label: _vm.__("slug"),
                           name: "slug",
                           error: _vm.$page.errors.slug,
-                          tabindex: "6",
+                          tabindex: "5",
                           required: ""
                         },
                         model: {
-                          value: _vm.form.slug,
+                          value: _vm.part.slug,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "slug", $$v)
+                            _vm.$set(_vm.part, "slug", $$v)
                           },
-                          expression: "form.slug"
+                          expression: "part.slug"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("sale"),
+                          name: "sale",
+                          error: _vm.$page.errors.sale,
+                          tabindex: "5",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.part.sale,
+                          callback: function($$v) {
+                            _vm.$set(_vm.part, "sale", $$v)
+                          },
+                          expression: "part.sale"
                         }
                       })
                     ],
@@ -53398,7 +53322,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", [
                     _c("label", { staticClass: "text-gray-700" }, [
-                      _vm._v("Car")
+                      _vm._v(_vm._s(_vm.__("car")))
                     ]),
                     _vm._v(" "),
                     _c(
@@ -53408,14 +53332,74 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.form.car_id,
-                            expression: "form.car_id"
+                            value: _vm.part.car_id,
+                            expression: "part.car_id"
                           }
                         ],
                         staticClass: "form-select text-gray-500 w-full mt-1",
                         attrs: {
                           name: "car_id",
                           error: _vm.$page.errors.car_id,
+                          required: "",
+                          tabindex: "6"
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.part,
+                              "car_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "0" } }, [
+                          _vm._v("select car")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.cars, function(car) {
+                          return _c(
+                            "option",
+                            { key: car.index, domProps: { value: car.id } },
+                            [_vm._v(_vm._s(car.brand))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("label", { staticClass: "text-gray-700" }, [
+                      _vm._v(_vm._s(_vm.__("category")))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.part.category_id,
+                            expression: "part.category_id"
+                          }
+                        ],
+                        staticClass: "form-select text-gray-500 w-full mt-1",
+                        attrs: {
+                          name: "category_id",
+                          error: _vm.$page.errors.category_id,
                           required: "",
                           tabindex: "7"
                         },
@@ -53430,8 +53414,8 @@ var render = function() {
                                 return val
                               })
                             _vm.$set(
-                              _vm.form,
-                              "car_id",
+                              _vm.part,
+                              "category_id",
                               $event.target.multiple
                                 ? $$selectedVal
                                 : $$selectedVal[0]
@@ -53439,20 +53423,29 @@ var render = function() {
                           }
                         }
                       },
-                      _vm._l(_vm.cars, function(car) {
-                        return _c(
-                          "option",
-                          { key: car.index, domProps: { value: car.id } },
-                          [_vm._v(_vm._s(car.brand))]
-                        )
-                      }),
-                      0
+                      [
+                        _c("option", { attrs: { value: "0" } }, [
+                          _vm._v("select category")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.categories, function(category) {
+                          return _c(
+                            "option",
+                            {
+                              key: category.index,
+                              domProps: { value: category.id }
+                            },
+                            [_vm._v(_vm._s(category.name))]
+                          )
+                        })
+                      ],
+                      2
                     )
                   ]),
                   _vm._v(" "),
                   _c("div", [
                     _c("label", { staticClass: "text-gray-700" }, [
-                      _vm._v("Category")
+                      _vm._v(_vm._s(_vm.__("supplier")))
                     ]),
                     _vm._v(" "),
                     _c(
@@ -53462,14 +53455,14 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.form.category_id,
-                            expression: "form.category_id"
+                            value: _vm.part.supplier_id,
+                            expression: "part.supplier_id"
                           }
                         ],
                         staticClass: "form-select text-gray-500 w-full mt-1",
                         attrs: {
-                          name: "category_id",
-                          error: _vm.$page.errors.category_id,
+                          name: "supplier_id",
+                          error: _vm.$page.errors.supplier_id,
                           required: "",
                           tabindex: "8"
                         },
@@ -53484,64 +53477,7 @@ var render = function() {
                                 return val
                               })
                             _vm.$set(
-                              _vm.form,
-                              "category_id",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      _vm._l(_vm.categories, function(category) {
-                        return _c(
-                          "option",
-                          {
-                            key: category.index,
-                            domProps: { value: category.id }
-                          },
-                          [_vm._v(_vm._s(category.name))]
-                        )
-                      }),
-                      0
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("label", { staticClass: "text-gray-700" }, [
-                      _vm._v("Supplier")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.supplier_id,
-                            expression: "form.supplier_id"
-                          }
-                        ],
-                        staticClass: "form-select text-gray-500 w-full mt-1",
-                        attrs: {
-                          name: "supplier_id",
-                          error: _vm.$page.errors.supplier_id,
-                          required: "",
-                          tabindex: "9"
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.form,
+                              _vm.part,
                               "supplier_id",
                               $event.target.multiple
                                 ? $$selectedVal
@@ -53550,23 +53486,29 @@ var render = function() {
                           }
                         }
                       },
-                      _vm._l(_vm.suppliers, function(supplier) {
-                        return _c(
-                          "option",
-                          {
-                            key: supplier.index,
-                            domProps: { value: supplier.id }
-                          },
-                          [_vm._v(_vm._s(supplier.name))]
-                        )
-                      }),
-                      0
+                      [
+                        _c("option", { attrs: { value: "0" } }, [
+                          _vm._v("select supplier")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.suppliers, function(supplier) {
+                          return _c(
+                            "option",
+                            {
+                              key: supplier.index,
+                              domProps: { value: supplier.id }
+                            },
+                            [_vm._v(_vm._s(supplier.name))]
+                          )
+                        })
+                      ],
+                      2
                     )
                   ]),
                   _vm._v(" "),
                   _c("div", [
                     _c("label", { staticClass: "text-gray-700" }, [
-                      _vm._v("Type")
+                      _vm._v(_vm._s(_vm.__("type")))
                     ]),
                     _vm._v(" "),
                     _c(
@@ -53625,7 +53567,9 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", [
-                    _c("label", { attrs: { for: "image" } }, [_vm._v("Image")]),
+                    _c("label", { staticClass: "text-gray-700" }, [
+                      _vm._v(_vm._s(_vm.__("images")))
+                    ]),
                     _vm._v(" "),
                     _c("input", {
                       ref: "images",
@@ -53638,8 +53582,9 @@ var render = function() {
                         label: "Images",
                         name: "images[]",
                         error: _vm.$page.errors.file,
-                        tabindex: "10",
-                        multiple: ""
+                        tabindex: "7",
+                        multiple: "",
+                        required: ""
                       },
                       on: {
                         change: function($event) {
@@ -53656,7 +53601,7 @@ var render = function() {
                 { staticClass: "flex justify-end mt-4" },
                 [
                   _c("base-button", { staticClass: "bg-teal-700" }, [
-                    _vm._v("Update Part")
+                    _vm._v(_vm._s(_vm.__("Edit")))
                   ])
                 ],
                 1
@@ -54523,12 +54468,14 @@ var render = function() {
   return _c("layout", [
     _c(
       "div",
-      { staticClass: "mt-8" },
+      { staticClass: "mt-8 capitalize" },
       [
         _c("div", { staticClass: "flex" }, [
           _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
-            _vm._v("Super Category/"),
-            _c("span", { staticClass: "text-gray-500" }, [_vm._v("Create")])
+            _vm._v(_vm._s(_vm.__("super categories")) + "/"),
+            _c("span", { staticClass: "text-gray-500" }, [
+              _vm._v(_vm._s(_vm.__("create")))
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -54553,7 +54500,7 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Name",
+                          label: _vm.__("name"),
                           name: "name",
                           error: _vm.$page.errors.name,
                           tabindex: "1",
@@ -54578,7 +54525,7 @@ var render = function() {
                         staticClass: "text-gray-700",
                         attrs: { for: "Upload Image" }
                       },
-                      [_vm._v("Upload Image")]
+                      [_vm._v(_vm._s(_vm.__("images")))]
                     ),
                     _vm._v(" "),
                     _c("input", {
@@ -54611,7 +54558,7 @@ var render = function() {
                 { staticClass: "flex justify-end mt-4" },
                 [
                   _c("base-button", { staticClass: "bg-teal-700" }, [
-                    _vm._v("Create Category")
+                    _vm._v(_vm._s(_vm.__("create")))
                   ])
                 ],
                 1
@@ -54653,8 +54600,10 @@ var render = function() {
       [
         _c("div", { staticClass: "flex" }, [
           _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
-            _vm._v("Super Category/"),
-            _c("span", { staticClass: "text-gray-500" }, [_vm._v("Edit")])
+            _vm._v(_vm._s(_vm.__("super categories")) + "/"),
+            _c("span", { staticClass: "text-gray-500" }, [
+              _vm._v(_vm._s(_vm.__("Edit")))
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -54679,7 +54628,7 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Name",
+                          label: _vm.__("name"),
                           name: "name",
                           error: _vm.$page.errors.name,
                           tabindex: "1",
@@ -54704,7 +54653,7 @@ var render = function() {
                         staticClass: "text-gray-700",
                         attrs: { for: "Upload Image" }
                       },
-                      [_vm._v("Upload Image")]
+                      [_vm._v("I" + _vm._s(_vm.__("images")))]
                     ),
                     _vm._v(" "),
                     _c("input", {
@@ -54737,7 +54686,7 @@ var render = function() {
                 { staticClass: "flex justify-end mt-4" },
                 [
                   _c("base-button", { staticClass: "bg-teal-700" }, [
-                    _vm._v("Update Super")
+                    _vm._v(_vm._s(_vm.__("Edit")))
                   ])
                 ],
                 1
@@ -54773,14 +54722,20 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("layout", [
-    _c("h1", { staticClass: "md:text-base my-2 text-gray-500 text-sm" }, [
-      _vm._v("Dashboard/Super Category")
-    ]),
+    _c(
+      "h1",
+      { staticClass: "md:text-base my-2 text-gray-500 text-sm capitalize" },
+      [
+        _vm._v(
+          _vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("super categories"))
+        )
+      ]
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "mt-8" }, [
+    _c("div", { staticClass: "mt-8 capitalize" }, [
       _c("div", { staticClass: "flex justify-between" }, [
         _c("h2", { staticClass: "text-3xl text-teal-600 font-bold" }, [
-          _vm._v("Super Category")
+          _vm._v(_vm._s(_vm.__("super categories")))
         ]),
         _vm._v(" "),
         _c(
@@ -54816,7 +54771,13 @@ var render = function() {
                     })
                   ]
                 ),
-                _vm._v("\n                    Add Super\n                ")
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.__("add")) +
+                    " " +
+                    _vm._s(_vm.__("super")) +
+                    "\n                "
+                )
               ]
             )
           ],
@@ -54863,7 +54824,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Name\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("name")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -55125,13 +55088,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("layout", [
     _c("h1", { staticClass: "md:text-base my-2 text-gray-500 text-sm" }, [
-      _vm._v("Dashboard/Suppliers")
+      _vm._v(_vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("suppliers")))
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "mt-8" }, [
+    _c("div", { staticClass: "mt-8 capitalize" }, [
       _c("div", { staticClass: "flex justify-between" }, [
         _c("h2", { staticClass: "text-3xl text-teal-600 font-bold" }, [
-          _vm._v("Suppliers")
+          _vm._v(_vm._s(_vm.__("suppliers")))
         ]),
         _vm._v(" "),
         _c("div", [
@@ -55155,7 +55118,7 @@ var render = function() {
                     attrs: {
                       name: "name",
                       error: _vm.$page.errors.name,
-                      placeholder: "Supplier name",
+                      placeholder: _vm.__("supplier name"),
                       required: ""
                     },
                     model: {
@@ -55176,7 +55139,7 @@ var render = function() {
                   _c(
                     "base-button",
                     { staticClass: "bg-teal-700 hover:bg-teal-600" },
-                    [_vm._v("Create Supplier")]
+                    [_vm._v(_vm._s(_vm.__("create")))]
                   )
                 ],
                 1
@@ -55188,9 +55151,11 @@ var render = function() {
       _vm._v(" "),
       _c("h1", { staticClass: "font-medium text-gray-500 text-xs" }, [
         _c("span", { staticClass: "font-semibold text-red-400" }, [
-          _vm._v("Hint")
+          _vm._v(_vm._s(_vm.__("hint")))
         ]),
-        _vm._v(" double click on name to modify\n        ")
+        _vm._v(
+          " " + _vm._s(_vm.__("double click on name to modify")) + "\n        "
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "mt-4" }, [
@@ -55232,7 +55197,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Name\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("name")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -55360,12 +55327,14 @@ var render = function() {
   return _c("layout", [
     _c(
       "div",
-      { staticClass: "mt-8" },
+      { staticClass: "mt-8 capitalize" },
       [
         _c("div", { staticClass: "flex" }, [
           _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
-            _vm._v("Customer/"),
-            _c("span", { staticClass: "text-gray-500" }, [_vm._v("Create")])
+            _vm._v(_vm._s(_vm.__("customers")) + "/"),
+            _c("span", { staticClass: "text-gray-500" }, [
+              _vm._v(_vm._s(_vm.__("create")))
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -55390,7 +55359,7 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Name",
+                          label: _vm.__("name"),
                           name: "name",
                           error: _vm.$page.errors.name,
                           placeholder: _vm.__("e.g Mohammed"),
@@ -55414,7 +55383,7 @@ var render = function() {
                       _c("base-input", {
                         attrs: {
                           type: "email",
-                          label: "Email address",
+                          label: _vm.__("email"),
                           name: "email",
                           error: _vm.$page.errors.email,
                           placeholder: _vm.__("e.g mohammed@email.com"),
@@ -55437,7 +55406,7 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: "Password",
+                          label: _vm.__("password"),
                           type: "password",
                           error: _vm.$page.errors.password,
                           placeholder: _vm.__("e.g password"),
@@ -55457,7 +55426,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("base-input", {
                     attrs: {
-                      label: "Password confirmation",
+                      label: _vm.__("password confirmation"),
                       type: "password",
                       placeholder: _vm.__("e.g password"),
                       required: ""
@@ -55477,7 +55446,7 @@ var render = function() {
                       _c("base-input", {
                         attrs: {
                           type: "number",
-                          label: "Admin",
+                          label: _vm.__("admin"),
                           name: "is_admin",
                           error: _vm.$page.errors.is_admin,
                           placeholder: _vm.__("e.g 1 or 0"),
@@ -55501,7 +55470,7 @@ var render = function() {
                       _c("base-input", {
                         attrs: {
                           type: "number",
-                          label: "Delivery",
+                          label: _vm.__("delivery"),
                           name: "is_delivery",
                           error: _vm.$page.errors.is_delivery,
                           placeholder: _vm.__("e.g 1 or 0"),
@@ -55527,7 +55496,7 @@ var render = function() {
                 { staticClass: "flex justify-end mt-4" },
                 [
                   _c("base-button", { staticClass: "bg-teal-700" }, [
-                    _vm._v("Create Customer")
+                    _vm._v(_vm._s(_vm.__("create")))
                   ])
                 ],
                 1
@@ -55565,12 +55534,14 @@ var render = function() {
   return _c("layout", [
     _c(
       "div",
-      { staticClass: "mt-8" },
+      { staticClass: "mt-8 capitalize" },
       [
         _c("div", { staticClass: "flex" }, [
           _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
-            _vm._v("Customer /"),
-            _c("span", { staticClass: "text-gray-700" }, [_vm._v(" Edit")])
+            _vm._v(_vm._s(_vm.__("customers")) + "/"),
+            _c("span", { staticClass: "text-gray-500" }, [
+              _vm._v(_vm._s(_vm.__("Edit")))
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -55590,56 +55561,83 @@ var render = function() {
                 "div",
                 { staticClass: "grid grid-cols-1 sm:grid-cols-2 gap-6" },
                 [
-                  _c("base-input", {
-                    attrs: {
-                      label: "Name",
-                      name: "name",
-                      error: _vm.$page.errors.name,
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.form.name,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "name", $$v)
-                      },
-                      expression: "form.name"
-                    }
-                  }),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("name"),
+                          name: "name",
+                          error: _vm.$page.errors.name,
+                          placeholder: _vm.__("e.g Mohammed"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.form.name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "name", $$v)
+                          },
+                          expression: "form.name"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          type: "email",
+                          label: _vm.__("email"),
+                          name: "email",
+                          error: _vm.$page.errors.email,
+                          placeholder: _vm.__("e.g mohammed@email.com"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.form.email,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "email", $$v)
+                          },
+                          expression: "form.email"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("password"),
+                          type: "password",
+                          error: _vm.$page.errors.password,
+                          placeholder: _vm.__("e.g password"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.form.password,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "password", $$v)
+                          },
+                          expression: "form.password"
+                        }
+                      })
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c("base-input", {
                     attrs: {
-                      type: "email",
-                      label: "Email address",
-                      name: "email",
-                      error: _vm.$page.errors.email,
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.form.email,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "email", $$v)
-                      },
-                      expression: "form.email"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("base-input", {
-                    attrs: {
-                      label: "Password",
+                      label: _vm.__("password confirmation"),
                       type: "password",
-                      error: _vm.$page.errors.password
+                      placeholder: _vm.__("e.g password"),
+                      required: ""
                     },
-                    model: {
-                      value: _vm.form.password,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "password", $$v)
-                      },
-                      expression: "form.password"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("base-input", {
-                    attrs: { label: "Password confirmation", type: "password" },
                     model: {
                       value: _vm.form.password_confirmation,
                       callback: function($$v) {
@@ -55649,41 +55647,53 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("base-input", {
-                    attrs: {
-                      type: "number",
-                      label: "Admin",
-                      name: "is_admin",
-                      error: _vm.$page.errors.is_admin,
-                      placeholder: _vm.__("e.g 1 or 0"),
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.form.is_admin,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "is_admin", $$v)
-                      },
-                      expression: "form.is_admin"
-                    }
-                  }),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          type: "number",
+                          label: _vm.__("admin"),
+                          name: "is_admin",
+                          error: _vm.$page.errors.is_admin,
+                          placeholder: _vm.__("e.g 1 or 0"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.form.is_admin,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "is_admin", $$v)
+                          },
+                          expression: "form.is_admin"
+                        }
+                      })
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _c("base-input", {
-                    attrs: {
-                      type: "number",
-                      label: "Delivery",
-                      name: "is_delivery",
-                      error: _vm.$page.errors.is_delivery,
-                      placeholder: _vm.__("e.g 1 or 0"),
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.form.is_delivery,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "is_delivery", $$v)
-                      },
-                      expression: "form.is_delivery"
-                    }
-                  })
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          type: "number",
+                          label: _vm.__("delivery"),
+                          name: "is_delivery",
+                          error: _vm.$page.errors.is_delivery,
+                          placeholder: _vm.__("e.g 1 or 0"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.form.is_delivery,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "is_delivery", $$v)
+                          },
+                          expression: "form.is_delivery"
+                        }
+                      })
+                    ],
+                    1
+                  )
                 ],
                 1
               ),
@@ -55693,7 +55703,7 @@ var render = function() {
                 { staticClass: "flex justify-end mt-4" },
                 [
                   _c("base-button", { staticClass: "bg-teal-700" }, [
-                    _vm._v("Update user")
+                    _vm._v(_vm._s(_vm.__("Edit")))
                   ])
                 ],
                 1
@@ -55730,7 +55740,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("layout", [
     _c("h1", { staticClass: "md:text-base my-2 text-gray-500 text-sm" }, [
-      _vm._v("Dashboard/Customers")
+      _vm._v(_vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("customers")))
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "mx-5" }, [
@@ -55739,33 +55749,7 @@ var render = function() {
           _c(
             "h2",
             { staticClass: "font-bold md:text-3xl text-xl text-teal-600" },
-            [_vm._v("Customers")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "capitalize flex items-center md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap"
-            },
-            [
-              _c("h1", [_vm._v("123 total")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex items-center mx-8" }, [
-                _c("h1", [_vm._v("sort by :")]),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "" } }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass:
-                        "bg-transparent border-0 capitalize font-medium form-select text-gray-600 text-xs md:text-base"
-                    },
-                    [_c("option", [_vm._v("date created")])]
-                  )
-                ])
-              ])
-            ]
+            [_vm._v(_vm._s(_vm.__("customers")))]
           )
         ]),
         _vm._v(" "),
@@ -55802,7 +55786,13 @@ var render = function() {
                     })
                   ]
                 ),
-                _vm._v("\n                    Add Customer\n                ")
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.__("add")) +
+                    " " +
+                    _vm._s(_vm.__("customer")) +
+                    "\n                "
+                )
               ]
             ),
             _vm._v(" "),
@@ -55917,7 +55907,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Name\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("name")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -55931,7 +55923,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Email\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("email")) +
+                                "\n                                "
                             )
                           ]
                         ),
@@ -55945,7 +55939,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Action\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.__("action")) +
+                                "\n                                "
                             )
                           ]
                         )
@@ -59558,7 +59554,14 @@ var render = function() {
               "div",
               { staticClass: "flex items-center mx-6 text-teal-700" },
               [
-                _c("a", { attrs: { href: "/store" } }, [_vm._v("store")]),
+                _c(
+                  "a",
+                  {
+                    staticClass: "font-semibold hover:scale-105 transform",
+                    attrs: { href: "/store" }
+                  },
+                  [_vm._v(_vm._s(_vm.__("store")))]
+                ),
                 _vm._v(" "),
                 _c("LanguageSelector"),
                 _vm._v(" "),
@@ -73817,8 +73820,8 @@ module.exports = NATIVE_SYMBOL
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.6.12
- * (c) 2014-2020 Evan You
+ * Vue.js v2.6.11
+ * (c) 2014-2019 Evan You
  * Released under the MIT License.
  */
 
@@ -79257,7 +79260,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.6.12';
+Vue.version = '2.6.11';
 
 /*  */
 
@@ -81463,7 +81466,7 @@ function updateDOMProps (oldVnode, vnode) {
       // skip the update if old and new VDOM state is the same.
       // `value` is handled separately because the DOM value may be temporarily
       // out of sync with VDOM state due to focus, composition and modifiers.
-      // This  #4521 by skipping the unnecessary `checked` update.
+      // This  #4521 by skipping the unnecesarry `checked` update.
       cur !== oldProps[key]
     ) {
       // some property updates can throw
@@ -83708,7 +83711,7 @@ function parse (
       }
     },
     comment: function comment (text, start, end) {
-      // adding anything as a sibling to the root node is forbidden
+      // adding anyting as a sibling to the root node is forbidden
       // comments should still be allowed, but ignored
       if (currentParent) {
         var child = {
@@ -87914,8 +87917,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Store/Index.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -88001,8 +88004,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDetails_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ItemDetails.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Store/ItemDetails.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDetails_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDetails_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDetails_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDetails_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDetails_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDetails_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDetails_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -88807,8 +88810,8 @@ component.options.__file = "resources/js/components/UI/BaseFooter.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseFooter_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./BaseFooter.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UI/BaseFooter.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseFooter_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseFooter_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseFooter_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseFooter_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseFooter_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseFooter_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseFooter_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -88963,8 +88966,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseNav_vue_vue_type_style_index_0_id_f2aaf5fc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./BaseNav.vue?vue&type=style&index=0&id=f2aaf5fc&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UI/BaseNav.vue?vue&type=style&index=0&id=f2aaf5fc&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseNav_vue_vue_type_style_index_0_id_f2aaf5fc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseNav_vue_vue_type_style_index_0_id_f2aaf5fc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseNav_vue_vue_type_style_index_0_id_f2aaf5fc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseNav_vue_vue_type_style_index_0_id_f2aaf5fc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseNav_vue_vue_type_style_index_0_id_f2aaf5fc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseNav_vue_vue_type_style_index_0_id_f2aaf5fc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseNav_vue_vue_type_style_index_0_id_f2aaf5fc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -89119,8 +89122,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseSidebar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./BaseSidebar.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UI/BaseSidebar.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseSidebar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseSidebar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseSidebar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseSidebar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseSidebar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseSidebar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BaseSidebar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -89206,8 +89209,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_style_index_0_id_2022ff60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Flash.vue?vue&type=style&index=0&id=2022ff60&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UI/Flash.vue?vue&type=style&index=0&id=2022ff60&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_style_index_0_id_2022ff60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_style_index_0_id_2022ff60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_style_index_0_id_2022ff60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_style_index_0_id_2022ff60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_style_index_0_id_2022ff60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_style_index_0_id_2022ff60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_style_index_0_id_2022ff60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -89293,8 +89296,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Multislide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Multislide.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UI/Multislide.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Multislide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Multislide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Multislide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Multislide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Multislide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Multislide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Multislide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -89380,8 +89383,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./SelectSection.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UI/SelectSection.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -89467,8 +89470,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Slide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Slide.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UI/Slide.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Slide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Slide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Slide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Slide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Slide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Slide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Slide_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -89654,8 +89657,8 @@ module.exports = "/images/oops-404-error-with-a-broken-robot-animate.svg?844f72a
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/khatabwedaa/Code/contributions/partix/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/khatabwedaa/Code/contributions/partix/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /home/hnooz/Documents/Projects/Partix/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/hnooz/Documents/Projects/Partix/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

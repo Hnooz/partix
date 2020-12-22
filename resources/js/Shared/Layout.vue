@@ -14,7 +14,7 @@
 
                 
                 <div class="flex items-center mx-6 text-teal-700">
-                    <a href="/store">store</a>
+                    <a href="/store" class="font-semibold hover:scale-105 transform">{{__('store')}}</a>
                     <LanguageSelector />
 
                     <button class="focus:outline-none mx-2">

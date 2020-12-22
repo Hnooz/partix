@@ -13,7 +13,7 @@
                             <base-input :label="__('name')"  name="name"  v-model="part.name" :error="$page.errors.name" tabindex="1" required></base-input>
                         </div>
                         <div>
-                            <base-input :label="__('part number')"  name="number"  v-model="part.number" :error="$page.errors.number" tabindex="2" required></base-input>
+                            <base-input :label="__('number')"  name="number"  v-model="part.number" :error="$page.errors.number" tabindex="2" required></base-input>
                         </div>
                         <div>
                             <base-input :label="__('description')"  name="description"   v-model="part.description" :error="$page.errors.description" tabindex="3" required></base-input>
@@ -65,7 +65,7 @@
                         
                     </div>
                     <div class="flex justify-end mt-4">
-                        <base-button class="bg-teal-700">{{__('create part')}}</base-button>
+                        <base-button class="bg-teal-700">{{__('create')}}</base-button>
                     </div>
                 </form>
             </base-panel>

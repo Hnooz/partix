@@ -1,65 +1,72 @@
 <template>
     <layout>
 
-        <div class="mt-8">
+        <div class="mt-8 capitalize">
             <div class="flex">
-                <h2 class="text-3xl text-teal-700 font-bold">Part/<span class="text-gray-500">Edit</span></h2>
+                <h2 class="text-3xl text-teal-700 font-bold">{{__('parts')}}/<span class="text-gray-500">{{__('Edit')}}</span></h2>
             </div>
 
             <base-panel class="md:max-w-3xl mt-4">
                 <form @submit.prevent="submit" enctype="multipart/form-data">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <base-input label="Name"  name="name"  v-model="form.name" :error="$page.errors.name" tabindex="1" required></base-input>
+                            <base-input :label="__('name')"  name="name"  v-model="part.name" :error="$page.errors.name" tabindex="1" required></base-input>
                         </div>
                         <div>
-                            <base-input label="Part Number"  name="number"  v-model="form.number" :error="$page.errors.number" tabindex="2" required></base-input>
+                            <base-input :label="__('number')"  name="number"  v-model="part.number" :error="$page.errors.number" tabindex="2" required></base-input>
                         </div>
                         <div>
-                            <base-input label="Description"  name="description"   v-model="form.description" :error="$page.errors.description" tabindex="3" required></base-input>
+                            <base-input :label="__('description')"  name="description"   v-model="part.description" :error="$page.errors.description" tabindex="3" required></base-input>
                         </div>
                         <div>
-                            <base-input type="number" label="Price"  name="price"  v-model="form.price" :error="$page.errors.price" tabindex="4" required></base-input>
+                            <base-input type="number" :label="__('price')"  name="price"  v-model="part.price" :error="$page.errors.price" tabindex="4" required></base-input>
                         </div>
                         <div>
-                            <base-input type="number" label="Price for used part"  name="second_price"  v-model="form.second_price" :error="$page.errors.second_price" tabindex="5" required></base-input>
+                            <base-input type="number" :label="__('second price')"  name="second_price"  v-model="part.second_price" :error="$page.errors.second_price" tabindex="4" required></base-input>
                         </div>
                         <div>
-                            <base-input label="Slug"  name="slug"  v-model="form.slug" :error="$page.errors.slug" tabindex="6" required></base-input>
+                            <base-input :label="__('slug')"  name="slug"  v-model="part.slug" :error="$page.errors.slug" tabindex="5" required></base-input>
+                        </div>
+                         <div>
+                            <base-input :label="__('sale')"  name="sale"  v-model="part.sale" :error="$page.errors.sale" tabindex="5" required></base-input>
                         </div>
                         <div>
-                            <label class="text-gray-700">Car</label>
-                                <select  name="car_id"  v-model="form.car_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.car_id" required tabindex="7">
+                            <label class="text-gray-700">{{__('car')}}</label>
+                                <select  name="car_id"  v-model="part.car_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.car_id" required tabindex="6">
+                                    <option value="0">select car</option>
                                     <option v-for="car in cars" :key="car.index" :value="car.id">{{car.brand}}</option>
                                 </select>
                         </div>
                         <div>
-                            <label class="text-gray-700">Category</label>
-                                <select  name="category_id"  v-model="form.category_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.category_id" required tabindex="8">
+                            <label class="text-gray-700">{{__('category')}}</label>
+                                <select  name="category_id"  v-model="part.category_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.category_id" required tabindex="7">
+                                    <option value="0">select category</option>
                                     <option v-for="category in categories" :key="category.index" :value="category.id">{{category.name}}</option>
                                 </select>
                         </div>
                         <div>
-                            <label class="text-gray-700">Supplier</label>
-                                <select  name="supplier_id"  v-model="form.supplier_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.supplier_id" required tabindex="9">
+                            <label class="text-gray-700">{{__('supplier')}}</label>
+                                <select  name="supplier_id"  v-model="part.supplier_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.supplier_id" required tabindex="8">
+                                    <option value="0">select supplier</option>
                                     <option v-for="supplier in suppliers" :key="supplier.index" :value="supplier.id">{{supplier.name}}</option>
                                 </select>
                         </div>
                         <div>
-                            <label class="text-gray-700">Type</label>
+                            <label class="text-gray-700">{{__('type')}}</label>
                                 <select  name="part_type_id"  v-model="part.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type_id" required tabindex="9">
                                     <option value="0">select type</option>
                                     <option v-for="type in part_types" :key="type.index" :value="type.id">{{type.name}}</option>
                                 </select>
                         </div>
                         <div>
-                            <label for="image">Image</label>
-                            <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full" :error="$page.errors.file" tabindex="10" multiple>
+                            <label class="text-gray-700">{{__('images')}}</label>
+                            <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full" :error="$page.errors.file" tabindex="7" multiple required>
                         </div>
+                        
                         
                     </div>
                     <div class="flex justify-end mt-4">
-                        <base-button class="bg-teal-700">Update Part</base-button>
+                        <base-button class="bg-teal-700">{{__('Edit')}}</base-button>
                     </div>
                 </form>
             </base-panel>

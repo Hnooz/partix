@@ -1,22 +1,22 @@
 <template>
     <layout>
-        <h1 class="md:text-base my-2 text-gray-500 text-sm">Dashboard/Suppliers</h1>
-        <div class="mt-8">
+        <h1 class="md:text-base my-2 text-gray-500 text-sm">{{__('dashboard')}}/{{__('suppliers')}}</h1>
+        <div class="mt-8 capitalize">
             <div class="flex justify-between">
-                <h2 class="text-3xl text-teal-600 font-bold">Suppliers</h2>
+                <h2 class="text-3xl text-teal-600 font-bold">{{__('suppliers')}}</h2>
                 <div>
                     <form class="flex items-end" @submit.prevent="submit">
                         <div class="mx-2">
-                            <base-input  name="name" v-model="form.name" :error="$page.errors.name" placeholder="Supplier name" required></base-input>
+                            <base-input  name="name" v-model="form.name" :error="$page.errors.name" :placeholder="__('supplier name')" required></base-input>
                         </div>
                         <div>
-                            <base-button class="bg-teal-700 hover:bg-teal-600">Create Supplier</base-button>
+                            <base-button class="bg-teal-700 hover:bg-teal-600">{{__('create')}}</base-button>
                         </div>
                     </form>
                 </div>
             </div>
             <h1 class="font-medium text-gray-500 text-xs">
-                <span class="font-semibold text-red-400">Hint</span> double click on name to modify
+                <span class="font-semibold text-red-400">{{__('hint')}}</span> {{__('double click on name to modify')}}
             </h1>
             <div class="mt-4">
                 <div class="flex flex-col">
@@ -32,7 +32,7 @@
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Name
+                                        {{__('name')}}
                                     </th>
 
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>

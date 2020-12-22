@@ -1,12 +1,12 @@
 <template>
     <layout>
-        <h1 class="my-2 text-gray-500">Dashboard/Orders</h1>
-        <div class="mx-5">
+        <h1 class="my-2 text-gray-500 capitalize">{{__('dashboard')}}/{{__('orders')}}</h1>
+        <div class="mx-5 capitalize">
             <div class="justify-between md:flex">
                 <div class="items-center md:flex">
-                    <h2 class="font-bold md:text-3xl text-xl text-teal-600">Orders</h2>
+                    <h2 class="font-bold md:text-3xl text-xl text-teal-600">{{__('orders')}}</h2>
                     <div class="capitalize flex items-center md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap">
-                         <h1>{{this.$page.order.total}} total</h1>
+                         <h1>{{this.$page.order.total}} {{__('order')}}</h1>
                          <div class="flex items-center mx-8">
                              <label for="">
                                 <div class="relative inline-block text-left">
@@ -20,10 +20,10 @@
                                 </div>
                                 <div v-if="isOpen" :class="isOpen ? 'transition ease-out duration-100':'transition ease-in duration-75'" class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                                     <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                        <a href="/dashboard/orders?1" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">pending</a>
-                                        <a href="/dashboard/orders?2" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">delivered</a>
-                                        <a href="/dashboard/orders?3" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">awaiting</a>
-                                        <a href="/dashboard/orders?4" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">rejected</a>
+                                        <a href="/dashboard/orders?1" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">{{__('pending')}}</a>
+                                        <a href="/dashboard/orders?2" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">{{__('delivered')}}</a>
+                                        <a href="/dashboard/orders?3" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">{{__('awaiting')}}</a>
+                                        <a href="/dashboard/orders?4" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">{{__('rejected')}}</a>
                                     </div>
                                 </div>
                                 </div>
@@ -37,7 +37,7 @@
                     <inertia-link href="#"
                                   class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                        Add Order
+                        {{__('add')}} {{__('order')}}
                     </inertia-link>
                     <button class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white" type="submit">
                         <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
@@ -53,48 +53,48 @@
                             <table class="min-w-full">
                                 <thead class="bg-gray-100">
                                 <tr>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                    <!-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                    </th>
+                                    </th> -->
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         #
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Customer Address
+                                        {{__('customer address')}} 
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Customer Phone
+                                        {{__('customer phone')}}
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Total Price
+                                        {{__('total')}} {{__('price')}}
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Order Status
+                                        {{__('order status')}}
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Created At
+                                        {{__('created at')}}
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        Action
+                                        {{__('action')}}
                                     </th>
                                     <!-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th> -->
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white text-gray-500 text-sm md:text-base">
                                 <tr v-for="order in orders" :key="order.index">
-                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                    <!-- <td class="px-6 py-4 whitespace-no-wrap">
                                         <label for="">
                                             <input type="checkbox" class="form-checkbox border-2">
                                         </label>
-                                    </td>
+                                    </td> -->
                                     <td class="px-6 py-4 whitespace-no-wrap"> 
                                         {{ order.id }}
                                     </td>
