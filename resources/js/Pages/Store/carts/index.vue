@@ -73,7 +73,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="text-gray-600">{{item.price.toFixed()}}$</span>
+                                    <div>
+                                        <span class="block text-gray-600">{{item.price.toFixed()}}$</span>
+                                    <button @click="Delete(item)" class="focus:outline-none font-medium outline-none text-red-500 text-sm">remove</button>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -111,23 +115,22 @@ import StoreLayout from '../../../Shared/StoreLayout'
         methods: {
             submit()
             {
-                this.$inertia.post('/orders', this.form);
-            },
-            Apply(coupon)
-            {
-                this.$inertia.post('/orders/checkCoupons', coupon);
+                this.$inertia.post('/store/orders', this.form).then(() => location.reload());
             },
             increment(item){
                 item.quantity++;
-                this.$inertia.put(`/cart/${item.id}`, item);
+                this.$inertia.put(`/store/cart/${item.id}`, item);
             },
 
             decrement(item){
                 item.quantity--;
-                this.$inertia.put(`/cart/${item.id}`, item);
+                this.$inertia.put(`/store/cart/${item.id}`, item);
+            },
+            Delete(item) {
+                this.$inertia.delete(`/store/carts/${item.id}`).then(() => location.reload());
             },
             clearCart(){
-                this.$inertia.delete(`clear`);
+                this.$inertia.delete(`/store/clear`).then(() => location.reload());
             }
         },
     }

@@ -28,6 +28,7 @@ class PartImport implements ToModel
             'category_id' => $row[11],
             'part_type_id' => $row[12],
             'sale' => $row[13],
+            'brand_id' => $row[14],
         ]);
     }
 }

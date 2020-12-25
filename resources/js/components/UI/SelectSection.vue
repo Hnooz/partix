@@ -38,7 +38,7 @@
                             <label class="w-70" for="">
                                 <select v-model="brand" @change="getModel()"  name="brand" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full" id="">
                                     <option value="0">select Brand</option>
-                                    <option v-for="car in brands" :key="car.index" :value="car.id">{{car.brand}}</option>
+                                    <option v-for="brand in brands" :key="brand.index" :value="brand.id">{{brand.name}}</option>
                                 </select>
                             </label>
                             <label for="model" class="w-70">
@@ -81,10 +81,6 @@ import BaseInput from '../UI/BaseInput'
 import BaseButton from '../UI/BaseButton'
 
     export default {
-
-        props:{
-            carItem:Array,
-        },
         data() {
             return {
                 brand:0,
@@ -105,7 +101,7 @@ import BaseButton from '../UI/BaseButton'
 
                 axios({
                     method: 'post',
-                    url: '/filtered_parts',
+                    url: '/store/filtered_parts',
                     data: {
                         car_id: this.brand,
                     }
@@ -118,13 +114,13 @@ import BaseButton from '../UI/BaseButton'
                 });
             },
             getBrand(){
-                axios.get('/get_brands')
+                axios.get('/store/get_brands')
                     .then(function (response) {
                         this.brands = response.data;
                     }.bind(this));
             },
             getModel(){
-                axios.get('/get_models',{
+                axios.get('/store/get_models',{
                     params: {
                         brand_id: this.brand
                     }
@@ -135,7 +131,7 @@ import BaseButton from '../UI/BaseButton'
 
             },
             getYear(){
-                axios.get('/get_years',{
+                axios.get('/store/get_years',{
                     params: {
                         model_id: this.model
                     }
@@ -146,7 +142,7 @@ import BaseButton from '../UI/BaseButton'
 
             },
             getEngine(){
-                axios.get('/get_engines',{
+                axios.get('/store/get_engines',{
                     params: {
                         year_id: this.year
                     }

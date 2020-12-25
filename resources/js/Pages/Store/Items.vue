@@ -2,7 +2,7 @@
     <store-layout>
     <BaseNav :cartItemQuantity="cartQuantity" :cartItem="cartCollection" :cartTotalPrice="cartTotalPrice" />
 
-    <SelectSection :carItem="cars"/>
+    <SelectSection />
 
     <!-- filter search -->
     <div class="bg-teal-700 py-5 hidden md:block">
@@ -51,15 +51,14 @@
                 <p v-if="part.sale > 0" class="bg-teal-400 font-semibold md:h-12 md:px-1 md:rounded-none px-2 md:py-3 rounded-br-lg shadow-lg md:text-base text-xs text-white md:w-12">{{part.sale}}%</p>
             </div>
             
-            <a :href="`/details/${part.id}`">
+            <a :href="`/store/details/${part.id}`">
                 <img v-if="!part.url[0]" class="h-20 md:h-24 md:mt-12 mx-auto object-center object-cover w-20 md:w-24" src="../../images/oops-404-error-with-a-broken-robot-animate.svg" alt="noo">
                 <img v-else class="h-20 md:h-24 md:mt-12 mx-auto object-center object-cover w-20 md:w-24" :src="part.url[0]">
-                <!-- <img class="h-20 md:h-24 md:mt-12 mx-auto object-center object-cover w-20 md:w-24" :src="part.url[0]" alt="item name"> -->
             </a>
 
             <div class="px-4 py-2">
-                <a :href="`/details/${part.id}`" class="font-bold text-xs md:text-base text-teal-500 capitalize">{{part.name}}</a>
-                <p class="break-all font-medium text-gray-600 text-xs">{{__('item number')}}:{{part.number}}</p>
+                <a :href="`/store/details/${part.id}`" class="font-bold text-xs md:text-base text-teal-500 capitalize">{{part.name}}</a>
+                <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p>
                 <p class="text-gray-800 md:text-xl text-xs font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">QAR</span></p>
             </div>
 
@@ -98,7 +97,7 @@ export default {
         BaseFooter,
         
     },
-    props:['parts', 'cars', 'cartQuantity', 'cartCollection', 'cartTotalPrice'],
+    props:['parts', 'cartQuantity', 'cartCollection', 'cartTotalPrice'],
     data() {
         return {
             search:'',
@@ -115,7 +114,7 @@ export default {
 
     methods: {
         addCart(part) {
-        this.$inertia.post('/carts', part);
+        this.$inertia.post('/store/carts', part);
         },
 
     },

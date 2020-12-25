@@ -6,6 +6,23 @@
                 <h2 class="text-3xl text-teal-600 font-bold">{{__('suppliers')}}</h2>
                 <div>
                     <form class="flex items-end" @submit.prevent="submit">
+                        <div class="relative">
+                            
+                            <input id="files" type="file" ref="files" accept="file/*" label="Files" name="files[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full cursor-pointer absolute opacity-0 pin-r pin-t" :error="$page.errors.files" tabindex="7" multiple required>
+                            
+                            <button type="button" class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white">
+                                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </button>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <base-button class="bg-teal-700">
+                                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </base-button>
+                        </div>
+                    </form>
+                    <form class="flex items-end" @submit.prevent="submit">
+
                         <div class="mx-2">
                             <base-input  name="name" v-model="form.name" :error="$page.errors.name" :placeholder="__('supplier name')" required></base-input>
                         </div>
@@ -13,6 +30,7 @@
                             <base-button class="bg-teal-700 hover:bg-teal-600">{{__('create')}}</base-button>
                         </div>
                     </form>
+                    
                 </div>
             </div>
             <h1 class="font-medium text-gray-500 text-xs">
@@ -49,7 +67,6 @@
                                     </td>
 
                                     <td  class="flex px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium">
-                                        <!-- <svg @click="showInput(category)" class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg> -->
                                         <button @click="Delete(supplier)" class="focus:outline-none outline-none">
                                             <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                         </button>
@@ -74,23 +91,43 @@ import Edit from '../suppliers/Edit'
         props:['suppliers'],
         data() {
             return {
-                // show:0,
-                form: {
-                    name: '',
-                },
+                files:'',
+                   form:{
+                        name: '',
+                   }
             }
         },
         methods: {
             submit() {
-                this.$inertia.post('/dashboard/suppliers', this.form);
-                this.form = '';
+                // this.$inertia.post('/dashboard/suppliers', this.form).then(() => location.reload());
+                const data = new FormData();
+
+            data.append('files', this.files);
+
+            axios.post( '/dashboard/suppliers/import',
+                data,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then(function(response){
+               const status = JSON.parse(response.status);
+
+                    if (status == '200') {
+                        window.location.pathname = response.data.redirect;
+                    }
+            })
+            .catch(function(){
+            console.log('FAILURE!!');
+            });
+            },
+            handleFileUpload(){
+                this.files = this.$refs.files.files[0];
             },
             Delete(supplier){
-                     this.$inertia.delete(`/dashboard/suppliers/${supplier.id}`);
+                     this.$inertia.delete(`/dashboard/suppliers/${supplier.id}`).then(() => location.reload());
             },
-            // showInput(category){
-            //     this.show = category.id
-            // }
         }
     }
 </script>

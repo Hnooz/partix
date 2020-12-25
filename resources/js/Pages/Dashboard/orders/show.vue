@@ -48,6 +48,10 @@
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
+                                        {{__('brand')}}
+                                    </th>
+                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                        style="text-align: start">
                                         {{__('type')}}
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
@@ -85,7 +89,9 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap capitalize">
                                         <h1 >{{ details.part.name }}</h1>
-                                        <!-- <h1 class="block">{{ order.id }}</h1> -->
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap capitalize">
+                                        <h1 >{{ details.part.brands.name  }}</h1>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap">
                                         {{ details.part.type.name }}

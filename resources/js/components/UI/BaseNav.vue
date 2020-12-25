@@ -4,21 +4,8 @@
         class="animated bg-teal-700 md:flex hidden flex-wrap items-center justify-between m-auto pb-6 shadow-md top-0 w-full">
         <!-- top nav -->
         <div class="bg-teal-900 capitalize flex font-medium justify-between px-20 py-4 text-white w-full">
-            <div class="flex">
-                <h1>{{__('Call')}} <span>{{__('78 5439 36')}}</span></h1>
-                <span class="mx-2">|</span>
-                <LanguageSelector />
-            </div>
-            <div class="flex" v-if="!$page.auth.user.loggedIn">
-                <a href="/login" class="flex">
-                    <svg class="w-5 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                    {{__('log in')}}
-                </a>
-            </div>
-            <div v-else>
-                <button class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white hover:bg-teal-500 focus:outline-none focus:text-white focus:bg-gray-700"
-                   @click="logout">Logout</button>
-            </div>
+            <h1>{{__('Call')}} | <span>{{__('78 5439 36')}}</span></h1>
+            <LanguageSelector />
         </div>
         <div class="container mx-auto p-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between md:block">
@@ -36,7 +23,6 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M6 18L18 6M6 6l12 12"/>
                         </svg>
-
                     </button>
                 </div>
                 
@@ -90,7 +76,7 @@
                     </div>
                 </div>
 
-                <div class="-ml-2 flex md:hidden">
+                <div class="-mx-2 flex md:hidden">
                     <!-- Mobile menu button -->
                     <button type="button" @click="cartOpen = !cartOpen" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 focus:outline-none outline-none">
                     
@@ -156,17 +142,21 @@
                                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </button>
                             <span class="text-gray-700 mx-2">{{item.quantity}}</span>
-                            <button type="button" @click="decrement(item)" class="text-gray-500 focus:outline-none focus:text-gray-600" :disabled="item.quantity == 0">
+                            <button type="button" @click="decrement(item)" class="text-gray-500 focus:outline-none focus:text-gray-600" :disabled="item.quantity == 1">
                                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </button>
                         </div>
                     </div>
                 </div>
-                <span class="text-gray-600">{{item.price.toFixed()}}$</span>
+                <div>
+                    <span class="block text-gray-600">{{item.price.toFixed()}}$</span>
+                    <button @click="Delete(item)" class="focus:outline-none font-medium outline-none text-red-500 text-sm">remove</button>
+                </div>
+                
             </div>
         </form>
         
-        <a href="/carts" class="flex items-center justify-center mt-4 px-3 py-2 bg-teal-800 text-white text-sm uppercase font-medium rounded hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
+        <a href="/store/carts" class="flex items-center justify-center mt-4 px-3 py-2 bg-teal-800 text-white text-sm uppercase font-medium rounded hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
             <span>{{__('Chechout')}}</span>
             <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </a>
@@ -174,6 +164,12 @@
     </nav>
 
     <nav class="bg-center bg-cover bg_image md:hidden">
+        <div class="bg-teal-900 capitalize flex font-medium justify-between px-3 py-4 text-white w-full">
+
+                <h1>{{__('Call')}} | <span>{{__('78 5439 36')}}</span></h1>
+                <LanguageSelector />
+
+        </div>
         <div class="">
             <img src="../../images/LOGO-1.png" class="container mb-3 mx-auto pt-10 w-32" alt="">
             <div class="text-center">
@@ -221,17 +217,21 @@
                                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </button>
                             <span class="text-gray-700 mx-2">{{item.quantity}}</span>
-                            <button type="button" @click="decrement(item)" class="text-gray-500 focus:outline-none focus:text-gray-600" :disabled="item.quantity == 0">
+                            <button type="button" @click="decrement(item)" class="text-gray-500 focus:outline-none focus:text-gray-600" :disabled="item.quantity == 1">
                                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </button>
                         </div>
                     </div>
                 </div>
-                <span class="text-gray-600">{{item.price}}$</span>
+                <div>
+                    <span class="block text-gray-600">{{item.price.toFixed()}}$</span>
+                    <button @click="Delete(item)" class="focus:outline-none font-medium outline-none text-red-500 text-sm">remove</button>
+                </div>
+                
             </div>
         </form>
         
-        <a href="/carts" class="flex items-center justify-center mt-4 px-3 py-2 bg-teal-800 text-white text-sm uppercase font-medium rounded hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
+        <a href="/store/carts" class="flex items-center justify-center mt-4 px-3 py-2 bg-teal-800 text-white text-sm uppercase font-medium rounded hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
             <span>{{__('Chechout')}}</span>
             <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </a>
@@ -273,7 +273,7 @@ export default {
 
                 axios({
                     method: 'post',
-                    url: '/search',
+                    url: '/store/search',
                     data: {
                         name: this.form.name,
                     }
@@ -283,19 +283,22 @@ export default {
                         window.location.pathname = response.data.redirect + response.data.data[0].id;
                     }
                 }).catch(function() {
-                     window.location.pathname = '/404';
+                     window.location.pathname = '/store/404';
                 });
             },
-            increment(item){
+            increment(item)
+            {
                 item.quantity++;
-                // item.price = item.price*item.quantity
-                this.$inertia.put(`/cart/${item.id}`, item);
+                this.$inertia.put(`/store/cart/${item.id}`, item);
             },
 
-            decrement(item){
+            decrement(item)
+            {
                 item.quantity--;
-                // item.price = item.price/item.quantity
-                this.$inertia.put(`/cart/${item.id}`, item);
+                this.$inertia.put(`/store/cart/${item.id}`, item);
+            },
+             Delete(item) {
+                this.$inertia.delete(`/store/carts/${item.id}`);
             },
             logout() {
                 axios.post('logout')

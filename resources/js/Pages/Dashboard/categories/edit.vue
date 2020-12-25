@@ -5,7 +5,6 @@
             <div class="flex">
                 <h2 class="text-3xl text-teal-700 font-bold capitalize">{{__('category')}}/<span class="text-gray-500">{{__('Edit')}}</span></h2>
             </div>
-
             <base-panel class="md:max-w-3xl mt-4 capitalize">
                 <form @submit.prevent="submit">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -24,7 +23,7 @@
                         </div>
                          <div>
                              <label for="image" class="text-gray-700 capitalize">{{__('images')}}</label>
-                            <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white  block w-full" :error="$page.errors.images" tabindex="4" multiple required>
+                            <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white  block w-full" :error="$page.errors.images" tabindex="4" multiple>
                         </div>
                     </div>
                     <div class="flex justify-end mt-4">
@@ -59,34 +58,21 @@
         },
 
         methods: {
-            submit() {
+            submit() 
+            {
                 const data = new FormData();
 
                 data.append('name', this.form.name);
                 data.append('description', this.form.description);
                 data.append('super_category_id', this.form.super_category_id);
-                data.append('images', this.form.images);
-                data.append('_method', 'put');
-
-                axios.post( '/dashboard/categories/'+this.category.id, data,{
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-                }
-                ).then(function(response){
-                const status = JSON.parse(response.status);
-
-                        if (status == '200') {
-                            window.location.pathname = response.data.redirect;
-                        }
-                })
-                .catch(function(){
-                console.log('FAILURE!!');
-                });
-                // this.$inertia.post('/dashboard/categories', this.category);
+                
+                this.form.images ?  data.append('images', this.form.images) : '' ;
+                data.append('_method', 'PUT');
+                this.$inertia.post(this.$route('categories.update', this.category.id), data);
             },
 
-            handleFileUpload(){
+            handleFileUpload()
+            {
                 this.form.images = this.$refs.images.files[0];
             },
 

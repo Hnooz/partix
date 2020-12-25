@@ -3,53 +3,18 @@
         <h1 class="my-2 text-gray-500">{{__('dashboard')}}/{{__('coupon code')}}</h1>
         <div class="mx-5">
             <div class="justify-between">
-                <div class="flex items-center">
+                <div class="flex items-center justify-between">
                     <h2 class="md:text-3xl text-xl text-teal-600 font-bold">{{__('coupon code')}}</h2>
+                    <div class="flex items-center capitalize">
+                        <inertia-link href="/dashboard/coupons/create"
+                                    class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                            {{__('add')}} {{__('coupons')}}
+                        </inertia-link>
+                        
+                    </div>
                 </div>
                 
-
-                <div class="flex items-center justify-center my-6 font-medium text-sm capitalize">
-                    <form class="md:grid md:grid-cols-4" @submit.prevent="submit">
-                        <div class="my-5 md:my-0 text-teal-600">
-                            <label for="name">{{__('name')}}</label>
-                            <label class="block mt-3 text-gray-500">
-                                <input type="text" name="name" class="form-input"  v-model="form.name" :error="$page.errors.name" :placeholder="__('e.g free sale')"  required>
-                            </label> 
-                        </div>
-                        <div class="text-teal-600">
-                            <label >
-                                {{__('discount type')}}
-                            </label>
-                            <label class="block mt-3">
-                                <select name="descount_type_id" class="form-select text-gray-500 w-full"  v-model="form.descount_type_id" :error="$page.errors.descount_type_id" required>
-                                    <option value="">{{__('e.g Fixed or Percentage')}}</option>
-                                    <option v-for="type in descountType" :key="type.index" :value="type.id">{{type.name}}</option>
-                                </select>
-                            </label>
-                        </div>
-                        <div class="my-5 md:my-0 text-teal-600">
-                            <label for="value">{{__('value')}}</label>
-                            <label class="block mt-3 text-gray-500">
-                                <input type="text" name="value" class="form-input"  v-model="form.value" :error="$page.errors.value" placeholder="e.g 200 QAR or 20%"  required>
-                            </label> 
-                        </div>
-                        <div class="text-teal-600">
-                            <label for="code Expiration date">
-                                {{__('expiration date')}}
-                            </label>
-                            <label class="block mt-3 text-gray-500">
-                                <input type="date" name="expiration_at" class="form-input w-full"  v-model="form.expiration_at" :error="$page.errors.expiration_at" placeholder="12/3/2020" required>
-                            </label>
-                        </div> 
-                            <div class="my-6">
-                                <base-button
-                                            class="bg-teal-800 flex items-center font-medium hover:bg-teal-700 mx-1 px-4 py-2 rounded text-white">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                    {{__('add')}} {{__('coupon')}}
-                                </base-button>
-                            </div>                   
-                    </form>                
-                </div>
                 
                    
             </div>
@@ -122,6 +87,7 @@
                                          <svg v-if="coupon.used == 1" class="text-teal-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path><path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                                     </td>
                                     <td class="flex px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium">
+                                        <inertia-link :href="'/dashboard/coupons/'+coupon.id+'/edit'"><svg class="h-6 text-blue-500 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg></inertia-link>
                                         <button @click="Delete(coupon)"><svg class="h-6 text-red-500 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg></button>
                                     </td>
                                 </tr>

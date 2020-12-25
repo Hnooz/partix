@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $suppliers = Supplier::all();
@@ -23,16 +18,16 @@ class SupplierController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate(['name' => 'required']);
+        $request->validate(['name' => 'required']);
 
-        Supplier::create($data);
+        Supplier::create(['name' => $request->name,]);
 
         session()->flash('toast', [
             'type' => 'success',
             'message' => 'Supplier created successfully',
         ]);
 
-        return redirect()->back();
+        return redirect()->route('suppliers.index');
     }
 
     public function update(Request $request, Supplier $supplier)
@@ -51,6 +46,9 @@ class SupplierController extends Controller
 
     public function destroy(Supplier $supplier)
     {
+        $supplier->part()->each(function ($part) {
+            $part->delete();
+        });
         $supplier->delete();
 
         session()->flash('toast', [

@@ -90,6 +90,7 @@
                     description: '',
                     price: '',
                     second_price:'',
+                    sale:'',
                     slug: '',
                     car_id: '',
                     supplier_id:'',
@@ -116,36 +117,20 @@
             data.append('price', this.form.price);
             data.append('second_price', this.form.second_price);
             data.append('slug', this.form.slug);
+            data.append('sale', this.form.sale);
             data.append('car_id', this.form.car_id);
             data.append('supplier_id', this.form.supplier_id);
             data.append('category_id', this.form.category_id);
             data.append('part_type_id', this.form.part_type_id);
             if (this.form.images) {
-                for( let i = 0; i < this.form.images.length; i++ ){
-            let images = this.form.images[i];
-
-            data.append('images[' + i + ']', images);
-            }
+                for( let i = 0; i < this.form.images.length; i++ )
+                {
+                    let images = this.form.images[i];
+                    data.append('images[' + i + ']', images);
+                }
             }
             data.append('_method', 'put');
-            axios.post('/dashboard/parts/'+this.part.id,  data,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-              },
-            ).then(function(response){
-               const status = JSON.parse(response.status);
-
-                    if (status == '200') {
-                        window.location.pathname = response.data.redirect;
-                    }
-            })
-            .catch(function(){
-            console.log(data);
-            });
-
-            // this.$inertia.put(`/dashboard/parts/${this.part.id}`, this.form);
+            this.$inertia.post(`/dashboard/parts/${this.part.id}`, data);
             },
 
             handleFileUpload(){

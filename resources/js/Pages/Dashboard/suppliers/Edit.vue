@@ -18,12 +18,14 @@
         data() {
             return {
                 form: { 
-                    name: this.supplier.name,
+                    name: '',
                 },
                 edit: false
             }
         },
-
+    created() {
+        this.form = this.supplier;
+    },
         methods: {
             update() {
                 this.$inertia.put(this.$route('suppliers.update', this.supplier.id), this.form);

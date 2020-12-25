@@ -5,34 +5,35 @@ namespace App\Http\Controllers;
 use Cart;
 use App\Car;
 use App\Part;
+use App\Brand;
 use Illuminate\Http\Request;
 
 class FilterController extends Controller
 {
     public function fetchBrands()
     {
-        $brands = Car::all();
+        $brands = Brand::all();
 
         return response()->json($brands);
     }
 
     public function fetchModels(Request $request)
     {
-        $models = Car::where('id', $request->brand_id)->get();
+        $models = Car::where('brand_id', $request->brand_id)->get();
 
         return response()->json($models);
     }
 
     public function fetchYears(Request $request)
     {
-        $years = Car::where('id', $request->model_id)->get();
+        $years = Car::where('brand_id', $request->model_id)->get();
 
         return response()->json($years);
     }
 
     public function fetchEngines(Request $request)
     {
-        $engines = Car::where('id', $request->year_id)->get();
+        $engines = Car::where('brand_id', $request->year_id)->get();
 
         return response()->json($engines);
     }
@@ -42,7 +43,8 @@ class FilterController extends Controller
         $cars = Car::all();
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
-        $parts = Part::where('car_id', $id)->get();
+        $cartTotalPrice = Cart::getTotal();
+        $parts = Part::where('brand_id', $id)->get();
 
         return inertia()->render(
             'Store/filteredPart',
@@ -50,12 +52,14 @@ class FilterController extends Controller
                 'parts' => $parts,
                 'cars' => $cars,
                 'cartQuantity' => $cartQuantity,
-                'cartCollection' => $cartCollection, ]
+                'cartCollection' => $cartCollection,
+                'cartTotalPrice' => $cartTotalPrice,
+            ]
         );
     }
 
     public function filteredParts(Request $request)
     {
-        return response()->json(['redirect' => 'filtered_part/'.$request->car_id]);
+        return response()->json(['redirect' => '/store/filtered_part/'.$request->car_id]);
     }
 }

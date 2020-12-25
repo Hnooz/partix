@@ -28,7 +28,7 @@
                                     </div>
                                 </div>
                                 <p class="text-sm text-green-600 mt-4">
-                                    <span class="text-green-600">+3.48%</span>
+                                    <span class="text-green-600">+{{thisWeekOrders}}%</span>
                                     <span class="whitespace-no-wrap">{{__('this week')}}</span>
                                 </p>
                             </div>
@@ -41,7 +41,7 @@
                                     <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
                                         <h5 class="text-gray-500 uppercase font-bold text-xs">{{__('customers')}}</h5>
 
-                                        <span class="font-semibold text-xl text-gray-800">924</span>
+                                        <span class="font-semibold text-xl text-gray-800">{{customerAddress}}</span>
 
                                     </div>
                                     <div class="relative w-auto px-2 flex-initial">
@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                                 <p class="text-sm text-green-600 mt-4">
-                                    <span class="text-green-600"><i class="fas fa-arrow-down"></i>+35</span>
+                                    <span class="text-green-600"><i class="fas fa-arrow-down"></i>+{{newCustomers}}</span>
                                     <span class="whitespace-no-wrap">{{__('this week')}}</span>
                                 </p>
                             </div>
@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                                 <p class="text-sm text-green-500 mt-4">
-                                    <span class="mr-2"><i class="fas fa-arrow-up"></i>+12</span>
+                                    <span class="mr-2"><i class="fas fa-arrow-up"></i>+{{newCars}}</span>
                                     <span class="whitespace-no-wrap">{{__('this week')}}</span>
                                 </p>
                             </div>
@@ -172,7 +172,7 @@
                 width="200" height="164"
                 id="chart1"
                 :title="__('top salling brands')"
-                :labels='["BMW", "Chevrelet", "Alfa Romeo", "Cilroen","Chrysler", "GMC"]'
+                :labels='[limitBrands[0].name,limitBrands[1].name]'
                 :data='[45, 75, 150, 90, 75, 30]'
                 :top="20"
                 :left="30"
@@ -216,6 +216,10 @@
         props:[
         'brands','pending_order', 
         'delivered_order', 'awaiting_order', 
-        'rejected_order', 'total'],
+        'rejected_order', 'total', 'limitBrands',
+        'newCars', 'thisWeekOrders',
+        'customerAddress',
+        'newCustomers'
+        ],
     }
 </script>

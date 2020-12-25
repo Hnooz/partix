@@ -12,11 +12,6 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-    
     public function index()
     {
         if (request()->has('1')) {
@@ -48,17 +43,19 @@ class OrderController extends Controller
 
         return inertia()->render('Dashboard/orders/show', ['order_details' => $order_details]);
     }
+
     public function store(Request $request)
     {
-        $mutable = Carbon::now();
-        // dd($request);
+        $mutable = Carbon::now(); //CUREENT DATE
+
         $data = $request->validate([
             'customer_phone' => 'required',
             'address' => 'required',
         ]);
-        $coupon = CouponCode::where('name', $request->coupon)->get();
+
+        $coupon = CouponCode::where('name', $request->coupon)->get(); //COUPON FROM REQUEST
         
-        if (Cart::isEmpty()) {
+        if (Cart::isEmpty()) { // CHECK IF CART IS EMPTY
             session()->flash('toast', [
                 'type' => 'error',
                 'message' => "you can't pruchase an empty order",
@@ -67,27 +64,26 @@ class OrderController extends Controller
             return redirect()->back();
         }
 
-        if ($coupon[0]) {
-            $today = Carbon::createFromFormat('Y-m-d', $coupon[0]->expiration_at)->toDateTimeString();
+        if (sizeOf($coupon) == 0) { //CHECK IF COUPON IS EMPTY
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => 'invalid coupon code | there is no coupon with this name',
+            ]);
 
-            if ($coupon[0]->quantity < 1 || $today <= $mutable) { // check coupon expiration
-                session()->flash('toast', [
-                    'type' => 'error',
-                    'message' => 'invalid coupon code',
-                ]);
+            return redirect()->back();
+        } else {
+            if (isset($coupon[0])) {
+                $expiration = Carbon::createFromFormat('Y-m-d', $coupon[0]->expiration_at)->toDateTimeString();
+                
+                if ($coupon[0]->quantity < 1 || $expiration <= $mutable) { // check coupon expiration TIME
+                    session()->flash('toast', [
+                        'type' => 'error',
+                        'message' => 'invalid coupon code | quantity = 0 or it\'s expired s',
+                    ]);
 
-                return redirect()->back();
-            }
-    
-            $cartTotalPrice = Cart::getTotal();
-        
-            if (sizeOf($coupon) == 0) {
-                $order = Order::create([
-                    'customer_phone' => $request->customer_phone,
-                    'address' => $request->address,
-                    'order_status_id' => 1,
-                ]);
-            } else {
+                    return redirect()->back();
+                }
+
                 $order = Order::create([
                     'customer_phone' => $request->customer_phone,
                     'address' => $request->address,
@@ -96,8 +92,16 @@ class OrderController extends Controller
                 ]);
 
                 $coupon[0]->quantity = $coupon[0]->quantity - 1;
-
+                if ($coupon[0]->quantity == 0) {
+                    $coupon[0]->used = '0';
+                }
                 $coupon[0]->save();
+            } else {
+                $order = Order::create([
+                    'customer_phone' => $request->customer_phone,
+                    'address' => $request->address,
+                    'order_status_id' => 1,
+                ]);
             }
         
             $cartCollection = Cart::getContent();
@@ -111,8 +115,8 @@ class OrderController extends Controller
                 ]);
             };
 
-            \Cart::clear();
-        
+            Cart::clear();
+    
             session()->flash('toast', [
                 'type' => 'success',
                 'message' => 'you have successfully',

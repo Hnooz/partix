@@ -1,7 +1,7 @@
 <template>
     <store-layout>
     <BaseNav :cartItemQuantity="cartQuantity" :cartItem="cartCollection" :cartTotalPrice="cartTotalPrice" />
-    <SelectSection :carItem="cars" class="hidden md:block"/>
+    <SelectSection />
          <!-- filter search -->
     <div class="bg-teal-700 py-5 hidden md:block">
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-16 text-white">
@@ -68,6 +68,7 @@
                                     <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                     <svg class="w-6 text-gray-400 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
                                 </button>
+                                <p class="capitalize font-medium text-teal-400 text-xl">{{part.brands.name}}</p>
                             </div>
                         </div>
                         <div class="">
@@ -77,7 +78,7 @@
                         </div>
                             <form @submit.prevent="submit">
                                 <div>
-                                    <label class="text-gray-700">Part Type</label>
+                                    <label class="text-gray-700">{{__('type')}}</label>
                                     <select  name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
                                         <option value="0">Select Type</option>
                                         <option v-for="type in part_type" :key="type.index" :value="type.id">{{type.name}}</option>
@@ -86,17 +87,18 @@
 
                                 <div class="flex items-center">
                                     <h1 class="capitalize text-teal-900">{{__('quantity')}}:</h1>
-                                    <button type="button" @click="increment(cartItem)" class="bg-teal-500 mx-2 my-2 text-white">
+                                    <button type="button" @click="increment()" class="bg-teal-500 mx-2 my-2 text-white">
                                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path> </svg>
                                     </button>
                                     
-                                    <span class="bg-white flex items-center mx-2 px-4 py-2">{{quantity}}</span>
+                                    <span class="bg-white flex items-center mx-2 px-4 py-2">{{calcQuantity}}</span>
                                     <input type="text" v-model="quantity" hidden >
 
-                                    <button type="button" @click="decrement(cartItem)" class="bg-teal-500 mx-2 my-2 text-white">
+                                    <button type="button" @click="decrement()" class="bg-teal-500 mx-2 my-2 text-white" :disabled="calcQuantity == 1">
                                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                                     </button>
                                 </div>
+
                                 <div class="capitalize my-8">
                                     <button  @click="addCart(part)" class="bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white" type="button">
                                         <span class="mx-12 capitalize">{{__('add to cart')}}</span> 
@@ -122,7 +124,7 @@
                     </h1>
                     <div class="flex">
                         <a class="" href="#" v-for="latest in latest_category" :key="latest.index">
-                            <img :src="latest.url[0]" alt="">
+                            <img :src="latest.url[0]" alt="" class="h-40 object-center object-cover w-40">
                         </a>
                     </div>
                 </div>
@@ -150,30 +152,37 @@
             <p class="flex bg-teal-400 font-semibold h-10 w-10 md:h-12 md:px-1 md:rounded-none px-1 py-3 rounded-br-lg shadow-lg text-sm text-white md:w-12">{{part.sale}}%</p>
         </div>
         <div class="flex items-center justify-center">
-            <a class="-mt-10 px-10" href="/details">
-                <img class="h-24 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-24" :src="part.url[0]" alt="item name">
+            <a class="-mt-10 px-10" href="#">
+                <img class="h-24 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-24" :src="part.url[0]" :alt="part.name.slice(0,5)">
             </a>
             <div>
-                <a href="/details">
-                <img class="border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto my-1 object-center object-cover w-12" :src="part.url[1]" alt="item name">
+                <a href="#">
+                <img class="border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto my-1 object-center object-cover w-12" :src="part.url[1]" :alt="part.name.slice(0,5)">
             </a>
-            <a href="/details">
-                <img class="border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-12" :src="part.url[2]" alt="item name">
+            <a href="#">
+                <img class="border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-12" :src="part.url[2]" :alt="part.name.slice(0,5)">
             </a>
             </div>
         </div>
         
         <form @submit.prevent="submit">
         <div class="-mt-6 px-4">
-            <a href="/details" class="font-bold  text-xs md:text-base text-teal-500 capitalize">{{part.name}}</a>
-            <p class="break-all font-medium text-gray-600 text-xs">{{__('item number')}}:{{part.number}}</p>
-            <p class="font-semibold md:text-xl text-gray-800 text-xs">
-                {{part.price}}<span class="text-gray-500 text-xs">QAR</span>
-                <span class="line-through px-2 text-gray-500 text-xs">3.800 QAR</span> </p>
+            <a href="#" class="font-bold  text-xs md:text-base text-teal-500 capitalize">{{part.name}}</a>
+            <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p>
+            <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="part.type.name == 'oem'">
+                {{calcOemPrice}}<span class="text-gray-500 text-xs">QAR</span>
+                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.price.slice(0,3)}}QAR</span> 
+            </p>
+
+            <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="part.type.name == 'aftermarket'">
+                {{calcAftermarketPrice}}<span class="text-gray-500 text-xs">QAR</span>
+                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.second_price}}QAR</span> 
+            </p>
+
         </div>
 
         <div class=" px-4">
-            <label class="text-gray-700 text-xs">Part Type</label>
+            <label class="text-gray-700 text-xs">{{__('part')}} {{__('type')}}</label>
             <select  name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
                 <option value="0">Select Type</option>
                 <option v-for="type in part_type" :key="type.index" :value="type.id">{{type.name}}</option>
@@ -181,15 +190,16 @@
         </div>
         <div class="flex items-center px-4">
             <h1 class="text-teal-900 text-sm">{{__('quantity')}}:</h1>
-            <button type="button" @click="increment(cartItem)" class="bg-teal-500 text-white">
+            <button type="button" @click="increment()" class="bg-teal-500 text-white">
                 <svg class="w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                 </svg>
             </button>
 
-            <span class="bg-white flex items-center mx-2 py-2">{{quantity}}</span>
+            <span class="bg-white flex items-center mx-2 py-2">{{calcQuantity}}</span>
+            <input type="text" v-model="quantity" hidden >
 
-            <button type="button" @click="decrement(cartItem)" class="bg-teal-500 my-2 text-white">
+            <button type="button" @click="decrement()" class="bg-teal-500 my-2 text-white" :disabled="calcQuantity == 1">
                 <svg class="w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">    
                     <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
                 </svg>
@@ -233,31 +243,23 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             BaseFooter,
         },
         props:[
-            'part', 'cars',
-            'category', 
+            'part','category', 
             'cartQuantity', 
-            'cartCollection' 
-            ,'cartItem',
+            'cartCollection' ,
+            'cartItem',
             'part_type',
             'latest_category',
-            'cartTotalPrice'],
+            'cartTotalPrice'
+            ],
         data() {
             return {
-                // fav:false,
-
-                quantity:this.cartItem.quantity,
+                quantity:1,
                 form: {
-                    name: '',
-                    number: '',
-                    description: '',
-                    price: '',
-                    second_price:'',
-                    slug: '',
-                    car_id: '',
-                    supplier_id:'',
-                    category_id:'',
-                    part_type_id:'',
-                    
+                    name: '',        number: '',
+                    description: '', price: ''  ,
+                    second_price:'', slug: '',
+                    car_id: '',      supplier_id:'',
+                    category_id:'',  part_type_id:'',
                 },
             }
         },
@@ -272,35 +274,52 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             calcAftermarketPrice()
             {
               return  this.part.second_price - (this.part.sale / 100) * this.part.second_price;
+            },
+            calcQuantity()
+            {
+                if (this.cartItem == null) {
+                    return this.quantity
+                } else {
+                    return this.cartItem.quantity
+                }
             }
         },
         methods: {
             
         addCart() {
-            const form = this.form;
+            const form =this.form;
+            
             const quantity = this.cartItem;
 
             const both = Object.assign(form , quantity);
 
-            // console.log(both);
-            if (this.cartItem) {
-                this.$inertia.put(`/cart/${this.cartItem.id}`, both);
+            if (this.cartItem != null) {
+                this.$inertia.put(`store/cart/${this.cartItem.id}`, both);
             } else {
-                this.$inertia.post('/carts', this.form);
+                const newadd = this.form;
+                newadd.quantity = this.quantity;
+                this.$inertia.post('/store/carts', newadd);
             }
             
-            
         },
-         increment(cartItem){
-            cartItem.quantity = this.quantity++ ;            
+         increment(){
+             if (this.cartItem == null) {
+                 this.quantity++ ; 
+             } else {
+                 this.cartItem.quantity++;  
+             }
+                      
         },
 
-        decrement(cartItem){
-            cartItem.quantity = this.quantity--;            
+        decrement(){
+          if (this.cartItem == null) {
+                 this.quantity-- ; 
+             } else {
+                  this.cartItem.quantity--; 
+             }
+                        
         },
-        // fave(){
-        //     this.fav = !this.fav
-        // }
+
     },
     }
 </script>
@@ -310,7 +329,4 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
     z-index: 0;
 }
 
-.bottomimage{
-    background-image: url('../../images/1223/replace_collage.png');
-}
 </style>

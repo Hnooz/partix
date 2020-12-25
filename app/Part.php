@@ -15,11 +15,16 @@ class Part extends Model implements HasMedia
     protected $table = 'parts';
     protected $guarded = [];
     protected $appends = ['url'];
-    protected $with = ['category','type'];
+    protected $with = ['category','type','brands'];
     
     public function cars()
     {
         return $this->belongsToMany(Car::class);
+    }
+
+    public function brands()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
     public function category()

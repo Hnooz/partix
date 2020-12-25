@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Car;
-use App\Part;
+use App\Brand;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCarRequest;
 
 class CarController extends Controller
 {
     public function index()
     {
-        $cars = Car::all();
+        $cars = Car::with('brands')->get();
 
         return inertia()->render('Dashboard/cars/index', [
             'cars' => $cars,
@@ -19,23 +20,21 @@ class CarController extends Controller
 
     public function create()
     {
-        return inertia()->render('Dashboard/cars/create');
+        $brands = Brand::all();
+
+        return inertia()->render('Dashboard/cars/create', ['brands' => $brands]);
     }
 
-    public function store(Request $request)
+    public function store(StoreCarRequest $request)
     {
-        $request->validate([
-            'brand' => 'required|min:3',
-            'model' => 'required|max:255',
-            'engine' => 'required|max:255',
-            'year' => 'required|max:255',
-        ]);
+        $request->validated();
 
         Car::create([
             'brand' => $request->brand,
             'model' => $request->model,
             'engine' => $request->engine,
             'year' => $request->year,
+            'brand_id' => $request->brand_id,
 
         ]);
 
@@ -49,7 +48,9 @@ class CarController extends Controller
 
     public function edit(Car $car)
     {
-        return inertia()->render('Dashboard/cars/edit', ['car' => $car]);
+        $brands = Brand::all();
+
+        return inertia()->render('Dashboard/cars/edit', ['car' => $car,'brands' => $brands]);
     }
 
     public function update(Request $request, Car $car)
@@ -59,6 +60,7 @@ class CarController extends Controller
             'model' => 'required|max:255',
             'engine' => 'required|max:255',
             'year' => 'required|max:255',
+            'brand_id' => 'required|max:255',
         ]);
 
         $car->update($data);
@@ -73,11 +75,7 @@ class CarController extends Controller
 
     public function destroy(Car $car)
     {
-        // $car->delete();
-
-        $parts = Part::where(['car_id' => $car->id])->get();
-
-        dd($parts);
+        $car->delete();
         session()->flash('toast', [
             'type' => 'error',
             'message' => 'Car Deleted successfully',

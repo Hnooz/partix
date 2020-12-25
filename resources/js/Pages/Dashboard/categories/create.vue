@@ -5,7 +5,6 @@
             <div class="flex capitalize">
                 <h2 class="text-3xl text-teal-700 font-bold">{{__('category')}}/<span class="text-gray-500">{{__('create')}}</span></h2>
             </div>
-
             <base-panel class="md:max-w-3xl mt-4">
                 <form @submit.prevent="submit">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -55,35 +54,18 @@
             }
         }, 
         methods: {
-            submit() {
+            submit() 
+            {
                 const data = new FormData();
-
                 data.append('name', this.category.name);
                 data.append('description', this.category.description);
                 data.append('super_category_id', this.category.super_category_id);
-                data.append('images', this.category.images);
-
-                axios.post( '/dashboard/categories',
-                data,
-                {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-                }
-                ).then(function(response){
-                const status = JSON.parse(response.status);
-
-                        if (status == '200') {
-                            window.location.pathname = response.data.redirect;
-                        }
-                })
-                .catch(function(){
-                console.log('FAILURE!!');
-                });
-                // this.$inertia.post('/dashboard/categories', this.category);
+                // check for image
+                this.category.images ?  data.append('images', this.category.images) : '';
+                this.$inertia.post('/dashboard/categories', data);
             },
-
-            handleFileUpload(){
+            handleFileUpload()
+            {
                 this.category.images = this.$refs.images.files[0];
             }
         }

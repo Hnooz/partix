@@ -3,7 +3,7 @@
 
         <div class="mt-8 capitalize">
             <div class="flex">
-                <h2 class="text-3xl text-teal-700 font-bold">{{__('customers')}}/<span class="text-gray-500">{{__('Edit')}}</span></h2>
+                <h2 class="text-3xl text-teal-700 font-bold">{{__('users')}}/<span class="text-gray-500">{{__('Edit')}}</span></h2>
             </div>
 
             <base-panel class="md:max-w-3xl mt-4">

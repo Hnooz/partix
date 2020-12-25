@@ -68,6 +68,9 @@ class SuperCategoryController extends Controller
 
     public function destroy(SuperCategory $superCategory)
     {
+        $superCategory->categories()->each(function ($category) {
+            $category->delete();
+        });
         $superCategory->delete();
 
         session()->flash('toast', [

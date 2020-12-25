@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Car;
 use App\Part;
+use App\Brand;
 use App\Category;
 use App\PartType;
 use App\Supplier;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePartRequest;
 
 class PartController extends Controller
 {
@@ -21,7 +23,7 @@ class PartController extends Controller
             ]);
         } elseif (request()->has('a')) {
             $parts = Part::orderBy('name')->get();
-            // dd($parts);
+
             return inertia()->render('Dashboard/parts/index', [
                 'parts' => $parts,
             ]);
@@ -49,6 +51,7 @@ class PartController extends Controller
     public function create()
     {
         $cars = Car::all();
+        $brands = Brand::all();
         $categories = Category::all();
         $suppliers = Supplier::all();
         $part_types = PartType::all();
@@ -58,24 +61,14 @@ class PartController extends Controller
             'categories' => $categories,
             'suppliers' => $suppliers,
             'part_types' => $part_types,
+            'brands' => $brands,
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StorePartRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|min:4',
-            'number' => 'required|unique:parts|max:255',
-            'description' => 'required|max:255|min:45',
-            'price' => 'required|max:255',
-            'second_price' => 'required|max:255',
-            'slug' => 'required|max:255',
-            'car_id' => 'required|max:255',
-            'category_id' => 'required|max:255',
-            'supplier_id' => 'required|max:255',
-            'part_type_id' => 'required|max:255',
-        ]);
-        // \dd($data);
+        $data = $request->validated();
+
         $part = Part::create([
             'name' => $request->name,
             'number' => $request->number,
@@ -87,6 +80,8 @@ class PartController extends Controller
             'category_id' => $request->category_id,
             'supplier_id' => $request->supplier_id,
             'part_type_id' => $request->part_type_id,
+            'sale' => $request->sale,
+            'brand_id' => $request->brand_id,
         ]);
 
         if ($request->file('images')) {
@@ -95,14 +90,12 @@ class PartController extends Controller
                 $part->addMedia($image)->toMediaCollection('images');
             }
         };
-
         session()->flash('toast', [
             'type' => 'success',
             'message' => 'Part created successfully',
         ]);
 
-        return response()->json(['data' => $part,
-            'redirect' => 'dashboard/parts', ]);
+        return redirect()->route('parts.index');
     }
    
     public function edit(Part $part)
@@ -119,31 +112,19 @@ class PartController extends Controller
         ]);
     }
 
-    public function update(Request $request, Part $part)
+    public function update(StorePartRequest $request, Part $part)
     {
-        // dd($request);
-        // dd(true);
-        $data = $request->validate([
-            'name' => 'required|min:4',
-            'number' => 'required|max:255',
-            'description' => 'required|max:255|min:45',
-            'price' => 'required|max:255',
-            'second_price' => 'required|max:255',
-            'slug' => 'required|max:255',
-            'car_id' => 'required|max:255',
-            'category_id' => 'required|max:255',
-            'supplier_id' => 'required|max:255',
-            'part_type_id' => 'required|max:255',
-        ]);
-        // dd($data);
+        $data = $request->validated();
+
         $part->clearMediaCollection('images');
+
         if ($request->file('images')) {
             $images = $request->file('images');
             foreach ($images as $image) {
-                $part->addMedia($image)
-                    ->toMediaCollection('images');
+                $part->addMedia($image)->toMediaCollection('images');
             }
         };
+
         $part->update($data);
 
         session()->flash('toast', [
@@ -151,10 +132,7 @@ class PartController extends Controller
             'message' => 'Part Updated successfully',
         ]);
 
-        return response()->json(['data' => $part,
-            'redirect' => 'dashboard/parts', ]);
-
-        // return redirect()->route('parts.index');
+        return redirect()->route('parts.index');
     }
 
     public function destroy(Part $part)

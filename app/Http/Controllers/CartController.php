@@ -47,18 +47,30 @@ class CartController extends Controller
         } else {
             $price = 0;
         }
+        if ($request->quantity) {
+            Cart::add([
+                'id' => $request->id,
+                'name' => $request->name,
+                'price' => $price,
+                'quantity' => $request->quantity,
+                'attributes' => [
+                    'slug' => $request->slug,
+                    'supplier' => $supplier->name,
+                ],
+            ]);
+        } else {
+            Cart::add([
+                'id' => $request->id,
+                'name' => $request->name,
+                'price' => $price,
+                'quantity' => 1,
+                'attributes' => [
+                    'slug' => $request->slug,
+                    'supplier' => $supplier->name,
+                ],
+            ]);
+        }
         
-        Cart::add([
-            'id' => $request->id,
-            'name' => $request->name,
-            'price' => $price,
-            'quantity' => 1,
-            'attributes' => [
-                'slug' => $request->slug,
-                'supplier' => $supplier->name,
-            ],
-        ]);
-
         return redirect()->back();
     }
 
@@ -66,11 +78,11 @@ class CartController extends Controller
     {
         $data = $request->validate(['part_type_id' => 'max:10']);
         $part = Part::find($request->id);
-    
+
         $part->update($data);
 
         $category = Category::find($part->category_id);
-        // dd($category);
+
         if ($part->type->name == 'oem') {
             if ($category->sale > 0) {
                 $price = $part->price - (($category->sale / 100) * $part->price);
@@ -101,14 +113,25 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    // public function remove(Request $request){
-    //     \Cart::remove($request->id);
-    //     return redirect()->back();
-    // }
+    public function remove($id)
+    {
+        \Cart::remove($id);
+        session()->flash('toast', [
+            'type' => 'error',
+            'message' => 'item was removed',
+        ]);
+
+        return redirect()->back();
+    }
 
     public function clear()
     {
         \Cart::clear();
+
+        session()->flash('toast', [
+            'type' => 'error',
+            'message' => `cart was cleared successfuly`,
+        ]);
 
         return redirect()->route('store.index');
     }

@@ -15,10 +15,9 @@ class StoreController extends Controller
     public function index()
     {
         $parts = Part::all();
-        
-        $cars = Car::all();
+
         $categories = Category::all();
-        $super_category = SuperCategory::all();
+        $super_category = SuperCategory::with('categories')->get();
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
         $cartTotalPrice = Cart::getTotal();
@@ -29,7 +28,6 @@ class StoreController extends Controller
                 'parts' => $parts,
                 'categories' => $categories,
                 'super_category' => $super_category,
-                'cars' => $cars,
                 'cartQuantity' => $cartQuantity,
                 'cartTotalPrice' => $cartTotalPrice,
                 'cartCollection' => $cartCollection, ]
@@ -104,19 +102,11 @@ class StoreController extends Controller
     {
         $part = Part::where('name', $request->name)->orWhere('number', $request->name)->get();
 
-        return response()->json(['data' => $part, 'redirect' => 'details/']);
+        return response()->json(['data' => $part, 'redirect' => '/store/details/']);
     }
 
     public function notfound()
     {
-        $cartQuantity = Cart::getTotalQuantity();
-        $cartTotalPrice = Cart::getTotal();
-        $cartCollection = Cart::getContent();
-
-        return inertia()->render('Store/404', [
-            'cartQuantity' => $cartQuantity,
-            'cartCollection' => $cartCollection,
-            'cartTotalPrice' => $cartTotalPrice,
-        ]);
+        return inertia()->render('Store/404');
     }
 }

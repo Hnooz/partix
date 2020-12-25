@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Part;
 use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
@@ -12,5 +11,10 @@ class Car extends Model
     public function part()
     {
         return $this->hasMany(Part::class);
+    }
+
+    public function brands()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
 }

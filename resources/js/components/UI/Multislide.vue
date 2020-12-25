@@ -6,13 +6,6 @@
     </div>
   </VueSlickCarousel>
 
-  <!-- <div v-if="isOpen" class="flex justify-center">
-    <div  v-for="category in categories" :key="category.index">
-      <inertia-link :href="'/items/'+category.id" class="flex justify-center mx-2">
-        <img v-if="category.super_category_id == cat.id" class="h-12 mx-auto my-2 object-center object-cover w-12" :src="category.url[0]" alt="">
-      </inertia-link>
-    </div>
-  </div> -->
   
   <slot class="mt-5 block" v-if="isOpen" :super_id="super_id"></slot>
 </div>
@@ -37,14 +30,45 @@
         super_id:[],
         cat:[],
         settings: {
-          "centerMode": true,
-          "infinite": true,
-          "speed": 500,
-          "slidesToShow": 3,
-          "slidesToScroll": 3,
-          "touchThreshold": 5,
-          "adaptiveHeight": true,
-          "focusOnSelect":false
+          centerMode: true,
+          "centerPadding": "20px",
+          infinite: true,
+          speed: 500,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          touchThreshold: 5,
+          adaptiveHeight: true,
+          focusOnSelect:true,
+          "responsive": [
+          {
+            "breakpoint": 1024,
+            "settings": {
+              "slidesToShow": 3,
+              "slidesToScroll": 3,
+              "infinite": true,
+              "dots": true
+            }
+          },
+          {
+            "breakpoint": 600,
+            "settings": {
+              centerMode: true,
+              adaptiveHeight: true,
+              "slidesToShow": 2,
+              "slidesToScroll": 2,
+              "initialSlide": 2
+            }
+          },
+          {
+            "breakpoint": 480,
+            "settings": {
+              centerMode: true,
+              adaptiveHeight: true,
+              "slidesToShow": 1,
+              "slidesToScroll": 1
+            }
+          }
+  ]
         },
       }
     },

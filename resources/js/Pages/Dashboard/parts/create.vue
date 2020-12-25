@@ -38,6 +38,13 @@
                                 </select>
                         </div>
                         <div>
+                            <label class="text-gray-700">{{__('brand')}}</label>
+                                <select  name="brand_id"  v-model="part.brand_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.brand_id" required tabindex="6">
+                                    <option value="0">select brand</option>
+                                    <option v-for="brand in brands" :key="brand.index" :value="brand.id">{{brand.name}}</option>
+                                </select>
+                        </div>
+                        <div>
                             <label class="text-gray-700">{{__('category')}}</label>
                                 <select  name="category_id"  v-model="part.category_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.category_id" required tabindex="7">
                                     <option value="0">select category</option>
@@ -77,10 +84,10 @@
 
 <script>
     import Layout from "../../../Shared/Layout";
-
+    import 'vue-select/dist/vue-select.css';
     export default {
         components: {Layout},
-        props:['cars','suppliers','categories','part_types'],
+        props:['cars','suppliers','categories','part_types', 'brands'],
         data() {
             return {
                 part: {
@@ -95,6 +102,7 @@
                     supplier_id:0,
                     category_id:0,
                     part_type_id:0,
+                    brand_id:0,
                     images:''
                 },
 
@@ -111,34 +119,20 @@
             data.append('price', this.part.price);
             data.append('second_price', this.part.second_price);
             data.append('slug', this.part.slug);
+            data.append('sale', this.part.sale);
             data.append('car_id', this.part.car_id);
             data.append('supplier_id', this.part.supplier_id);
             data.append('category_id', this.part.category_id);
             data.append('part_type_id', this.part.part_type_id);
-            for( let i = 0; i < this.part.images.length; i++ ){
-            let images = this.part.images[i];
-
-            data.append('images[' + i + ']', images);
-            }
-
-            axios.post( '/dashboard/parts',
-                data,
-                {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+            data.append('brand_id', this.part.brand_id);
+            if (this.part.images) 
+            {
+                for( let i = 0; i < this.part.images.length; i++ ){
+                    let images = this.part.images[i];
+                    data.append('images[' + i + ']', images);
                 }
-              }
-            ).then(function(response){
-               const status = JSON.parse(response.status);
-
-                    if (status == '200') {
-                        window.location.pathname = response.data.redirect;
-                    }
-            })
-            .catch(function(){
-            console.log('FAILURE!!');
-            });
-
+            }
+            this.$inertia.post('/dashboard/parts', data);
             },
 
             handleFileUpload(){

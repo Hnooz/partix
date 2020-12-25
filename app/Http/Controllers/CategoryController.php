@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\SuperCategory;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -28,13 +28,9 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:categories|max:255',
-            'description' => 'required|max:255',
-            'super_category_id' => 'sometimes|nullable|max:255',
-        ]);
+        $request->validated();
 
         $category = Category::create([
             'name' => $request->name,
@@ -43,18 +39,13 @@ class CategoryController extends Controller
 
         ]);
 
-        if ($request->file('images')) {
-            $category->addMedia($request->file('images'))->toMediaCollection('images');
-        };
-
+        $request->file('images') ? $category->addMedia($request->file('images'))->toMediaCollection('images') : '';
         session()->flash('toast', [
             'type' => 'success',
             'message' => 'Category created successfully',
         ]);
 
-        return response()->json(['data' => $category,
-            'redirect' => 'dashboard/categories', ]);
-        // return redirect()->route('categories.index');
+        return redirect()->route('categories.index');
     }
 
     public function edit(Category $category)
@@ -67,32 +58,32 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function update(Request $request, Category $category)
+    public function update(StoreCategoryRequest $request, Category $category)
     {
-        $data = $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required|max:255',
-            'super_category_id' => 'sometimes|nullable|max:255',
-        ]);
+        $data = $request->validated();
+
         $category->clearMediaCollection('images');
-        if ($request->file('images')) {
-            $category->addMedia($request->file('images'))
-                ->toMediaCollection('images');
-        };
+
+        $request->file('images') ? $category->addMedia($request->file('images'))->toMediaCollection('images') : '' ;
 
         $category->update($data);
+
         session()->flash('toast', [
             'type' => 'success',
             'message' => 'Category updated successfully',
         ]);
 
-        return response()->json(['data' => $category,
-            'redirect' => 'dashboard/categories', ]);
+        return redirect()->route('categories.index');
     }
 
     public function destroy(Category $category)
     {
+        $category->parts()->each(function ($part) {
+            $part->delete();
+        });
+
         $category->delete();
+
         session()->flash('toast', [
             'type' => 'success',
             'message' => 'Category Deleted successfully',
