@@ -33,7 +33,7 @@ class CartController extends Controller
         $category = Category::find($request->category_id);
         $part = Part::where('id', $request->id)->get();
         if ($part[0]->type->name == 'oem') {
-            if ($category->sale > 0) {
+            if (isset($category->sale) > 0) {
                 $price = $request->price - (($category->sale / 100) * $request->price);
             } else {
                 $price = $request->price - (($request->sale / 100) * $request->price);
@@ -55,7 +55,7 @@ class CartController extends Controller
                 'quantity' => $request->quantity,
                 'attributes' => [
                     'slug' => $request->slug,
-                    'supplier' => $supplier->name,
+                    'supplier' => isset($supplier->name),
                 ],
             ]);
         } else {
@@ -66,7 +66,7 @@ class CartController extends Controller
                 'quantity' => 1,
                 'attributes' => [
                     'slug' => $request->slug,
-                    'supplier' => $supplier->name,
+                    'supplier' => isset($supplier->name),
                 ],
             ]);
         }

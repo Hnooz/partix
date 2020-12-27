@@ -5412,10 +5412,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     calcOemPrice: function calcOemPrice() {
-      return this.part.price - this.part.sale / 100 * this.part.price;
+      return (this.part.price - this.part.sale / 100 * this.part.price).toFixed();
     },
     calcAftermarketPrice: function calcAftermarketPrice() {
-      return this.part.second_price - this.part.sale / 100 * this.part.second_price;
+      return (this.part.second_price - this.part.sale / 100 * this.part.second_price).toFixed();
     },
     calcQuantity: function calcQuantity() {
       if (this.cartItem == null) {
@@ -56333,12 +56333,14 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "flex" }, [
-              _c("h1", [
-                _vm._v(_vm._s(_vm.part.category.super_category.name) + " |")
-              ]),
+              _vm.part.category
+                ? _c("h1", [
+                    _vm._v(_vm._s(_vm.part.category.super_category.name) + " |")
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c("span", { staticClass: "font-normal capitalize" }, [
-                _vm._v(" " + _vm._s(_vm.part.category.name) + " ")
+                _vm._v(" " + _vm._s(_vm.part.name) + " ")
               ]),
               _vm._v(" "),
               _c("span", { attrs: { lass: "font-normal capitalize" } }, [
@@ -56528,7 +56530,7 @@ var render = function() {
                             staticClass:
                               "capitalize font-semibold text-3xl text-teal-700"
                           },
-                          [_vm._v(_vm._s(_vm.part.category.name))]
+                          [_vm._v(_vm._s(_vm.part.name))]
                         ),
                         _vm._v(" "),
                         _c(
@@ -89218,8 +89220,8 @@ module.exports = "/images/oops-404-error-with-a-broken-robot-animate.svg?844f72a
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/khatabwedaa/Code/laravel/partix/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/khatabwedaa/Code/laravel/partix/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /home/hnooz/Documents/Projects/partix/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/hnooz/Documents/Projects/partix/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })
