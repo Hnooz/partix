@@ -26,31 +26,33 @@ class FilterController extends Controller
 
     public function fetchYears(Request $request)
     {
-        $years = Car::where('brand_id', $request->model_id)->get();
+        $years = Car::where('id', $request->model_id)->get();
 
         return response()->json($years);
     }
 
     public function fetchEngines(Request $request)
     {
-        $engines = Car::where('brand_id', $request->year_id)->get();
-
+        $engines = Car::where('id', $request->year_id)->get();
+        // dd($engines);
         return response()->json($engines);
     }
 
     public function getFilteredParts($id)
     {
-        $cars = Car::all();
+        // dd($id);
+        $cars = Car::find($id);
+        
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
         $cartTotalPrice = Cart::getTotal();
-        $parts = Part::where('brand_id', $id)->get();
-
+        $parts = Part::with('cars')->where('id', $id)->get();
+        //    dd($cars->parts);
         return inertia()->render(
             'Store/filteredPart',
             [
                 'parts' => $parts,
-                'cars' => $cars,
+                'cars' => $cars->parts,
                 'cartQuantity' => $cartQuantity,
                 'cartCollection' => $cartCollection,
                 'cartTotalPrice' => $cartTotalPrice,

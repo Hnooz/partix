@@ -44,7 +44,6 @@ class AppServiceProvider extends ServiceProvider
             'flash' => function () {
                 return Session::get('toast');
             },
-            // 'loggedIn' => Auth::check(),
             'popstate' => false,
         ]);
 

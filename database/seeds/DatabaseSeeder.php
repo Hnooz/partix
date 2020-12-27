@@ -19,5 +19,11 @@ class DatabaseSeeder extends Seeder
             'is_admin' => 1,
             'is_delivery' => 1,
         ]);
+        \App\Brand::create([
+            'name' => 'kia',
+        ]);
+        \App\Brand::create([
+            'name' => 'rio',
+        ]);
     }
 }

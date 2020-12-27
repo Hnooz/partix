@@ -30,12 +30,14 @@ class StorePartRequest extends FormRequest
             'price' => 'required|max:255',
             'second_price' => 'required|max:255',
             'slug' => 'required|max:255',
-            'car_id' => 'required|max:255',
+            // 'car_id' => 'required|max:255',
             'category_id' => 'required|max:255',
             'supplier_id' => 'required|max:255',
             'part_type_id' => 'required|max:255',
             'sale' => 'sometimes|nullable',
-            'brand_id' => 'required|max:255',
+            'cars' => 'sometimes',
+            'cars.*' => 'required_with:cars|exists:cars,id',
+            // 'brand_id' => 'required|max:255',
         ];
     }
 }

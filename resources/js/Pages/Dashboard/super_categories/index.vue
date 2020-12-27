@@ -3,7 +3,7 @@
         <h1 class="md:text-base my-2 text-gray-500 text-sm capitalize">{{__('dashboard')}}/{{__('super categories')}}</h1>
         <div class="mt-8 capitalize">
             <div class="flex justify-between">
-                <h2 class="text-3xl text-teal-600 font-bold">{{__('super categories')}}</h2>
+                <h2 class="md:text-3xl text-teal-600 font-bold">{{__('super categories')}}</h2>
             <div class="flex items-center">
                     <inertia-link href="/dashboard/super_categories/create"
                                   class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap">

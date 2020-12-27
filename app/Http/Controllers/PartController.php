@@ -76,13 +76,15 @@ class PartController extends Controller
             'price' => $request->price,
             'second_price' => $request->second_price,
             'slug' => $request->slug,
-            'car_id' => $request->car_id,
             'category_id' => $request->category_id,
             'supplier_id' => $request->supplier_id,
             'part_type_id' => $request->part_type_id,
             'sale' => $request->sale,
-            'brand_id' => $request->brand_id,
         ]);
+
+        if ($request->filled('cars')) {
+            $part->cars()->attach(json_decode($data['cars']));
+        }
 
         if ($request->file('images')) {
             $images = $request->file('images');

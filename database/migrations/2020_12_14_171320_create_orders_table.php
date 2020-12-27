@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('order_status_id');
             $table->string('customer_phone');
             $table->string('address');
+            $table->foreignId('coupon_id')->nullable();
             $table->timestamps();
         });
     }

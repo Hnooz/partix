@@ -12,19 +12,13 @@ class Part extends Model implements HasMedia
 {
     use Notifiable,AppendImage, InteractsWithMedia;
 
-    protected $table = 'parts';
     protected $guarded = [];
     protected $appends = ['url'];
-    protected $with = ['category','type','brands'];
+    protected $with = ['category','type'];
     
     public function cars()
     {
         return $this->belongsToMany(Car::class);
-    }
-
-    public function brands()
-    {
-        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
     public function category()

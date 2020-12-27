@@ -8,9 +8,9 @@ class Car extends Model
 {
     protected $guarded = [];
     
-    public function part()
+    public function parts()
     {
-        return $this->hasMany(Part::class);
+        return $this->belongsToMany(Part::class);
     }
 
     public function brands()

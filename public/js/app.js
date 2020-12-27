@@ -2199,6 +2199,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3782,6 +3783,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3799,11 +3802,11 @@ __webpack_require__.r(__webpack_exports__);
         second_price: '',
         slug: '',
         sale: '',
-        car_id: 0,
+        cars: [],
         supplier_id: 0,
         category_id: 0,
         part_type_id: 0,
-        brand_id: 0,
+        // brand_id:0,
         images: ''
       }
     };
@@ -3818,11 +3821,10 @@ __webpack_require__.r(__webpack_exports__);
       data.append('second_price', this.part.second_price);
       data.append('slug', this.part.slug);
       data.append('sale', this.part.sale);
-      data.append('car_id', this.part.car_id);
+      data.append('cars', JSON.stringify(this.part.cars));
       data.append('supplier_id', this.part.supplier_id);
       data.append('category_id', this.part.category_id);
-      data.append('part_type_id', this.part.part_type_id);
-      data.append('brand_id', this.part.brand_id);
+      data.append('part_type_id', this.part.part_type_id); // data.append('brand_id', this.part.brand_id);
 
       if (this.part.images) {
         for (var i = 0; i < this.part.images.length; i++) {
@@ -4181,32 +4183,29 @@ __webpack_require__.r(__webpack_exports__);
       laravelData: {}
     };
   },
-  computed: {
-    filteredList: function filteredList() {
-      var _this = this;
-
-      return this.parts.filter(function (part) {
-        return part.name.toLowerCase().includes(_this.search.toLowerCase());
-      });
-    }
-  },
   // created() {
-  //         this.getResults();
-  //     },
+  //     this.laravelData = this.parts
+  // },
+  // mounted() {
+  // // Fetch initial results
+  // this.getResults();
+  // },
+  //     computed: {
+  //     filteredList() {
+  //     return this.parts.filter(part => {
+  //         return part.name.toLowerCase().includes(this.search.toLowerCase())
+  //     })
+  //     }
+  // },
   methods: {
-    getResults: function getResults(page) {
-      var _this2 = this;
-
-      if (typeof page === 'undefined') {
-        page = 1;
-      }
-
-      this.$http.get('/dashboard/parts?page=' + page).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        _this2.laravelData = data;
-      });
-    },
+    // getResults(page = 1) {
+    // axios.get('dashboard/parts?currentPage=' + page)
+    // 	.then(response => {
+    // 		response.json();
+    // 	}).then(response => {
+    // 		this.laravelData = response;
+    // 	});
+    // },
     submit: function submit() {
       var data = new FormData();
       data.append('files', this.files);
@@ -4646,6 +4645,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4664,7 +4668,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      // this.$inertia.post('/dashboard/suppliers', this.form).then(() => location.reload());
+      this.$inertia.post('/dashboard/suppliers', this.form).then(function () {
+        return location.reload();
+      });
+    },
+    uploadExcel: function uploadExcel() {
       var data = new FormData();
       data.append('files', this.files);
       axios.post('/dashboard/suppliers/import', data, {
@@ -6003,7 +6011,7 @@ __webpack_require__.r(__webpack_exports__);
     SelectSection: _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_2__["default"],
     BaseFooter: _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
-  props: ['parts', 'cartQuantity', 'cartCollection', 'cartTotalPrice'],
+  props: ['parts', 'cars', 'cartQuantity', 'cartCollection', 'cartTotalPrice'],
   data: function data() {
     return {
       search: ''
@@ -6013,7 +6021,7 @@ __webpack_require__.r(__webpack_exports__);
     filteredList: function filteredList() {
       var _this = this;
 
-      return this.parts.filter(function (part) {
+      return this.cars.filter(function (part) {
         return part.name.toLowerCase().includes(_this.search.toLowerCase());
       });
     }
@@ -7083,7 +7091,7 @@ __webpack_require__.r(__webpack_exports__);
         method: 'post',
         url: '/store/filtered_parts',
         data: {
-          car_id: this.brand
+          car_id: this.engine
         }
       }).then(function (response) {
         var status = JSON.parse(response.status);
@@ -23501,7 +23509,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nnav[data-v-f2aaf5fc] {\n    z-index: 10\n}\nnav.scrolled[data-v-f2aaf5fc] {\n@apply shadow-2xl;\n@apply border-b-2 ;\n@apply border-teal-500;\n}\n.bg_image[data-v-f2aaf5fc]{\n        background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/bg.png */ "./resources/js/images/1223/bg.png")) + ");\n}\n", ""]);
+exports.push([module.i, "\nnav[data-v-f2aaf5fc] {\n    z-index: 10\n}\nnav.scrolled[data-v-f2aaf5fc] {\n@apply shadow-2xl;\n@apply border-b-2 ;\n@apply border-teal-500;\n}\n.bg_image[data-v-f2aaf5fc]{\n    background-image: url(" + escape(__webpack_require__(/*! ../../images/1223/bg.png */ "./resources/js/images/1223/bg.png")) + ");\n}\n", ""]);
 
 // exports
 
@@ -23612,83 +23620,7 @@ exports.push([module.i, "\n.slick-prev:before, .slick-next:before{\n  color: tea
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/hnooz/Documents/Projects/Partix/node_modules/css-loader/lib/css-base.js'");
 
 /***/ }),
 
@@ -23699,23 +23631,7 @@ function toComment(sourceMap) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = function escape(url) {
-    if (typeof url !== 'string') {
-        return url
-    }
-    // If url is already wrapped in quotes, remove them
-    if (/^['"].*['"]$/.test(url)) {
-        url = url.slice(1, -1);
-    }
-    // Should url be wrapped?
-    // See https://drafts.csswg.org/css-values-3/#urls
-    if (/["'() \t\n]/.test(url)) {
-        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
-    }
-
-    return url
-}
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/hnooz/Documents/Projects/Partix/node_modules/css-loader/lib/url/escape.js'");
 
 /***/ }),
 
@@ -46565,204 +46481,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/setimmediate/setImmediate.js":
-/*!***************************************************!*\
-  !*** ./node_modules/setimmediate/setImmediate.js ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
-    "use strict";
-
-    if (global.setImmediate) {
-        return;
-    }
-
-    var nextHandle = 1; // Spec says greater than zero
-    var tasksByHandle = {};
-    var currentlyRunningATask = false;
-    var doc = global.document;
-    var registerImmediate;
-
-    function setImmediate(callback) {
-      // Callback can either be a function or a string
-      if (typeof callback !== "function") {
-        callback = new Function("" + callback);
-      }
-      // Copy function arguments
-      var args = new Array(arguments.length - 1);
-      for (var i = 0; i < args.length; i++) {
-          args[i] = arguments[i + 1];
-      }
-      // Store and register the task
-      var task = { callback: callback, args: args };
-      tasksByHandle[nextHandle] = task;
-      registerImmediate(nextHandle);
-      return nextHandle++;
-    }
-
-    function clearImmediate(handle) {
-        delete tasksByHandle[handle];
-    }
-
-    function run(task) {
-        var callback = task.callback;
-        var args = task.args;
-        switch (args.length) {
-        case 0:
-            callback();
-            break;
-        case 1:
-            callback(args[0]);
-            break;
-        case 2:
-            callback(args[0], args[1]);
-            break;
-        case 3:
-            callback(args[0], args[1], args[2]);
-            break;
-        default:
-            callback.apply(undefined, args);
-            break;
-        }
-    }
-
-    function runIfPresent(handle) {
-        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
-        // So if we're currently running a task, we'll need to delay this invocation.
-        if (currentlyRunningATask) {
-            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
-            // "too much recursion" error.
-            setTimeout(runIfPresent, 0, handle);
-        } else {
-            var task = tasksByHandle[handle];
-            if (task) {
-                currentlyRunningATask = true;
-                try {
-                    run(task);
-                } finally {
-                    clearImmediate(handle);
-                    currentlyRunningATask = false;
-                }
-            }
-        }
-    }
-
-    function installNextTickImplementation() {
-        registerImmediate = function(handle) {
-            process.nextTick(function () { runIfPresent(handle); });
-        };
-    }
-
-    function canUsePostMessage() {
-        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
-        // where `global.postMessage` means something completely different and can't be used for this purpose.
-        if (global.postMessage && !global.importScripts) {
-            var postMessageIsAsynchronous = true;
-            var oldOnMessage = global.onmessage;
-            global.onmessage = function() {
-                postMessageIsAsynchronous = false;
-            };
-            global.postMessage("", "*");
-            global.onmessage = oldOnMessage;
-            return postMessageIsAsynchronous;
-        }
-    }
-
-    function installPostMessageImplementation() {
-        // Installs an event handler on `global` for the `message` event: see
-        // * https://developer.mozilla.org/en/DOM/window.postMessage
-        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
-
-        var messagePrefix = "setImmediate$" + Math.random() + "$";
-        var onGlobalMessage = function(event) {
-            if (event.source === global &&
-                typeof event.data === "string" &&
-                event.data.indexOf(messagePrefix) === 0) {
-                runIfPresent(+event.data.slice(messagePrefix.length));
-            }
-        };
-
-        if (global.addEventListener) {
-            global.addEventListener("message", onGlobalMessage, false);
-        } else {
-            global.attachEvent("onmessage", onGlobalMessage);
-        }
-
-        registerImmediate = function(handle) {
-            global.postMessage(messagePrefix + handle, "*");
-        };
-    }
-
-    function installMessageChannelImplementation() {
-        var channel = new MessageChannel();
-        channel.port1.onmessage = function(event) {
-            var handle = event.data;
-            runIfPresent(handle);
-        };
-
-        registerImmediate = function(handle) {
-            channel.port2.postMessage(handle);
-        };
-    }
-
-    function installReadyStateChangeImplementation() {
-        var html = doc.documentElement;
-        registerImmediate = function(handle) {
-            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
-            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
-            var script = doc.createElement("script");
-            script.onreadystatechange = function () {
-                runIfPresent(handle);
-                script.onreadystatechange = null;
-                html.removeChild(script);
-                script = null;
-            };
-            html.appendChild(script);
-        };
-    }
-
-    function installSetTimeoutImplementation() {
-        registerImmediate = function(handle) {
-            setTimeout(runIfPresent, 0, handle);
-        };
-    }
-
-    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
-    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
-    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
-
-    // Don't get fooled by e.g. browserify environments.
-    if ({}.toString.call(global.process) === "[object process]") {
-        // For Node.js before 0.9
-        installNextTickImplementation();
-
-    } else if (canUsePostMessage()) {
-        // For non-IE10 modern browsers
-        installPostMessageImplementation();
-
-    } else if (global.MessageChannel) {
-        // For web workers, where supported
-        installMessageChannelImplementation();
-
-    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
-        // For IE 6–8
-        installReadyStateChangeImplementation();
-
-    } else {
-        // For older browsers
-        installSetTimeoutImplementation();
-    }
-
-    attachTo.setImmediate = setImmediate;
-    attachTo.clearImmediate = clearImmediate;
-}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../process/browser.js */ "./node_modules/process/browser.js")))
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Store/Index.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Store/Index.vue?vue&type=style&index=0&lang=css& ***!
@@ -47038,507 +46756,9 @@ if(false) {}
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
   \****************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-
-var stylesInDom = {};
-
-var	memoize = function (fn) {
-	var memo;
-
-	return function () {
-		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-		return memo;
-	};
-};
-
-var isOldIE = memoize(function () {
-	// Test for IE <= 9 as proposed by Browserhacks
-	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-	// Tests for existence of standard globals is to allow style-loader
-	// to operate correctly into non-standard environments
-	// @see https://github.com/webpack-contrib/style-loader/issues/177
-	return window && document && document.all && !window.atob;
-});
-
-var getTarget = function (target, parent) {
-  if (parent){
-    return parent.querySelector(target);
-  }
-  return document.querySelector(target);
-};
-
-var getElement = (function (fn) {
-	var memo = {};
-
-	return function(target, parent) {
-                // If passing function in options, then use it for resolve "head" element.
-                // Useful for Shadow Root style i.e
-                // {
-                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
-                // }
-                if (typeof target === 'function') {
-                        return target();
-                }
-                if (typeof memo[target] === "undefined") {
-			var styleTarget = getTarget.call(this, target, parent);
-			// Special case to return head of iframe instead of iframe itself
-			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
-				try {
-					// This will throw an exception if access to iframe is blocked
-					// due to cross-origin restrictions
-					styleTarget = styleTarget.contentDocument.head;
-				} catch(e) {
-					styleTarget = null;
-				}
-			}
-			memo[target] = styleTarget;
-		}
-		return memo[target]
-	};
-})();
-
-var singleton = null;
-var	singletonCounter = 0;
-var	stylesInsertedAtTop = [];
-
-var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
-
-module.exports = function(list, options) {
-	if (typeof DEBUG !== "undefined" && DEBUG) {
-		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-
-	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
-
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the <head> element
-        if (!options.insertInto) options.insertInto = "head";
-
-	// By default, add <style> tags to the bottom of the target
-	if (!options.insertAt) options.insertAt = "bottom";
-
-	var styles = listToStyles(list, options);
-
-	addStylesToDom(styles, options);
-
-	return function update (newList) {
-		var mayRemove = [];
-
-		for (var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-
-		if(newList) {
-			var newStyles = listToStyles(newList, options);
-			addStylesToDom(newStyles, options);
-		}
-
-		for (var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-
-			if(domStyle.refs === 0) {
-				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
-
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-};
-
-function addStylesToDom (styles, options) {
-	for (var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-
-		if(domStyle) {
-			domStyle.refs++;
-
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles (list, options) {
-	var styles = [];
-	var newStyles = {};
-
-	for (var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = options.base ? item[0] + options.base : item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-
-		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
-		else newStyles[id].parts.push(part);
-	}
-
-	return styles;
-}
-
-function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
-
-	if (!target) {
-		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-	}
-
-	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
-
-	if (options.insertAt === "top") {
-		if (!lastStyleElementInsertedAtTop) {
-			target.insertBefore(style, target.firstChild);
-		} else if (lastStyleElementInsertedAtTop.nextSibling) {
-			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			target.appendChild(style);
-		}
-		stylesInsertedAtTop.push(style);
-	} else if (options.insertAt === "bottom") {
-		target.appendChild(style);
-	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
-		var nextSibling = getElement(options.insertAt.before, target);
-		target.insertBefore(style, nextSibling);
-	} else {
-		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
-	}
-}
-
-function removeStyleElement (style) {
-	if (style.parentNode === null) return false;
-	style.parentNode.removeChild(style);
-
-	var idx = stylesInsertedAtTop.indexOf(style);
-	if(idx >= 0) {
-		stylesInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement (options) {
-	var style = document.createElement("style");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-
-	if(options.attrs.nonce === undefined) {
-		var nonce = getNonce();
-		if (nonce) {
-			options.attrs.nonce = nonce;
-		}
-	}
-
-	addAttrs(style, options.attrs);
-	insertStyleElement(options, style);
-
-	return style;
-}
-
-function createLinkElement (options) {
-	var link = document.createElement("link");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-	options.attrs.rel = "stylesheet";
-
-	addAttrs(link, options.attrs);
-	insertStyleElement(options, link);
-
-	return link;
-}
-
-function addAttrs (el, attrs) {
-	Object.keys(attrs).forEach(function (key) {
-		el.setAttribute(key, attrs[key]);
-	});
-}
-
-function getNonce() {
-	if (false) {}
-
-	return __webpack_require__.nc;
-}
-
-function addStyle (obj, options) {
-	var style, update, remove, result;
-
-	// If a transform function was defined, run it on the css
-	if (options.transform && obj.css) {
-	    result = typeof options.transform === 'function'
-		 ? options.transform(obj.css) 
-		 : options.transform.default(obj.css);
-
-	    if (result) {
-	    	// If transform returns a value, use that instead of the original css.
-	    	// This allows running runtime transformations on the css.
-	    	obj.css = result;
-	    } else {
-	    	// If the transform function returns a falsy value, don't add this css.
-	    	// This allows conditional loading of css
-	    	return function() {
-	    		// noop
-	    	};
-	    }
-	}
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-
-		style = singleton || (singleton = createStyleElement(options));
-
-		update = applyToSingletonTag.bind(null, style, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-
-	} else if (
-		obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function"
-	) {
-		style = createLinkElement(options);
-		update = updateLink.bind(null, style, options);
-		remove = function () {
-			removeStyleElement(style);
-
-			if(style.href) URL.revokeObjectURL(style.href);
-		};
-	} else {
-		style = createStyleElement(options);
-		update = applyToTag.bind(null, style);
-		remove = function () {
-			removeStyleElement(style);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle (newObj) {
-		if (newObj) {
-			if (
-				newObj.css === obj.css &&
-				newObj.media === obj.media &&
-				newObj.sourceMap === obj.sourceMap
-			) {
-				return;
-			}
-
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag (style, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (style.styleSheet) {
-		style.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = style.childNodes;
-
-		if (childNodes[index]) style.removeChild(childNodes[index]);
-
-		if (childNodes.length) {
-			style.insertBefore(cssNode, childNodes[index]);
-		} else {
-			style.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag (style, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		style.setAttribute("media", media)
-	}
-
-	if(style.styleSheet) {
-		style.styleSheet.cssText = css;
-	} else {
-		while(style.firstChild) {
-			style.removeChild(style.firstChild);
-		}
-
-		style.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink (link, options, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	/*
-		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
-		and there is no publicPath defined then lets turn convertToAbsoluteUrls
-		on by default.  Otherwise default to the convertToAbsoluteUrls option
-		directly
-	*/
-	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
-
-	if (options.convertToAbsoluteUrls || autoFixUrls) {
-		css = fixUrls(css);
-	}
-
-	if (sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = link.href;
-
-	link.href = URL.createObjectURL(blob);
-
-	if(oldSrc) URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/lib/urls.js":
-/*!***********************************************!*\
-  !*** ./node_modules/style-loader/lib/urls.js ***!
-  \***********************************************/
-/*! no static exports found */
 /***/ (function(module, exports) {
 
-
-/**
- * When source maps are enabled, `style-loader` uses a link element with a data-uri to
- * embed the css on the page. This breaks all relative urls because now they are relative to a
- * bundle instead of the current page.
- *
- * One solution is to only use full urls, but that may be impossible.
- *
- * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
- *
- * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
- *
- */
-
-module.exports = function (css) {
-  // get current location
-  var location = typeof window !== "undefined" && window.location;
-
-  if (!location) {
-    throw new Error("fixUrls requires window.location");
-  }
-
-	// blank or null?
-	if (!css || typeof css !== "string") {
-	  return css;
-  }
-
-  var baseUrl = location.protocol + "//" + location.host;
-  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
-
-	// convert each url(...)
-	/*
-	This regular expression is just a way to recursively match brackets within
-	a string.
-
-	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
-	   (  = Start a capturing group
-	     (?:  = Start a non-capturing group
-	         [^)(]  = Match anything that isn't a parentheses
-	         |  = OR
-	         \(  = Match a start parentheses
-	             (?:  = Start another non-capturing groups
-	                 [^)(]+  = Match anything that isn't a parentheses
-	                 |  = OR
-	                 \(  = Match a start parentheses
-	                     [^)(]*  = Match anything that isn't a parentheses
-	                 \)  = Match a end parentheses
-	             )  = End Group
-              *\) = Match anything and then a close parens
-          )  = Close non-capturing group
-          *  = Match anything
-       )  = Close capturing group
-	 \)  = Match a close parens
-
-	 /gi  = Get all matches, not the first.  Be case insensitive.
-	 */
-	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
-		// strip quotes (if they exist)
-		var unquotedOrigUrl = origUrl
-			.trim()
-			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
-			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
-
-		// already a full url? no change
-		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
-		  return fullMatch;
-		}
-
-		// convert the url to a full url
-		var newUrl;
-
-		if (unquotedOrigUrl.indexOf("//") === 0) {
-		  	//TODO: should we add protocol?
-			newUrl = unquotedOrigUrl;
-		} else if (unquotedOrigUrl.indexOf("/") === 0) {
-			// path should be relative to the base url
-			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
-		} else {
-			// path should be relative to current directory
-			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
-		}
-
-		// send back the fixed url(...)
-		return "url(" + JSON.stringify(newUrl) + ")";
-	});
-
-	// send back the fixed css
-	return fixedCss;
-};
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/hnooz/Documents/Projects/Partix/node_modules/style-loader/lib/addStyles.js'");
 
 /***/ }),
 
@@ -47547,73 +46767,9 @@ module.exports = function (css) {
   !*** ./node_modules/timers-browserify/main.js ***!
   \************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
-            (typeof self !== "undefined" && self) ||
-            window;
-var apply = Function.prototype.apply;
-
-// DOM APIs, for completeness
-
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) {
-  if (timeout) {
-    timeout.close();
-  }
-};
-
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(scope, this._id);
-};
-
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// setimmediate attaches itself to the global object
-__webpack_require__(/*! setimmediate */ "./node_modules/setimmediate/setImmediate.js");
-// On some exotic environments, it's not clear which object `setimmediate` was
-// able to install onto.  Search each possibility in the same order as the
-// `setimmediate` library.
-exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
-                       (typeof global !== "undefined" && global.setImmediate) ||
-                       (this && this.setImmediate);
-exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
-                         (typeof global !== "undefined" && global.clearImmediate) ||
-                         (this && this.clearImmediate);
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/hnooz/Documents/Projects/Partix/node_modules/timers-browserify/main.js'");
 
 /***/ }),
 
@@ -48159,7 +47315,7 @@ var render = function() {
               height: "164",
               id: "chart1",
               title: _vm.__("top salling brands"),
-              labels: [_vm.limitBrands[0].name, _vm.limitBrands[1].name],
+              labels: _vm.limitBrands ? ["cars"] : "",
               data: [45, 75, 150, 90, 75, 30],
               top: 20,
               left: 30,
@@ -51494,8 +50650,8 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "mx-5 capitalize" }, [
-      _c("div", { staticClass: "justify-between md:flex" }, [
-        _c("div", { staticClass: "items-center md:flex" }, [
+      _c("div", { staticClass: "justify-between flex" }, [
+        _c("div", { staticClass: "items-center flex" }, [
           _c(
             "h2",
             { staticClass: "font-bold md:text-3xl text-xl text-teal-600" },
@@ -51506,7 +50662,7 @@ var render = function() {
             "div",
             {
               staticClass:
-                "capitalize flex items-center md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap"
+                "capitalize flex items-center mx-3 md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap"
             },
             [
               _c("h1", [
@@ -52195,22 +51351,6 @@ var render = function() {
                           [
                             _vm._v(
                               "\n                                    " +
-                                _vm._s(_vm.__("brand")) +
-                                "\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
                                 _vm._s(_vm.__("type")) +
                                 "\n                                "
                             )
@@ -52314,18 +51454,10 @@ var render = function() {
                             [_c("h1", [_vm._v(_vm._s(details.part.name))])]
                           ),
                           _vm._v(" "),
-                          _c(
-                            "td",
-                            {
-                              staticClass:
-                                "px-6 py-4 whitespace-no-wrap capitalize"
-                            },
-                            [
-                              _c("h1", [
-                                _vm._v(_vm._s(details.part.brands.name))
-                              ])
-                            ]
-                          ),
+                          _c("td", {
+                            staticClass:
+                              "px-6 py-4 whitespace-no-wrap capitalize"
+                          }),
                           _vm._v(" "),
                           _c(
                             "td",
@@ -52623,125 +51755,64 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("div", [
-                    _c("label", { staticClass: "text-gray-700" }, [
-                      _vm._v(_vm._s(_vm.__("car")))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.part.car_id,
-                            expression: "part.car_id"
-                          }
-                        ],
-                        staticClass: "form-select text-gray-500 w-full mt-1",
+                  _c(
+                    "div",
+                    [
+                      _c("span", { staticClass: "text-gray-700" }, [
+                        _vm._v(_vm._s(_vm.__("car")))
+                      ]),
+                      _vm._v(" "),
+                      _c("base-select", {
                         attrs: {
-                          name: "car_id",
-                          error: _vm.$page.errors.car_id,
-                          required: "",
-                          tabindex: "6"
+                          label: "brand",
+                          options: _vm.cars,
+                          reduce: function(car) {
+                            return car.id
+                          },
+                          multiple: ""
                         },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.part,
-                              "car_id",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "0" } }, [
-                          _vm._v("select car")
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.cars, function(car) {
-                          return _c(
-                            "option",
-                            { key: car.index, domProps: { value: car.id } },
-                            [_vm._v(_vm._s(car.brand))]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("label", { staticClass: "text-gray-700" }, [
-                      _vm._v(_vm._s(_vm.__("brand")))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
+                        scopedSlots: _vm._u([
                           {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.part.brand_id,
-                            expression: "part.brand_id"
+                            key: "search",
+                            fn: function(ref) {
+                              var attributes = ref.attributes
+                              var events = ref.events
+                              return [
+                                _c(
+                                  "input",
+                                  _vm._g(
+                                    _vm._b(
+                                      { staticClass: "vs__search" },
+                                      "input",
+                                      attributes,
+                                      false
+                                    ),
+                                    events
+                                  )
+                                )
+                              ]
+                            }
                           }
-                        ],
-                        staticClass: "form-select text-gray-500 w-full mt-1",
-                        attrs: {
-                          name: "brand_id",
-                          error: _vm.$page.errors.brand_id,
-                          required: "",
-                          tabindex: "6"
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.part,
-                              "brand_id",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "0" } }, [
-                          _vm._v("select brand")
                         ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.brands, function(brand) {
-                          return _c(
-                            "option",
-                            { key: brand.index, domProps: { value: brand.id } },
-                            [_vm._v(_vm._s(brand.name))]
+                        model: {
+                          value: _vm.part.cars,
+                          callback: function($$v) {
+                            _vm.$set(_vm.part, "cars", $$v)
+                          },
+                          expression: "part.cars"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.$page.errors.cars
+                        ? _c(
+                            "span",
+                            { staticClass: "text-red-500 text-xs mt-4" },
+                            [_vm._v(_vm._s(_vm.$page.errors.cars[0]))]
                           )
-                        })
-                      ],
-                      2
-                    )
-                  ]),
+                        : _vm._e()
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c("div", [
                     _c("label", { staticClass: "text-gray-700" }, [
@@ -53510,11 +52581,102 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("layout", [
-    _c(
-      "h1",
-      { staticClass: "md:text-base my-2 text-gray-500 text-sm capitalize" },
-      [_vm._v(_vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("parts")))]
-    ),
+    _c("div", { staticClass: "flex justify-between px-5" }, [
+      _c(
+        "h1",
+        { staticClass: "md:text-base my-2 text-gray-500 text-sm capitalize" },
+        [_vm._v(_vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("parts")))]
+      ),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "flex",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.submit($event)
+            }
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "flex justify-end" },
+            [
+              _c(
+                "base-button",
+                { staticClass: "bg-teal-800 hover:bg-teal-700 rounded-none" },
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "w-4 h-4 md:w-6 md:h-6",
+                      attrs: {
+                        fill: "none",
+                        stroke: "currentColor",
+                        viewBox: "0 0 24 24",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round",
+                          "stroke-width": "2",
+                          d:
+                            "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "relative" }, [
+            _c("input", {
+              ref: "files",
+              staticClass:
+                "mt-1 block w-full cursor-pointer absolute opacity-0",
+              attrs: {
+                id: "files",
+                type: "file",
+                accept: "file/*",
+                label: "Files",
+                name: "files[]",
+                error: _vm.$page.errors.files,
+                tabindex: "7",
+                multiple: "",
+                required: ""
+              },
+              on: {
+                change: function($event) {
+                  return _vm.handleFileUpload()
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "bg-teal-800 focus:outline-none hover:bg-teal-700 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded-tr text-white",
+                attrs: { type: "button" }
+              },
+              [
+                _c("span", { staticClass: "whitespace-no-wrap" }, [
+                  _vm._v("upload excel")
+                ])
+              ]
+            )
+          ])
+        ]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "mx-5" }, [
       _c("div", { staticClass: "justify-between items-center md:flex" }, [
@@ -53679,7 +52841,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", [
+        _c("div", { staticClass: "flex" }, [
           _c("form", [
             _c("div", { staticClass: "relative" }, [
               _c(
@@ -53732,12 +52894,8 @@ var render = function() {
                   }
                 ],
                 staticClass:
-                  "focus:outline-none px-10 placeholder-gray-400 py-2 shadow-md rounded-md text-sm text-gray-600",
-                attrs: {
-                  type: "search",
-                  placeholder: _vm.__("search"),
-                  autocomplete: "off"
-                },
+                  "focus:outline-none px-5 placeholder-gray-400 py-2 shadow-md rounded-md text-sm text-gray-600",
+                attrs: { type: "search", autocomplete: "off" },
                 domProps: { value: _vm.search },
                 on: {
                   input: function($event) {
@@ -53749,193 +52907,88 @@ var render = function() {
                 }
               })
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "flex items-center capitalize" },
-          [
-            _c(
-              "inertia-link",
-              {
-                staticClass:
-                  "bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap",
-                attrs: { href: "/dashboard/parts/create" }
-              },
-              [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6 h-6",
-                    attrs: {
-                      fill: "currentColor",
-                      viewBox: "0 0 20 20",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "fill-rule": "evenodd",
-                        d:
-                          "M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z",
-                        "clip-rule": "evenodd"
-                      }
-                    })
-                  ]
-                ),
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(_vm.__("add part")) +
-                    "\n                "
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "form",
-              {
-                staticClass: "flex",
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.submit($event)
-                  }
-                }
-              },
-              [
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "bg-teal-500 focus:outline-none hover:bg-teal-400 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white",
-                    attrs: { type: "submit" }
-                  },
-                  [
-                    _c("a", { attrs: { href: "/dashboard/parts/export" } }, [
-                      _c(
-                        "svg",
-                        {
-                          staticClass: "w-4 h-4 md:w-6 md:h-6",
-                          attrs: {
-                            fill: "none",
-                            stroke: "currentColor",
-                            viewBox: "0 0 24 24",
-                            xmlns: "http://www.w3.org/2000/svg"
-                          }
-                        },
-                        [
-                          _c("path", {
-                            attrs: {
-                              "stroke-linecap": "round",
-                              "stroke-linejoin": "round",
-                              "stroke-width": "2",
-                              d:
-                                "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                            }
-                          })
-                        ]
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "relative" }, [
-                  _c("input", {
-                    ref: "files",
-                    staticClass:
-                      "form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full cursor-pointer absolute opacity-0 pin-r pin-t",
-                    attrs: {
-                      id: "files",
-                      type: "file",
-                      accept: "file/*",
-                      label: "Files",
-                      name: "files[]",
-                      error: _vm.$page.errors.files,
-                      tabindex: "7",
-                      multiple: "",
-                      required: ""
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.handleFileUpload()
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex items-center capitalize" },
+            [
+              _c(
+                "inertia-link",
+                {
+                  staticClass:
+                    "bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-4 py-1 rounded text-white text-xs whitespace-no-wrap",
+                  attrs: { href: "/dashboard/parts/create" }
+                },
+                [
                   _c(
-                    "button",
+                    "svg",
                     {
-                      staticClass:
-                        "bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white",
-                      attrs: { type: "button" }
+                      staticClass: "w-6 h-6",
+                      attrs: {
+                        fill: "currentColor",
+                        viewBox: "0 0 20 20",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
                     },
                     [
-                      _c(
-                        "svg",
-                        {
-                          staticClass: "w-4 h-4 md:w-6 md:h-6",
-                          attrs: {
-                            fill: "none",
-                            stroke: "currentColor",
-                            viewBox: "0 0 24 24",
-                            xmlns: "http://www.w3.org/2000/svg"
-                          }
-                        },
-                        [
-                          _c("path", {
-                            attrs: {
-                              "stroke-linecap": "round",
-                              "stroke-linejoin": "round",
-                              "stroke-width": "2",
-                              d:
-                                "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                            }
-                          })
-                        ]
-                      )
+                      _c("path", {
+                        attrs: {
+                          "fill-rule": "evenodd",
+                          d:
+                            "M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z",
+                          "clip-rule": "evenodd"
+                        }
+                      })
                     ]
+                  ),
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.__("add part")) +
+                      "\n            "
                   )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "flex justify-end" },
-                  [
-                    _c("base-button", { staticClass: "bg-teal-700" }, [
-                      _c(
-                        "svg",
-                        {
-                          staticClass: "w-4 h-4 md:w-6 md:h-6",
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-teal-800 focus:outline-none hover:bg-teal-700 md:px-2  outline-none px-6 py-2 rounded text-white",
+                  attrs: { type: "submit" }
+                },
+                [
+                  _c("a", { attrs: { href: "/dashboard/parts/export" } }, [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "w-4 h-4 md:w-6 md:h-6",
+                        attrs: {
+                          fill: "none",
+                          stroke: "currentColor",
+                          viewBox: "0 0 24 24",
+                          xmlns: "http://www.w3.org/2000/svg"
+                        }
+                      },
+                      [
+                        _c("path", {
                           attrs: {
-                            fill: "none",
-                            stroke: "currentColor",
-                            viewBox: "0 0 24 24",
-                            xmlns: "http://www.w3.org/2000/svg"
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2",
+                            d:
+                              "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
                           }
-                        },
-                        [
-                          _c("path", {
-                            attrs: {
-                              "stroke-linecap": "round",
-                              "stroke-linejoin": "round",
-                              "stroke-width": "2",
-                              d:
-                                "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                            }
-                          })
-                        ]
-                      )
-                    ])
-                  ],
-                  1
-                )
-              ]
-            )
-          ],
-          1
-        )
+                        })
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ],
+            1
+          )
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "mt-4" }, [
@@ -54072,7 +53125,7 @@ var render = function() {
                         staticClass:
                           "bg-white text-gray-500 text-sm md:text-base"
                       },
-                      _vm._l(_vm.filteredList, function(part) {
+                      _vm._l(_vm.parts, function(part) {
                         return _c("tr", { key: part.index }, [
                           _c(
                             "td",
@@ -54128,35 +53181,41 @@ var render = function() {
                             [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(
-                                    part.price.slice(0, part.price.length - 3)
-                                  ) +
+                                  _vm._s(part.price) +
                                   "  || " +
-                                  _vm._s(
-                                    part.second_price.slice(
-                                      0,
-                                      part.second_price.length - 3
-                                    )
-                                  ) +
+                                  _vm._s(part.second_price) +
                                   "\n\n                                "
                               )
                             ]
                           ),
                           _vm._v(" "),
-                          _c(
-                            "td",
-                            {
-                              staticClass:
-                                "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
-                            },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(part.category.name) +
-                                  "\n                                "
+                          part.category
+                            ? _c(
+                                "td",
+                                {
+                                  staticClass:
+                                    "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(part.category.name) +
+                                      "\n                                "
+                                  )
+                                ]
                               )
-                            ]
-                          ),
+                            : _c(
+                                "td",
+                                {
+                                  staticClass:
+                                    "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                                },
+                                [
+                                  _c("span", { staticClass: "text-red-600" }, [
+                                    _vm._v("no category")
+                                  ])
+                                ]
+                              ),
                           _vm._v(" "),
                           _c(
                             "td",
@@ -54258,7 +53317,12 @@ var render = function() {
                       }),
                       0
                     )
-                  ])
+                  ]),
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(_vm.parts.links()) +
+                      "\n                    "
+                  )
                 ]
               )
             ]
@@ -54559,7 +53623,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "mt-8 capitalize" }, [
       _c("div", { staticClass: "flex justify-between" }, [
-        _c("h2", { staticClass: "text-3xl text-teal-600 font-bold" }, [
+        _c("h2", { staticClass: "md:text-3xl text-teal-600 font-bold" }, [
           _vm._v(_vm._s(_vm.__("super categories")))
         ]),
         _vm._v(" "),
@@ -54926,20 +53990,59 @@ var render = function() {
           _c(
             "form",
             {
-              staticClass: "flex items-end",
+              staticClass: "flex justify-end",
               on: {
                 submit: function($event) {
                   $event.preventDefault()
-                  return _vm.submit($event)
+                  return _vm.uploadExcel($event)
                 }
               }
             },
             [
+              _c(
+                "div",
+                { staticClass: "flex justify-end" },
+                [
+                  _c(
+                    "base-button",
+                    {
+                      staticClass: "bg-teal-700 hover:bg-teal-600 rounded-none"
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "w-4 h-4 md:w-6 md:h-6",
+                          attrs: {
+                            fill: "none",
+                            stroke: "currentColor",
+                            viewBox: "0 0 24 24",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              "stroke-width": "2",
+                              d:
+                                "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c("div", { staticClass: "relative" }, [
                 _c("input", {
                   ref: "files",
                   staticClass:
-                    "form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full cursor-pointer absolute opacity-0 pin-r pin-t",
+                    "mt-1 block w-full cursor-pointer absolute opacity-0",
                   attrs: {
                     id: "files",
                     type: "file",
@@ -54962,69 +54065,16 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white",
+                      "bg-teal-700 focus:outline-none hover:bg-teal-600 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded-tr text-white",
                     attrs: { type: "button" }
                   },
                   [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "w-4 h-4 md:w-6 md:h-6",
-                        attrs: {
-                          fill: "none",
-                          stroke: "currentColor",
-                          viewBox: "0 0 24 24",
-                          xmlns: "http://www.w3.org/2000/svg"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round",
-                            "stroke-width": "2",
-                            d:
-                              "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                          }
-                        })
-                      ]
-                    )
+                    _c("span", { staticClass: "whitespace-no-wrap" }, [
+                      _vm._v("upload excel")
+                    ])
                   ]
                 )
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex justify-end" },
-                [
-                  _c("base-button", { staticClass: "bg-teal-700" }, [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "w-4 h-4 md:w-6 md:h-6",
-                        attrs: {
-                          fill: "none",
-                          stroke: "currentColor",
-                          viewBox: "0 0 24 24",
-                          xmlns: "http://www.w3.org/2000/svg"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round",
-                            "stroke-width": "2",
-                            d:
-                              "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                          }
-                        })
-                      ]
-                    )
-                  ])
-                ],
-                1
-              )
+              ])
             ]
           ),
           _vm._v(" "),
@@ -56323,18 +55373,6 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "p",
-                      {
-                        staticClass:
-                          "break-all font-medium text-gray-600 text-xs "
-                      },
-                      [
-                        _c("span", { attrs: { dir: "auto" } }),
-                        _vm._v(_vm._s(part.brands.name))
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "p",
                       { staticClass: "text-gray-800 text-xl font-semibold" },
                       [
                         _vm._v(_vm._s(part.price)),
@@ -56757,15 +55795,6 @@ var render = function() {
                               ]
                             )
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "p",
-                          {
-                            staticClass:
-                              "capitalize font-medium text-teal-400 text-xl"
-                          },
-                          [_vm._v(_vm._s(_vm.part.brands.name))]
                         )
                       ])
                     ]
@@ -57370,14 +56399,6 @@ var render = function() {
                   [_vm._v(_vm._s(_vm.part.name))]
                 ),
                 _vm._v(" "),
-                _c(
-                  "p",
-                  {
-                    staticClass: "break-all font-medium text-gray-600 text-xs"
-                  },
-                  [_vm._v(_vm._s(_vm.part.brands.name))]
-                ),
-                _vm._v(" "),
                 _vm.part.type.name == "oem"
                   ? _c(
                       "p",
@@ -57398,11 +56419,7 @@ var render = function() {
                                 staticClass:
                                   "line-through px-2 text-gray-500 text-xs"
                               },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.part.price.slice(0, 3)) + "QAR"
-                                )
-                              ]
+                              [_vm._v(_vm._s(_vm.part.price) + "QAR")]
                             )
                           : _vm._e()
                       ]
@@ -57907,14 +56924,6 @@ var render = function() {
                     attrs: { href: "/store/details/" + part.id }
                   },
                   [_vm._v(_vm._s(part.name))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  {
-                    staticClass: "break-all font-medium text-gray-600 text-xs"
-                  },
-                  [_vm._v(_vm._s(part.brands.name))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -58810,14 +57819,6 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "p",
-                  {
-                    staticClass: "break-all font-medium text-gray-600 text-xs"
-                  },
-                  [_vm._v(_vm._s(part.brands.name))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "p",
                   { staticClass: "text-gray-800 md:text-xl font-semibold" },
                   [
                     _vm._v(_vm._s(part.price) + " "),
@@ -59175,14 +58176,6 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "p",
-                  {
-                    staticClass: "break-all font-medium text-gray-600 text-xs"
-                  },
-                  [_vm._v(_vm._s(part.brands.name))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "p",
                   { staticClass: "text-gray-800 md:text-xl font-semibold" },
                   [
                     _vm._v(_vm._s(part.price) + " "),
@@ -59257,7 +58250,7 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _vm.parts.length == 0
+      _vm.cars.length == 0
         ? _c(
             "p",
             {
@@ -59267,7 +58260,7 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.parts.length == 0
+      _vm.cars.length == 0
         ? _c("div", { staticClass: "flex justify-center mb-10" }, [
             _c("img", {
               staticClass: "w-70 h-70",
@@ -62356,110 +61349,9 @@ render._withStripped = true
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
   \********************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode /* vue-cli only */
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () {
-        injectStyles.call(
-          this,
-          (options.functional ? this.parent : this).$root.$options.shadowRoot
-        )
-      }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functional component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/hnooz/Documents/Projects/Partix/node_modules/vue-loader/lib/runtime/componentNormalizer.js'");
 
 /***/ }),
 
@@ -85608,27 +84500,7 @@ if (false) {} else {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/hnooz/Documents/Projects/Partix/node_modules/webpack/buildin/global.js'");
 
 /***/ }),
 
@@ -85639,29 +84511,7 @@ module.exports = g;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = function(module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/hnooz/Documents/Projects/Partix/node_modules/webpack/buildin/module.js'");
 
 /***/ }),
 
@@ -85672,7 +84522,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed: Error: ENOENT: no such file or directory, open '/home/hnooz/Documents/Projects/Partix/node_modules/css-loader/lib/css-base.js'\n    at /home/hnooz/Documents/Projects/Partix/node_modules/webpack/lib/NormalModule.js:316:20\n    at /home/hnooz/Documents/Projects/Partix/node_modules/loader-runner/lib/LoaderRunner.js:367:11\n    at /home/hnooz/Documents/Projects/Partix/node_modules/loader-runner/lib/LoaderRunner.js:203:19\n    at /home/hnooz/Documents/Projects/Partix/node_modules/enhanced-resolve/lib/CachedInputFileSystem.js:85:15\n    at processTicksAndRejections (internal/process/task_queues.js:79:11)");
 
 /***/ }),
 
@@ -88401,7 +87251,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_2___default.a);
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('base-select', vue_select__WEBPACK_IMPORTED_MODULE_2___default.a);
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('base-nav', __webpack_require__(/*! ./components/UI/BaseNav */ "./resources/js/components/UI/BaseNav.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('base-sidebar', __webpack_require__(/*! ./components/UI/BaseSidebar */ "./resources/js/components/UI/BaseSidebar.vue")["default"]);

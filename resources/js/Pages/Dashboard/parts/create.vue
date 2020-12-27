@@ -30,19 +30,21 @@
                          <div>
                             <base-input :label="__('sale')"  name="sale"  v-model="part.sale" :error="$page.errors.sale" tabindex="5" required></base-input>
                         </div>
-                        <div>
+                        <!-- <div>
                             <label class="text-gray-700">{{__('car')}}</label>
                                 <select  name="car_id"  v-model="part.car_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.car_id" required tabindex="6">
                                     <option value="0">select car</option>
                                     <option v-for="car in cars" :key="car.index" :value="car.id">{{car.brand}}</option>
                                 </select>
-                        </div>
+                        </div> -->
                         <div>
-                            <label class="text-gray-700">{{__('brand')}}</label>
-                                <select  name="brand_id"  v-model="part.brand_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.brand_id" required tabindex="6">
-                                    <option value="0">select brand</option>
-                                    <option v-for="brand in brands" :key="brand.index" :value="brand.id">{{brand.name}}</option>
-                                </select>
+                            <span class="text-gray-700">{{__('car')}}</span>
+                            <base-select label="brand" :options="cars" :reduce="car => car.id" v-model="part.cars" multiple>
+                                <template #search="{attributes, events}">
+                                    <input class="vs__search" v-bind="attributes" v-on="events"/>
+                                </template>
+                            </base-select>
+                            <span class="text-red-500 text-xs mt-4" v-if="$page.errors.cars">{{ $page.errors.cars[0] }}</span>
                         </div>
                         <div>
                             <label class="text-gray-700">{{__('category')}}</label>
@@ -98,11 +100,11 @@
                     second_price:'',
                     slug: '',
                     sale:'',
-                    car_id:0,
+                    cars:[],
                     supplier_id:0,
                     category_id:0,
                     part_type_id:0,
-                    brand_id:0,
+                    // brand_id:0,
                     images:''
                 },
 
@@ -120,11 +122,11 @@
             data.append('second_price', this.part.second_price);
             data.append('slug', this.part.slug);
             data.append('sale', this.part.sale);
-            data.append('car_id', this.part.car_id);
+            data.append('cars', JSON.stringify(this.part.cars));
             data.append('supplier_id', this.part.supplier_id);
             data.append('category_id', this.part.category_id);
             data.append('part_type_id', this.part.part_type_id);
-            data.append('brand_id', this.part.brand_id);
+            // data.append('brand_id', this.part.brand_id);
             if (this.part.images) 
             {
                 for( let i = 0; i < this.part.images.length; i++ ){

@@ -1,6 +1,24 @@
 <template>
     <layout>
-        <h1 class="md:text-base my-2 text-gray-500 text-sm capitalize">{{__('dashboard')}}/{{__('parts')}}</h1>
+        <div class="flex justify-between px-5">
+            <h1 class="md:text-base my-2 text-gray-500 text-sm capitalize">{{__('dashboard')}}/{{__('parts')}}</h1>
+            <form @submit.prevent="submit" class="flex">
+            <div class="flex justify-end">
+                <base-button class="bg-teal-800 hover:bg-teal-700 rounded-none">
+                    <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </base-button>
+                </div>
+                <div class="relative">
+                    
+                    <input id="files" type="file" ref="files" accept="file/*" label="Files" name="files[]" @change="handleFileUpload()" class="mt-1 block w-full cursor-pointer absolute opacity-0" :error="$page.errors.files" tabindex="7" multiple required>
+                    
+                    <button type="button" class="bg-teal-800 focus:outline-none hover:bg-teal-700 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded-tr text-white">
+                        <span class="whitespace-no-wrap">upload excel</span>
+                        <!-- <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg> -->
+                    </button>
+                </div>
+            </form>
+        </div>
         <div class="mx-5">
             <div class="justify-between items-center md:flex">
                 <div class="items-center md:flex">
@@ -32,7 +50,8 @@
                     </div>
                 </div>
                 
-                <div>
+                <div class="flex">
+
                 <form>
                     <div class="relative">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -42,42 +61,24 @@
                             </svg>
                         </button>
                     </span>
-                    <input type="search" v-model="search" class="focus:outline-none px-10 placeholder-gray-400 py-2 shadow-md rounded-md text-sm text-gray-600" :placeholder="__('search')" autocomplete="off">
+                    <input type="search" v-model="search" class="focus:outline-none px-5 placeholder-gray-400 py-2 shadow-md rounded-md text-sm text-gray-600" autocomplete="off">
                     </div>
                 </form>
-            </div>
 
                 <div class="flex items-center capitalize">
-                    <inertia-link href="/dashboard/parts/create"
-                                    class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                        {{__('add part')}}
-                    </inertia-link>
-                    <form @submit.prevent="submit" class="flex">
-                        <button class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white" type="submit">
-                            <a href="/dashboard/parts/export">
-                                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg> 
-                            </a>
-                        </button>
-                
-                        <div class="relative">
-                            
-                            <input id="files" type="file" ref="files" accept="file/*" label="Files" name="files[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full cursor-pointer absolute opacity-0 pin-r pin-t" :error="$page.errors.files" tabindex="7" multiple required>
-                            
-                            <button type="button" class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white">
-                                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            </button>
-                        </div>
-
-                        <div class="flex justify-end">
-                            <base-button class="bg-teal-700">
-                                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            </base-button>
-                        </div>
-                    </form>
-                    
-                    
-                </div>
+                <inertia-link href="/dashboard/parts/create"
+                                class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-4 py-1 rounded text-white text-xs whitespace-no-wrap">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                    {{__('add part')}}
+                </inertia-link>
+                <button class="bg-teal-800 focus:outline-none hover:bg-teal-700 md:px-2  outline-none px-6 py-2 rounded text-white" type="submit">
+                        <a href="/dashboard/parts/export">
+                            <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg> 
+                        </a>
+                    </button>
+            </div>
+            </div>
+            
             </div>
             <div class="mt-4">
                 <div class="flex flex-col">
@@ -87,10 +88,6 @@
                             <table class="min-w-full">
                                 <thead class="bg-gray-100">
                                 <tr>
-                                    <!-- <th class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
-                                        style="text-align: start">
-                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                    </th> -->
                                     <th class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         #ID
@@ -139,11 +136,14 @@
                                         {{ part.number }}
                                     </td>
                                      <td class="px-3 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        {{ part.price.slice(0,part.price.length - 3) }}  || {{ part.second_price.slice(0,part.second_price.length - 3) }}
+                                        {{ part.price }}  || {{ part.second_price }}
 
                                     </td>
-                                    <td class="px-3 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    <td class="px-3 py-4 whitespace-no-wrap border-b border-gray-200" v-if="part.category">
                                         {{ part.category.name }}
+                                    </td>
+                                    <td class="px-3 py-4 whitespace-no-wrap border-b border-gray-200" v-else>
+                                        <span class="text-red-600">no category</span>
                                     </td>
                                     <td class="px-3 py-4 whitespace-no-wrap border-b border-gray-200">
                                         {{ part.type.name }}
@@ -154,7 +154,6 @@
                                     </td>
                                 </tr>
                                 </tbody>
-                                <!-- <pagination :data="laravelData" @pagination-change-page="getResults"></pagination> -->
                             </table>
                         </div>
                     </div>
@@ -176,9 +175,9 @@
                 files:'',
                 isOpen:false,
                 search:'',
-                laravelData: {},
             }
         },
+
         computed: {
         filteredList() {
         return this.parts.filter(part => {
@@ -186,23 +185,7 @@
         })
         }
     },
-    // created() {
-    //         this.getResults();
-    //     },
         methods: {
-            getResults(page) {
-                if (typeof page === 'undefined') {
-                    page = 1;
-                }
-      
-                this.$http.get('/dashboard/parts?page=' + page)
-                    .then(response => {
-                    
-                        return response.json();
-                    }).then(data => {
-                        this.laravelData = data;
-                    });
-            },
             submit() {
             
             const data = new FormData();

@@ -34,9 +34,6 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     // coupons route
     Route::resource('coupons', 'CouponCodeController')->except(['show']);
 
-    // comments route
-    Route::get('/comments', 'CommentController@index')->name('comments.index');
-
     // category route
     Route::resource('super_categories', 'SuperCategoryController')->except(['show']);
     Route::resource('categories', 'CategoryController');

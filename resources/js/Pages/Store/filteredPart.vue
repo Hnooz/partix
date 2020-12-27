@@ -57,7 +57,7 @@
 
             <div class="px-4 py-2">
                 <a :href="`/store/details/${part.id}`" class="font-bold text-sm md:text-base text-teal-500 uppercase">{{part.name}}</a>
-                <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p>
+                <!-- <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p> -->
                 <p class="text-gray-800 md:text-xl font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">QAR</span></p>
             </div>
 
@@ -75,8 +75,8 @@
             </div>
         </div>
     </div>
-        <p  v-if="parts.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">there is no parts ~_~!</p>
-        <div v-if="parts.length == 0" class="flex justify-center mb-10">
+        <p  v-if="cars.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">there is no parts ~_~!</p>
+        <div v-if="cars.length == 0" class="flex justify-center mb-10">
             <img class="w-70 h-70" src="../../images/empty-animate.svg" alt="">
         </div>
 <BaseFooter/>
@@ -96,7 +96,7 @@ export default {
         BaseFooter,
         
     },
-    props:['parts', 'cartQuantity', 'cartCollection', 'cartTotalPrice'],
+    props:['parts', 'cars', 'cartQuantity', 'cartCollection', 'cartTotalPrice'],
     data() {
         return {
             search:'',
@@ -105,7 +105,7 @@ export default {
 
     computed: {
     filteredList() {
-      return this.parts.filter(part => {
+      return this.cars.filter(part => {
         return part.name.toLowerCase().includes(this.search.toLowerCase())
       })
     }

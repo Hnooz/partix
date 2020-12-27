@@ -64,66 +64,57 @@ class OrderController extends Controller
             return redirect()->back();
         }
 
-        if (sizeOf($coupon) == 0) { //CHECK IF COUPON IS EMPTY
-            session()->flash('toast', [
-                'type' => 'error',
-                'message' => 'invalid coupon code | there is no coupon with this name',
-            ]);
-
-            return redirect()->back();
-        } else {
-            if (isset($coupon[0])) {
-                $expiration = Carbon::createFromFormat('Y-m-d', $coupon[0]->expiration_at)->toDateTimeString();
+        if (isset($coupon[0])) {
+            $expiration = Carbon::createFromFormat('Y-m-d', $coupon[0]->expiration_at)->toDateTimeString();
                 
-                if ($coupon[0]->quantity < 1 || $expiration <= $mutable) { // check coupon expiration TIME
-                    session()->flash('toast', [
-                        'type' => 'error',
-                        'message' => 'invalid coupon code | quantity = 0 or it\'s expired s',
-                    ]);
-
-                    return redirect()->back();
-                }
-
-                $order = Order::create([
-                    'customer_phone' => $request->customer_phone,
-                    'address' => $request->address,
-                    'order_status_id' => 1,
-                    'coupon_id' => $coupon[0]->id,
+            if ($coupon[0]->quantity < 1 || $expiration <= $mutable) { // check coupon expiration TIME
+                session()->flash('toast', [
+                    'type' => 'error',
+                    'message' => 'invalid coupon code | quantity = 0 or it\'s expired s',
                 ]);
 
-                $coupon[0]->quantity = $coupon[0]->quantity - 1;
-                if ($coupon[0]->quantity == 0) {
-                    $coupon[0]->used = '0';
-                }
-                $coupon[0]->save();
-            } else {
-                $order = Order::create([
-                    'customer_phone' => $request->customer_phone,
-                    'address' => $request->address,
-                    'order_status_id' => 1,
-                ]);
+                return redirect()->back();
             }
-        
-            $cartCollection = Cart::getContent();
 
-            foreach ($cartCollection as $cart) {
-                $details = OrderDetails::create([
-                    'order_id' => $order->id,
-                    'part_id' => $cart->id,
-                    'quantity' => $cart->quantity,
-                    'price' => $cart->price,
-                ]);
-            };
-
-            Cart::clear();
-    
-            session()->flash('toast', [
-                'type' => 'success',
-                'message' => 'you have successfully',
+            $order = Order::create([
+                'customer_phone' => $request->customer_phone,
+                'address' => $request->address,
+                'order_status_id' => 1,
+                'coupon_id' => $coupon[0]->id,
             ]);
 
-            return redirect()->route('store.index');
+            $coupon[0]->quantity = $coupon[0]->quantity - 1;
+            if ($coupon[0]->quantity == 0) {
+                $coupon[0]->used = '0';
+            }
+            $coupon[0]->save();
+        } else {
+            $order = Order::create([
+                'customer_phone' => $request->customer_phone,
+                'address' => $request->address,
+                'order_status_id' => 1,
+            ]);
         }
+        
+        $cartCollection = Cart::getContent();
+
+        foreach ($cartCollection as $cart) {
+            $details = OrderDetails::create([
+                'order_id' => $order->id,
+                'part_id' => $cart->id,
+                'quantity' => $cart->quantity,
+                'price' => $cart->price,
+            ]);
+        };
+
+        Cart::clear();
+    
+        session()->flash('toast', [
+            'type' => 'success',
+            'message' => 'you have successfully',
+        ]);
+
+        return redirect()->route('store.index');
     }
 
     public function edit(Order $order)

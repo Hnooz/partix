@@ -5,20 +5,25 @@
             <div class="flex justify-between">
                 <h2 class="text-3xl text-teal-600 font-bold">{{__('suppliers')}}</h2>
                 <div>
-                    <form class="flex items-end" @submit.prevent="submit">
-                        <div class="relative">
-                            
-                            <input id="files" type="file" ref="files" accept="file/*" label="Files" name="files[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full cursor-pointer absolute opacity-0 pin-r pin-t" :error="$page.errors.files" tabindex="7" multiple required>
-                            
-                            <button type="button" class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white">
-                                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            </button>
-                        </div>
-
+                    <form @submit.prevent="uploadExcel" class="flex justify-end">
+                        <!-- <button class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white" type="submit">
+                            <a href="/dashboard/suppliers/export">
+                                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg> 
+                            </a>
+                        </button> -->
                         <div class="flex justify-end">
-                            <base-button class="bg-teal-700">
+                            <base-button class="bg-teal-700 hover:bg-teal-600 rounded-none">
                                 <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             </base-button>
+                        </div>
+                        <div class="relative">
+                            
+                            <input id="files" type="file" ref="files" accept="file/*" label="Files" name="files[]" @change="handleFileUpload()" class="mt-1 block w-full cursor-pointer absolute opacity-0" :error="$page.errors.files" tabindex="7" multiple required>
+                            
+                            <button type="button" class="bg-teal-700 focus:outline-none hover:bg-teal-600 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded-tr text-white">
+                                <span class="whitespace-no-wrap">upload excel</span>
+                                <!-- <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg> -->
+                            </button>
                         </div>
                     </form>
                     <form class="flex items-end" @submit.prevent="submit">
@@ -99,9 +104,12 @@ import Edit from '../suppliers/Edit'
         },
         methods: {
             submit() {
-                // this.$inertia.post('/dashboard/suppliers', this.form).then(() => location.reload());
-                const data = new FormData();
+                this.$inertia.post('/dashboard/suppliers', this.form).then(() => location.reload());
 
+            },
+             uploadExcel() 
+            {
+            const data = new FormData();
             data.append('files', this.files);
 
             axios.post( '/dashboard/suppliers/import',

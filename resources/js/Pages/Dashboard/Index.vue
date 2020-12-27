@@ -168,11 +168,12 @@
                     <i class="absolute bg-blue-400 h-3 mx-3 rounded-full w-3"></i>
                     <p class="px-8 py-4 text-indigo-900">{{__('top salling brands')}}</p>
                 </div>
+                <!-- limitBrands[0].name,limitBrands[1].name -->
                 <chart class="chartjs-render-monitor max-w-xs mt-24 mb-24"
                 width="200" height="164"
                 id="chart1"
                 :title="__('top salling brands')"
-                :labels='[limitBrands[0].name,limitBrands[1].name]'
+                :labels="limitBrands ? ['cars'] : ''"  
                 :data='[45, 75, 150, 90, 75, 30]'
                 :top="20"
                 :left="30"
@@ -203,7 +204,7 @@
 
     </layout>
     
-</template>
+</template> 
 
 <script>
     import Layout from "../../Shared/Layout";

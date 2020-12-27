@@ -54,7 +54,7 @@
 
                     <div class="px-4 py-2">
                         <a :href="'/store/details/' + part.id" class="font-bold text-teal-500 uppercase">{{part.name}}</a>
-                        <p class="break-all font-medium text-gray-600 text-xs "><span dir="auto"></span>{{part.brands.name}}</p>
+                        <!-- <p class="break-all font-medium text-gray-600 text-xs "><span dir="auto"></span>{{part.brands.name}}</p> -->
                         <p class="text-gray-800 text-xl font-semibold">{{part.price}}<span class="px-2 text-gray-500 text-sm">QAR</span></p>
                     </div>
                     <input type="text" name="supplier_id"  hidden>

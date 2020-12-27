@@ -329,10 +329,8 @@ nav.scrolled {
     @apply shadow-2xl;
     @apply border-b-2 ;
     @apply border-teal-500;
-
-
 }
-    .bg_image{
-        background-image: url('../../images/1223/bg.png');
-    }
+.bg_image{
+    background-image: url('../../images/1223/bg.png');
+}
 </style>

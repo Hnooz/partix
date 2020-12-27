@@ -103,7 +103,7 @@ import BaseButton from '../UI/BaseButton'
                     method: 'post',
                     url: '/store/filtered_parts',
                     data: {
-                        car_id: this.brand,
+                        car_id: this.engine,
                     }
                 }).then((response) => {
                      const status = JSON.parse(response.status);

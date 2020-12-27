@@ -2,10 +2,10 @@
     <layout>
         <h1 class="my-2 text-gray-500 capitalize">{{__('dashboard')}}/{{__('orders')}}</h1>
         <div class="mx-5 capitalize">
-            <div class="justify-between md:flex">
-                <div class="items-center md:flex">
+            <div class="justify-between flex">
+                <div class="items-center flex">
                     <h2 class="font-bold md:text-3xl text-xl text-teal-600">{{__('orders')}}</h2>
-                    <div class="capitalize flex items-center md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap">
+                    <div class="capitalize flex items-center mx-3 md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap">
                          <h1>{{this.$page.order.total}} {{__('order')}}</h1>
                          <div class="flex items-center mx-8">
                              <label for="">

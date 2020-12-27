@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSecondPriceToPartsTable extends Migration
+class CreateCarPartTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddSecondPriceToPartsTable extends Migration
      */
     public function up()
     {
-        Schema::table('parts', function (Blueprint $table) {
-            $table->integer('second_price')->nullable();
+        Schema::create('car_part', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('car_id')->references('id')->on('cars');
+            $table->foreignId('part_id')->references('id')->on('parts');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddSecondPriceToPartsTable extends Migration
      */
     public function down()
     {
-        Schema::table('parts', function (Blueprint $table) {
-            $table->dropColumn('second_price');
-        });
+        Schema::dropIfExists('car_part');
     }
 }

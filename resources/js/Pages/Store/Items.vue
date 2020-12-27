@@ -58,7 +58,7 @@
 
             <div class="px-4 py-2">
                 <a :href="`/store/details/${part.id}`" class="font-bold text-xs md:text-base text-teal-500 capitalize">{{part.name}}</a>
-                <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p>
+                <!-- <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p> -->
                 <p class="text-gray-800 md:text-xl text-xs font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">QAR</span></p>
             </div>
 
