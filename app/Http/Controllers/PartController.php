@@ -8,7 +8,6 @@ use App\Brand;
 use App\Category;
 use App\PartType;
 use App\Supplier;
-use Illuminate\Http\Request;
 use App\Http\Requests\StorePartRequest;
 
 class PartController extends Controller
@@ -75,7 +74,6 @@ class PartController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'second_price' => $request->second_price,
-            'slug' => $request->slug,
             'category_id' => $request->category_id,
             'supplier_id' => $request->supplier_id,
             'part_type_id' => $request->part_type_id,

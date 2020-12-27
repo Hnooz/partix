@@ -24,9 +24,9 @@
                         <div>
                             <base-input type="number" :label="__('second price')"  name="second_price"  v-model="part.second_price" :error="$page.errors.second_price" tabindex="4" required></base-input>
                         </div>
-                        <div>
+                        <!-- <div>
                             <base-input :label="__('slug')"  name="slug"  v-model="part.slug" :error="$page.errors.slug" tabindex="5" required></base-input>
-                        </div>
+                        </div> -->
                          <div>
                             <base-input :label="__('sale')"  name="sale"  v-model="part.sale" :error="$page.errors.sale" tabindex="5" required></base-input>
                         </div>
