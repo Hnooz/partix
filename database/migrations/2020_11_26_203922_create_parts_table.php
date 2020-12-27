@@ -18,7 +18,7 @@ class CreatePartsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('number');
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->integer('price');
             $table->integer('second_price')->nullable();
             $table->integer('sale')->nullable();

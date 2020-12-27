@@ -52572,29 +52572,6 @@ var render = function() {
                     [
                       _c("base-input", {
                         attrs: {
-                          label: _vm.__("slug"),
-                          name: "slug",
-                          error: _vm.$page.errors.slug,
-                          tabindex: "5",
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.part.slug,
-                          callback: function($$v) {
-                            _vm.$set(_vm.part, "slug", $$v)
-                          },
-                          expression: "part.slug"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _c("base-input", {
-                        attrs: {
                           label: _vm.__("sale"),
                           name: "sale",
                           error: _vm.$page.errors.sale,
