@@ -23,6 +23,18 @@ class DatabaseSeeder extends Seeder
             'name' => 'kia',
             'name_ar' => 'كيا',
         ]);
+        \App\Brand::create([
+            'name' => 'toyota',
+            'name_ar' => 'تويوتا',
+        ]);
+        \App\Brand::create([
+            'name' => 'ford',
+            'name_ar' => 'فورد',
+        ]);
+        \App\Brand::create([
+            'name' => 'bentley',
+            'name_ar' => 'بينتيلي',
+        ]);
         \App\Car::create([
             'brand' => 'kia rio 23',
             'model' => 'rio 23',
@@ -44,6 +56,12 @@ class DatabaseSeeder extends Seeder
         \App\Category::create([
             'name' => 'air filter',
             'name_ar' => 'فلتر هواء',
+            'sale' => 10,
+            'super_category_id' => 1,
+        ]);
+        \App\Category::create([
+            'name' => 'oil filter',
+            'name_ar' => 'فلتر زيت',
             'sale' => 10,
             'super_category_id' => 1,
         ]);
