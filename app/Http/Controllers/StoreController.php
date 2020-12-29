@@ -100,7 +100,7 @@ class StoreController extends Controller
 
     public function search(Request $request)
     {
-        $part = Part::where('name', $request->name)->orWhere('number', $request->name)->get();
+        $part = Part::where('name', $request->name)->orWhere('number', $request->name)->orWhere('name_ar', $request->name)->get();
 
         return response()->json(['data' => $part, 'redirect' => '/store/details/']);
     }

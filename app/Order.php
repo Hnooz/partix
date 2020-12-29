@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $guarded = [];
-    protected $with = ['status'];
+    protected $with = ['status', 'coupon'];
     protected $appends = ['price'];
 
     public function getPriceAttribute()
@@ -19,17 +19,17 @@ class Order extends Model
             $totalPrice = $totalPrice + $total->price * $total->quantity;
         }
         if (sizeof($coupon) >= 1) {
-            if ($coupon[0]->descountType->name == 'fixied') {
-                if (round($totalPrice - $coupon[0]->value, 2) < 0) {
-                    return round($totalPrice - $coupon[0]->value, 2) + $coupon[0]->value;
+            if ($coupon[0]->descountType->name == 'fixed') {
+                if ($totalPrice - $coupon[0]->value < 0) {
+                    return $totalPrice - $coupon[0]->value + $coupon[0]->value;
                 }
 
-                return round($totalPrice - $coupon[0]->value, 2);
+                return $totalPrice - $coupon[0]->value;
             } else {
-                return round($totalPrice - (($coupon[0]->value / 100) * $totalPrice), 2);
+                return $totalPrice - (($coupon[0]->value / 100) * $totalPrice);
             }
         } else {
-            return round($totalPrice, 2);
+            return $totalPrice;
         }
     }
     public function orderDetails()
@@ -40,5 +40,9 @@ class Order extends Model
     public function status()
     {
         return $this->belongsTo(OrderStatus::class, 'order_status_id');
+    }
+    public function coupon()
+    {
+        return $this->belongsTo(CouponCode::class, 'coupon_id');
     }
 }

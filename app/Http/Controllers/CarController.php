@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Car;
 use App\Brand;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreCarRequest;
 
 class CarController extends Controller
@@ -33,6 +32,9 @@ class CarController extends Controller
             'brand' => $request->brand,
             'model' => $request->model,
             'engine' => $request->engine,
+            'brand_ar' => $request->brand_ar,
+            'model_ar' => $request->model_ar,
+            'engine_ar' => $request->engine_ar,
             'year' => $request->year,
             'brand_id' => $request->brand_id,
 
@@ -53,15 +55,9 @@ class CarController extends Controller
         return inertia()->render('Dashboard/cars/edit', ['car' => $car,'brands' => $brands]);
     }
 
-    public function update(Request $request, Car $car)
+    public function update(StoreCarRequest $request, Car $car)
     {
-        $data = $request->validate([
-            'brand' => 'required|min:3',
-            'model' => 'required|max:255',
-            'engine' => 'required|max:255',
-            'year' => 'required|max:255',
-            'brand_id' => 'required|max:255',
-        ]);
+        $data = $request->validated();
 
         $car->update($data);
 

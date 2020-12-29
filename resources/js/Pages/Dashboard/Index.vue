@@ -103,7 +103,7 @@
                 <div class="flex items-center justify-between">
                     <div class="mx-6 text-gray-600">
                         <h1>{{__('total sales')}}</h1>
-                        <p>{{total}}</p>
+                        <p>{{orderIds.length}}</p>
                     </div>
                     <div class="flex items-center mx-6">
                         <i class="-mx-12 absolute bg-teal-300 h-2 rounded-full w-10"></i>
@@ -116,9 +116,9 @@
                     id="chart2"
                     type="line"
                     title="Top Salling"
-                    :labels='["", "", "", "","", "","", "", "", "","", "",""]'
+                    :labels='orderIds'
                     
-                    :data='[0, 10, 17, 12, 23, 10, 41, 40, 30, 19, 31, 39, 50]'
+                    :data='orderTotalPrice'
                     :background-color="'rgba(129, 230, 217, 0.6)'"
                     :border-color="'rgba(129, 230, 217, 0.5)'"
                     :top="20"
@@ -173,7 +173,7 @@
                 width="200" height="164"
                 id="chart1"
                 :title="__('top salling brands')"
-                :labels="limitBrands ? ['cars'] : ''"  
+                :labels="brandName"  
                 :data='[45, 75, 150, 90, 75, 30]'
                 :top="20"
                 :left="30"
@@ -189,7 +189,7 @@
                                 <i class="absolute bg-red-400 h-2 rounded-full w-2"></i>
                                 <h1 class="mx-3 text-xs">{{__('total sales')}}</h1>
                             </div>
-                            <span class="font-semibold text-xl text-gray-700">QAR {{total}}</span>
+                            <span class="font-semibold text-xl text-gray-700">{{__('QAR')}} {{total}}</span>
                             <div class="absolute bg-gray-300 h-2 rounded-full w-64">
                                 <i class="absolute bg-red-400 h-2 rounded-full w-20"></i>
                             </div>
@@ -219,8 +219,20 @@
         'delivered_order', 'awaiting_order', 
         'rejected_order', 'total', 'limitBrands',
         'newCars', 'thisWeekOrders',
-        'customerAddress',
-        'newCustomers'
+        'customerAddress','orderTotalPrice',
+        'orderIds', 'newCustomers'
         ],
+
+        computed: {
+            brandName()
+            {
+            const brandNames = [];
+              this.limitBrands.forEach(limitBrand => {
+                  
+                    brandNames.push(limitBrand.name);
+              });
+              return brandNames;
+            }
+        },
     }
 </script>

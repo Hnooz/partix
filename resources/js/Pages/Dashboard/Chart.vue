@@ -6,7 +6,13 @@
     import Chart from "chart.js";
 
     export default {
-        props: ['id','width','height','type','title','labels','data','top','left','right','bottom', 'fill', 'backgroundColor', 'borderColor', 'borderWidth','layout'],
+        props: [
+            'id','width','height','type',
+            'title','labels','data','top',
+            'left','right','bottom', 'fill',
+            'backgroundColor', 'borderColor',
+            'borderWidth','layout'
+            ],
 
         mounted() {
             var ctx = document.getElementById(this.id).getContext('2d');

@@ -13,6 +13,9 @@
                             <base-input :label="__('name')" name="name" v-model="form.name" :error="$page.errors.name" tabindex="1" required></base-input>
                         </div>
                          <div>
+                            <base-input :label="__('name_ar')" name="name_ar" v-model="form.name_ar" :error="$page.errors.name_ar" tabindex="1" required></base-input>
+                        </div>
+                         <div>
                              <label class="text-gray-700" for="Upload Image">I{{__('images')}}</label>
                             <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full" :error="$page.errors.images" tabindex="4" multiple required>
                         </div>
@@ -38,6 +41,7 @@
             return {
                 form: {
                     name: '',
+                    name_ar:'',
                     images:''
                 }
             }
@@ -50,6 +54,7 @@
                 const data = new FormData();
 
                 data.append('name', this.form.name);
+                data.append('name_ar', this.form.name_ar);
                 data.append('images', this.form.images);
                 data.append('_method', 'put');
 

@@ -16,13 +16,14 @@ class CreatePartTypesTable extends Migration
         Schema::create('part_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('name_ar');
             $table->timestamps();
         });
         
         DB::table('part_types')->insert([
-            ['id' => '1', 'name' => 'oem'],
-            ['id' => '2', 'name' => 'aftermarket'],
-            ['id' => '3', 'name' => 'used'],
+            ['id' => '1', 'name' => 'oem', 'name_ar' => 'جديد'],
+            ['id' => '2', 'name' => 'aftermarket', 'name_ar' => 'تجاري'],
+            ['id' => '3', 'name' => 'used', 'name_ar' => 'مستعمل'],
         ]);
     }
 

@@ -8,7 +8,7 @@
     <div class="bg-teal-700 py-5 hidden md:block">
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-10 text-white">
             <div>
-                <h1>{{__('filtered item')}}</h1>
+                <h1>{{__('filtered part')}}</h1>
                 
             </div>
             <div>
@@ -56,9 +56,9 @@
             </a>
 
             <div class="px-4 py-2">
-                <a :href="`/store/details/${part.id}`" class="font-bold text-sm md:text-base text-teal-500 uppercase">{{part.name}}</a>
+                <a :href="`/store/details/${part.id}`" class="font-bold text-sm md:text-base text-teal-500 uppercase">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
                 <!-- <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p> -->
-                <p class="text-gray-800 md:text-xl font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">QAR</span></p>
+                <p class="text-gray-800 md:text-xl font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p>
             </div>
 
             <div class="bg-teal-700 py-2">

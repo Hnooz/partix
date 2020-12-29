@@ -13,10 +13,19 @@
                             <base-input :label="__('name')" name="brand" v-model="car.brand" :error="$page.errors.brand" tabindex="1" :placeholder="__('e.g Toyota')" required></base-input>
                         </div>
                         <div>
-                            <base-input :label="__('model')" name="model" v-model="car.model" :error="$page.errors.model" tabindex="2" :placeholder="__('e.g Brado')" required></base-input>
+                            <base-input :label="__('name_ar')" name="brand_ar" v-model="car.brand_ar" :error="$page.errors.brand_ar" tabindex="2" :placeholder="__('e.g Toyota')" required></base-input>
                         </div>
                         <div>
-                            <base-input :label="__('engine')" name="engine" v-model="car.engine" :error="$page.errors.engine" tabindex="3" :placeholder="__('e.g jas')" required></base-input>
+                            <base-input :label="__('model')" name="model" v-model="car.model" :error="$page.errors.model" tabindex="3" :placeholder="__('e.g Brado')" required></base-input>
+                        </div>
+                         <div>
+                            <base-input :label="__('model_ar')" name="model_ar" v-model="car.model_ar" :error="$page.errors.model_ar" tabindex="4" :placeholder="__('e.g Brado')" required></base-input>
+                        </div>
+                        <div>
+                            <base-input :label="__('engine')" name="engine" v-model="car.engine" :error="$page.errors.engine" tabindex="5" :placeholder="__('e.g jas')" required></base-input>
+                        </div>
+                        <div>
+                            <base-input :label="__('engine_ar')" name="engine_ar" v-model="car.engine_ar" :error="$page.errors.engine_ar" tabindex="6" :placeholder="__('e.g jas')" required></base-input>
                         </div>
                         <div>
                             <base-input :label="__('year')" name="year" v-model="car.year" :error="$page.errors.year" tabindex="4" :placeholder="__('e.g 2018')" required></base-input>
@@ -52,6 +61,9 @@
                     brand: '',
                     model: '',
                     engine: '',
+                    brand_ar: '',
+                    model_ar: '',
+                    engine_ar: '',
                     year: '',
                     brand_id:0
                 }

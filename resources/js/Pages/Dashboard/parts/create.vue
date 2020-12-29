@@ -13,10 +13,16 @@
                             <base-input :label="__('name')"  name="name"  v-model="part.name" :error="$page.errors.name" tabindex="1" required></base-input>
                         </div>
                         <div>
+                            <base-input :label="__('name_ar')"  name="name_ar"  v-model="part.name_ar" :error="$page.errors.name_ar" tabindex="1" required></base-input>
+                        </div>
+                        <div>
                             <base-input :label="__('number')"  name="number"  v-model="part.number" :error="$page.errors.number" tabindex="2" required></base-input>
                         </div>
                         <div>
                             <base-input :label="__('description')"  name="description"   v-model="part.description" :error="$page.errors.description" tabindex="3" required></base-input>
+                        </div>
+                         <div>
+                            <base-input :label="__('description_ar')"  name="description_ar"   v-model="part.description_ar" :error="$page.errors.description_ar" tabindex="3" required></base-input>
                         </div>
                         <div>
                             <base-input type="number" :label="__('price')"  name="price"  v-model="part.price" :error="$page.errors.price" tabindex="4" required></base-input>
@@ -24,19 +30,9 @@
                         <div>
                             <base-input type="number" :label="__('second price')"  name="second_price"  v-model="part.second_price" :error="$page.errors.second_price" tabindex="4" required></base-input>
                         </div>
-                        <!-- <div>
-                            <base-input :label="__('slug')"  name="slug"  v-model="part.slug" :error="$page.errors.slug" tabindex="5" required></base-input>
-                        </div> -->
                          <div>
                             <base-input :label="__('sale')"  name="sale"  v-model="part.sale" :error="$page.errors.sale" tabindex="5" required></base-input>
                         </div>
-                        <!-- <div>
-                            <label class="text-gray-700">{{__('car')}}</label>
-                                <select  name="car_id"  v-model="part.car_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.car_id" required tabindex="6">
-                                    <option value="0">select car</option>
-                                    <option v-for="car in cars" :key="car.index" :value="car.id">{{car.brand}}</option>
-                                </select>
-                        </div> -->
                         <div>
                             <span class="text-gray-700">{{__('car')}}</span>
                             <base-select label="brand" :options="cars" :reduce="car => car.id" v-model="part.cars" multiple>
@@ -94,8 +90,10 @@
             return {
                 part: {
                     name: '',
+                    name_ar: '',
                     number: '',
                     description: '',
+                    description_ar: '',
                     price: '',
                     second_price:'',
                     slug: '',
@@ -104,7 +102,6 @@
                     supplier_id:0,
                     category_id:0,
                     part_type_id:0,
-                    // brand_id:0,
                     images:''
                 },
 
@@ -116,8 +113,10 @@
             const data = new FormData();
 
             data.append('name', this.part.name);
+            data.append('name_ar', this.part.name_ar);
             data.append('number', this.part.number);
             data.append('description', this.part.description);
+            data.append('description_ar', this.part.description_ar);
             data.append('price', this.part.price);
             data.append('second_price', this.part.second_price);
             data.append('slug', this.part.slug);
@@ -126,7 +125,6 @@
             data.append('supplier_id', this.part.supplier_id);
             data.append('category_id', this.part.category_id);
             data.append('part_type_id', this.part.part_type_id);
-            // data.append('brand_id', this.part.brand_id);
             if (this.part.images) 
             {
                 for( let i = 0; i < this.part.images.length; i++ ){

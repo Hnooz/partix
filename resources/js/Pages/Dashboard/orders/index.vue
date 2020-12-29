@@ -68,6 +68,10 @@
                                         style="text-align: start">
                                         {{__('total')}} {{__('price')}}
                                     </th>
+                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                        style="text-align: start">
+                                        {{__('coupon value')}}
+                                    </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         {{__('order status')}}
@@ -103,6 +107,9 @@
 
                                     <td class="px-6 py-4 whitespace-no-wrap uppercase">
                                         {{ order.price}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap uppercase">
+                                        {{ order.coupon ?  order.coupon.value : "no coupon"}}
                                     </td>
                                 
                                     <td class="px-6 py-4 whitespace-no-wrap">

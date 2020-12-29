@@ -1,12 +1,6 @@
 <template>
   <VueSlickCarousel v-bind="settings">
-    <div v-for="category in super_category.categories" :key="category.index" class="bg-teal-700">
-      
-      <inertia-link :href="'/store/items/'+category.id" class="flex text-white font-semibold">
-        <h1 class="mx-6 text-center w-full"> {{category.name}}</h1>
-          <!-- <img class="h-12 mx-auto my-2 object-center object-cover w-12" :src="category.url[0]" alt=""> -->
-      </inertia-link>
-  </div>
+      <slot></slot>
   </VueSlickCarousel>
 </template>
 <script>
@@ -16,12 +10,12 @@
   import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 
   export default {
-    name: 'Slide',
+    name: 'SlideImage',
     props:[
       'arrows',
       'slidesToShow',
-      'categories',
-      'super_category'
+      // 'categories',
+      // 'super_category'
     ],
     components: { VueSlickCarousel },
     data() {

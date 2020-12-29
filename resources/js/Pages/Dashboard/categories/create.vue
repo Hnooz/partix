@@ -12,7 +12,10 @@
                             <base-input :label="__('name')" name="name" v-model="category.name" :error="$page.errors.name" tabindex="1" :placeholder="__('filters')" required></base-input>
                         </div>
                         <div>
-                            <base-input type="text" :label="__('description')" name="description" v-model="category.description"  tabindex="2" :placeholder="__('category description')" required></base-input>
+                            <base-input :label="__('name_ar')" name="name_ar" v-model="category.name_ar" :error="$page.errors.name_ar" tabindex="1" :placeholder="__('filters')" required></base-input>
+                        </div>
+                        <div>
+                            <base-input :label="__('sale')" name="sale" v-model="category.sale" :error="$page.errors.sale" tabindex="1" :placeholder="__('20')"></base-input>
                         </div>
                         <div>
                             <label class="text-gray-700 capitalize">{{__('super categories')}}</label>
@@ -47,7 +50,8 @@
             return {
                 category: {
                     name: '',
-                    description: '',
+                    name_ar: '',
+                    sale:'',
                     super_category_id:0,
                     images:''
                 }
@@ -58,7 +62,8 @@
             {
                 const data = new FormData();
                 data.append('name', this.category.name);
-                data.append('description', this.category.description);
+                data.append('name_ar', this.category.name_ar);
+                data.append('sale', this.category.sale);
                 data.append('super_category_id', this.category.super_category_id);
                 // check for image
                 this.category.images ?  data.append('images', this.category.images) : '';

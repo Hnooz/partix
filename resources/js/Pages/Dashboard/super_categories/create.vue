@@ -12,6 +12,9 @@
                         <div>
                             <base-input :label="__('name')" name="name" v-model="category.name" :error="$page.errors.name" tabindex="1" required></base-input>
                         </div>
+                        <div>
+                            <base-input :label="__('name_ar')" name="name_ar" v-model="category.name_ar" :error="$page.errors.name_ar" tabindex="1" required></base-input>
+                        </div>
                          <div>
                              <label class="text-gray-700" for="Upload Image">{{__('images')}}</label>
                              <!-- <base-input label="Name" name="name" :error="$page.errors.images" tabindex="1" required></base-input> -->
@@ -38,6 +41,7 @@
             return {
                 category: {
                     name: '',
+                    name_ar:'',
                     images:''
                 }
             }
@@ -47,6 +51,7 @@
                 const data = new FormData();
 
                 data.append('name', this.category.name);
+                data.append('name_ar', this.category.name_ar);
                 data.append('images', this.category.images);
 
                 axios.post( '/dashboard/super_categories',

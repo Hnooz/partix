@@ -21,9 +21,38 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Brand::create([
             'name' => 'kia',
+            'name_ar' => 'كيا',
         ]);
-        \App\Brand::create([
-            'name' => 'rio',
+        \App\Car::create([
+            'brand' => 'kia rio 23',
+            'model' => 'rio 23',
+            'year' => '2023',
+            'engine' => 'jas',
+            'brand_ar' => 'كيا ريو 23',
+            'model_ar' => 'ريو 23',
+            'engine_ar' => 'جاز',
+            'brand_id' => 1,
+        ]);
+        \App\Supplier::create([
+            'name' => 'Hnoo',
+            'name_ar' => 'حنووز',
+        ]);
+        \App\SuperCategory::create([
+            'name' => 'filter',
+            'name_ar' => 'فلتر',
+        ]);
+        \App\Category::create([
+            'name' => 'air filter',
+            'name_ar' => 'فلتر هواء',
+            'sale' => 10,
+            'super_category_id' => 1,
+        ]);
+        \App\CouponCode::create([
+            'name' => 'grxpartix',
+            'value' => 300,
+            'quantity' => 5,
+            'descount_type_id' => 1,
+            'expiration_at' => '2020-12-29',
         ]);
     }
 }

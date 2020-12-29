@@ -32,7 +32,7 @@
                         <div class="">
                             <div class="flex-shrink-0">
                                 <a href="/store">
-                                <img src="../../images/LOGO-1.png" class="w-48" alt="">
+                                <img src="../../images/LOGO-1-W.png" class="w-48" alt="">
                                 </a>
                             </div>
                             <p class="capitalize font-medium text-white">{{__('share part soluation')}}</p>
@@ -70,7 +70,7 @@
                             <span class="-mt-12 mx-10 absolute bg-red-400 flex font-bold h-5 justify-center rounded-full text-sm w-5">{{cartItemQuantity}}</span>
                             
 
-                            <span class="font-bold text-sm">{{cartTotalPrice.toFixed()}} QAR</span>
+                            <span class="font-bold text-sm">{{cartTotalPrice.toFixed()}} {{__('QAR')}}</span>
 
                         </div>
                     </div>
@@ -104,7 +104,7 @@
             </form>
         </div>
 
-        <div v-if="isOpen" class="absolute bg-white  h-screen md:hidden pb-3 pt-2 px-2 sm:px-3 top-0 w-3/4">
+        <!-- <div v-if="isOpen" class="absolute bg-white  h-screen md:hidden pb-3 pt-2 px-2 sm:px-3 top-0 w-3/4">
             <svg @click="isOpen = !isOpen"  class="-mr-8 absolute bg-gray-200 block cursor-pointer h-6 right-0 rounded-full text-blue-500 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
@@ -121,7 +121,7 @@
                    class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">{{__('Reports')}}</a>
                 <button class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white hover:bg-blue-400 focus:outline-none focus:text-white focus:bg-gray-700"
                    @click="logout">Logout</button>
-        </div>
+        </div> -->
     <!-- your cart -->
     <div :class="cartOpen  ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'" class="fixed right-0 top-0 z-30 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300">
         <div class="flex items-center justify-between">
@@ -171,7 +171,7 @@
 
         </div>
         <div class="">
-            <img src="../../images/LOGO-1.png" class="container mb-3 mx-auto pt-10 w-32" alt="">
+            <img src="../../images/LOGO-1-W.png" class="container mb-3 mx-auto pt-10 w-32" alt="">
             <div class="text-center">
                 <span class="-mx-8 -mt-1 absolute bg-teal-600 h-1 w-16"></span>
                 <h1 class="font-medium text-sm text-teal-500 uppercase">{{__('store')}}</h1>

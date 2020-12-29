@@ -23,7 +23,10 @@ class SuperCategoryController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate(['name' => 'required']);
+        $data = $request->validate([
+            'name' => 'required',
+            'name_ar' => 'required',
+        ]);
 
         $super_category = SuperCategory::create($data);
 
@@ -36,10 +39,10 @@ class SuperCategoryController extends Controller
             'message' => 'Super category created successfully',
         ]);
 
-        return response()->json(['data' => $super_category,
-            'redirect' => 'dashboard/super_categories', ]);
-
-        // return redirect()->back();
+        return response()->json([
+            'data' => $super_category,
+            'redirect' => 'dashboard/super_categories',
+        ]);
     }
 
     public function edit(SuperCategory $superCategory)
@@ -49,7 +52,10 @@ class SuperCategoryController extends Controller
 
     public function update(Request $request, SuperCategory $superCategory)
     {
-        $data = $request->validate(['name' => 'required']);
+        $data = $request->validate([
+            'name' => 'required',
+            'name_ar' => 'required',
+        ]);
         
         $superCategory->update($data);
         $superCategory->clearMediaCollection('images');

@@ -49,7 +49,7 @@
     "year":"السنه",
     "engine":"المحرك",
     "your email":"بريدك الالكتروني",
-    "join":"انضم",
+    "Join":"اشترك",
     "add to cart":"اضافه الى السله",
     "product details":"تفاصيل المنتج",
     "features":"",
@@ -137,7 +137,15 @@
     "sales statistical overview":"احصائيات المبيعات",
     "total sales":"مجموع المبيعات",
     "sales":"المبيعات",
-    "top salling brands":"الماركات الاعلى مبيعا"
+    "top salling brands":"الماركات الاعلى مبيعا",
+    "there is no parts in this category" : "لا توجد قطع في هذا القسم ",
+    "there is no parts" : "لا توجد قطع حاليا ",
+    "filtered part" : "قطع عن طريق الفلتر",
+    "select Brand" : "الماركه",
+    "select Model" : "الموديل",
+    "select Year" : "السنه",
+    "select Engine" : "نوع المحرك",
+    "QAR" : "ريال"
     
   
 

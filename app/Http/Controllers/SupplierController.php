@@ -18,9 +18,15 @@ class SupplierController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required']);
+        $request->validate([
+            'name' => 'required',
+            'name_ar' => 'required',
+        ]);
 
-        Supplier::create(['name' => $request->name,]);
+        Supplier::create([
+            'name' => $request->name,
+            'name_ar' => $request->name_ar,
+        ]);
 
         session()->flash('toast', [
             'type' => 'success',
@@ -32,7 +38,10 @@ class SupplierController extends Controller
 
     public function update(Request $request, Supplier $supplier)
     {
-        $data = $request->validate(['name' => 'required']);
+        $data = $request->validate([
+            'name' => 'required',
+            'name_ar' => 'required',
+        ]);
         
         $supplier->update($data);
         

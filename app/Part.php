@@ -15,7 +15,7 @@ class Part extends Model implements HasMedia
 
     protected $guarded = [];
     protected $appends = ['url'];
-    protected $with = ['category','type'];
+    protected $with = ['category','type','cars'];
 
     protected static function boot()
     {

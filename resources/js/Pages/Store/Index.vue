@@ -53,9 +53,9 @@
                     </a>
 
                     <div class="px-4 py-2">
-                        <a :href="'/store/details/' + part.id" class="font-bold text-teal-500 uppercase">{{part.name}}</a>
+                        <a :href="'/store/details/' + part.id" class="font-bold text-teal-500 uppercase">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
                         <!-- <p class="break-all font-medium text-gray-600 text-xs "><span dir="auto"></span>{{part.brands.name}}</p> -->
-                        <p class="text-gray-800 text-xl font-semibold">{{part.price}}<span class="px-2 text-gray-500 text-sm">QAR</span></p>
+                        <p class="text-gray-800 text-xl font-semibold">{{part.price}}<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p>
                     </div>
                     <input type="text" name="supplier_id"  hidden>
                     <div class="bg-teal-700 py-2">
@@ -103,10 +103,11 @@ export default {
         search:'',
     }
 },
+
 computed: {
     filteredList() {
       return this.parts.filter(part => {
-        return part.name.toLowerCase().includes(this.search.toLowerCase())
+        return part.name.toLowerCase().includes(this.search.toLowerCase()) || part.number.includes(this.search) || part.name_ar.includes(this.search);
       })
     }
   },
@@ -120,10 +121,7 @@ methods: {
 
 </script>
 
-<style >
-.itemImage{
-    background-image: url('../../images/car.jpeg');
-}   
+<style >  
  .slick-slide{
   margin-left:5px;
   margin-right: 5px;

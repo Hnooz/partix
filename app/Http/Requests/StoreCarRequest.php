@@ -27,6 +27,9 @@ class StoreCarRequest extends FormRequest
             'brand' => 'required|min:3',
             'model' => 'required|max:255',
             'engine' => 'required|max:255',
+            'brand_ar' => 'required|min:3',
+            'model_ar' => 'required|max:255',
+            'engine_ar' => 'required|max:255',
             'year' => 'required|max:255',
             'brand_id' => 'required|max:255',
         ];

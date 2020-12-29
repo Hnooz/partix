@@ -6,9 +6,13 @@
     <div class="bg-teal-700 py-5 hidden md:block">
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-16 text-white">
             <div class="flex">
-                <h1 v-if="part.category">{{part.category.super_category.name}} |</h1>
-                <span class="font-normal capitalize">&nbsp;{{part.name}}&nbsp;</span> 
-                <span lass="font-normal capitalize"> | {{part.name}}</span>
+                <h1>{{$page.locale == 'en' ? part.category.super_category.name : part.category.super_category.name_ar}} |</h1>
+                <!-- <h1 v-else>{{part.category.super_category.name_ar}} |</h1> -->
+                <span class="font-normal capitalize">&nbsp;{{$page.locale == 'en' ? part.category.name : part.category.name_ar}}&nbsp;</span> 
+                <!-- <span v-else class="font-normal capitalize">&nbsp;{{part.name_ar}}&nbsp;</span>  -->
+                <span class="font-normal capitalize"> | {{ $page.locale == 'en' ? part.name : part.name_ar}}</span>
+                <!-- <span v-else class="font-normal capitalize"> | {{part.name_ar}}</span> -->
+                
             </div>
             <div class="flex items-center">
                 <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -47,20 +51,20 @@
                             <img class="h-40 object-center object-cover w-40" :src="part.url[0]" alt="">
                         </div>
                        <div class="flex justify-around mt-6">
-                        <Slide class="max-w-xs" :arrows="true" :slidesToShow=2>
+                        <slide-image class="max-w-xs" :arrows="true" :slidesToShow=2>
                             <div class="flex justify-center bg-white mx-2" v-for="url in part.url" :key="url.index">
                                 <img class="h-12 mx-auto my-2 object-center object-cover w-12" :src="url" alt="">
                             </div>
-                        </Slide> 
+                        </slide-image> 
                        </div>
-                        
-
                     </div>
                     <div class="mx-8">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="capitalize font-semibold text-3xl text-teal-700">{{part.name}}</p>
-                                <p class="capitalize font-medium text-teal-400 text-xl">{{part.name}}</p>
+                                <p class="capitalize font-semibold text-3xl text-teal-700">{{$page.locale == 'en' ? part.name : part.name_ar}}</p>
+                                <!-- <p v-else class="capitalize font-semibold text-3xl text-teal-700">{{part.name_ar}}</p> -->
+                                <p class="capitalize font-medium text-teal-400 text-xl">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].brand_ar}}</p>
+                                <!-- <p v-else class="capitalize font-medium text-teal-400 text-xl">{{part.cars[0].brand_ar}}</p> -->
                                 <button class="flex" type="button">
                                     <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                     <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
@@ -68,20 +72,20 @@
                                     <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                     <svg class="w-6 text-gray-400 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
                                 </button>
-                                <!-- <p class="capitalize font-medium text-teal-400 text-xl">{{part.brands.name}}</p> -->
+                                
                             </div>
                         </div>
                         <div class="">
-                            <p class="bg-blue-100 my-5 p-5 text-gray-600 text-sm">
-                                {{part.description}}
+                            <p v-if="$page.locale == 'en'" class="bg-blue-100 my-5 p-5 text-gray-600 text-sm">
+                                {{$page.locale == 'en' ? part.description : part.description_ar}}
                             </p>
                         </div>
                             <form @submit.prevent="submit">
                                 <div>
                                     <label class="text-gray-700">{{__('type')}}</label>
-                                    <select  name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
+                                    <select name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
                                         <option value="0">Select Type</option>
-                                        <option v-for="type in part_type" :key="type.index" :value="type.id">{{type.name}}</option>
+                                        <option v-for="type in part_type" :key="type.index" :value="type.id">{{$page.locale == 'en' ? type.name : type.name_ar}}</option>
                                     </select>
                                 </div>
 
@@ -131,12 +135,12 @@
             </div>
             <div class="flex">
                 <div class="mx-2" v-if="part.type.name == 'oem'">
-                    <p class="font-semibold text-3xl text-gray-900">{{calcOemPrice}} <span class="font-hairline text-gray-700 text-xl">QAR</span> </p>
-                    <p v-if="part.sale > 0" class="line-through text-center text-gray-600">{{part.price}} <span>QAR</span> </p>
+                    <p class="font-semibold text-3xl text-gray-900">{{calcOemPrice}} <span class="font-hairline text-gray-700 text-xl">{{__('QAR')}}</span> </p>
+                    <p v-if="part.sale > 0" class="line-through text-center text-gray-600">{{part.price}} <span>{{__('QAR')}}</span> </p>
                 </div>
                 <div class="mx-2" v-if="part.type.name == 'aftermarket'">
-                    <p class="font-semibold text-3xl text-gray-900">{{calcAftermarketPrice}} <span class="font-hairline text-gray-700 text-xl">QAR</span> </p>
-                    <p v-if="part.sale > 0" class="line-through text-center text-gray-600">{{part.second_price}} <span>QAR</span> </p>
+                    <p class="font-semibold text-3xl text-gray-900">{{calcAftermarketPrice}} <span class="font-hairline text-gray-700 text-xl">{{__('QAR')}}</span> </p>
+                    <p v-if="part.sale > 0" class="line-through text-center text-gray-600">{{part.second_price}} <span>{{__('QAR')}}</span> </p>
                 </div>
                 <img src="../../images/1223/rightimage.png" class="h-72 object-center object-cover w-5/12">
             </div>
@@ -167,16 +171,16 @@
         
         <form @submit.prevent="submit">
         <div class="-mt-6 px-4">
-            <a href="#" class="font-bold  text-xs md:text-base text-teal-500 capitalize">{{part.name}}</a>
+            <a href="#" class="font-bold  text-xs md:text-base text-teal-500 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
             <!-- <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p> -->
             <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="part.type.name == 'oem'">
-                {{calcOemPrice}}<span class="text-gray-500 text-xs">QAR</span>
-                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.price}}QAR</span> 
+                {{calcOemPrice}}<span class="text-gray-500 text-xs">{{__('QAR')}}</span>
+                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.price}}{{__('QAR')}}</span> 
             </p>
 
             <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="part.type.name == 'aftermarket'">
-                {{calcAftermarketPrice}}<span class="text-gray-500 text-xs">QAR</span>
-                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.second_price}}QAR</span> 
+                {{calcAftermarketPrice}}<span class="text-gray-500 text-xs">{{__('QAR')}}</span>
+                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.second_price}}{{__('QAR')}}</span> 
             </p>
 
         </div>
@@ -185,7 +189,7 @@
             <label class="text-gray-700 text-xs">{{__('part')}} {{__('type')}}</label>
             <select  name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
                 <option value="0">Select Type</option>
-                <option v-for="type in part_type" :key="type.index" :value="type.id">{{type.name}}</option>
+                <option v-for="type in part_type" :key="type.index" :value="type.id">{{$page.locale == 'en' ? type.name : type.name_ar}}</option>
             </select>
         </div>
         <div class="flex items-center px-4">
@@ -206,7 +210,7 @@
             </button>
         </div>
         
-        <p class="px-4 py-5 text-gray-600 text-xs">{{part.description}}</p>
+        <p class="px-4 py-5 text-gray-600 text-xs">{{$page.locale == 'en' ? part.description : part.description_ar}}</p>
 
          <div class="bg-teal-500 py-4 md:hidden" >
         <button  @click="addCart(part)" class="flex focus:outline-none font-semibold items-center justify-center outline-none px-2 py-1 rounded text-white uppercase w-full">
@@ -228,7 +232,7 @@
 import BaseNav from '../../components/UI/BaseNav'
 import BaseInput from '../../components/UI/BaseInput'
 import SelectSection from '../../components/UI/SelectSection'
-import Slide from '../../components/UI/Slide'
+import SlideImage from '../../components/UI/SlideImage'
 import BaseFooter from '../../components/UI/BaseFooter'
 import StoreLayout from '../../Shared/StoreLayout.vue'
 
@@ -239,7 +243,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             BaseNav,
             BaseInput,
             SelectSection,
-            Slide,
+            SlideImage,
             BaseFooter,
         },
         props:[
@@ -255,10 +259,11 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             return {
                 quantity:1,
                 form: {
-                    name: '',        number: '',
+                    name: '',
+                    name_ar: '', number: '',
                     description: '', price: ''  ,
                     second_price:'', slug: '',
-                    car_id: '',      supplier_id:'',
+                    supplier_id:'',
                     category_id:'',  part_type_id:'',
                 },
             }

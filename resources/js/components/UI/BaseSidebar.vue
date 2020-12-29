@@ -2,7 +2,7 @@
     <aside class="w-full md:w-64 md:min-h-screen bg_image bg-center bg-cover">
         <div :class="isOpen ? 'hidden' : ''" class="flex h-24 items-baseline justify-between md:fixed md:h-16 md:items-center md:mx-0 md:p-4 mx-5">
             <inertia-link href="/dashboard" class="flex items-center mt-10">
-                <img src="../../images/LOGO-1.png"  class="w-24 md:w-40" alt="">
+                <img src="../../images/LOGO-1-W.png"  class="w-24 md:w-40" alt="">
             </inertia-link>
             <div class="flex md:hidden">
                 <button type="button" @click="isOpen = !isOpen"
@@ -27,7 +27,7 @@
             </svg>
 
             <inertia-link href="/dashboard" class="flex items-center md:hidden mt-6 mx-10">
-                <img src="../../images/LOGO-1.png"  class="w-24 md:hidden md:w-40" alt="">
+                <img src="../../images/LOGO-1-W.png"  class="w-24 md:hidden md:w-40" alt="">
             </inertia-link>
 
             <ul class="md:fixed md:mt-16 mt-10 mx-6">

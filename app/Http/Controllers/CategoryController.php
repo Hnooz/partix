@@ -34,7 +34,8 @@ class CategoryController extends Controller
 
         $category = Category::create([
             'name' => $request->name,
-            'description' => $request->description,
+            'name_ar' => $request->name_ar,
+            'sale' => $request->sale,
             'super_category_id' => $request->super_category_id,
 
         ]);

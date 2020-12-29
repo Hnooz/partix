@@ -4,7 +4,7 @@
         <div class="container hidden md:grid md:grid-cols-2 lg:grid-cols-3 items-center mx-auto px-12 text-white">
             <div class="">
                 <div>
-                    <img src="../../images/LOGO-1.png" class="w-48" alt="">
+                    <img src="../../images/LOGO-1-W.png" class="w-48" alt="">
                     <p class="capitalize text-gray-300">{{__('share part soluation')}}</p>
                 </div>
                 <p class="leading-4 max-w-xs mt-2 text-gray-400 text-sm">

@@ -25,7 +25,8 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:categories|max:255',
-            'description' => 'required|max:255',
+            'name_ar' => 'required|unique:categories|max:255',
+            'sale' => 'sometimes|nullable|max:255',
             'super_category_id' => 'sometimes|nullable|max:255',
         ];
     }

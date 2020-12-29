@@ -10,8 +10,8 @@
             <div>
                 <div class="flex">
                 
-                <span class="font-normal capitalize">&nbsp;{{category.super_category.name}}&nbsp;</span> 
-                <span lass="font-normal capitalize"> | {{category.name}}</span>
+                <span class="font-normal capitalize">&nbsp;{{$page.locale == 'en' ? category.super_category.name : category.super_category.name_ar}}&nbsp;</span> 
+                <span lass="font-normal capitalize"> | {{$page.locale == 'en' ? category.name : category.name_ar}}</span>
             </div>
                 
             </div>
@@ -61,9 +61,9 @@
             </a>
 
             <div class="px-4 py-2">
-                <a :href="`/store/details/${part.id}`" class="font-bold text-sm md:text-base text-teal-500 uppercase">{{part.name}}</a>
+                <a :href="`/store/details/${part.id}`" class="font-bold text-sm md:text-base text-teal-500 uppercase">{{$page.locale == 'en' ?  part.name : part.name_ar}}</a>
                 <!-- <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p> -->
-                <p class="text-gray-800 md:text-xl font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">QAR</span></p>
+                <p class="text-gray-800 md:text-xl font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p>
             </div>
 
             <div class="bg-teal-700 py-2">
@@ -82,7 +82,7 @@
         
     </div>
 
-        <p v-if="parts.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">there is no parts in this category ~_~!</p>
+        <p v-if="parts.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">{{__('there is no parts in this category')}}~_~!</p>
         <div v-if="parts.length == 0" class="flex justify-center mb-10">
             <img class="w-70 h-70" src="../../images/empty-animate.svg" alt="">
         </div>

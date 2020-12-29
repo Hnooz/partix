@@ -16,7 +16,9 @@ class CreatePartsTable extends Migration
         Schema::create('parts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('name_ar');
             $table->text('description');
+            $table->text('description_ar');
             $table->string('number');
             $table->string('slug')->nullable();
             $table->integer('price');

@@ -57,9 +57,9 @@
             </a>
 
             <div class="px-4 py-2">
-                <a :href="`/store/details/${part.id}`" class="font-bold text-xs md:text-base text-teal-500 capitalize">{{part.name}}</a>
+                <a :href="`/store/details/${part.id}`" class="font-bold text-xs md:text-base text-teal-500 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
                 <!-- <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p> -->
-                <p class="text-gray-800 md:text-xl text-xs font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">QAR</span></p>
+                <p class="text-gray-800 md:text-xl text-xs font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p>
             </div>
 
             <div class="bg-teal-700 py-2">
@@ -76,7 +76,7 @@
             </div>
         </div>
     </div>
-         <p  v-if="parts.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">there is no parts ~_~!</p>
+         <p  v-if="parts.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">{{__('there is no parts')}} ~_~!</p>
         <div v-if="parts.length == 0" class="flex justify-center mb-10">
             <img class="w-70 h-70" src="../../images/empty-animate.svg" alt="">
         </div>

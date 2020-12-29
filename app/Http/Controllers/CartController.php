@@ -39,7 +39,7 @@ class CartController extends Controller
                 $price = $request->price - (($request->sale / 100) * $request->price);
             }
         } elseif ($part[0]->type->name == 'aftermarket') {
-            if ($category->sale > 0) {
+            if (isset($category->sale) > 0) {
                 $price = $request->second_price - (($category->sale / 100) * $request->second_price);
             } else {
                 $price = $request->second_price - (($request->sale / 100) * $request->second_price);

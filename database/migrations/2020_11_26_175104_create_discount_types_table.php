@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateDiscountTypesTable extends Migration
 {
@@ -20,8 +20,8 @@ class CreateDiscountTypesTable extends Migration
         });
 
         DB::table('discount_types')->insert([
-            ["id" => '1', "name" => "Fixed Discount"],
-            ["id" => '2', "name" => "Percentage Discount"],
+            ['id' => '1', 'name' => 'fixed'],
+            ['id' => '2', 'name' => 'percentage'],
         ]);
     }
 

@@ -70,8 +70,10 @@ class PartController extends Controller
 
         $part = Part::create([
             'name' => $request->name,
+            'name_ar' => $request->name_ar,
             'number' => $request->number,
             'description' => $request->description,
+            'description_ar' => $request->description_ar,
             'price' => $request->price,
             'second_price' => $request->second_price,
             'category_id' => $request->category_id,
@@ -104,7 +106,7 @@ class PartController extends Controller
         $categories = Category::all();
         $suppliers = Supplier::all();
         $part_types = PartType::all();
-
+        // dd($part->with('cars')->get());
         return inertia()->render('Dashboard/parts/edit', [
             'part' => $part, 'cars' => $cars,
             'categories' => $categories, 'suppliers' => $suppliers,
@@ -116,6 +118,9 @@ class PartController extends Controller
     {
         $data = $request->validated();
 
+        if ($request->filled('cars')) {
+            $part->cars()->sync(json_decode($data['cars']));
+        }
         $part->clearMediaCollection('images');
 
         if ($request->file('images')) {
