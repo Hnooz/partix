@@ -7,7 +7,7 @@ Route::get('language/{language}', 'LangController@lang')->name('language');
 
 Auth::routes(['register' => false, 'confirm' => false, 'reset' => false]);
 
-Route::redirect('/', '/dashboard');
+Route::redirect('/', '/store');
 
 // delivery route
 Route::group(['middleware' => 'is_delivery', 'prefix' => '/dashboard'], function () {
