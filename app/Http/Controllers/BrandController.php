@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
 use App\Brand;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,13 @@ class BrandController extends Controller
     public function create()
     {
         return inertia()->render('Dashboard/brands/create');
+    }
+
+    public function show(Brand $brand)
+    {
+        $cars = Car::where('brand_id', $brand->id)->get();
+
+        return inertia()->render('Dashboard/brands/show', ['cars' => $cars]);
     }
 
     public function store(Request $request)
@@ -42,7 +50,7 @@ class BrandController extends Controller
 
     public function edit(Brand $brand)
     {
-        return inertia()->render('Dashboard/brands/edit');
+        return inertia()->render('Dashboard/brands/edit', ['brand' => $brand]);
     }
 
     public function update(Request $request, Brand $brand)

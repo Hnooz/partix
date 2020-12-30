@@ -1,39 +1,26 @@
 <template>
     <layout>
-        <h1 class="md:text-base my-2 text-gray-500 text-sm capitalize">{{__('dashboard')}}/{{__('cars')}}</h1>
+        <h1 class="md:text-base my-2 text-gray-500 text-sm capitalize">{{__('dashboard')}}/{{__('brands')}}</h1>
         <div class="mx-5">
             <div class="justify-between md:flex">
                 <div class="items-center md:flex">
-                    <h2 class="font-bold md:text-3xl text-xl text-teal-600 capitalize">{{__('cars')}}</h2>
-                    <!-- <div class="capitalize flex items-center md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap">
-                         <h1>123 total</h1>
-                         <div class="flex items-center mx-8">
-                             <h1>sort by :</h1>
-                             <label for="">
-                                 <select class="bg-transparent border-0 capitalize font-medium form-select text-gray-600 text-xs md:text-base">
-                                     <option>date created</option>
-                                 </select>
-                             </label>
-                         </div>
-                    </div> -->
+                    <h2 class="font-bold md:text-3xl text-xl text-teal-600 capitalize">{{__('brands')}}</h2>
                 </div>
-                
-
                 <div class="flex items-center">
-                    <inertia-link href="/dashboard/cars/create"
+                    <inertia-link href="/dashboard/cars/"
+                                  class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap capitalize">
+                        {{__('all cars')}}
+                    </inertia-link>
+                    <inertia-link href="/dashboard/brands/create"
                                   class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap capitalize">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                        {{__('add')}} {{__('car')}}
+                        {{__('add')}} {{__('brand')}}
                     </inertia-link>
-                    <!-- <form @submit.prevent="submit"> -->
-                        <button class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white" type="submit">
-                            <a href="#">
-                                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg> 
-                            </a>
-                        </button>
-                    <!-- </form> -->
-                    
-                    
+                    <button class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white" type="submit">
+                        <a href="#">
+                            <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg> 
+                        </a>
+                    </button>
                 </div>
             </div>
             <div class="mt-4">
@@ -44,17 +31,9 @@
                             <table class="min-w-full">
                                 <thead class="bg-gray-100">
                                 <tr>
-                                    <!-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
-                                        style="text-align: start">
-                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                    </th> -->
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         #ID
-                                    </th>
-                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
-                                        style="text-align: start">
-                                        {{__('brand')}}
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
@@ -62,61 +41,30 @@
                                     </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        {{__('model')}}
+                                        {{__('cars')}}
                                     </th>
-                                      <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
-                                        style="text-align: start">
-                                        {{__('engine')}}
-                                    </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
-                                        style="text-align: start">
-                                        {{__('year')}}
-                                    </th>
-
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                          {{__('action')}}
                                     </th>
-                                    <!-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th> -->
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white text-gray-500 text-sm md:text-base">
-                                <tr v-for="car in cars" :key="car.index">
-                                    <!-- <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        <label for="">
-                                            <input type="checkbox" class="form-checkbox border-2">
-                                        </label>
-                                    </td> -->
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        {{ car.id }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        {{ car.brands.name }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        {{ car.brand }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        {{ car.model }}
-                                    </td>
-                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        {{ car.engine }}
-                                    </td>
-
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        {{ car.year }}
-                                    </td>
-
-                                    <!-- <td>
-                                        
-                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                                    </td> -->
-
-                                    <td class="flex px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
-                                        <inertia-link :href="'/dashboard/cars/'+car.id+'/edit'" ><svg class="h-6 text-blue-500 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg></inertia-link>
-                                        <button @click="Delete(car)"><svg class="h-6 text-red-500 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg></button>
-                                    </td>
-                                </tr>
+                                    <tr v-for="brand in brands" :key="brand.index">
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                            {{ brand.id }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                            {{brand.name }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                            <a :href="'brands/'+brand.id">cars belongs to brand</a>
+                                        </td>
+                                        <td class="flex px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
+                                            <inertia-link :href="'/dashboard/brands/'+brand.id+'/edit'" ><svg class="h-6 text-blue-500 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg></inertia-link>
+                                            <button @click="Delete(brand)"><svg class="h-6 text-red-500 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg></button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -133,16 +81,13 @@
 
     export default {
         components: {Layout},
-         props: ['cars'],
+         props: ['brands'],
             methods: {
-            // submit() {
-            //     this.$inertia.get('/dashboard/parts/export');
-            // },
-            Delete(car) {
-                this.$inertia.delete(`/dashboard/cars/${car.id}`);
+            Delete(brand) {
+                this.$inertia.delete(`/dashboard/brands/${brand.id}`);
             },
             Edit(car){
-                this.$inertia.get(`/dashboard/cars/${car.id}/edit`);
+                this.$inertia.get(`/dashboard/brands/${brand.id}/edit`);
             }
             }
        
