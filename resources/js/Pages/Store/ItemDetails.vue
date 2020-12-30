@@ -299,7 +299,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             const both = Object.assign(form , quantity);
 
             if (this.cartItem != null) {
-                this.$inertia.put(`store/cart/${this.cartItem.id}`, both);
+                this.$inertia.put(`/store/cart/${this.cartItem.id}`, both);
             } else {
                 const newadd = this.form;
                 newadd.quantity = this.quantity;

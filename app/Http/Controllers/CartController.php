@@ -56,6 +56,7 @@ class CartController extends Controller
                 'attributes' => [
                     'slug' => $request->slug,
                     'supplier' => isset($supplier->name),
+                    'url' => $part->each->append('url'),
                 ],
             ]);
         } else {
@@ -67,6 +68,7 @@ class CartController extends Controller
                 'attributes' => [
                     'slug' => $request->slug,
                     'supplier' => isset($supplier->name),
+                    'url' => $part->each->append('url'),
                 ],
             ]);
         }
@@ -79,7 +81,7 @@ class CartController extends Controller
         $data = $request->validate(['part_type_id' => 'max:10']);
         $part = Part::find($request->id);
 
-        $part->update($data);
+        $part->update($request->only(['part_type_id']));
 
         $category = Category::find($part->category_id);
 

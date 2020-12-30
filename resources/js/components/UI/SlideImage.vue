@@ -14,8 +14,6 @@
     props:[
       'arrows',
       'slidesToShow',
-      // 'categories',
-      // 'super_category'
     ],
     components: { VueSlickCarousel },
     data() {
@@ -42,9 +40,9 @@
             "settings": {
               centerMode: true,
               adaptiveHeight: true,
-              "slidesToShow": 2,
-              "slidesToScroll": 2,
-              "initialSlide": 2
+              "slidesToShow": 1,
+              "slidesToScroll": 1,
+              "initialSlide": 1
             }
           },
           {

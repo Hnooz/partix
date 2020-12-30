@@ -70,4 +70,11 @@ Route::group(['prefix' => 'store'], function () {
     Route::put('/cart/{id}', 'CartController@update')->name('carts.update');
     Route::delete('/carts/{id}', 'CartController@remove')->name('carts.remove');
     Route::delete('/clear', 'CartController@clear')->name('carts.clear');
+
+    Route::group(['prefix' => 'wishlist'], function () {
+        Route::get('/', 'WishListController@index')->name('wishlist.index');
+        Route::post('/', 'WishListController@add')->name('wishlist.add');
+        Route::get('/details', 'WishListController@details')->name('wishlist.details');
+        Route::delete('/{id}', 'WishListController@delete')->name('wishlist.delete');
+    });
 });

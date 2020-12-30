@@ -5516,7 +5516,7 @@ __webpack_require__.r(__webpack_exports__);
       var both = Object.assign(form, quantity);
 
       if (this.cartItem != null) {
-        this.$inertia.put("store/cart/".concat(this.cartItem.id), both);
+        this.$inertia.put("/store/cart/".concat(this.cartItem.id), both);
       } else {
         var newadd = this.form;
         newadd.quantity = this.quantity;
@@ -7314,9 +7314,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SlideImage',
-  props: ['arrows', 'slidesToShow' // 'categories',
-  // 'super_category'
-  ],
+  props: ['arrows', 'slidesToShow'],
   components: {
     VueSlickCarousel: vue_slick_carousel__WEBPACK_IMPORTED_MODULE_0___default.a
   },
@@ -7342,9 +7340,9 @@ __webpack_require__.r(__webpack_exports__);
           "settings": {
             centerMode: true,
             adaptiveHeight: true,
-            "slidesToShow": 2,
-            "slidesToScroll": 2,
-            "initialSlide": 2
+            "slidesToShow": 1,
+            "slidesToScroll": 1,
+            "initialSlide": 1
           }
         }, {
           "breakpoint": 480,
@@ -58881,8 +58879,7 @@ var render = function() {
                                         staticClass:
                                           "h-20 w-20 object-cover rounded",
                                         attrs: {
-                                          src:
-                                            "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80",
+                                          src: item.attributes.url[0].url[0],
                                           alt: ""
                                         }
                                       }),
@@ -60830,11 +60827,7 @@ var render = function() {
                     _c("div", { staticClass: "flex" }, [
                       _c("img", {
                         staticClass: "h-20 w-20 object-cover rounded",
-                        attrs: {
-                          src:
-                            "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80",
-                          alt: ""
-                        }
+                        attrs: { src: item.attributes.url[0].url[0], alt: "" }
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "mx-3" }, [
@@ -61210,11 +61203,7 @@ var render = function() {
                   _c("div", { staticClass: "flex" }, [
                     _c("img", {
                       staticClass: "h-20 w-20 object-cover rounded",
-                      attrs: {
-                        src:
-                          "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80",
-                        alt: ""
-                      }
+                      attrs: { src: item.attributes.url[0].url[0], alt: "" }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "mx-3" }, [
