@@ -111,7 +111,7 @@ class OrderController extends Controller
     
         session()->flash('toast', [
             'type' => 'success',
-            'message' => 'you have successfully',
+            'message' => 'you have ordered successfully',
         ]);
 
         return redirect()->route('store.index');

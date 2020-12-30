@@ -3543,15 +3543,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
  // import moment from 'moment';
 
 
@@ -5484,11 +5475,15 @@ __webpack_require__.r(__webpack_exports__);
       var both = Object.assign(form, quantity);
 
       if (this.cartItem != null) {
-        this.$inertia.put("/store/cart/".concat(this.cartItem.id), both);
+        this.$inertia.put("/store/cart/".concat(this.cartItem.id), both).then(function () {
+          return location.reload();
+        });
       } else {
         var newadd = this.form;
         newadd.quantity = this.quantity;
-        this.$inertia.post('/store/carts', newadd);
+        this.$inertia.post('/store/carts', newadd).then(function () {
+          return location.reload();
+        });
       }
     },
     increment: function increment() {

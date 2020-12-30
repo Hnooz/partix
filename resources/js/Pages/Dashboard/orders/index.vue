@@ -48,10 +48,6 @@
                             <table class="min-w-full">
                                 <thead class="bg-gray-100">
                                 <tr>
-                                    <!-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
-                                        style="text-align: start">
-                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                    </th> -->
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         #
@@ -89,11 +85,6 @@
                                 </thead>
                                 <tbody class="bg-white text-gray-500 text-sm md:text-base">
                                 <tr v-for="order in orders" :key="order.index">
-                                    <!-- <td class="px-6 py-4 whitespace-no-wrap">
-                                        <label for="">
-                                            <input type="checkbox" class="form-checkbox border-2">
-                                        </label>
-                                    </td> -->
                                     <td class="px-6 py-4 whitespace-no-wrap"> 
                                         {{ order.id }}
                                     </td>
