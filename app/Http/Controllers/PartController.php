@@ -117,26 +117,28 @@ class PartController extends Controller
     public function update(StorePartRequest $request, Part $part)
     {
         $data = $request->validated();
+
+        // dd($data);
         $part->update($request->only([
-            'name' => 'required|min:4',
-            'name_ar' => 'required|min:4',
-            'number' => 'required|max:255',
-            'description' => 'required|max:255',
-            'description_ar' => 'required|max:255',
-            'price' => 'required|max:255',
-            'second_price' => 'required|max:255',
-            'category_id' => 'required|max:255',
-            'supplier_id' => 'required|max:255',
-            'part_type_id' => 'required|max:255',
-            'sale' => 'sometimes|nullable',
+            'name',
+            'name_ar',
+            'number',
+            'description',
+            'description_ar',
+            'price',
+            'second_price',
+            'category_id',
+            'supplier_id',
+            'part_type_id',
+            'sale',
         ]));
         
         if ($request->filled('cars')) {
             $part->cars()->sync(json_decode($data['cars']));
         }
-        $part->clearMediaCollection('images');
-
+        
         if ($request->file('images')) {
+            $part->clearMediaCollection('images');
             $images = $request->file('images');
             foreach ($images as $image) {
                 $part->addMedia($image)->toMediaCollection('images');
