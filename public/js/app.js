@@ -2450,51 +2450,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['brands'],
   data: function data() {
     return {
-      car: {
-        brand: '',
-        model: '',
-        engine: '',
-        brand_ar: '',
-        model_ar: '',
-        engine_ar: '',
-        year: '',
-        brand_id: 0
+      form: {
+        name: '',
+        name_ar: ''
       }
     };
   },
   methods: {
     submit: function submit() {
-      this.$inertia.post('/dashboard/cars', this.car);
+      this.$inertia.post('/dashboard/brands', this.form);
     }
   }
 });
@@ -2540,54 +2511,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['car', 'brands'],
+  props: ['brand'],
   data: function data() {
     return {
       form: {
-        brand: '',
-        model: '',
-        engine: '',
-        brand_ar: '',
-        model_ar: '',
-        engine_ar: '',
-        year: '',
-        brand_id: 0
+        name: '',
+        name_ar: ''
       }
     };
   },
   created: function created() {
-    this.form = this.car;
+    this.form = this.brand;
   },
   methods: {
     submit: function submit() {
-      this.$inertia.put(this.$route('cars.update', this.car.id), this.form); //   this.$inertia.put(`/dashboard/cars/${this.car.id}/edit`, this.car);
+      this.$inertia.put(this.$route('brands.update', this.brand.id), this.form);
     }
   }
 });
@@ -5861,7 +5804,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_UI_BaseNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/UI/BaseNav */ "./resources/js/components/UI/BaseNav.vue");
 /* harmony import */ var _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/UI/SelectSection */ "./resources/js/components/UI/SelectSection.vue");
 /* harmony import */ var _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/UI/BaseFooter */ "./resources/js/components/UI/BaseFooter.vue");
-//
 //
 //
 //
@@ -49331,7 +49273,7 @@ var render = function() {
       [
         _c("div", { staticClass: "flex" }, [
           _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
-            _vm._v(_vm._s(_vm.__("cars")) + "/"),
+            _vm._v(_vm._s(_vm.__("brands")) + "/"),
             _c("span", { staticClass: "text-gray-500 capitalize" }, [
               _vm._v(_vm._s(_vm.__("create")))
             ])
@@ -49361,18 +49303,18 @@ var render = function() {
                       _c("base-input", {
                         attrs: {
                           label: _vm.__("name"),
-                          name: "brand",
-                          error: _vm.$page.errors.brand,
+                          name: "name",
+                          error: _vm.$page.errors.name,
                           tabindex: "1",
                           placeholder: _vm.__("e.g Toyota"),
                           required: ""
                         },
                         model: {
-                          value: _vm.car.brand,
+                          value: _vm.form.brand,
                           callback: function($$v) {
-                            _vm.$set(_vm.car, "brand", $$v)
+                            _vm.$set(_vm.form, "brand", $$v)
                           },
-                          expression: "car.brand"
+                          expression: "form.brand"
                         }
                       })
                     ],
@@ -49385,203 +49327,23 @@ var render = function() {
                       _c("base-input", {
                         attrs: {
                           label: _vm.__("name_ar"),
-                          name: "brand_ar",
-                          error: _vm.$page.errors.brand_ar,
+                          name: "name_ar",
+                          error: _vm.$page.errors.name_ar,
                           tabindex: "2",
-                          placeholder: _vm.__("e.g Toyota"),
+                          placeholder: _vm.__("e.g تويوتا"),
                           required: ""
                         },
                         model: {
-                          value: _vm.car.brand_ar,
+                          value: _vm.form.brand_ar,
                           callback: function($$v) {
-                            _vm.$set(_vm.car, "brand_ar", $$v)
+                            _vm.$set(_vm.form, "brand_ar", $$v)
                           },
-                          expression: "car.brand_ar"
+                          expression: "form.brand_ar"
                         }
                       })
                     ],
                     1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          label: _vm.__("model"),
-                          name: "model",
-                          error: _vm.$page.errors.model,
-                          tabindex: "3",
-                          placeholder: _vm.__("e.g Brado"),
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.car.model,
-                          callback: function($$v) {
-                            _vm.$set(_vm.car, "model", $$v)
-                          },
-                          expression: "car.model"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          label: _vm.__("model_ar"),
-                          name: "model_ar",
-                          error: _vm.$page.errors.model_ar,
-                          tabindex: "4",
-                          placeholder: _vm.__("e.g Brado"),
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.car.model_ar,
-                          callback: function($$v) {
-                            _vm.$set(_vm.car, "model_ar", $$v)
-                          },
-                          expression: "car.model_ar"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          label: _vm.__("engine"),
-                          name: "engine",
-                          error: _vm.$page.errors.engine,
-                          tabindex: "5",
-                          placeholder: _vm.__("e.g jas"),
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.car.engine,
-                          callback: function($$v) {
-                            _vm.$set(_vm.car, "engine", $$v)
-                          },
-                          expression: "car.engine"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          label: _vm.__("engine_ar"),
-                          name: "engine_ar",
-                          error: _vm.$page.errors.engine_ar,
-                          tabindex: "6",
-                          placeholder: _vm.__("e.g jas"),
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.car.engine_ar,
-                          callback: function($$v) {
-                            _vm.$set(_vm.car, "engine_ar", $$v)
-                          },
-                          expression: "car.engine_ar"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          label: _vm.__("year"),
-                          name: "year",
-                          error: _vm.$page.errors.year,
-                          tabindex: "7",
-                          placeholder: _vm.__("e.g 2018"),
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.car.year,
-                          callback: function($$v) {
-                            _vm.$set(_vm.car, "year", $$v)
-                          },
-                          expression: "car.year"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("label", { staticClass: "text-gray-700" }, [
-                      _vm._v(_vm._s(_vm.__("brand")))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.car.brand_id,
-                            expression: "car.brand_id"
-                          }
-                        ],
-                        staticClass: "form-select text-gray-500 w-full mt-1",
-                        attrs: {
-                          name: "brand_id",
-                          error: _vm.$page.errors.car_id,
-                          required: "",
-                          tabindex: "6"
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.car,
-                              "brand_id",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "0" } }, [
-                          _vm._v("select brand")
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.brands, function(brand) {
-                          return _c(
-                            "option",
-                            { key: brand.index, domProps: { value: brand.id } },
-                            [_vm._v(_vm._s(brand.name))]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  ])
+                  )
                 ]
               ),
               _vm._v(" "),
@@ -49590,9 +49352,7 @@ var render = function() {
                 { staticClass: "flex justify-end mt-4" },
                 [
                   _c("base-button", { staticClass: "bg-teal-700 capitalize" }, [
-                    _vm._v(
-                      _vm._s(_vm.__("create")) + " " + _vm._s(_vm.__("car"))
-                    )
+                    _vm._v(_vm._s(_vm.__("create")))
                   ])
                 ],
                 1
@@ -49634,7 +49394,7 @@ var render = function() {
       [
         _c("div", { staticClass: "flex capitalize" }, [
           _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
-            _vm._v(_vm._s(_vm.__("cars")) + "/"),
+            _vm._v(_vm._s(_vm.__("brands")) + "/"),
             _c("span", { staticClass: "text-gray-500" }, [
               _vm._v(_vm._s(_vm.__("Edit")))
             ])
@@ -49667,18 +49427,18 @@ var render = function() {
                       _c("base-input", {
                         attrs: {
                           label: _vm.__("name"),
-                          name: "brand",
-                          error: _vm.$page.errors.brand,
+                          name: "name",
+                          error: _vm.$page.errors.name,
                           tabindex: "1",
                           placeholder: _vm.__("e.g Toyota"),
                           required: ""
                         },
                         model: {
-                          value: _vm.car.brand,
+                          value: _vm.form.brand,
                           callback: function($$v) {
-                            _vm.$set(_vm.car, "brand", $$v)
+                            _vm.$set(_vm.form, "brand", $$v)
                           },
-                          expression: "car.brand"
+                          expression: "form.brand"
                         }
                       })
                     ],
@@ -49691,203 +49451,23 @@ var render = function() {
                       _c("base-input", {
                         attrs: {
                           label: _vm.__("name_ar"),
-                          name: "brand_ar",
-                          error: _vm.$page.errors.brand_ar,
+                          name: "name_ar",
+                          error: _vm.$page.errors.name_ar,
                           tabindex: "2",
-                          placeholder: _vm.__("e.g Toyota"),
+                          placeholder: _vm.__("e.g تويوتا"),
                           required: ""
                         },
                         model: {
-                          value: _vm.car.brand_ar,
+                          value: _vm.form.brand_ar,
                           callback: function($$v) {
-                            _vm.$set(_vm.car, "brand_ar", $$v)
+                            _vm.$set(_vm.form, "brand_ar", $$v)
                           },
-                          expression: "car.brand_ar"
+                          expression: "form.brand_ar"
                         }
                       })
                     ],
                     1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          label: _vm.__("model"),
-                          name: "model",
-                          error: _vm.$page.errors.model,
-                          tabindex: "3",
-                          placeholder: _vm.__("e.g Brado"),
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.car.model,
-                          callback: function($$v) {
-                            _vm.$set(_vm.car, "model", $$v)
-                          },
-                          expression: "car.model"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          label: _vm.__("model_ar"),
-                          name: "model_ar",
-                          error: _vm.$page.errors.model_ar,
-                          tabindex: "4",
-                          placeholder: _vm.__("e.g Brado"),
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.car.model_ar,
-                          callback: function($$v) {
-                            _vm.$set(_vm.car, "model_ar", $$v)
-                          },
-                          expression: "car.model_ar"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          label: _vm.__("engine"),
-                          name: "engine",
-                          error: _vm.$page.errors.engine,
-                          tabindex: "5",
-                          placeholder: _vm.__("e.g jas"),
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.car.engine,
-                          callback: function($$v) {
-                            _vm.$set(_vm.car, "engine", $$v)
-                          },
-                          expression: "car.engine"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          label: _vm.__("engine_ar"),
-                          name: "engine_ar",
-                          error: _vm.$page.errors.engine_ar,
-                          tabindex: "6",
-                          placeholder: _vm.__("e.g jas"),
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.car.engine_ar,
-                          callback: function($$v) {
-                            _vm.$set(_vm.car, "engine_ar", $$v)
-                          },
-                          expression: "car.engine_ar"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          label: _vm.__("year"),
-                          name: "year",
-                          error: _vm.$page.errors.year,
-                          tabindex: "4",
-                          placeholder: _vm.__("e.g 2018"),
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.car.year,
-                          callback: function($$v) {
-                            _vm.$set(_vm.car, "year", $$v)
-                          },
-                          expression: "car.year"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("label", { staticClass: "text-gray-700" }, [
-                      _vm._v(_vm._s(_vm.__("brand")))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.car.brand_id,
-                            expression: "car.brand_id"
-                          }
-                        ],
-                        staticClass: "form-select text-gray-500 w-full mt-1",
-                        attrs: {
-                          name: "brand_id",
-                          error: _vm.$page.errors.car_id,
-                          required: "",
-                          tabindex: "6"
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.car,
-                              "brand_id",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "0" } }, [
-                          _vm._v("select brand")
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.brands, function(brand) {
-                          return _c(
-                            "option",
-                            { key: brand.index, domProps: { value: brand.id } },
-                            [_vm._v(_vm._s(brand.name))]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  ])
+                  )
                 ]
               ),
               _vm._v(" "),
@@ -49896,7 +49476,7 @@ var render = function() {
                 { staticClass: "flex justify-end mt-4" },
                 [
                   _c("base-button", { staticClass: "bg-teal-700 capitalize" }, [
-                    _vm._v(_vm._s(_vm.__("Edit")) + " " + _vm._s(_vm.__("car")))
+                    _vm._v(_vm._s(_vm.__("Edit")))
                   ])
                 ],
                 1
@@ -59778,7 +59358,7 @@ var render = function() {
                 "div",
                 {
                   staticClass: "flex justify-between",
-                  class: part.sale > 0 ? "" : "pt-12"
+                  class: part.sale > 0 ? "" : "py-2 md:pt-10"
                 },
                 [
                   part.sale > 0
@@ -59823,6 +59403,22 @@ var render = function() {
                     _vm._v(
                       _vm._s(
                         _vm.$page.locale == "en" ? part.name : part.name_ar
+                      )
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass: "break-all font-medium text-gray-600 text-xs"
+                  },
+                  [
+                    _vm._v(
+                      _vm._s(
+                        _vm.$page.locale == "en"
+                          ? part.cars[0].brand
+                          : part.cars[0].bran_ar
                       )
                     )
                   ]
@@ -60689,7 +60285,7 @@ var render = function() {
                 "div",
                 {
                   staticClass: "flex justify-between",
-                  class: part.sale > 0 ? "" : "pt-12"
+                  class: part.sale > 0 ? "" : "py-2 md:pt-10"
                 },
                 [
                   part.sale > 0
@@ -60697,9 +60293,9 @@ var render = function() {
                         "p",
                         {
                           staticClass:
-                            "bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-bl-full shadow-lg text-sm text-white w-12"
+                            "bg-teal-400 font-semibold md:h-12 md:px-1 md:rounded-none px-2 md:py-3 rounded-br-lg shadow-lg md:text-base text-xs text-white md:w-12"
                         },
-                        [_vm._v("-" + _vm._s(part.sale) + "%")]
+                        [_vm._v(_vm._s(part.sale) + "%")]
                       )
                     : _vm._e()
                 ]
@@ -60709,7 +60305,7 @@ var render = function() {
                 !part.url[0]
                   ? _c("img", {
                       staticClass:
-                        "h-24 mt-12 mx-auto object-cover object-center w-24",
+                        "h-20 md:h-24 md:mt-12 mx-auto object-center object-cover w-20 md:w-24",
                       attrs: {
                         src: __webpack_require__(/*! ../../images/oops-404-error-with-a-broken-robot-animate.svg */ "./resources/js/images/oops-404-error-with-a-broken-robot-animate.svg"),
                         alt: "noo"
@@ -60717,7 +60313,7 @@ var render = function() {
                     })
                   : _c("img", {
                       staticClass:
-                        "h-24 mt-12 mx-auto object-cover object-center w-24",
+                        "h-20 md:h-24 md:mt-12 mx-auto object-center object-cover w-20 md:w-24",
                       attrs: { src: part.url[0] }
                     })
               ]),
@@ -60727,7 +60323,7 @@ var render = function() {
                   "a",
                   {
                     staticClass:
-                      "font-bold text-sm md:text-base text-teal-500 uppercase",
+                      "font-bold text-xs md:text-base text-teal-500 capitalize",
                     attrs: { href: "/store/details/" + part.id }
                   },
                   [
@@ -60741,7 +60337,26 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "p",
-                  { staticClass: "text-gray-800 md:text-xl font-semibold" },
+                  {
+                    staticClass: "break-all font-medium text-gray-600 text-xs"
+                  },
+                  [
+                    _vm._v(
+                      _vm._s(
+                        _vm.$page.locale == "en"
+                          ? part.cars[0].brand
+                          : part.cars[0].bran_ar
+                      )
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass:
+                      "text-gray-800 md:text-xl text-xs font-semibold"
+                  },
                   [
                     _vm._v(_vm._s(part.price) + " "),
                     _c("span", { staticClass: "px-2 text-gray-500 text-sm" }, [
@@ -60756,7 +60371,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "flex md:hidden focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white md:text-xs uppercase w-full",
+                      "flex md:hidden focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white text-xs capitalize w-full",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {

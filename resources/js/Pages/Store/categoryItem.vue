@@ -50,24 +50,24 @@
         <!-- main section -->
     <div class="container grid grid-cols-2 md:grid-cols-4 md:px-16 mx-auto py-10">            
         <div class="bg-white mb-10 mx-3 overflow-hidden md:rounded-tr-lg shadow-lg rounded-lg" v-for="(part, index) in filteredList" :key="index">
-            <div class="flex justify-between" :class="part.sale > 0 ? '':'pt-12'">
+            <div class="flex justify-between" :class="part.sale > 0 ? '':'py-2 md:pt-10'">
 
-                <p v-if="part.sale > 0" class="bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-bl-full shadow-lg text-sm text-white w-12">-{{part.sale}}%</p>
+               <p v-if="part.sale > 0" class="bg-teal-400 font-semibold md:h-12 md:px-1 md:rounded-none px-2 md:py-3 rounded-br-lg shadow-lg md:text-base text-xs text-white md:w-12">{{part.sale}}%</p>
             </div>
             
             <a :href="`/store/details/${part.id}`">
-                <img v-if="!part.url[0]" class="h-24 mt-12 mx-auto object-cover object-center w-24" src="../../images/oops-404-error-with-a-broken-robot-animate.svg" alt="noo">
-                <img v-else class="h-24 mt-12 mx-auto object-cover object-center w-24" :src="part.url[0]">
+                <img v-if="!part.url[0]" class="h-20 md:h-24 md:mt-12 mx-auto object-center object-cover w-20 md:w-24" src="../../images/oops-404-error-with-a-broken-robot-animate.svg" alt="noo">
+                <img v-else class="h-20 md:h-24 md:mt-12 mx-auto object-center object-cover w-20 md:w-24" :src="part.url[0]">
             </a>
 
-            <div class="px-4 py-2">
-                <a :href="`/store/details/${part.id}`" class="font-bold text-sm md:text-base text-teal-500 uppercase">{{$page.locale == 'en' ?  part.name : part.name_ar}}</a>
-                <!-- <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p> -->
-                <p class="text-gray-800 md:text-xl font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p>
+           <div class="px-4 py-2">
+                <a :href="`/store/details/${part.id}`" class="font-bold text-xs md:text-base text-teal-500 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
+                <p class="break-all font-medium text-gray-600 text-xs">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].bran_ar}}</p>
+                <p class="text-gray-800 md:text-xl text-xs font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p>
             </div>
 
             <div class="bg-teal-700 py-2">
-                <button type="button" @click="addCart(part)" class="flex md:hidden focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white md:text-xs uppercase w-full">
+                <button type="button" @click="addCart(part)" class="flex md:hidden focus:outline-none font-semibold items-center justify-around outline-none px-2 py-1 rounded text-white text-xs capitalize w-full">
                     {{__('Buy')}}
                 </button>
 
