@@ -42,6 +42,9 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     Route::post('parts/import', 'ImportController@parts')->name('parts.import');
     Route::get('parts/export', 'ExportController@parts')->name('parts.export');
     Route::resource('parts', 'PartController');
+
+    //cars and brands
+    Route::resource('brands', 'BrandController');
     Route::resource('cars', 'CarController');
 });
 

@@ -16,6 +16,7 @@ class SuppliersImport implements ToModel
     {
         return new Supplier([
             'name' => $row[0],
+            'name_ar' => $row[1],
         ]);
     }
 }

@@ -14,18 +14,24 @@ class PartImport implements ToModel
     */
     public function model(array $row)
     {
+        // $part = Part::where('id', $row[0])->get();
+        // dd($part);
         return new Part([
             'name' => $row[1],
-            'description' => $row[2],
-            'number' => $row[3],
-            'price' => $row[4],
-            'supplier_id' => $row[5],
-            'created_at' => $row[6],
-            'updated_at' => $row[7],
-            'second_price' => $row[9],
-            'category_id' => $row[10],
-            'part_type_id' => $row[11],
-            'sale' => $row[12],
+            'name_ar' => $row[2],
+            'description' => $row[3],
+            'description_ar' => $row[4],
+            'number' => $row[5],
+            'price' => $row[6],
+            'second_price' => $row[7],
+            'sale' => $row[8],
+            
+            'supplier_id' => $row[9],
+            'part_type_id' => $row[10],
+            'category_id' => $row[11],
+            'created_at' => $row[12],
+            'updated_at' => $row[13],
+            // 'cars' => $row[14],
             // 'brand_id' => $row[14],
         ]);
     }

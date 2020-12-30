@@ -11,6 +11,9 @@ class ImportController extends Controller
 {
     public function parts()
     {
+        $test = new PartImport;
+
+        // dd(request()->file('files'));
         $parts = Excel::import(new PartImport, request()->file('files'));
 
         return response()->json(['data' => $parts, 'redirect' => 'dashboard/parts']);

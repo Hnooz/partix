@@ -38,10 +38,10 @@
                                 </div>
                                 <div v-if="isOpen" :class="isOpen ? 'transition ease-out duration-100':'transition ease-in duration-75'" class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                                     <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                    <a href="/dashboard/sorts/parts?latest" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Latest</a>
-                                    <a href="/dashboard/sorts/parts?oldest" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Oldest</a>
-                                    <a href="/dashboard/sorts/parts?a" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">A-Z</a>
-                                    <a href="/dashboard/sorts/parts?z" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Z-A</a>
+                                    <a href="/dashboard/parts?latest" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Latest</a>
+                                    <a href="/dashboard/parts?oldest" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Oldest</a>
+                                    <a href="/dashboard/parts?a" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">A-Z</a>
+                                    <a href="/dashboard/parts?z" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Z-A</a>
                                     </div>
                                 </div>
                                 </div>
@@ -203,6 +203,7 @@
                const status = JSON.parse(response.status);
 
                     if (status == '200') {
+                        
                         window.location.pathname = response.data.redirect;
                     }
             })

@@ -7,12 +7,8 @@
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-16 text-white">
             <div class="flex">
                 <h1>{{$page.locale == 'en' ? part.category.super_category.name : part.category.super_category.name_ar}} |</h1>
-                <!-- <h1 v-else>{{part.category.super_category.name_ar}} |</h1> -->
-                <span class="font-normal capitalize">&nbsp;{{$page.locale == 'en' ? part.category.name : part.category.name_ar}}&nbsp;</span> 
-                <!-- <span v-else class="font-normal capitalize">&nbsp;{{part.name_ar}}&nbsp;</span>  -->
+                <a :href="'/store/items/'+part.category_id" class="font-normal capitalize">&nbsp;{{$page.locale == 'en' ? part.category.name : part.category.name_ar}}&nbsp;</a> 
                 <span class="font-normal capitalize"> | {{ $page.locale == 'en' ? part.name : part.name_ar}}</span>
-                <!-- <span v-else class="font-normal capitalize"> | {{part.name_ar}}</span> -->
-                
             </div>
             <div class="flex items-center">
                 <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -76,42 +72,45 @@
                             </div>
                         </div>
                         <div class="">
-                            <p v-if="$page.locale == 'en'" class="bg-blue-100 my-5 p-5 text-gray-600 text-sm">
+                            <p class="bg-blue-100 my-5 p-5 text-gray-600 text-sm">
                                 {{$page.locale == 'en' ? part.description : part.description_ar}}
                             </p>
                         </div>
-                            <form @submit.prevent="submit">
-                                <div>
-                                    <label class="text-gray-700">{{__('type')}}</label>
-                                    <select name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
-                                        <option value="0">Select Type</option>
-                                        <option v-for="type in part_type" :key="type.index" :value="type.id">{{$page.locale == 'en' ? type.name : type.name_ar}}</option>
-                                    </select>
-                                </div>
+                        <div>
+                            <span class="bg-white mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{car.brand}}</span>
+                        </div>
+                        <form @submit.prevent="submit">
+                            <div>
+                                <label class="text-gray-700">{{__('type')}}</label>
+                                <select name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
+                                    <option value="0">Select Type</option>
+                                    <option v-for="type in part_type" :key="type.index" :value="type.id">{{$page.locale == 'en' ? type.name : type.name_ar}}</option>
+                                </select>
+                            </div>
 
-                                <div class="flex items-center">
-                                    <h1 class="capitalize text-teal-900">{{__('quantity')}}:</h1>
-                                    <button type="button" @click="increment()" class="bg-teal-500 mx-2 my-2 text-white">
-                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path> </svg>
-                                    </button>
-                                    
-                                    <span class="bg-white flex items-center mx-2 px-4 py-2">{{calcQuantity}}</span>
-                                    <input type="text" v-model="quantity" hidden >
+                            <div class="flex items-center">
+                                <h1 class="capitalize text-teal-900">{{__('quantity')}}:</h1>
+                                <button type="button" @click="increment()" class="bg-teal-500 mx-2 my-2 text-white">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path> </svg>
+                                </button>
+                                
+                                <span class="bg-white flex items-center mx-2 px-4 py-2">{{calcQuantity}}</span>
+                                <input type="text" v-model="quantity" hidden >
 
-                                    <button type="button" @click="decrement()" class="bg-teal-500 mx-2 my-2 text-white" :disabled="calcQuantity == 1">
-                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                                    </button>
-                                </div>
+                                <button type="button" @click="decrement()" class="bg-teal-500 mx-2 my-2 text-white" :disabled="calcQuantity == 1">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                                </button>
+                            </div>
 
-                                <div class="capitalize my-8">
-                                    <button  @click="addCart(part)" class="bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white" type="button">
-                                        <span class="mx-12 capitalize">{{__('add to cart')}}</span> 
-                                        <svg class="h-6 mx-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </form>
+                            <div class="capitalize my-8">
+                                <button  @click="addCart(part)" class="bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white" type="button">
+                                    <span class="mx-12 capitalize">{{__('add to cart')}}</span> 
+                                    <svg class="h-6 mx-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
                         <div class="flex">
                             <a href="#" class="bg-blue-700 flex items-center p-2 rounded text-white"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.19795 21.5H13.198V13.4901H16.8021L17.198 9.50977H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H17.198V2.5H14.198C11.4365 2.5 9.19795 4.73858 9.19795 7.5V9.50977H7.19795L6.80206 13.4901H9.19795V21.5Z" fill="currentColor" /></svg></a>
                             <a href="#" class="bg-blue-400 flex items-center mx-1 p-2 rounded text-white"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 3C9.10457 3 10 3.89543 10 5V8H16C17.1046 8 18 8.89543 18 10C18 11.1046 17.1046 12 16 12H10V14C10 15.6569 11.3431 17 13 17H16C17.1046 17 18 17.8954 18 19C18 20.1046 17.1046 21 16 21H13C9.13401 21 6 17.866 6 14V5C6 3.89543 6.89543 3 8 3Z" fill="currentColor" /></svg></a>

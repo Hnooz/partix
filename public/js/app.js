@@ -2411,6 +2411,350 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/brands/create.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Dashboard/brands/create.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: ['brands'],
+  data: function data() {
+    return {
+      car: {
+        brand: '',
+        model: '',
+        engine: '',
+        brand_ar: '',
+        model_ar: '',
+        engine_ar: '',
+        year: '',
+        brand_id: 0
+      }
+    };
+  },
+  methods: {
+    submit: function submit() {
+      this.$inertia.post('/dashboard/cars', this.car);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/brands/edit.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Dashboard/brands/edit.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: ['car', 'brands'],
+  data: function data() {
+    return {
+      form: {
+        brand: '',
+        model: '',
+        engine: '',
+        brand_ar: '',
+        model_ar: '',
+        engine_ar: '',
+        year: '',
+        brand_id: 0
+      }
+    };
+  },
+  created: function created() {
+    this.form = this.car;
+  },
+  methods: {
+    submit: function submit() {
+      this.$inertia.put(this.$route('cars.update', this.car.id), this.form); //   this.$inertia.put(`/dashboard/cars/${this.car.id}/edit`, this.car);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/brands/index.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Dashboard/brands/index.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: ['cars'],
+  methods: {
+    // submit() {
+    //     this.$inertia.get('/dashboard/parts/export');
+    // },
+    Delete: function Delete(car) {
+      this.$inertia["delete"]("/dashboard/cars/".concat(car.id));
+    },
+    Edit: function Edit(car) {
+      this.$inertia.get("/dashboard/cars/".concat(car.id, "/edit"));
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/cars/create.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Dashboard/cars/create.vue?vue&type=script&lang=js& ***!
@@ -5187,7 +5531,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_UI_SlideImage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/UI/SlideImage */ "./resources/js/components/UI/SlideImage.vue");
 /* harmony import */ var _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/UI/BaseFooter */ "./resources/js/components/UI/BaseFooter.vue");
 /* harmony import */ var _Shared_StoreLayout_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Shared/StoreLayout.vue */ "./resources/js/Shared/StoreLayout.vue");
-//
 //
 //
 //
@@ -48966,6 +49309,1058 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/brands/create.vue?vue&type=template&id=6ccd3a6a&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Dashboard/brands/create.vue?vue&type=template&id=6ccd3a6a& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("layout", [
+    _c(
+      "div",
+      { staticClass: "mt-8" },
+      [
+        _c("div", { staticClass: "flex" }, [
+          _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
+            _vm._v(_vm._s(_vm.__("cars")) + "/"),
+            _c("span", { staticClass: "text-gray-500 capitalize" }, [
+              _vm._v(_vm._s(_vm.__("create")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("base-panel", { staticClass: "md:max-w-3xl mt-4" }, [
+          _c(
+            "form",
+            {
+              attrs: { enctype: "multipart/form-data" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.submit($event)
+                }
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "grid grid-cols-1 sm:grid-cols-2 gap-6" },
+                [
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("name"),
+                          name: "brand",
+                          error: _vm.$page.errors.brand,
+                          tabindex: "1",
+                          placeholder: _vm.__("e.g Toyota"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.brand,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "brand", $$v)
+                          },
+                          expression: "car.brand"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("name_ar"),
+                          name: "brand_ar",
+                          error: _vm.$page.errors.brand_ar,
+                          tabindex: "2",
+                          placeholder: _vm.__("e.g Toyota"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.brand_ar,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "brand_ar", $$v)
+                          },
+                          expression: "car.brand_ar"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("model"),
+                          name: "model",
+                          error: _vm.$page.errors.model,
+                          tabindex: "3",
+                          placeholder: _vm.__("e.g Brado"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.model,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "model", $$v)
+                          },
+                          expression: "car.model"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("model_ar"),
+                          name: "model_ar",
+                          error: _vm.$page.errors.model_ar,
+                          tabindex: "4",
+                          placeholder: _vm.__("e.g Brado"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.model_ar,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "model_ar", $$v)
+                          },
+                          expression: "car.model_ar"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("engine"),
+                          name: "engine",
+                          error: _vm.$page.errors.engine,
+                          tabindex: "5",
+                          placeholder: _vm.__("e.g jas"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.engine,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "engine", $$v)
+                          },
+                          expression: "car.engine"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("engine_ar"),
+                          name: "engine_ar",
+                          error: _vm.$page.errors.engine_ar,
+                          tabindex: "6",
+                          placeholder: _vm.__("e.g jas"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.engine_ar,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "engine_ar", $$v)
+                          },
+                          expression: "car.engine_ar"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("year"),
+                          name: "year",
+                          error: _vm.$page.errors.year,
+                          tabindex: "7",
+                          placeholder: _vm.__("e.g 2018"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.year,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "year", $$v)
+                          },
+                          expression: "car.year"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("label", { staticClass: "text-gray-700" }, [
+                      _vm._v(_vm._s(_vm.__("brand")))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.car.brand_id,
+                            expression: "car.brand_id"
+                          }
+                        ],
+                        staticClass: "form-select text-gray-500 w-full mt-1",
+                        attrs: {
+                          name: "brand_id",
+                          error: _vm.$page.errors.car_id,
+                          required: "",
+                          tabindex: "6"
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.car,
+                              "brand_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "0" } }, [
+                          _vm._v("select brand")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.brands, function(brand) {
+                          return _c(
+                            "option",
+                            { key: brand.index, domProps: { value: brand.id } },
+                            [_vm._v(_vm._s(brand.name))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "flex justify-end mt-4" },
+                [
+                  _c("base-button", { staticClass: "bg-teal-700 capitalize" }, [
+                    _vm._v(
+                      _vm._s(_vm.__("create")) + " " + _vm._s(_vm.__("car"))
+                    )
+                  ])
+                ],
+                1
+              )
+            ]
+          )
+        ])
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/brands/edit.vue?vue&type=template&id=51b1da99&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Dashboard/brands/edit.vue?vue&type=template&id=51b1da99& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("layout", [
+    _c(
+      "div",
+      { staticClass: "mt-8" },
+      [
+        _c("div", { staticClass: "flex capitalize" }, [
+          _c("h2", { staticClass: "text-3xl text-teal-700 font-bold" }, [
+            _vm._v(_vm._s(_vm.__("cars")) + "/"),
+            _c("span", { staticClass: "text-gray-500" }, [
+              _vm._v(_vm._s(_vm.__("Edit")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("base-panel", { staticClass: "md:max-w-3xl mt-4" }, [
+          _c(
+            "form",
+            {
+              attrs: { enctype: "multipart/form-data" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.submit($event)
+                }
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "grid grid-cols-1 sm:grid-cols-2 gap-6 capitalize"
+                },
+                [
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("name"),
+                          name: "brand",
+                          error: _vm.$page.errors.brand,
+                          tabindex: "1",
+                          placeholder: _vm.__("e.g Toyota"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.brand,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "brand", $$v)
+                          },
+                          expression: "car.brand"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("name_ar"),
+                          name: "brand_ar",
+                          error: _vm.$page.errors.brand_ar,
+                          tabindex: "2",
+                          placeholder: _vm.__("e.g Toyota"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.brand_ar,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "brand_ar", $$v)
+                          },
+                          expression: "car.brand_ar"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("model"),
+                          name: "model",
+                          error: _vm.$page.errors.model,
+                          tabindex: "3",
+                          placeholder: _vm.__("e.g Brado"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.model,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "model", $$v)
+                          },
+                          expression: "car.model"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("model_ar"),
+                          name: "model_ar",
+                          error: _vm.$page.errors.model_ar,
+                          tabindex: "4",
+                          placeholder: _vm.__("e.g Brado"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.model_ar,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "model_ar", $$v)
+                          },
+                          expression: "car.model_ar"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("engine"),
+                          name: "engine",
+                          error: _vm.$page.errors.engine,
+                          tabindex: "5",
+                          placeholder: _vm.__("e.g jas"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.engine,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "engine", $$v)
+                          },
+                          expression: "car.engine"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("engine_ar"),
+                          name: "engine_ar",
+                          error: _vm.$page.errors.engine_ar,
+                          tabindex: "6",
+                          placeholder: _vm.__("e.g jas"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.engine_ar,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "engine_ar", $$v)
+                          },
+                          expression: "car.engine_ar"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: _vm.__("year"),
+                          name: "year",
+                          error: _vm.$page.errors.year,
+                          tabindex: "4",
+                          placeholder: _vm.__("e.g 2018"),
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.car.year,
+                          callback: function($$v) {
+                            _vm.$set(_vm.car, "year", $$v)
+                          },
+                          expression: "car.year"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("label", { staticClass: "text-gray-700" }, [
+                      _vm._v(_vm._s(_vm.__("brand")))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.car.brand_id,
+                            expression: "car.brand_id"
+                          }
+                        ],
+                        staticClass: "form-select text-gray-500 w-full mt-1",
+                        attrs: {
+                          name: "brand_id",
+                          error: _vm.$page.errors.car_id,
+                          required: "",
+                          tabindex: "6"
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.car,
+                              "brand_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "0" } }, [
+                          _vm._v("select brand")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.brands, function(brand) {
+                          return _c(
+                            "option",
+                            { key: brand.index, domProps: { value: brand.id } },
+                            [_vm._v(_vm._s(brand.name))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "flex justify-end mt-4" },
+                [
+                  _c("base-button", { staticClass: "bg-teal-700 capitalize" }, [
+                    _vm._v(_vm._s(_vm.__("Edit")) + " " + _vm._s(_vm.__("car")))
+                  ])
+                ],
+                1
+              )
+            ]
+          )
+        ])
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/brands/index.vue?vue&type=template&id=26413253&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Dashboard/brands/index.vue?vue&type=template&id=26413253& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("layout", [
+    _c(
+      "h1",
+      { staticClass: "md:text-base my-2 text-gray-500 text-sm capitalize" },
+      [_vm._v(_vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("cars")))]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "mx-5" }, [
+      _c("div", { staticClass: "justify-between md:flex" }, [
+        _c("div", { staticClass: "items-center md:flex" }, [
+          _c(
+            "h2",
+            {
+              staticClass:
+                "font-bold md:text-3xl text-xl text-teal-600 capitalize"
+            },
+            [_vm._v(_vm._s(_vm.__("cars")))]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "flex items-center" },
+          [
+            _c(
+              "inertia-link",
+              {
+                staticClass:
+                  "bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap capitalize",
+                attrs: { href: "/dashboard/cars/create" }
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "w-6 h-6",
+                    attrs: {
+                      fill: "currentColor",
+                      viewBox: "0 0 20 20",
+                      xmlns: "http://www.w3.org/2000/svg"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        "fill-rule": "evenodd",
+                        d:
+                          "M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z",
+                        "clip-rule": "evenodd"
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.__("add")) +
+                    " " +
+                    _vm._s(_vm.__("car")) +
+                    "\n                "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white",
+                attrs: { type: "submit" }
+              },
+              [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "w-4 h-4 md:w-6 md:h-6",
+                      attrs: {
+                        fill: "none",
+                        stroke: "currentColor",
+                        viewBox: "0 0 24 24",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round",
+                          "stroke-width": "2",
+                          d:
+                            "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        }
+                      })
+                    ]
+                  )
+                ])
+              ]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mt-4" }, [
+        _c("div", { staticClass: "flex flex-col" }, [
+          _c(
+            "div",
+            { staticClass: "-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6" },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
+                },
+                [
+                  _c("table", { staticClass: "min-w-full" }, [
+                    _c("thead", { staticClass: "bg-gray-100" }, [
+                      _c("tr", [
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                            staticStyle: { "text-align": "start" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    #ID\n                                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                            staticStyle: { "text-align": "start" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.__("brand")) +
+                                "\n                                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                            staticStyle: { "text-align": "start" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.__("name")) +
+                                "\n                                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                            staticStyle: { "text-align": "start" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.__("model")) +
+                                "\n                                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                            staticStyle: { "text-align": "start" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.__("engine")) +
+                                "\n                                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                            staticStyle: { "text-align": "start" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.__("year")) +
+                                "\n                                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                            staticStyle: { "text-align": "start" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                     " +
+                                _vm._s(_vm.__("action")) +
+                                "\n                                "
+                            )
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      {
+                        staticClass:
+                          "bg-white text-gray-500 text-sm md:text-base"
+                      },
+                      _vm._l(_vm.cars, function(car) {
+                        return _c("tr", { key: car.index }, [
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(car.id) +
+                                  "\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(car.brands.name) +
+                                  "\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(car.brand) +
+                                  "\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(car.model) +
+                                  "\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(car.engine) +
+                                  "\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(car.year) +
+                                  "\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "flex px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium"
+                            },
+                            [
+                              _c(
+                                "inertia-link",
+                                {
+                                  attrs: {
+                                    href: "/dashboard/cars/" + car.id + "/edit"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      staticClass: "h-6 text-blue-500 w-6",
+                                      attrs: {
+                                        fill: "currentColor",
+                                        viewBox: "0 0 20 20",
+                                        xmlns: "http://www.w3.org/2000/svg"
+                                      }
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          d: "M10 12a2 2 0 100-4 2 2 0 000 4z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          "fill-rule": "evenodd",
+                                          d:
+                                            "M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z",
+                                          "clip-rule": "evenodd"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.Delete(car)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      staticClass: "h-6 text-red-500 w-6",
+                                      attrs: {
+                                        fill: "currentColor",
+                                        viewBox: "0 0 20 20",
+                                        xmlns: "http://www.w3.org/2000/svg"
+                                      }
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          "fill-rule": "evenodd",
+                                          d:
+                                            "M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z",
+                                          "clip-rule": "evenodd"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/cars/create.vue?vue&type=template&id=5b927ed0&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Dashboard/cars/create.vue?vue&type=template&id=5b927ed0& ***!
@@ -54111,7 +55506,7 @@ var render = function() {
                                       staticClass:
                                         "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
                                       attrs: {
-                                        href: "/dashboard/sorts/parts?latest",
+                                        href: "/dashboard/parts?latest",
                                         role: "menuitem"
                                       }
                                     },
@@ -54124,7 +55519,7 @@ var render = function() {
                                       staticClass:
                                         "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
                                       attrs: {
-                                        href: "/dashboard/sorts/parts?oldest",
+                                        href: "/dashboard/parts?oldest",
                                         role: "menuitem"
                                       }
                                     },
@@ -54137,7 +55532,7 @@ var render = function() {
                                       staticClass:
                                         "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
                                       attrs: {
-                                        href: "/dashboard/sorts/parts?a",
+                                        href: "/dashboard/parts?a",
                                         role: "menuitem"
                                       }
                                     },
@@ -54150,7 +55545,7 @@ var render = function() {
                                       staticClass:
                                         "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
                                       attrs: {
-                                        href: "/dashboard/sorts/parts?z",
+                                        href: "/dashboard/parts?z",
                                         role: "menuitem"
                                       }
                                     },
@@ -56888,17 +58283,24 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "font-normal capitalize" }, [
-                _vm._v(
-                  " " +
-                    _vm._s(
-                      _vm.$page.locale == "en"
-                        ? _vm.part.category.name
-                        : _vm.part.category.name_ar
-                    ) +
-                    " "
-                )
-              ]),
+              _c(
+                "a",
+                {
+                  staticClass: "font-normal capitalize",
+                  attrs: { href: "/store/items/" + _vm.part.category_id }
+                },
+                [
+                  _vm._v(
+                    " " +
+                      _vm._s(
+                        _vm.$page.locale == "en"
+                          ? _vm.part.category.name
+                          : _vm.part.category.name_ar
+                      ) +
+                      " "
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("span", { staticClass: "font-normal capitalize" }, [
                 _vm._v(
@@ -57236,27 +58638,41 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("div", {}, [
-                    _vm.$page.locale == "en"
-                      ? _c(
-                          "p",
-                          {
-                            staticClass:
-                              "bg-blue-100 my-5 p-5 text-gray-600 text-sm"
-                          },
-                          [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(
-                                  _vm.$page.locale == "en"
-                                    ? _vm.part.description
-                                    : _vm.part.description_ar
-                                ) +
-                                "\n                        "
-                            )
-                          ]
+                    _c(
+                      "p",
+                      {
+                        staticClass:
+                          "bg-blue-100 my-5 p-5 text-gray-600 text-sm"
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              _vm.$page.locale == "en"
+                                ? _vm.part.description
+                                : _vm.part.description_ar
+                            ) +
+                            "\n                        "
                         )
-                      : _vm._e()
+                      ]
+                    )
                   ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    _vm._l(_vm.part.cars, function(car) {
+                      return _c(
+                        "span",
+                        {
+                          key: car.id,
+                          staticClass:
+                            "bg-white mx-1 px-3 py-2 rounded-full text-gray-600"
+                        },
+                        [_vm._v(_vm._s(car.brand))]
+                      )
+                    }),
+                    0
+                  ),
                   _vm._v(" "),
                   _c(
                     "form",
@@ -86149,6 +87565,14 @@ var map = {
 	"./Dashboard/Index.vue": "./resources/js/Pages/Dashboard/Index.vue",
 	"./Dashboard/UI": "./resources/js/Pages/Dashboard/UI.vue",
 	"./Dashboard/UI.vue": "./resources/js/Pages/Dashboard/UI.vue",
+	"./Dashboard/brands": "./resources/js/Pages/Dashboard/brands/index.vue",
+	"./Dashboard/brands/": "./resources/js/Pages/Dashboard/brands/index.vue",
+	"./Dashboard/brands/create": "./resources/js/Pages/Dashboard/brands/create.vue",
+	"./Dashboard/brands/create.vue": "./resources/js/Pages/Dashboard/brands/create.vue",
+	"./Dashboard/brands/edit": "./resources/js/Pages/Dashboard/brands/edit.vue",
+	"./Dashboard/brands/edit.vue": "./resources/js/Pages/Dashboard/brands/edit.vue",
+	"./Dashboard/brands/index": "./resources/js/Pages/Dashboard/brands/index.vue",
+	"./Dashboard/brands/index.vue": "./resources/js/Pages/Dashboard/brands/index.vue",
 	"./Dashboard/cars": "./resources/js/Pages/Dashboard/cars/index.vue",
 	"./Dashboard/cars/": "./resources/js/Pages/Dashboard/cars/index.vue",
 	"./Dashboard/cars/create": "./resources/js/Pages/Dashboard/cars/create.vue",
@@ -86157,6 +87581,7 @@ var map = {
 	"./Dashboard/cars/edit.vue": "./resources/js/Pages/Dashboard/cars/edit.vue",
 	"./Dashboard/cars/index": "./resources/js/Pages/Dashboard/cars/index.vue",
 	"./Dashboard/cars/index.vue": "./resources/js/Pages/Dashboard/cars/index.vue",
+	"./Dashboard/cars/pass": "./resources/js/Pages/Dashboard/cars/pass",
 	"./Dashboard/categories": "./resources/js/Pages/Dashboard/categories/index.vue",
 	"./Dashboard/categories/": "./resources/js/Pages/Dashboard/categories/index.vue",
 	"./Dashboard/categories/create": "./resources/js/Pages/Dashboard/categories/create.vue",
@@ -86458,6 +87883,213 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Dashboard/brands/create.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/Pages/Dashboard/brands/create.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _create_vue_vue_type_template_id_6ccd3a6a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create.vue?vue&type=template&id=6ccd3a6a& */ "./resources/js/Pages/Dashboard/brands/create.vue?vue&type=template&id=6ccd3a6a&");
+/* harmony import */ var _create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Dashboard/brands/create.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _create_vue_vue_type_template_id_6ccd3a6a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _create_vue_vue_type_template_id_6ccd3a6a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Dashboard/brands/create.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Dashboard/brands/create.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Pages/Dashboard/brands/create.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./create.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/brands/create.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Dashboard/brands/create.vue?vue&type=template&id=6ccd3a6a&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/Pages/Dashboard/brands/create.vue?vue&type=template&id=6ccd3a6a& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_template_id_6ccd3a6a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./create.vue?vue&type=template&id=6ccd3a6a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/brands/create.vue?vue&type=template&id=6ccd3a6a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_template_id_6ccd3a6a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_template_id_6ccd3a6a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Dashboard/brands/edit.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/Pages/Dashboard/brands/edit.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _edit_vue_vue_type_template_id_51b1da99___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit.vue?vue&type=template&id=51b1da99& */ "./resources/js/Pages/Dashboard/brands/edit.vue?vue&type=template&id=51b1da99&");
+/* harmony import */ var _edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Dashboard/brands/edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _edit_vue_vue_type_template_id_51b1da99___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _edit_vue_vue_type_template_id_51b1da99___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Dashboard/brands/edit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Dashboard/brands/edit.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/Pages/Dashboard/brands/edit.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./edit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/brands/edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Dashboard/brands/edit.vue?vue&type=template&id=51b1da99&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/Pages/Dashboard/brands/edit.vue?vue&type=template&id=51b1da99& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_template_id_51b1da99___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./edit.vue?vue&type=template&id=51b1da99& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/brands/edit.vue?vue&type=template&id=51b1da99&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_template_id_51b1da99___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_template_id_51b1da99___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Dashboard/brands/index.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/Pages/Dashboard/brands/index.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index_vue_vue_type_template_id_26413253___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.vue?vue&type=template&id=26413253& */ "./resources/js/Pages/Dashboard/brands/index.vue?vue&type=template&id=26413253&");
+/* harmony import */ var _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Dashboard/brands/index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _index_vue_vue_type_template_id_26413253___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _index_vue_vue_type_template_id_26413253___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Dashboard/brands/index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Dashboard/brands/index.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Pages/Dashboard/brands/index.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/brands/index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Dashboard/brands/index.vue?vue&type=template&id=26413253&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/Pages/Dashboard/brands/index.vue?vue&type=template&id=26413253& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_26413253___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=template&id=26413253& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Dashboard/brands/index.vue?vue&type=template&id=26413253&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_26413253___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_26413253___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Dashboard/cars/create.vue":
 /*!******************************************************!*\
   !*** ./resources/js/Pages/Dashboard/cars/create.vue ***!
@@ -86662,6 +88294,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_2eca66e6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Dashboard/cars/pass":
+/*!************************************************!*\
+  !*** ./resources/js/Pages/Dashboard/cars/pass ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+rlZBXSNSuAP3USi853Um
+GbI2doapDHIe1slZL0XM
 
 /***/ }),
 
