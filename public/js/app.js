@@ -3688,35 +3688,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
- // import moment from 'moment';
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3724,9 +3695,6 @@ __webpack_require__.r(__webpack_exports__);
     Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: ['order_details'],
-  data: function data() {
-    return {};
-  },
   methods: {
     ago: function ago(details) {
       return moment__WEBPACK_IMPORTED_MODULE_1___default()(details.created_at).format('lll');
@@ -52640,6 +52608,22 @@ var render = function() {
                           [
                             _vm._v(
                               "\n                                    " +
+                                _vm._s(_vm.__("car")) +
+                                "\n                                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                            staticStyle: { "text-align": "start" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    " +
                                 _vm._s(_vm.__("type")) +
                                 "\n                                "
                             )
@@ -52743,10 +52727,25 @@ var render = function() {
                             [_c("h1", [_vm._v(_vm._s(details.part.name))])]
                           ),
                           _vm._v(" "),
-                          _c("td", {
-                            staticClass:
-                              "px-6 py-4 whitespace-no-wrap capitalize"
-                          }),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-6 py-4 whitespace-no-wrap capitalize"
+                            },
+                            _vm._l(details.part.cars, function(car) {
+                              return _c("h1", { key: car.id }, [
+                                details.part.cars.length <= 2
+                                  ? _c("span", [
+                                      _vm._v(_vm._s(car.brand) + " ")
+                                    ])
+                                  : _c("span", [
+                                      _vm._v(_vm._s(car.brand[0]) + " ")
+                                    ])
+                              ])
+                            }),
+                            0
+                          ),
                           _vm._v(" "),
                           _c(
                             "td",

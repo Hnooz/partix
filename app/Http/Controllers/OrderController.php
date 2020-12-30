@@ -103,7 +103,7 @@ class OrderController extends Controller
                 'order_id' => $order->id,
                 'part_id' => $cart->id,
                 'quantity' => $cart->quantity,
-                'price' => $cart->price,
+                'price' => round($cart->price),
             ]);
         };
 
