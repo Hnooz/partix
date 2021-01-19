@@ -5,6 +5,11 @@
             <div class="flex justify-between">
                 <h2 class="text-3xl text-teal-600 font-bold">{{__('suppliers')}}</h2>
                 <div class="flex">
+                    <button type="button" @click="toggleModal = !toggleModal"
+                                  class="bg-teal-800 flex font-medium focus:outline-none outline-none hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                        {{__('add')}} {{__('supplier')}}
+                    </button> 
                     <form @submit.prevent="uploadExcel" class="flex justify-end">
                         <div class="flex justify-end">
                             <base-button class="bg-teal-800 hover:bg-teal-700 rounded-none">
@@ -20,11 +25,7 @@
                             </button>
                         </div>
                     </form> 
-                    <button type="button" @click="toggleModal = !toggleModal"
-                                  class="bg-teal-800 flex font-medium focus:outline-none outline-none hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                        {{__('add')}} {{__('supplier')}}
-                    </button>                   
+                                      
                 </div>
                 
             </div>
