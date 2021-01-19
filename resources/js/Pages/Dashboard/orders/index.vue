@@ -1,7 +1,7 @@
 <template>
     <layout>
         <h1 class="my-2 text-gray-500 capitalize">{{__('dashboard')}}/{{__('orders')}}</h1>
-        <div class="mx-5 capitalize">
+        <div class="mx-5">
             <div class="justify-between flex">
                 <div class="items-center flex">
                     <h2 class="font-bold md:text-3xl text-xl text-teal-600">{{__('orders')}}</h2>
@@ -48,35 +48,39 @@
                             <table class="min-w-full">
                                 <thead class="bg-gray-100">
                                 <tr>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                    <!-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         #
-                                    </th>
+                                    </th> -->
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        {{__('customer address')}} 
+                                        {{__('name')}} 
                                     </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                    <th class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
-                                        {{__('customer phone')}}
+                                        {{__('address')}} 
                                     </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                    <th class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                        style="text-align: start">
+                                        {{__('phone')}}
+                                    </th>
+                                    <th class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         {{__('total')}} {{__('price')}}
                                     </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                    <th class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         {{__('coupon value')}}
                                     </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                    <th class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         {{__('order status')}}
                                     </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                    <th class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         {{__('created at')}}
                                     </th>
-                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                    <th class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         {{__('action')}}
                                     </th>
@@ -85,35 +89,37 @@
                                 </thead>
                                 <tbody class="bg-white text-gray-500 text-sm md:text-base">
                                 <tr v-for="order in orders" :key="order.index">
-                                    <td class="px-6 py-4 whitespace-no-wrap"> 
+                                    <!-- <td class="px-3 py-4 whitespace-no-wrap"> 
                                         {{ order.id }}
+                                    </td> -->
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <h1 >{{ order.customer_name }}</h1>                                        
                                     </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap capitalize">
-                                        <h1 >{{ order.address }}</h1>
-                                        <!-- <h1 class="block">{{ order.id }}</h1> -->
+                                    <td class="px-3 py-4 whitespace-no-wrap">
+                                        <h1 >{{ order.customer_address }}</h1>                                        
                                     </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap uppercase">
+                                    <td class="px-3 py-4 whitespace-no-wrap">
                                         {{ order.customer_phone }}
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-no-wrap uppercase">
+                                    <td class="px-3 py-4 whitespace-no-wrap">
                                         {{ order.price}}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap uppercase">
-                                        {{ order.coupon ?  order.coupon.value : "no coupon"}}
+                                    <td class="px-3 py-4 whitespace-no-wrap">
+                                        {{ order.coupon ?  order.coupon.value : "0"}}
                                     </td>
                                 
-                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                    <td class="px-3 py-4 whitespace-no-wrap">
                                         <span v-if="order.order_status_id == 2" class="bg-teal-300 capitalize px-2 py-1 rounded text-sm text-white">{{ order.status.name }}</span>
                                         <span v-if="order.order_status_id == 3" class="bg-orange-500 px-2 py-1 rounded text-sm text-white">{{ order.status.name }}</span>
                                         <span v-if="order.order_status_id == 1" class="bg-gray-500 capitalize px-2 py-1 rounded text-sm text-white">{{ order.status.name }}</span>
                                         <span v-if="order.order_status_id == 4" class="bg-red-500 capitalize px-2 py-1 rounded text-sm text-white">{{ order.status.name }}</span>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                    <td class="px-3 py-4 whitespace-no-wrap">
                                         {{ ago(order) }}
                                     </td>
 
-                                    <td class="flex px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium">
+                                    <td class="flex px-3 py-4 whitespace-no-wrap text-sm leading-5 font-medium">
                                         <inertia-link :href="'/dashboard/orders/'+order.id+'/edit'" class="h-6 text-blue-500 w-6">
                                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
                                         </inertia-link>
@@ -151,7 +157,7 @@
         methods:  {
         ago(order) {
             
-            return moment(order.created_at).format('lll');
+            return moment(order.created_at).format('Y-M-D');
         }
     },
     }

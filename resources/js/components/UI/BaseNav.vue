@@ -53,17 +53,17 @@
                             </div>
                         </form>
 
-                        <div class="bg-teal-900 flex items-center ml-2 p-3 rounded text-white">
+                        <div class="bg-teal-900 flex items-center ml-2 p-3 rounded text-white whitespace-no-wrap">
 
-                            <button type="button">
+                            <button type="button" @click="wishlistOpen = !wishlistOpen">
                                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0122 5.57169L10.9252 4.48469C8.77734 2.33681 5.29493 2.33681 3.14705 4.48469C0.999162 6.63258 0.999162 10.115 3.14705 12.2629L11.9859 21.1017L11.9877 21.0999L12.014 21.1262L20.8528 12.2874C23.0007 10.1395 23.0007 6.65711 20.8528 4.50923C18.705 2.36134 15.2226 2.36134 13.0747 4.50923L12.0122 5.57169ZM11.9877 18.2715L16.9239 13.3352L18.3747 11.9342L18.3762 11.9356L19.4386 10.8732C20.8055 9.50635 20.8055 7.29028 19.4386 5.92344C18.0718 4.55661 15.8557 4.55661 14.4889 5.92344L12.0133 8.39904L12.006 8.3918L12.005 8.39287L9.51101 5.89891C8.14417 4.53207 5.92809 4.53207 4.56126 5.89891C3.19442 7.26574 3.19442 9.48182 4.56126 10.8487L7.10068 13.3881L7.10248 13.3863L11.9877 18.2715Z" fill="currentColor" />
                                 </svg>
                             </button>
-                            <span class="-mt-12 absolute bg-red-400 flex font-bold h-5 justify-center rounded-full text-sm w-5">3</span>
+                            <span class="-mt-12 absolute bg-red-400 flex font-bold h-5 justify-center rounded-full text-sm w-5">{{wishlistQuantity}}</span>
                             
-                            <button type="button" class="mx-3">
-                                <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 shopping-cart w-6" @click="cartOpen = !cartOpen">
+                            <button type="button" class="mx-3" @click="cartOpen = !cartOpen">
+                                <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 shopping-cart w-6">
                                     <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
                                 </svg>                                
                             </button>
@@ -104,24 +104,6 @@
             </form>
         </div>
 
-        <!-- <div v-if="isOpen" class="absolute bg-white  h-screen md:hidden pb-3 pt-2 px-2 sm:px-3 top-0 w-3/4">
-            <svg @click="isOpen = !isOpen"  class="-mr-8 absolute bg-gray-200 block cursor-pointer h-6 right-0 rounded-full text-blue-500 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-    
-            <a href="/store"
-                   class="block bg-blue-400 focus:outline-none focus:text-white font-medium  px-3 py-2 rounded-md text-base text-white">{{__('Home')}}</a>
-                <a href="/categories"
-                   class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">{{__('Categories')}}</a>
-                <a href="#"
-                   class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">{{__('Another Link')}}</a>
-                <a href="#"
-                   class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">{{__('Another one')}}</a>
-                <a href="#"
-                   class=" block  focus:outline-none focus:text-white font-medium hover:bg-blue-400 hover:text-white mt-1 px-3 py-2 rounded-md text-base text-gray-500">{{__('Reports')}}</a>
-                <button class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white hover:bg-blue-400 focus:outline-none focus:text-white focus:bg-gray-700"
-                   @click="logout">Logout</button>
-        </div> -->
     <!-- your cart -->
     <div :class="cartOpen  ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'" class="fixed right-0 top-0 z-30 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300">
         <div class="flex items-center justify-between">
@@ -134,7 +116,7 @@
         <form>
             <div class="flex justify-between mt-6" v-for="item in cartItem" :key="item.index">
                 <div class="flex">
-                    <img class="h-20 w-20 object-cover rounded" :src="item.attributes.url[0].url[0]" alt="">
+                    <img class="h-20 w-20 object-cover rounded" :src="item.attributes.url.url[0]" alt="">
                     <div class="mx-3">
                         <h3 class="text-sm text-gray-600">{{item.name}}</h3>
                         <div class="flex items-center mt-2">
@@ -161,6 +143,8 @@
             <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </a>
     </div>
+
+    <Wishlist :data="wishlistContent" :openWishlist="wishlistOpen"/>
     </nav>
 
     <nav class="bg-center bg-cover bg_image md:hidden">
@@ -209,7 +193,7 @@
         <form>
             <div class="flex justify-between mt-6" v-for="item in cartItem" :key="item.index">
                 <div class="flex">
-                    <img class="h-20 w-20 object-cover rounded" :src="item.attributes.url[0].url[0]" alt="">
+                    <img class="h-20 w-20 object-cover rounded" :src="item.attributes.url.url[0]" alt="">
                     <div class="mx-3">
                         <h3 class="text-sm text-gray-600">{{item.name}}</h3>
                         <div class="flex items-center mt-2">
@@ -235,7 +219,8 @@
             <span>{{__('Chechout')}}</span>
             <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </a>
-    </div>
+        </div>
+        <Wishlist :data="wishlistContent" :openWishlist="wishlistOpen"/>
     </nav>
 </div>
     
@@ -243,19 +228,22 @@
 
 <script>
 import LanguageSelector from '../../Shared/LanguageSelector'
+import Wishlist from '../UI/wishlist'
 export default {
     name: "BaseNav",
-    components:{LanguageSelector},
+    components:{LanguageSelector,Wishlist},
     props:{
         cartItemQuantity:Number,
         cartItem:Object,
-        cartTotalPrice:Number
+        cartTotalPrice:Number,
+        wishlistQuantity:Number,
+        wishlistContent:Object
     },
     data() {
         return {
             cartOpen:false,
             isOpen:false,
-            // quantity:1,
+            wishlistOpen:false,
             view: {
                 atTopOfPage: true
             },
@@ -297,7 +285,7 @@ export default {
                 item.quantity--;
                 this.$inertia.put(`/store/cart/${item.id}`, item);
             },
-             Delete(item) {
+            Delete(item) {
                 this.$inertia.delete(`/store/carts/${item.id}`);
             },
             logout() {

@@ -31,21 +31,32 @@ class CartController extends Controller
         $supplier = Supplier::find($request->supplier_id);
         
         $category = Category::find($request->category_id);
-        $part = Part::where('id', $request->id)->get();
-        if ($part[0]->type->name == 'oem') {
-            if (isset($category->sale) > 0) {
-                $price = $request->price - (($category->sale / 100) * $request->price);
+        $part = Part::find($request->id);
+        // dd($part->append('url'));
+        if ($request->part_type_id == 1) {
+            if (isset($part->sale) > 0) {  // price if part has sale
+                $price = $part->oem_price - (($part->sale / 100) * $part->oem_price);
+            } elseif (isset($category->sale) > 0) {
+                $price = $part->oem_price - (($category->sale / 100) * $part->oem_price);
             } else {
-                $price = $request->price - (($request->sale / 100) * $request->price);
+                $price = $part->oem_price;
             }
-        } elseif ($part[0]->type->name == 'aftermarket') {
-            if (isset($category->sale) > 0) {
-                $price = $request->second_price - (($category->sale / 100) * $request->second_price);
+        } elseif ($request->part_type_id == 2) {
+            if (isset($part->sale) > 0) {  // price if part has sale
+                $price = $part->aftermarket_price - (($part->sale / 100) * $part->aftermarket_price);
+            } elseif (isset($category->sale) > 0) {
+                $price = $request->aftermarket_price - (($category->sale / 100) * $request->aftermarket_price);
             } else {
-                $price = $request->second_price - (($request->sale / 100) * $request->second_price);
+                $price = $request->aftermarket_price;
             }
         } else {
-            $price = 0;
+            if (isset($part->sale) > 0) {  // price if part has sale
+                $price = $part->used_price - (($part->sale / 100) * $part->used_price);
+            } elseif (isset($category->sale) > 0) {
+                $price = $request->used_price - (($category->sale / 100) * $request->used_price);
+            } else {
+                $price = $request->used_price;
+            }
         }
         if ($request->quantity) {
             Cart::add([
@@ -56,7 +67,8 @@ class CartController extends Controller
                 'attributes' => [
                     'slug' => $request->slug,
                     'supplier' => isset($supplier->name),
-                    'url' => $part->each->append('url'),
+                    'part_type_id' => $request->part_type_id,
+                    'url' => $part->append('url'),
                 ],
             ]);
         } else {
@@ -68,7 +80,8 @@ class CartController extends Controller
                 'attributes' => [
                     'slug' => $request->slug,
                     'supplier' => isset($supplier->name),
-                    'url' => $part->each->append('url'),
+                    'part_type_id' => $request->part_type_id,
+                    'url' => $part->append('url'),
                 ],
             ]);
         }
@@ -78,27 +91,38 @@ class CartController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request);
         $data = $request->validate(['part_type_id' => 'max:10']);
         $part = Part::find($request->id);
 
-        $part->update($request->only(['part_type_id']));
+        // $part->update($request->only(['part_type_id']));
 
         $category = Category::find($part->category_id);
 
-        if ($part->type->name == 'oem') {
-            if ($category->sale > 0) {
+        if ($request->part_type_id == 1) {
+            if ($part->sale > 0) {  // price if part has sale
+                $price = $part->price - (($part->sale / 100) * $part->price);
+            } elseif ($category->sale > 0) {
                 $price = $part->price - (($category->sale / 100) * $part->price);
             } else {
-                $price = $part->price - (($part->sale / 100) * $part->price);
+                $price = $part->price;
             }
-        } elseif ($part->type->name == 'aftermarket') {
-            if ($category->sale > 0) {
-                $price = $part->second_price - (($category->sale / 100) * $part->second_price);
-            } else {
+        } elseif ($request->part_type_id == 2) {
+            if ($part->sale > 0) {  // price if part has sale
                 $price = $part->second_price - (($part->sale / 100) * $part->second_price);
+            } elseif ($category->sale > 0) {  //price if category has sale
+                $price = $part->second_price - (($category->sale / 100) * $part->second_price);
+            } else {   //original price if there are no sale in part or category
+                $price = $part->second_price;
             }
         } else {
-            $price = 0;
+            if (isset($part->sale) > 0) {  // price if part has sale
+                $price = $part->used_price - (($part->sale / 100) * $part->used_price);
+            } elseif (isset($category->sale) > 0) {
+                $price = $request->used_price - (($category->sale / 100) * $request->used_price);
+            } else {
+                $price = $request->used_price;
+            }
         }
 
         \Cart::update(

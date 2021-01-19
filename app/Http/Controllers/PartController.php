@@ -14,37 +14,26 @@ class PartController extends Controller
 {
     public function index()
     {
+        $parts = (new Part)->newQuery();
+        
         if (request()->has('latest')) {
-            $parts = Part::orderBy('id', 'desc')->get();
-            
-            return inertia()->render('Dashboard/parts/index', [
-                'parts' => $parts,
-            ]);
-        } elseif (request()->has('a')) {
-            $parts = Part::orderBy('name')->get();
-
-            return inertia()->render('Dashboard/parts/index', [
-                'parts' => $parts,
-            ]);
-        } elseif (request()->has('z')) {
-            $parts = Part::orderBy('name', 'desc')->get();
-
-            return inertia()->render('Dashboard/parts/index', [
-                'parts' => $parts,
-            ]);
-        } elseif (request()->has('oldest')) {
-            $parts = Part::all();
-
-            return inertia()->render('Dashboard/parts/index', [
-                'parts' => $parts,
-            ]);
-        } else {
-            $parts = Part::all();
-
-            return inertia()->render('Dashboard/parts/index', [
-                'parts' => $parts,
-            ]);
+            $parts->orderBy('id', 'desc');
         }
+        if (request()->has('a')) {
+            $parts->orderBy('name');
+        }
+        if (request()->has('z')) {
+            $parts->orderBy('name', 'desc');
+        }
+        if (request()->has('oldest')) {
+            $parts->orderBy('id');
+        } else {
+            $parts->orderBy('id');
+        }
+
+        return inertia()->render('Dashboard/parts/index', [
+            'parts' => $parts->get(),
+        ]);
     }
 
     public function create()
@@ -64,6 +53,13 @@ class PartController extends Controller
         ]);
     }
 
+    public function show($slug)
+    {
+        $part = Part::with('supplier')->where('slug', $slug)->first();
+       
+        return inertia()->render('Dashboard/parts/show', ['part' => $part]);
+    }
+
     public function store(StorePartRequest $request)
     {
         $data = $request->validated();
@@ -74,8 +70,9 @@ class PartController extends Controller
             'number' => $request->number,
             'description' => $request->description,
             'description_ar' => $request->description_ar,
-            'price' => $request->price,
-            'second_price' => $request->second_price,
+            'oem_price' => $request->oem_price,
+            'aftermarket_price' => $request->aftermarket_price,
+            'used_price' => $request->used_price,
             'category_id' => $request->category_id,
             'supplier_id' => $request->supplier_id,
             'part_type_id' => $request->part_type_id,
@@ -125,8 +122,9 @@ class PartController extends Controller
             'number',
             'description',
             'description_ar',
-            'price',
-            'second_price',
+            'oem_price',
+            'aftermarket_price',
+            'used_price',
             'category_id',
             'supplier_id',
             'part_type_id',
@@ -157,7 +155,7 @@ class PartController extends Controller
     {
         $part->delete();
         session()->flash('toast', [
-            'type' => 'success',
+            'type' => 'error',
             'message' => 'Part Deleted successfully',
         ]);
 

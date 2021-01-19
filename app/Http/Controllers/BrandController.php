@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Car;
 use App\Brand;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCarRequest;
 
 class BrandController extends Controller
 {
@@ -24,7 +25,7 @@ class BrandController extends Controller
     {
         $cars = Car::where('brand_id', $brand->id)->get();
 
-        return inertia()->render('Dashboard/brands/show', ['cars' => $cars]);
+        return inertia()->render('Dashboard/brands/show', ['cars' => $cars, 'brand' => $brand]);
     }
 
     public function store(Request $request)
@@ -80,5 +81,29 @@ class BrandController extends Controller
             'type' => 'error',
             'message' => 'Brand deleted successfully',
         ]);
+    }
+
+    // cars belongs to brand
+
+    public function brandCars(Brand $brand)
+    {
+        return inertia()->render('Dashboard/brands/createCar', ['brand' => $brand]);
+    }
+
+    public function storeBrandCars(StoreCarRequest $request, Brand $brand)
+    {
+        $request->validated();
+        Car::create([
+            'brand' => $request->brand,
+            'model' => $request->model,
+            'engine' => $request->engine,
+            'brand_ar' => $request->brand_ar,
+            'model_ar' => $request->model_ar,
+            'engine_ar' => $request->engine_ar,
+            'year' => $request->year,
+            'brand_id' => $brand->id,
+        ]);
+
+        return redirect()->route('brands.index');
     }
 }

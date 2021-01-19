@@ -7,7 +7,7 @@
             <nav class="flex justify-between items-center bg-white p-4 shadow-md h-24">
                 <div class="flex font-hairline items-center leading-none mx-5 text-teal-700">
                     <div>
-                        <h1 class="text-2xl"><span class="font-semibold mx-2 capitalize" dir="auto">{{__('Admin')}} </span> {{__('dashboard')}} </h1>
+                        <h1 class="md:text-2xl whitespace-no-wrap"><span class="font-semibold mx-2 capitalize" dir="auto">{{__('Admin')}} </span> {{__('dashboard')}} </h1>
                     </div>
                     
                 </div>
@@ -22,8 +22,6 @@
                         <svg class="w-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path></svg>
                     </button>
                     
-                    <!-- <a href="#" class="mx-1"><img class="h-12 object-center object-cover rounded-full w-12" src="../images/panda.jpg" alt=""></a> -->
-                    <!-- <svg class="w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.34317 7.75732L4.92896 9.17154L12 16.2426L19.0711 9.17157L17.6569 7.75735L12 13.4142L6.34317 7.75732Z" fill="currentColor" /></svg> -->
                 </div>
             </nav>
             <main class="min-h-screen">

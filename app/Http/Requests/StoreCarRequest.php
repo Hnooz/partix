@@ -31,7 +31,7 @@ class StoreCarRequest extends FormRequest
             'model_ar' => 'required|max:255',
             'engine_ar' => 'required|max:255',
             'year' => 'required|max:255',
-            'brand_id' => 'required|max:255',
+            'brand_id' => 'sometimes|max:255',
         ];
     }
 }

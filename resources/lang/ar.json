@@ -84,6 +84,7 @@
     "second price":"السعر الثاني",
     
     "description":"الوصف",
+    "description_ar":"الوصف بالعربي",
     "images":"الصور",
     "create":"اضافه",
     "orders":"الطلبات",
@@ -92,9 +93,11 @@
     "user":"مستخدم",
     "suppliers":"الموردين",
     "cars":"السيارات",
+    "all cars":"كل السيارات",
     "super categories":"الاقسام الرئيسيه",
     "categories":"الاقسام",
     "coupon code":"اكواد الخصم",
+    "coupons":"اكواد الخصم",
     "logout":"تسجيل خروج",
     "profile":"الملف الشخصي",
 
@@ -115,6 +118,7 @@
 
     "double click on name to modify":"اضغط علي الاسم مرتين للتعديل",
     "supplier name":"اسم المورد",
+    "supplier name_ar":"اسم المورد بالعربي",
     "hint":"ملحوظه",
     "email":"الايميل",
     "customer":"مستخدم",
@@ -145,7 +149,17 @@
     "select Model" : "الموديل",
     "select Year" : "السنه",
     "select Engine" : "نوع المحرك",
-    "QAR" : "ريال"
+    "QAR" : "ريال",
+    "name_ar":"الاسم بالعربي",
+    "model_ar":"الموديل بالعربي",
+    "engine_ar":"المحرك بالعربي",
+    "brands":"الماركات",
+    "favorite":"المفضله",
+    "aftermarket":"تجاري",
+    "oem":"اصلي",
+    "prices":"الاسعار",
+    "show":"عرض"
+
     
   
 

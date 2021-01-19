@@ -62,7 +62,7 @@
                                         {{ details.part.id }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap capitalize">
-                                        <h1 >{{ details.part.name }}</h1>
+                                        <a :href="'/dashboard/parts/' + details.part.slug" >{{ details.part.name }}</a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap capitalize">
                                         <h1 v-for="car in details.part.cars" :key="car.id">
@@ -71,7 +71,7 @@
                                         </h1>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap">
-                                        {{ details.part.type.name }}
+                                        {{ details.part_type }}
                                     </td>
                                     <td  class="px-6 py-4 whitespace-no-wrap">
                                         <span v-if="details.part.type.name != 'used'">{{ details.price }}</span>

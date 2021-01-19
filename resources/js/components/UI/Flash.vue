@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <div class="text-white mb-12 rounded max-w-xl absolute top-0 right-0 mr-4 mt-4 cursor-pointer" :class="colors[type]"
+        <div class="bg-white mb-12 rounded-lg max-w-xl absolute top-0 right-0 mr-4 mt-4 cursor-pointer shadow-xl" :class="colors[type]"
              v-if="isOpen && !popstate" @click="isOpen = false">
             <div class="flex container mx-auto py-4 px-6">
                 <svg viewBox="0 0 40 40" class="h-6 w-6 fill-current">
@@ -25,10 +25,10 @@
                 isOpen: true,
                 timeout: null,
                 colors: {
-                    success: 'bg-green-500',
-                    info: 'bg-blue-500',
-                    warning: 'bg-yellow-500',
-                    error: 'bg-red-500',
+                    success: 'text-green-500',
+                    info: 'text-blue-500',
+                    warning: 'text-yellow-500',
+                    error: 'text-red-500',
                 }
                 ,
                 icons: {
@@ -44,7 +44,7 @@
                 clearTimeout(this.time);
             }
 
-            this.timeout = setTimeout(() => this.isOpen = false, 3000);
+            this.timeout = setTimeout(() => this.isOpen = false, 5000);
         },
     }
 </script>

@@ -21,9 +21,10 @@ class CreatePartsTable extends Migration
             $table->text('description_ar');
             $table->string('number');
             $table->string('slug')->nullable();
-            $table->integer('price');
-            $table->integer('second_price')->nullable();
-            $table->integer('sale')->nullable();
+            $table->integer('oem_price')->default(0)->nullable();
+            $table->integer('aftermarket_price')->default(0)->nullable();
+            $table->integer('used_price')->default(0)->nullable();
+            $table->integer('sale')->default(0)->nullable();
             $table->foreignId('supplier_id')->nullable();
             $table->foreignId('category_id')->nullable();
             $table->foreignId('part_type_id')->nullable();

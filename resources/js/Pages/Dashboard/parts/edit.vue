@@ -25,10 +25,13 @@
                             <base-input :label="__('description_ar')"  name="description_ar"   v-model="form.description_ar" :error="$page.errors.description_ar" tabindex="3" required></base-input>
                         </div>
                         <div>
-                            <base-input type="number" :label="__('price')"  name="price"  v-model="form.price" :error="$page.errors.price" tabindex="4" required></base-input>
+                            <base-input type="number" :label="__('oem price')"  name="oem_price"  v-model="part.oem_price" :error="$page.errors.oem_price" tabindex="4" required></base-input>
                         </div>
                         <div>
-                            <base-input type="number" :label="__('second price')"  name="second_price"  v-model="form.second_price" :error="$page.errors.second_price" tabindex="4" required></base-input>
+                            <base-input type="number" :label="__('aftermarket price')"  name="aftermarket_price"  v-model="part.aftermarket_price" :error="$page.errors.aftermarket_price" tabindex="4" required></base-input>
+                        </div>
+                        <div>
+                            <base-input type="number" :label="__('used price')"  name="used_price"  v-model="part.used_price" :error="$page.errors.used_price" tabindex="4" required></base-input>
                         </div>
                          <div>
                             <base-input :label="__('sale')"  name="sale"  v-model="form.sale" :error="$page.errors.sale" tabindex="5" required></base-input>
@@ -95,8 +98,9 @@
                     number: '',
                     description: '',
                     description_ar: '',
-                    price: '',
-                    second_price:'',
+                    oem_price: '',
+                    aftermarket_price:'',
+                    used_price:'',
                     sale:'',
                     cars:[],
                     supplier_id:'',
@@ -116,8 +120,9 @@
                     number: this.part.number,
                     description: this.part.description,
                     description_ar: this.part.description_ar,
-                    price: this.part.price,
-                    second_price:this.part.second_price,
+                    oem_price: this.part.oem_price,
+                    aftermarket_price:this.part.aftermarket_price,
+                    used_price: this.part.used_price,
                     sale:this.part.sale,
                     cars:this.part.cars.map(car => car.id),
                     supplier_id:this.part.supplier_id,
@@ -136,8 +141,9 @@
             data.append('number', this.form.number);
             data.append('description', this.form.description);
             data.append('description_ar', this.form.description_ar);
-            data.append('price', this.form.price);
-            data.append('second_price', this.form.second_price);
+            data.append('oem_price', this.part.oem_price);
+            data.append('aftermarket_price', this.part.aftermarket_price);
+            data.append('used_price', this.part.used_price);
             data.append('slug', this.form.slug);
             data.append('sale', this.form.sale);
             data.append('cars', JSON.stringify(this.form.cars));

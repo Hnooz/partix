@@ -7,11 +7,19 @@
             <div class="flex flex-col lg:flex-row mt-8">
                 <div class="w-full lg:w-1/2 order-2">
                     <form class="mt-8 lg:w-3/4 pb-4" @submit.prevent="submit">
+                    <div class="mt-8">
+                            <h4 class="text-sm text-teal-700 font-medium">{{__('name')}}</h4>
+                            <div class="mt-6 flex">
+                                <label class="block flex-1">
+                                    <input type="text" name="customer_name" v-model="form.customer_name" :error="$page.errors.customer_name" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('your name')" required>
+                                </label>
+                            </div>
+                        </div>
                         <div class="mt-8">
                             <h4 class="text-sm text-teal-700 font-medium">{{__('Delivery address')}}</h4>
                             <div class="mt-6 flex">
                                 <label class="block flex-1">
-                                    <input type="text" name="address" v-model="form.address" :error="$page.errors.address" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('Address')" required>
+                                    <input type="text" name="customer_address" v-model="form.customer_address" :error="$page.errors.customer_address" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('Address')" required>
                                 </label>
                             </div>
                         </div>
@@ -24,7 +32,7 @@
                                     </select>
                                 </label>
                                 <label class="block flex-1 ml-3">
-                                    <input type="text" name="customer_phone" v-model="form.customer_phone" :error="$page.errors.customer_phone" class="form-input mt-1 block w-full text-gray-700" placeholder="your number" required>
+                                    <input type="number" name="customer_phone" v-model="form.customer_phone" :error="$page.errors.customer_phone" class="form-input mt-1 block w-full text-gray-700" placeholder="your number" required>
                                 </label>
                             </div>
                         </div>
@@ -59,7 +67,7 @@
                             <div class="overflow-y-auto" style="height:300px;">
                                 <div class="flex justify-between mt-6"  v-for="(item ,index) in cartCollection" :key="index">
                                     <div class="flex">
-                                        <img class="h-20 w-20 object-cover rounded" :src="item.attributes.url[0].url[0]" alt="">
+                                        <img class="h-20 w-20 object-cover rounded" :src="item.attributes.url.url[0]" alt="">
                                         <div class="mx-3">
                                             <h3 class="text-sm text-gray-600">{{item.name}}</h3>
                                             <div class="flex items-center mt-2">
@@ -106,8 +114,9 @@ import StoreLayout from '../../../Shared/StoreLayout'
         data() {
             return {
                 form:{
+                    customer_name:'',
                     customer_phone:'',
-                    address:'',
+                    customer_address:'',
                     coupon:''
                 }
             }
@@ -115,7 +124,7 @@ import StoreLayout from '../../../Shared/StoreLayout'
         methods: {
             submit()
             {
-                this.$inertia.post('/store/orders', this.form).then(() => location.reload());
+                this.$inertia.post('/store/orders', this.form);
             },
             increment(item){
                 item.quantity++;

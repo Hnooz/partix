@@ -1,6 +1,9 @@
 <template>
     <store-layout>
-    <BaseNav :cartItemQuantity="cartQuantity" :cartItem="cartCollection" :cartTotalPrice="cartTotalPrice" />
+    <BaseNav 
+        :cartItemQuantity="cartQuantity" :cartItem="cartCollection" 
+        :cartTotalPrice="cartTotalPrice" :wishlistQuantity="wishlistQuantity" 
+        :wishlistContent="wishlistContent"/>
     <SelectSection />
          <!-- filter search -->
     <div class="bg-teal-700 py-5 hidden md:block">
@@ -61,13 +64,6 @@
                                 <!-- <p v-else class="capitalize font-semibold text-3xl text-teal-700">{{part.name_ar}}</p> -->
                                 <p class="capitalize font-medium text-teal-400 text-xl">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].brand_ar}}</p>
                                 <!-- <p v-else class="capitalize font-medium text-teal-400 text-xl">{{part.cars[0].brand_ar}}</p> -->
-                                <button class="flex" type="button">
-                                    <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="h-6 text-yellow-400 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-6 text-gray-400 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
-                                </button>
                                 
                             </div>
                         </div>
@@ -80,12 +76,12 @@
                             <span class="bg-white mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{car.brand}}</span>
                         </div>
                         <form @submit.prevent="submit">
-                            <div>
-                                <label class="text-gray-700">{{__('type')}}</label>
-                                <select name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
-                                    <option value="0">Select Type</option>
-                                    <option v-for="type in part_type" :key="type.index" :value="type.id">{{$page.locale == 'en' ? type.name : type.name_ar}}</option>
-                                </select>
+                            <div class="my-4">
+                                <h1 class="text-red-500 text-sm"><span class="capitalize text-base text-gray-600">hint:</span> you can order directly if part type price = 0</h1>
+                                <h1 class="capitalize my-3 text-gray-600">chose type :</h1>
+                                <button type="button" @click="oem()" class="bg-gray-800 capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white">oem {{part.oem_price}}$</button>
+                                <button type="button" @click="aftermark()" class="bg-gray-800 capitalize focus:outline-none my-2 outline-none px-3 py-1 rounded-lg text-white">aftermarket {{part.aftermarket_price}}$</button>
+                                <button type="button" @click="used()" class="bg-gray-800 block capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white">used {{part.used_price}}$</button>
                             </div>
 
                             <div class="flex items-center">
@@ -102,8 +98,8 @@
                                 </button>
                             </div>
 
-                            <div class="capitalize my-8">
-                                <button  @click="addCart(part)" class="bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white" type="button">
+                            <div class="capitalize my-8" v-show="(form.oem_price != 0) || (form.aftermarket_price != 0) || (form.used_price != 0)">
+                                <button  @click="addCart(part)" class="bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white whitespace-no-wrap" type="button">
                                     <span class="mx-12 capitalize">{{__('add to cart')}}</span> 
                                     <svg class="h-6 mx-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -133,13 +129,18 @@
                 </div>
             </div>
             <div class="flex">
-                <div class="mx-2" v-if="part.type.name == 'oem'">
+               
+                <div class="mx-2" v-if="form.part_type_id == 1">
                     <p class="font-semibold text-3xl text-gray-900">{{calcOemPrice}} <span class="font-hairline text-gray-700 text-xl">{{__('QAR')}}</span> </p>
-                    <p v-if="part.sale > 0" class="line-through text-center text-gray-600">{{part.price}} <span>{{__('QAR')}}</span> </p>
+                    <p v-if="part.sale > 0" class="line-through text-center text-gray-600">{{part.oem_price}} <span>{{__('QAR')}}</span> </p>
                 </div>
-                <div class="mx-2" v-if="part.type.name == 'aftermarket'">
+                <div class="mx-2" v-if="form.part_type_id == 2">
                     <p class="font-semibold text-3xl text-gray-900">{{calcAftermarketPrice}} <span class="font-hairline text-gray-700 text-xl">{{__('QAR')}}</span> </p>
-                    <p v-if="part.sale > 0" class="line-through text-center text-gray-600">{{part.second_price}} <span>{{__('QAR')}}</span> </p>
+                    <p v-if="part.sale > 0" class="line-through text-center text-gray-600">{{part.aftermarket_price}} <span>{{__('QAR')}}</span> </p>
+                </div>
+                <div class="mx-2" v-if="form.part_type_id == 3">
+                    <p class="font-semibold text-3xl text-gray-900">{{calcUsedPrice}} <span class="font-hairline text-gray-700 text-xl">{{__('QAR')}}</span> </p>
+                    <p v-if="part.sale > 0" class="line-through text-center text-gray-600">{{part.used_price}} <span>{{__('QAR')}}</span> </p>
                 </div>
                 <img src="../../images/1223/rightimage.png" class="h-72 object-center object-cover w-5/12">
             </div>
@@ -152,7 +153,7 @@
     <div class="bg-white md:hidden md:rounded-tr-lg mx-6 mt-8 overflow-hidden rounded-t-lg shadow-lg">
         <div class="flex justify-between">
 
-            <p class="flex bg-teal-400 font-semibold h-10 w-10 md:h-12 md:px-1 md:rounded-none px-1 py-3 rounded-br-lg shadow-lg text-sm text-white md:w-12">{{part.sale}}%</p>
+            <p class="flex justify-center bg-teal-400 font-semibold h-10 w-10 md:h-12 md:px-1 md:rounded-none px-1 py-3 rounded-br-lg shadow-lg text-sm text-white md:w-12">{{part.sale}}%</p>
         </div>
         <div class="flex items-center justify-center">
             <a class="-mt-10 px-10" href="#">
@@ -169,28 +170,33 @@
         </div>
         
         <form @submit.prevent="submit">
-        <div class="-mt-6 px-4">
+        <div class="px-4">
             <a href="#" class="font-bold  text-xs md:text-base text-teal-500 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
             <!-- <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p> -->
             <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="part.type.name == 'oem'">
                 {{calcOemPrice}}<span class="text-gray-500 text-xs">{{__('QAR')}}</span>
-                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.price}}{{__('QAR')}}</span> 
+                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.oem_price}}{{__('QAR')}}</span> 
             </p>
 
             <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="part.type.name == 'aftermarket'">
                 {{calcAftermarketPrice}}<span class="text-gray-500 text-xs">{{__('QAR')}}</span>
-                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.second_price}}{{__('QAR')}}</span> 
+                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.aftermarket_price}}{{__('QAR')}}</span> 
             </p>
 
+            <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="part.type.name == 'used'">
+                {{calcUsedPrice}}<span class="text-gray-500 text-xs">{{__('QAR')}}</span>
+                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.used_price}}{{__('QAR')}}</span> 
+            </p>
         </div>
 
-        <div class=" px-4">
-            <label class="text-gray-700 text-xs">{{__('part')}} {{__('type')}}</label>
-            <select  name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type" required tabindex="3">
-                <option value="0">Select Type</option>
-                <option v-for="type in part_type" :key="type.index" :value="type.id">{{$page.locale == 'en' ? type.name : type.name_ar}}</option>
-            </select>
+        <div class="px-4">
+            <h1 class="text-red-500 text-xs"><span class="capitalize text-sm text-gray-600">hint:</span> you can order directly if part type price = 0</h1>
+            <h1 class="capitalize text-gray-600 text-sm">chose type :</h1>
+            <button type="button" @click="oem()" class="bg-gray-800 capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white text-xs">oem {{part.oem_price}}$</button>
+            <button type="button" @click="aftermark()" class="bg-gray-800 capitalize focus:outline-none my-2 outline-none px-3 py-1 rounded-lg text-white text-xs">aftermarket {{part.aftermarket_price}}$</button>
+            <button type="button" @click="used()" class="bg-gray-800 block capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white text-xs">used {{part.used_price}}$</button>
         </div>
+
         <div class="flex items-center px-4">
             <h1 class="text-teal-900 text-sm">{{__('quantity')}}:</h1>
             <button type="button" @click="increment()" class="bg-teal-500 text-white">
@@ -211,8 +217,8 @@
         
         <p class="px-4 py-5 text-gray-600 text-xs">{{$page.locale == 'en' ? part.description : part.description_ar}}</p>
 
-         <div class="bg-teal-500 py-4 md:hidden" >
-        <button  @click="addCart(part)" class="flex focus:outline-none font-semibold items-center justify-center outline-none px-2 py-1 rounded text-white uppercase w-full">
+         <div class="bg-teal-500 py-4 md:hidden" v-show="(form.oem_price != 0) || (form.aftermarket_price != 0) || (form.used_price != 0)">
+        <button @click="addCart(part)" class="flex focus:outline-none font-semibold items-center justify-center outline-none px-2 py-1 rounded text-white uppercase w-full">
             <svg viewBox="0 0 20 20" fill="currentColor" class="shopping-cart w-6">
                 <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
             </svg>
@@ -222,7 +228,83 @@
     </form>
     </div>
 
-   
+   <div v-if="toggleModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+        <div class="relative w-auto my-6 mx-auto max-w-6xl">        
+          <div class="relative flex flex-col w-full outline-none focus:outline-none">          
+            <div class="-m-10 p-6 flex-auto">            
+                <div class="">
+                    <div x-data="{ cartOpen: false , isOpen: false }">
+                        <main class="">
+                            <div class="bg-white mt-16 px-6 py-8 shadow-lg">
+                                <div class="flex justify-between">
+                                    <h3 class="text-teal-800 text-2xl font-medium">{{__('Checkout')}}</h3>
+                                    <button class="focus:outline-none outline-none" @click="toggleModal = !toggleModal">X</button>
+                                </div>
+                                
+                                <div class="">
+                                    <div class="">
+                                        <form class="mt-8 pb-4" @submit.prevent="submit">
+                                            <div class="mt-8">
+                                                <h4 class="text-sm text-teal-700 font-medium">{{__('name')}}</h4>
+                                                <div class="mt-6 flex">
+                                                    <label class="block flex-1">
+                                                        <input type="text" name="customer_name" v-model="modelForm.customer_name" :error="$page.errors.customer_name" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('name')" required>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mt-8">
+                                                <h4 class="text-sm text-teal-700 font-medium">{{__('Delivery address')}}</h4>
+                                                <div class="mt-6 flex">
+                                                    <label class="block flex-1">
+                                                        <input type="text" name="customer_address" v-model="modelForm.customer_address" :error="$page.errors.customer_address" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('Address')" required>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mt-8">
+                                                <h4 class="text-sm text-teal-700 font-medium">{{__('Phone')}}</h4>
+                                                <div class="mt-6 flex">
+                                                    <label class="block w-3/12">
+                                                        <select class="form-select text-gray-700 mt-1 block w-full">
+                                                            <option>+974</option>
+                                                        </select>
+                                                    </label>
+                                                    <label class="block flex-1 ml-3">
+                                                        <input type="number" name="customer_phone" v-model="modelForm.customer_phone" :error="$page.errors.customer_phone" class="form-input mt-1 block w-full text-gray-700" placeholder="your number" required>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mt-8">
+                                                <h4 class="text-sm text-teal-700 font-medium capitalize">{{__('coupon code')}}</h4>
+                                                <div class="mt-6 flex">
+                                                    <label class="block flex-1">
+                                                        <input type="text" name="coupon" v-model="modelForm.coupon" :error="$page.errors.coupon" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('add promocode')">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center justify-between mt-8">
+                                                <a href="/store" class="flex items-center text-teal-700 text-sm font-medium rounded hover:underline focus:outline-none">
+                                                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
+                                                    <span class="mx-2">{{__('Back To Shop')}}</span>
+                                                </a>
+                                                <button class="flex items-center px-3 py-2 bg-teal-800 text-white text-sm font-medium rounded-md hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
+                                                    <span>{{__('Payment')}}</span>
+                                                    <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div v-if="toggleModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+    
     <BaseFooter/>
     </store-layout>
 </template>
@@ -252,32 +334,42 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             'cartItem',
             'part_type',
             'latest_category',
-            'cartTotalPrice'
+            'cartTotalPrice',
+            'wishlistQuantity',
+            'wishlistContent'
             ],
         data() {
             return {
+                toggleModal:false,
                 quantity:1,
+                // pr:'',
                 form: {
-                    name: '',
-                    name_ar: '', number: '',
-                    description: '', price: ''  ,
-                    second_price:'', slug: '',
-                    supplier_id:'',
-                    category_id:'',  part_type_id:'',
+                    name:        '',  name_ar:'',          
+                    number:      '',  description:'', 
+                    oem_price:   '',  aftermarket_price:'', 
+                    used_price:  '',  slug: '',
+                    supplier_id: '',  category_id:'', 
+                    part_type_id:'',
                 },
+                modelForm:{
+                    customer_name:'',
+                    customer_phone:'',
+                    customer_address:'',
+                    coupon:''
+                }
             }
         },
         created() {
-            this.form = this.part
+            this.form = this.part;
         },
         computed: {
             calcOemPrice()
             {
-              return  (this.part.price - (this.part.sale / 100) * this.part.price).toFixed();
+              return  (this.part.oem_price - (this.part.sale / 100) * this.part.oem_price).toFixed();
             },
             calcAftermarketPrice()
             {
-              return  (this.part.second_price - (this.part.sale / 100) * this.part.second_price).toFixed();
+              return  (this.part.aftermarket_price - (this.part.sale / 100) * this.part.aftermarket_price).toFixed();
             },
             calcQuantity()
             {
@@ -289,13 +381,26 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             }
         },
         methods: {
+            submit()
+            {
+                const form =this.form;
+            
+                const formItem = this.modelForm;
+
+                const both = Object.assign(form , formItem);
+                this.$inertia.post('/store/orders/zeroprice', both).then(() => {
+                    this.toggleModal = false;
+                    this.modelForm = '';
+                    location.reload();
+                });
+            },
             
         addCart() {
             const form =this.form;
             
-            const quantity = this.cartItem;
+            const item = this.cartItem;
 
-            const both = Object.assign(form , quantity);
+            const both = Object.assign(form , item);
 
             if (this.cartItem != null) {
                 this.$inertia.put(`/store/cart/${this.cartItem.id}`, both).then(() => location.reload());
@@ -303,8 +408,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
                 const newadd = this.form;
                 newadd.quantity = this.quantity;
                 this.$inertia.post('/store/carts', newadd).then(() => location.reload());
-            }
-            
+            }            
         },
          increment(){
              if (this.cartItem == null) {
@@ -314,7 +418,6 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
              }
                       
         },
-
         decrement(){
           if (this.cartItem == null) {
                  this.quantity-- ; 
@@ -323,6 +426,29 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
              }
                         
         },
+        oem()
+        {         
+            if (this.form.price == 0) {
+                this.toggleModal = true;
+            }   
+            
+            this.form.part_type_id = 1;
+        },
+        aftermark()
+        {            
+            if (this.form.second_price == 0) {
+                this.toggleModal = true;
+            }
+            this.form.part_type_id = 2;
+        },
+        used()
+        {     
+            if (this.form.used_price == 0) {
+                this.toggleModal = true;
+            }       
+            this.form.part_type_id = 3;
+        }
+
 
     },
     }

@@ -58,8 +58,9 @@ class SuperCategoryController extends Controller
         ]);
         
         $superCategory->update($data);
-        $superCategory->clearMediaCollection('images');
+        
         if ($request->file('images')) {
+            $superCategory->clearMediaCollection('images');
             $superCategory->addMedia($request->file('images'))->toMediaCollection('images');
         };
 

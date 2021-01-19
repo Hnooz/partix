@@ -36,25 +36,25 @@
                     <form @submit.prevent="submit" class="flex flex-col lg:flex-row items-center justify-center">
                         <div class="grid gap-3 md:grid-cols-2">
                             <label class="w-70" for="">
-                                <select v-model="brand" @change="getModel()"  name="brand" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full" id="">
+                                <select v-model="brand" @change="getModel()"  name="brand" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full">
                                     <option value="0">{{__('select Brand')}}</option>
                                     <option v-for="brand in brands" :key="brand.index" :value="brand.id">{{$page.locale == 'en' ? brand.name : brand.name_ar}}</option>
                                 </select>
                             </label>
                             <label for="model" class="w-70">
-                                <select v-model="model" @change="getYear()" name="model" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full" id="">
+                                <select v-model="model" @change="getYear()" name="model" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full">
                                     <option value="0">{{__('select Model')}}</option>
                                     <option v-for="car in models" :key="car.index" :value="car.id">{{$page.locale == 'en' ? car.model : car.model_ar}}</option>
                                 </select>
                             </label>
                             <label for="" class="w-70">
-                                <select v-model="year" @change="getEngine()" name="year" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full" id="">
+                                <select v-model="year" @change="getEngine()" name="year" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full">
                                     <option value="0">{{__('select Year')}}</option>
                                     <option v-for="car in years" :key="car.index" :value="car.id">{{car.year}}</option>
                                 </select>
                             </label>
                             <label for="" class="w-70">
-                                <select v-model="engine" name="engine" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full" id="">
+                                <select v-model="engine" name="engine" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full">
                                     <option value="0">{{__('select Engine')}}</option>
                                     <option v-for="car in engines" :key="car.index" :value="car.id">{{$page.locale == 'en' ? car.engine : car.engine_ar}}</option>
                                 </select>

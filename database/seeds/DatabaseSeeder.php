@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder
             'value' => 300,
             'quantity' => 5,
             'descount_type_id' => 1,
-            'expiration_at' => '2020-12-29',
+            'expiration_at' => '2020-1-29',
         ]);
     }
 }

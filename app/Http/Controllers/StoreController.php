@@ -14,6 +14,7 @@ class StoreController extends Controller
 {
     public function index()
     {
+        $wish_list = app('wishlist');
         $parts = Part::all();
 
         $categories = Category::all();
@@ -21,7 +22,9 @@ class StoreController extends Controller
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
         $cartTotalPrice = Cart::getTotal();
-        
+        $wishlistQuantity = $wish_list->getTotalQuantity();
+        $wishlistContent = $wish_list->getContent();
+
         return inertia()->render(
             'Store/Index',
             [
@@ -30,17 +33,23 @@ class StoreController extends Controller
                 'super_category' => $super_category,
                 'cartQuantity' => $cartQuantity,
                 'cartTotalPrice' => $cartTotalPrice,
-                'cartCollection' => $cartCollection, ]
+                'cartCollection' => $cartCollection,
+                'wishlistQuantity' => $wishlistQuantity,
+                'wishlistContent' => $wishlistContent,
+            ]
         );
     }
 
     public function items()
     {
+        $wish_list = app('wishlist');
         $parts = Part::with('category')->get();
         $cars = Car::all();
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
         $cartTotalPrice = Cart::getTotal();
+        $wishlistQuantity = $wish_list->getTotalQuantity();
+        $wishlistContent = $wish_list->getContent();
 
         return inertia()->render(
             'Store/Items',
@@ -49,17 +58,23 @@ class StoreController extends Controller
                 'cars' => $cars,
                 'cartQuantity' => $cartQuantity,
                 'cartTotalPrice' => $cartTotalPrice,
-                'cartCollection' => $cartCollection, ]
+                'cartCollection' => $cartCollection,
+                'wishlistQuantity' => $wishlistQuantity,
+                'wishlistContent' => $wishlistContent,
+            ]
         );
     }
 
     public function categoryItems(Category $category)
     {
+        $wish_list = app('wishlist');
         $parts = Part::with('category')->where('category_id', $category->id)->get();
         $cars = Car::all();
         $cartQuantity = Cart::getTotalQuantity();
         $cartCollection = Cart::getContent();
         $cartTotalPrice = Cart::getTotal();
+        $wishlistQuantity = $wish_list->getTotalQuantity();
+        $wishlistContent = $wish_list->getContent();
 
         return inertia()->render(
             'Store/categoryItem',
@@ -69,16 +84,16 @@ class StoreController extends Controller
                 'cartQuantity' => $cartQuantity,
                 'cartTotalPrice' => $cartTotalPrice,
                 'cartCollection' => $cartCollection,
-                'category' => $category, ]
+                'category' => $category,
+                'wishlistQuantity' => $wishlistQuantity,
+                'wishlistContent' => $wishlistContent,
+            ]
         );
     }
 
-    public function category()
-    {
-        return inertia()->render('Store/Categories');
-    }
     public function details(Part $part)
     {
+        $wish_list = app('wishlist');
         $cars = Car::all();
         $cartQuantity = Cart::getTotalQuantity();
         $cartTotalPrice = Cart::getTotal();
@@ -86,7 +101,9 @@ class StoreController extends Controller
         $cartItem = Cart::get($part->id);
         $part_type = PartType::all();
         $latest_category = Category::latest()->limit(3)->get();
-        // dd($cat);
+        $wishlistQuantity = $wish_list->getTotalQuantity();
+        $wishlistContent = $wish_list->getContent();
+
         return inertia()->render('Store/ItemDetails', ['part' => $part,
             'cars' => $cars,
             'cartQuantity' => $cartQuantity,
@@ -95,6 +112,8 @@ class StoreController extends Controller
             'cartItem' => $cartItem,
             'part_type' => $part_type,
             'latest_category' => $latest_category,
+            'wishlistQuantity' => $wishlistQuantity,
+            'wishlistContent' => $wishlistContent,
         ]);
     }
 

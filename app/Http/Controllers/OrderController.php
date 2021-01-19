@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Cart;
 use App\Order;
+use App\PartType;
 use Carbon\Carbon;
 use App\CouponCode;
 use App\OrderStatus;
@@ -46,11 +47,14 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        $cartCollection = Cart::getContent();
+
         $mutable = Carbon::now(); //CUREENT DATE
 
         $data = $request->validate([
+            'customer_name' => 'required',
             'customer_phone' => 'required',
-            'address' => 'required',
+            'customer_address' => 'required',
         ]);
 
         $coupon = CouponCode::where('name', $request->coupon)->get(); //COUPON FROM REQUEST
@@ -77,8 +81,9 @@ class OrderController extends Controller
             }
 
             $order = Order::create([
+                'customer_name' => $request->customer_name,
                 'customer_phone' => $request->customer_phone,
-                'address' => $request->address,
+                'customer_address' => $request->customer_address,
                 'order_status_id' => 1,
                 'coupon_id' => $coupon[0]->id,
             ]);
@@ -90,8 +95,9 @@ class OrderController extends Controller
             $coupon[0]->save();
         } else {
             $order = Order::create([
+                'customer_name' => $request->customer_name,
                 'customer_phone' => $request->customer_phone,
-                'address' => $request->address,
+                'customer_address' => $request->customer_address,
                 'order_status_id' => 1,
             ]);
         }
@@ -99,9 +105,11 @@ class OrderController extends Controller
         $cartCollection = Cart::getContent();
 
         foreach ($cartCollection as $cart) {
+            $part_type = PartType::find($cart->attributes->part_type_id);
             $details = OrderDetails::create([
                 'order_id' => $order->id,
                 'part_id' => $cart->id,
+                'part_type' => $part_type->name,
                 'quantity' => $cart->quantity,
                 'price' => round($cart->price),
             ]);
@@ -136,6 +144,77 @@ class OrderController extends Controller
         ]);
 
         return redirect()->route('orders.index');
+    }
+
+    public function storeZeroPriceOrder(Request $request)
+    {
+        $mutable = Carbon::now(); //CUREENT DATE
+        $data = $request->validate([
+            'customer_name' => 'required',
+            'customer_phone' => 'required',
+            'customer_address' => 'required',
+        ]);
+
+        $coupon = CouponCode::where('name', $request->coupon)->get(); //COUPON FROM REQUEST
+
+        if (isset($coupon[0]->name) != $request->coupon) { // check coupon expiration TIME
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => 'invalid coupon code name',
+            ]);
+
+            return redirect()->back();
+        }
+
+        if (isset($coupon[0])) {
+            $expiration = Carbon::createFromFormat('Y-m-d', $coupon[0]->expiration_at)->toDateTimeString();
+                
+            if ($coupon[0]->quantity < 1 || $expiration <= $mutable) { // check coupon expiration TIME
+                session()->flash('toast', [
+                    'type' => 'error',
+                    'message' => 'invalid coupon code | quantity = 0 or it\'s expired s',
+                ]);
+
+                return redirect()->back();
+            }
+
+            $order = Order::create([
+                'customer_name' => $request->customer_name,
+                'customer_phone' => $request->customer_phone,
+                'customer_address' => $request->customer_address,
+                'order_status_id' => 1,
+                'coupon_id' => $coupon[0]->id,
+            ]);
+
+            $coupon[0]->quantity = $coupon[0]->quantity - 1;
+            if ($coupon[0]->quantity == 0) {
+                $coupon[0]->used = '0';
+            }
+            $coupon[0]->save();
+        } else {
+            $order = Order::create([
+                'customer_name' => $request->customer_name,
+                'customer_phone' => $request->customer_phone,
+                'customer_address' => $request->customer_address,
+                'order_status_id' => 1,
+            ]);
+        }
+        $part_type = PartType::find($request->part_type_id);
+        $details = OrderDetails::create([
+            'order_id' => $order->id,
+            'part_id' => $request->id,
+            'part_type' => $part_type->name,
+            'quantity' => 1,
+            'price' => 0,
+        ]);
+
+        session()->flash('toast', [
+            'type' => 'success',
+            'message' => 'orders done',
+        ]);
+
+        return redirect()->back();
+        // dd($order);
     }
 
     public function getTotalPrice(Request $request)

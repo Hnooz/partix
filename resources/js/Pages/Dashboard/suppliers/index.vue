@@ -4,10 +4,10 @@
         <div class="mt-8 capitalize">
             <div class="flex justify-between">
                 <h2 class="text-3xl text-teal-600 font-bold">{{__('suppliers')}}</h2>
-                <div>
+                <div class="flex">
                     <form @submit.prevent="uploadExcel" class="flex justify-end">
                         <div class="flex justify-end">
-                            <base-button class="bg-teal-700 hover:bg-teal-600 rounded-none">
+                            <base-button class="bg-teal-800 hover:bg-teal-700 rounded-none">
                                 <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             </base-button>
                         </div>
@@ -15,26 +15,18 @@
                             
                             <input id="files" type="file" ref="files" accept="file/*" label="Files" name="files[]" @change="handleFileUpload()" class="mt-1 block w-full cursor-pointer absolute opacity-0" :error="$page.errors.files" tabindex="7" multiple required>
                             
-                            <button type="button" class="bg-teal-700 focus:outline-none hover:bg-teal-600 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded-tr text-white">
-                                <span class="whitespace-no-wrap">upload excel</span>
-                                <!-- <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg> -->
+                            <button type="button" class="bg-teal-800 focus:outline-none hover:bg-teal-700 md:mx-0 md:px-2 mx-2 outline-none px-6 py-3 rounded-tr text-white">
+                                <span class="whitespace-no-wrap">upload excel</span>                               
                             </button>
                         </div>
-                    </form>
-                    <form class="flex items-end" @submit.prevent="submit">
-
-                        <div class="mx-2">
-                            <base-input  name="name" v-model="form.name" :error="$page.errors.name" :placeholder="__('supplier name')" required></base-input>
-                        </div>
-                        <div class="mx-2">
-                            <base-input  name="name_ar" v-model="form.name_ar" :error="$page.errors.name_ar" :placeholder="__('supplier name_ar')" required></base-input>
-                        </div>
-                        <div>
-                            <base-button class="bg-teal-700 hover:bg-teal-600">{{__('create')}}</base-button>
-                        </div>
-                    </form>
-                    
+                    </form> 
+                    <button type="button" @click="toggleModal = !toggleModal"
+                                  class="bg-teal-800 flex font-medium focus:outline-none outline-none hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                        {{__('add')}} {{__('supplier')}}
+                    </button>                   
                 </div>
+                
             </div>
             <h1 class="font-medium text-gray-500 text-xs">
                 <span class="font-semibold text-red-400">{{__('hint')}}</span> {{__('double click on name to modify')}}
@@ -83,6 +75,34 @@
             </div>
         </div>
 
+    <div v-if="toggleModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+        <div class="relative w-auto my-6 mx-auto max-w-6xl">        
+          <div class="relative flex flex-col w-full outline-none focus:outline-none">               
+            <main class="">
+                <div class="bg-white px-6 py-8 shadow-lg">
+                    <div class="absolute mx-3 my-1 right-0 top-0">
+                        <button class="focus:outline-none outline-none" @click="toggleModal = !toggleModal">X</button>
+                    </div>                        
+                    <div class="">
+                        <form class="flex items-end" @submit.prevent="submit">
+                            <div class="mx-2">
+                                <base-input  name="name" v-model="form.name" :error="$page.errors.name" :placeholder="__('supplier name')" required></base-input>
+                            </div>
+                            <div class="mx-2">
+                                <base-input  name="name_ar" v-model="form.name_ar" :error="$page.errors.name_ar" :placeholder="__('supplier name_ar')" required></base-input>
+                            </div>
+                            <div>
+                                <base-button class="bg-teal-700 hover:bg-teal-600">{{__('create')}}</base-button>
+                            </div>
+                        </form>                            
+                    </div>
+                </div>
+            </main>                   
+          </div>
+        </div>
+    </div>
+    <div v-if="toggleModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+
     </layout>
 </template>
 
@@ -94,6 +114,7 @@ import Edit from '../suppliers/Edit'
         props:['suppliers'],
         data() {
             return {
+                toggleModal:false,
                 files:'',
                    form:{
                         name: '',
@@ -103,7 +124,11 @@ import Edit from '../suppliers/Edit'
         },
         methods: {
             submit() {
-                this.$inertia.post('/dashboard/suppliers', this.form).then(() => location.reload());
+                this.$inertia.post('/dashboard/suppliers', this.form).then(() => {
+                    this.form = '';
+                    this.toggleModal = false;
+                    location.reload()
+                    });
 
             },
              uploadExcel() 

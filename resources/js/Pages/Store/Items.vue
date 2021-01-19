@@ -1,6 +1,9 @@
 <template>
     <store-layout>
-    <BaseNav :cartItemQuantity="cartQuantity" :cartItem="cartCollection" :cartTotalPrice="cartTotalPrice" />
+   <BaseNav 
+        :cartItemQuantity="cartQuantity" :cartItem="cartCollection" 
+        :cartTotalPrice="cartTotalPrice" :wishlistQuantity="wishlistQuantity" 
+        :wishlistContent="wishlistContent"/>
 
     <SelectSection />
 
@@ -57,8 +60,8 @@
 
             <div class="px-4 py-2">
                 <a :href="`/store/details/${part.id}`" class="font-bold text-xs md:text-base text-teal-500 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
-                <p class="break-all font-medium text-gray-600 text-xs">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].bran_ar}}</p>
-                <p class="text-gray-800 md:text-xl text-xs font-semibold">{{part.price}}&nbsp;<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p>
+                <p class="break-all font-medium text-gray-600 text-xs">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].brand_ar}}</p>
+                <p class="text-gray-800 md:text-xl text-xs font-semibold">{{part.oem_price}}&nbsp;<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p>
             </div>
 
             <div class="bg-teal-700 py-2">
@@ -96,7 +99,12 @@ export default {
         BaseFooter,
         
     },
-    props:['parts', 'cartQuantity', 'cartCollection', 'cartTotalPrice'],
+    props:[
+            'parts', 'cartQuantity', 
+            'cartCollection', 'cartTotalPrice',
+            'wishlistQuantity',
+            'wishlistContent'
+            ],
     data() {
         return {
             search:'',

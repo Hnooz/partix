@@ -41,9 +41,12 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     // part route
     Route::post('parts/import', 'ImportController@parts')->name('parts.import');
     Route::get('parts/export', 'ExportController@parts')->name('parts.export');
-    Route::resource('parts', 'PartController');
-
+   
+    Route::resource('parts', 'PartController')->except('show');
+    Route::get('parts/{slug}', 'PartController@show')->name('parts.show');
     //cars and brands
+    Route::get('brands/{brand}/cars/create', 'BrandController@brandCars')->name('brands.cars');
+    Route::post('brands/{brand}/cars', 'BrandController@storeBrandCars')->name('brands.cars.store');
     Route::resource('brands', 'BrandController');
     Route::resource('cars', 'CarController');
 });
@@ -55,6 +58,7 @@ Route::group(['prefix' => 'store'], function () {
     Route::get('/items/{category}', 'StoreController@categoryItems')->name('store.categoryItems');
     
     Route::post('/orders', 'OrderController@store')->name('orders.store');
+    Route::post('/orders/zeroprice', 'OrderController@storeZeroPriceOrder')->name('orders.storeZeroPriceOrder');
     Route::get('/details/{part}', 'StoreController@details')->name('store.details');
     Route::post('/search', 'StoreController@search')->name('store.search');
     Route::get('/404', 'StoreController@notfound')->name('store.notfound');
@@ -78,6 +82,6 @@ Route::group(['prefix' => 'store'], function () {
         Route::get('/', 'WishListController@index')->name('wishlist.index');
         Route::post('/', 'WishListController@add')->name('wishlist.add');
         Route::get('/details', 'WishListController@details')->name('wishlist.details');
-        Route::delete('/{id}', 'WishListController@delete')->name('wishlist.delete');
+        Route::delete('/{id}', 'WishListController@remove')->name('wishlist.remove');
     });
 });
