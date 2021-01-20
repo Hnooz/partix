@@ -2,7 +2,7 @@
     "Call" : "اتصل",
     "log in": "تسجيل دخول",
     "register" : "تسجيل",
-    "78 5439 36":"78 5439 36",
+    "78-5439-36":"٧٨-٩٣٤٥-٣٦",
     "share part soluation":"",
     "search":"بحث",
     "Enter the part number or name":"ادخل اسم او رقم القطعه",
@@ -158,7 +158,9 @@
     "aftermarket":"تجاري",
     "oem":"اصلي",
     "prices":"الاسعار",
-    "show":"عرض"
+    "show":"عرض",
+    "you can order directly if part type price = 0":"يمكنك الطلب مباشره اذا كان سعر القطعه 0",
+    "chose type":"اختر نوع"
 
     
   

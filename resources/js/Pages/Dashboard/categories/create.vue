@@ -15,7 +15,7 @@
                             <base-input :label="__('name_ar')" name="name_ar" v-model="category.name_ar" :error="$page.errors.name_ar" tabindex="1" :placeholder="__('filters')" required></base-input>
                         </div>
                         <div>
-                            <base-input :label="__('sale')" name="sale" v-model="category.sale" :error="$page.errors.sale" tabindex="1" :placeholder="__('20')"></base-input>
+                            <base-input type="number" :label="__('sale')" name="sale" v-model="category.sale" :error="$page.errors.sale" tabindex="1" :placeholder="__('20')"></base-input>
                         </div>
                         <div>
                             <label class="text-gray-700 capitalize">{{__('super categories')}}</label>

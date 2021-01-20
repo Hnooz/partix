@@ -148,7 +148,7 @@
             data.append('sale', this.form.sale);
             data.append('cars', JSON.stringify(this.form.cars));
             data.append('supplier_id', this.form.supplier_id);
-            if (this.part.category_id) {
+            if (this.form.category_id ) {
                 data.append('category_id', this.form.category_id);
             }
             

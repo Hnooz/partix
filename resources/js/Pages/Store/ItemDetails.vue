@@ -4,9 +4,9 @@
         :cartItemQuantity="cartQuantity" :cartItem="cartCollection" 
         :cartTotalPrice="cartTotalPrice" :wishlistQuantity="wishlistQuantity" 
         :wishlistContent="wishlistContent"/>
-    <SelectSection />
+    <!-- <SelectSection /> -->
          <!-- filter search -->
-    <div class="bg-teal-700 py-5 hidden md:block">
+    <div class="bg-teal-800 py-5 hidden md:block">
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-16 text-white">
             <div class="flex">
                 <h1>{{$page.locale == 'en' ? part.category.super_category.name : part.category.super_category.name_ar}} |</h1>
@@ -23,22 +23,6 @@
                 
             </div>
         </div>
-    </div>
-
-    <!-- mobile view search -->
-    <div class="md:hidden">
-        <form class="bg-teal-500 px-8 py-3">
-            <div class="relative">
-            <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-                <button type="submit" class="focus:outline-none p-1 text-white">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </button>
-            </span>
-            <input type="search" class="bg-transparent border-b focus:outline-none placeholder-white px-10 py-2 text-sm text-white w-full" placeholder="Search..." autocomplete="off">
-            </div>
-        </form>
     </div>
 
     <div class="container max-w-6xl mb-20 md:mx-auto mt-16 py-4 hidden md:block">
@@ -60,11 +44,8 @@
                     <div class="mx-8">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="capitalize font-semibold text-3xl text-teal-700">{{$page.locale == 'en' ? part.name : part.name_ar}}</p>
-                                <!-- <p v-else class="capitalize font-semibold text-3xl text-teal-700">{{part.name_ar}}</p> -->
-                                <p class="capitalize font-medium text-teal-400 text-xl">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].brand_ar}}</p>
-                                <!-- <p v-else class="capitalize font-medium text-teal-400 text-xl">{{part.cars[0].brand_ar}}</p> -->
-                                
+                                <p class="capitalize font-semibold text-3xl text-teal-700">{{$page.locale == 'en' ? part.name : part.name_ar}}</p>                              
+                                <p class="capitalize font-medium text-teal-400 text-xl">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].brand_ar}}</p>                            
                             </div>
                         </div>
                         <div class="">
@@ -73,23 +54,21 @@
                             </p>
                         </div>
                         <div>
-                            <span class="bg-white mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{car.brand}}</span>
+                            <span class="bg-white mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{$page.locale == 'en' ? car.brand : car.brand_ar}}</span>
                         </div>
                         <form @submit.prevent="submit">
                             <div class="my-4">
-                                <h1 class="text-red-500 text-sm"><span class="capitalize text-base text-gray-600">hint:</span> you can order directly if part type price = 0</h1>
-                                <h1 class="capitalize my-3 text-gray-600">chose type :</h1>
+                                <h1 class="text-red-500 text-sm"><span class="capitalize text-base text-gray-600">{{__('hint')}}:</span> {{__('you can order directly if part type price = 0')}}</h1>
+                                <h1 class="capitalize my-3 text-gray-600">{{__('chose type')}} :</h1>
                                 <button type="button" @click="oem()" class="bg-gray-800 capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white">oem {{part.oem_price}}$</button>
                                 <button type="button" @click="aftermark()" class="bg-gray-800 capitalize focus:outline-none my-2 outline-none px-3 py-1 rounded-lg text-white">aftermarket {{part.aftermarket_price}}$</button>
                                 <button type="button" @click="used()" class="bg-gray-800 block capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white">used {{part.used_price}}$</button>
                             </div>
-
                             <div class="flex items-center">
                                 <h1 class="capitalize text-teal-900">{{__('quantity')}}:</h1>
                                 <button type="button" @click="increment()" class="bg-teal-500 mx-2 my-2 text-white">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path> </svg>
                                 </button>
-                                
                                 <span class="bg-white flex items-center mx-2 px-4 py-2">{{calcQuantity}}</span>
                                 <input type="text" v-model="quantity" hidden >
 
@@ -145,14 +124,10 @@
                 <img src="../../images/1223/rightimage.png" class="h-72 object-center object-cover w-5/12">
             </div>
         </div>
-       
-        
-
     </div>
      <!-- mobile views -->
     <div class="bg-white md:hidden md:rounded-tr-lg mx-6 mt-8 overflow-hidden rounded-t-lg shadow-lg">
         <div class="flex justify-between">
-
             <p class="flex justify-center bg-teal-400 font-semibold h-10 w-10 md:h-12 md:px-1 md:rounded-none px-1 py-3 rounded-br-lg shadow-lg text-sm text-white md:w-12">{{part.sale}}%</p>
         </div>
         <div class="flex items-center justify-center">
@@ -172,7 +147,9 @@
         <form @submit.prevent="submit">
         <div class="px-4">
             <a href="#" class="font-bold  text-xs md:text-base text-teal-500 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
-            <!-- <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p> -->
+            <div class="my-3">
+                <span class="bg-white mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{$page.locale == 'en' ? car.brand : car.brand_ar}}</span>
+            </div>                           
             <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="form.part_type_id == 1">
                 {{calcOemPrice}}<span class="text-gray-500 text-xs">{{__('QAR')}}</span>
                 <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.oem_price}}{{__('QAR')}}</span> 
@@ -190,8 +167,8 @@
         </div>
 
         <div class="px-4">
-            <h1 class="text-red-500 text-xs"><span class="capitalize text-sm text-gray-600">hint:</span> you can order directly if part type price = 0</h1>
-            <h1 class="capitalize text-gray-600 text-sm">chose type :</h1>
+            <h1 class="text-red-500 text-xs"><span class="capitalize text-sm text-gray-600">{{__('hint')}}:</span> {{__('you can order directly if part type price = 0')}}</h1>
+            <h1 class="capitalize text-gray-600 text-sm">{{__('chose type')}} :</h1>
             <button type="button" @click="oem()" class="bg-gray-800 capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white text-xs">oem {{part.oem_price}}$</button>
             <button type="button" @click="aftermark()" class="bg-gray-800 capitalize focus:outline-none my-2 outline-none px-3 py-1 rounded-lg text-white text-xs">aftermarket {{part.aftermarket_price}}$</button>
             <button type="button" @click="used()" class="bg-gray-800 block capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white text-xs">used {{part.used_price}}$</button>
@@ -217,14 +194,18 @@
         
         <p class="px-4 py-5 text-gray-600 text-xs">{{$page.locale == 'en' ? part.description : part.description_ar}}</p>
 
-         <div class="bg-teal-500 py-4 md:hidden">
-        <button @click="addCart(part)" class="flex focus:outline-none font-semibold items-center justify-center outline-none px-2 py-1 rounded text-white uppercase w-full">
-            <svg viewBox="0 0 20 20" fill="currentColor" class="shopping-cart w-6">
-                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
-            </svg>
-            {{__('add to cart')}}
-        </button>
-    </div>
+         <div class="flex items-center justify-between md:hidden px-4 py-4">
+             <a href="/store" class="flex focus:outline-none font-medium hover:underline items-center rounded text-sm text-teal-700 whitespace-no-wrap">
+                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
+                <span class="mx-2">{{__('Back To Shop')}}</span>
+            </a>
+            <button @click="addCart(part)" class="capitalize flex focus:outline-none font-medium items-center justify-center outline-none rounded text-sm text-teal-700">
+               {{__('add to cart')}}
+                <svg viewBox="0 0 20 20" fill="currentColor" class="shopping-cart w-6">
+                    <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                </svg>                
+            </button>
+        </div>
     </form>
     </div>
 
@@ -341,8 +322,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
         data() {
             return {
                 toggleModal:false,
-                quantity:1,
-                // pr:'',
+                quantity:1,                
                 form: {
                     name:        '',  name_ar:'',          
                     number:      '',  description:'', 

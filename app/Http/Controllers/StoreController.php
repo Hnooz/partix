@@ -85,11 +85,12 @@ class StoreController extends Controller
         $wishlistQuantity = $wish_list->getTotalQuantity();
         $wishlistContent = $wish_list->getContent();
 
-        return inertia()->render('Store/ItemDetails', ['part' => $part,
+        return inertia()->render('Store/ItemDetails', [
+            'part' => $part,
             'cars' => Car::all(),
             'cartQuantity' => Cart::getTotalQuantity(),
-            'cartTotalPrice' => Cart::getContent(),
-            'cartCollection' => Cart::getTotal(),
+            'cartTotalPrice' => Cart::getTotal(),
+            'cartCollection' => Cart::getContent(),
             'cartItem' => $cartItem,
             'part_type' => PartType::all(),
             'latest_category' => $latest_category,
