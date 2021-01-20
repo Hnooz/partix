@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Car;
 use App\Part;
-use App\Brand;
 use App\Category;
 use App\PartType;
 use App\Supplier;
+use Illuminate\Support\Arr;
 use App\Http\Requests\StorePartRequest;
 
 class PartController extends Controller
@@ -17,7 +17,7 @@ class PartController extends Controller
         $parts = (new Part)->newQuery();
         
         if (request()->has('latest')) {
-            $parts->orderBy('id', 'desc');
+            $parts->orderBy('created_at', 'desc');
         }
         if (request()->has('a')) {
             $parts->orderBy('name');
@@ -26,7 +26,7 @@ class PartController extends Controller
             $parts->orderBy('name', 'desc');
         }
         if (request()->has('oldest')) {
-            $parts->orderBy('id');
+            $parts->orderBy('created_at');
         } else {
             $parts->orderBy('id');
         }
@@ -38,18 +38,11 @@ class PartController extends Controller
 
     public function create()
     {
-        $cars = Car::all();
-        $brands = Brand::all();
-        $categories = Category::all();
-        $suppliers = Supplier::all();
-        $part_types = PartType::all();
-
         return inertia()->render('Dashboard/parts/create', [
-            'cars' => $cars,
-            'categories' => $categories,
-            'suppliers' => $suppliers,
-            'part_types' => $part_types,
-            'brands' => $brands,
+            'cars' => Car::all(),
+            'categories' => Category::all(),
+            'suppliers' => Supplier::all(),
+            'part_types' => PartType::all(),
         ]);
     }
 
@@ -64,20 +57,7 @@ class PartController extends Controller
     {
         $data = $request->validated();
 
-        $part = Part::create([
-            'name' => $request->name,
-            'name_ar' => $request->name_ar,
-            'number' => $request->number,
-            'description' => $request->description,
-            'description_ar' => $request->description_ar,
-            'oem_price' => $request->oem_price,
-            'aftermarket_price' => $request->aftermarket_price,
-            'used_price' => $request->used_price,
-            'category_id' => $request->category_id,
-            'supplier_id' => $request->supplier_id,
-            'part_type_id' => $request->part_type_id,
-            'sale' => $request->sale,
-        ]);
+        $part = Part::create($data);
 
         if ($request->filled('cars')) {
             $part->cars()->attach(json_decode($data['cars']));
@@ -99,15 +79,10 @@ class PartController extends Controller
    
     public function edit(Part $part)
     {
-        $cars = Car::all();
-        $categories = Category::all();
-        $suppliers = Supplier::all();
-        $part_types = PartType::all();
-        // dd($part->with('cars')->get());
         return inertia()->render('Dashboard/parts/edit', [
-            'part' => $part, 'cars' => $cars,
-            'categories' => $categories, 'suppliers' => $suppliers,
-            'part_types' => $part_types,
+            'part' => $part, 'cars' => Car::all(),
+            'categories' => Category::all(), 'suppliers' => Supplier::all(),
+            'part_types' => PartType::all(),
         ]);
     }
 
@@ -115,21 +90,7 @@ class PartController extends Controller
     {
         $data = $request->validated();
 
-        // dd($data);
-        $part->update($request->only([
-            'name',
-            'name_ar',
-            'number',
-            'description',
-            'description_ar',
-            'oem_price',
-            'aftermarket_price',
-            'used_price',
-            'category_id',
-            'supplier_id',
-            'part_type_id',
-            'sale',
-        ]));
+        $part->update(Arr::except($data, 'cars'));
         
         if ($request->filled('cars')) {
             $part->cars()->sync(json_decode($data['cars']));

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class LangController extends Controller
+class LanguageController extends Controller
 {
-    public function lang($language)
+    public function show($language)
     {
         Session()->put('locale', $language);
  

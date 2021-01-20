@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('language/{language}', 'LangController@lang')->name('language');
+Route::get('language/{language}', 'LanguageController@show')->name('language');
 
 Auth::routes(['register' => false, 'confirm' => false, 'reset' => false]);
 
@@ -15,14 +15,12 @@ Route::group(['middleware' => 'is_delivery', 'prefix' => '/dashboard'], function
     Route::get('/orders/{order}/edit', 'OrderController@edit')->name('orders.edit');
     Route::put('/orders/{order}', 'OrderController@update')->name('orders.update');
     Route::get('/orders/{order}', 'OrderController@show')->name('orders.show');
-    Route::get('/order_total_price', 'OrderController@getTotalPrice')->name('orders.total');
 });
 
 //dashboard route
 Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     // dashboard
     Route::get('/', 'DashboardController@index')->name('dashboard.index');
-    Route::get('/ui', 'DashboardController@ui');
     // user route
     Route::get('users/export/', 'ExportController@users');
     Route::resource('users', 'UserController');
@@ -45,8 +43,8 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     Route::resource('parts', 'PartController')->except('show');
     Route::get('parts/{slug}', 'PartController@show')->name('parts.show');
     //cars and brands
-    Route::get('brands/{brand}/cars/create', 'BrandController@brandCars')->name('brands.cars');
-    Route::post('brands/{brand}/cars', 'BrandController@storeBrandCars')->name('brands.cars.store');
+    Route::get('brands/{brand}/cars/create', 'BrandCarsController@show')->name('brands.cars');
+    Route::post('brands/{brand}/cars', 'BrandCarsController@store')->name('brands.cars.store');
     Route::resource('brands', 'BrandController');
     Route::resource('cars', 'CarController');
 });

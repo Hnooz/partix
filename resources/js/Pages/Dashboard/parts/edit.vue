@@ -47,7 +47,7 @@
                         </div>
                         <div>
                             <label class="text-gray-700">{{__('category')}}</label>
-                                <select  name="category_id"  v-model="form.category_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.category_id" required tabindex="7">
+                                <select  name="category_id"  v-model="form.category_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.category_id" tabindex="7">
                                     <option value="0">select category</option>
                                     <option v-for="category in categories" :key="category.index" :value="category.id">{{category.name}}</option>
                                 </select>
@@ -148,7 +148,10 @@
             data.append('sale', this.form.sale);
             data.append('cars', JSON.stringify(this.form.cars));
             data.append('supplier_id', this.form.supplier_id);
-            data.append('category_id', this.form.category_id);
+            if (this.part.category_id) {
+                data.append('category_id', this.form.category_id);
+            }
+            
             data.append('part_type_id', this.form.part_type_id);
             if (this.form.images) {
                 for( let i = 0; i < this.form.images.length; i++ )

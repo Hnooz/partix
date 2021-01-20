@@ -15,25 +15,19 @@ class StoreController extends Controller
     public function index()
     {
         $wish_list = app('wishlist');
-        $parts = Part::all();
-
-        $categories = Category::all();
         $super_category = SuperCategory::with('categories')->get();
-        $cartQuantity = Cart::getTotalQuantity();
-        $cartCollection = Cart::getContent();
-        $cartTotalPrice = Cart::getTotal();
         $wishlistQuantity = $wish_list->getTotalQuantity();
         $wishlistContent = $wish_list->getContent();
 
         return inertia()->render(
             'Store/Index',
             [
-                'parts' => $parts,
-                'categories' => $categories,
+                'parts' => Part::all(),
+                'categories' => Category::all(),
                 'super_category' => $super_category,
-                'cartQuantity' => $cartQuantity,
-                'cartTotalPrice' => $cartTotalPrice,
-                'cartCollection' => $cartCollection,
+                'cartQuantity' => Cart::getTotalQuantity(),
+                'cartTotalPrice' => Cart::getTotal(),
+                'cartCollection' => Cart::getContent(),
                 'wishlistQuantity' => $wishlistQuantity,
                 'wishlistContent' => $wishlistContent,
             ]
@@ -44,10 +38,6 @@ class StoreController extends Controller
     {
         $wish_list = app('wishlist');
         $parts = Part::with('category')->get();
-        $cars = Car::all();
-        $cartQuantity = Cart::getTotalQuantity();
-        $cartCollection = Cart::getContent();
-        $cartTotalPrice = Cart::getTotal();
         $wishlistQuantity = $wish_list->getTotalQuantity();
         $wishlistContent = $wish_list->getContent();
 
@@ -55,10 +45,10 @@ class StoreController extends Controller
             'Store/Items',
             [
                 'parts' => $parts,
-                'cars' => $cars,
-                'cartQuantity' => $cartQuantity,
-                'cartTotalPrice' => $cartTotalPrice,
-                'cartCollection' => $cartCollection,
+                'cars' => Car::all(),
+                'cartQuantity' => Cart::getTotalQuantity(),
+                'cartTotalPrice' => Cart::getContent(),
+                'cartCollection' => Cart::getTotal(),
                 'wishlistQuantity' => $wishlistQuantity,
                 'wishlistContent' => $wishlistContent,
             ]
@@ -69,10 +59,6 @@ class StoreController extends Controller
     {
         $wish_list = app('wishlist');
         $parts = Part::with('category')->where('category_id', $category->id)->get();
-        $cars = Car::all();
-        $cartQuantity = Cart::getTotalQuantity();
-        $cartCollection = Cart::getContent();
-        $cartTotalPrice = Cart::getTotal();
         $wishlistQuantity = $wish_list->getTotalQuantity();
         $wishlistContent = $wish_list->getContent();
 
@@ -80,10 +66,10 @@ class StoreController extends Controller
             'Store/categoryItem',
             [
                 'parts' => $parts,
-                'cars' => $cars,
-                'cartQuantity' => $cartQuantity,
-                'cartTotalPrice' => $cartTotalPrice,
-                'cartCollection' => $cartCollection,
+                'cars' => Car::all(),
+                'cartQuantity' => Cart::getTotalQuantity(),
+                'cartTotalPrice' => Cart::getContent(),
+                'cartCollection' => Cart::getTotal(),
                 'category' => $category,
                 'wishlistQuantity' => $wishlistQuantity,
                 'wishlistContent' => $wishlistContent,
@@ -94,23 +80,18 @@ class StoreController extends Controller
     public function details(Part $part)
     {
         $wish_list = app('wishlist');
-        $cars = Car::all();
-        $cartQuantity = Cart::getTotalQuantity();
-        $cartTotalPrice = Cart::getTotal();
-        $cartCollection = Cart::getContent();
         $cartItem = Cart::get($part->id);
-        $part_type = PartType::all();
         $latest_category = Category::latest()->limit(3)->get();
         $wishlistQuantity = $wish_list->getTotalQuantity();
         $wishlistContent = $wish_list->getContent();
 
         return inertia()->render('Store/ItemDetails', ['part' => $part,
-            'cars' => $cars,
-            'cartQuantity' => $cartQuantity,
-            'cartCollection' => $cartCollection,
-            'cartTotalPrice' => $cartTotalPrice,
+            'cars' => Car::all(),
+            'cartQuantity' => Cart::getTotalQuantity(),
+            'cartTotalPrice' => Cart::getContent(),
+            'cartCollection' => Cart::getTotal(),
             'cartItem' => $cartItem,
-            'part_type' => $part_type,
+            'part_type' => PartType::all(),
             'latest_category' => $latest_category,
             'wishlistQuantity' => $wishlistQuantity,
             'wishlistContent' => $wishlistContent,

@@ -62,9 +62,9 @@ class FilterController extends Controller
                     'wishlistContent' => $wishlistContent,
                 ]
             );
-        } else {
-            return inertia()->render('Store/404');
         }
+
+        return inertia()->render('Store/404');
     }
 
     public function filteredParts(Request $request)

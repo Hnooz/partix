@@ -113,9 +113,4 @@ class DashboardController extends Controller
 
         ]);
     }
-
-    public function ui()
-    {
-        return inertia()->render('Dashboard/UI');
-    }
 }

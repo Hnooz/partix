@@ -67,7 +67,7 @@
                                 </select>
                         </div>
                         <div>
-                            <label class="text-gray-700">{{__('images')}}</label>
+                            <label class="text-gray-700">{{__('images')}} (<span class="text-red-500 text-sm">minimum image required 4</span>)</label>
                             <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full" :error="$page.errors.images" tabindex="7" multiple required>
                         </div>
                         
@@ -128,7 +128,9 @@
             data.append('sale', this.part.sale);
             data.append('cars', JSON.stringify(this.part.cars));
             data.append('supplier_id', this.part.supplier_id);
-            data.append('category_id', this.part.category_id);
+            if (this.part.category_id) {
+                 data.append('category_id', this.part.category_id);
+            }
             data.append('part_type_id', this.part.part_type_id);
             if (this.part.images) 
             {

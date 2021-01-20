@@ -19,26 +19,14 @@ class CarController extends Controller
 
     public function create()
     {
-        $brands = Brand::all();
-
-        return inertia()->render('Dashboard/cars/create', ['brands' => $brands]);
+        return inertia()->render('Dashboard/cars/create', ['brands' => Brand::all()]);
     }
 
     public function store(StoreCarRequest $request)
     {
-        $request->validated();
+        $data = $request->validated();
 
-        Car::create([
-            'brand' => $request->brand,
-            'model' => $request->model,
-            'engine' => $request->engine,
-            'brand_ar' => $request->brand_ar,
-            'model_ar' => $request->model_ar,
-            'engine_ar' => $request->engine_ar,
-            'year' => $request->year,
-            'brand_id' => $request->brand_id,
-
-        ]);
+        Car::create($data);
 
         session()->flash('toast', [
             'type' => 'success',
@@ -50,9 +38,10 @@ class CarController extends Controller
 
     public function edit(Car $car)
     {
-        $brands = Brand::all();
-
-        return inertia()->render('Dashboard/cars/edit', ['car' => $car,'brands' => $brands]);
+        return inertia()->render('Dashboard/cars/edit', [
+            'car' => $car,
+            'brands' => Brand::all(),
+        ]);
     }
 
     public function update(StoreCarRequest $request, Car $car)

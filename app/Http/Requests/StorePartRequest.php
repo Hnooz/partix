@@ -32,7 +32,7 @@ class StorePartRequest extends FormRequest
             'oem_price' => 'required|max:255',
             'aftermarket_price' => 'required|max:255',
             'used_price' => 'required|max:255',
-            'category_id' => 'required|max:255',
+            'category_id' => 'sometimes|max:255',
             'supplier_id' => 'required|max:255',
             'part_type_id' => 'required|max:255',
             'sale' => 'sometimes|nullable',

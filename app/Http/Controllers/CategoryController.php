@@ -10,11 +10,9 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-        $super_categories = SuperCategory::all();
+        $super_categories = SuperCategory::with('categories')->get();
 
         return inertia()->render('Dashboard/categories/index', [
-            'categories' => $categories,
             'super_categories' => $super_categories,
         ]);
     }
@@ -37,10 +35,10 @@ class CategoryController extends Controller
             'name_ar' => $request->name_ar,
             'sale' => $request->sale,
             'super_category_id' => $request->super_category_id,
-
         ]);
 
         $request->file('images') ? $category->addMedia($request->file('images'))->toMediaCollection('images') : '';
+
         session()->flash('toast', [
             'type' => 'success',
             'message' => 'Category created successfully',
@@ -62,10 +60,11 @@ class CategoryController extends Controller
     public function update(StoreCategoryRequest $request, Category $category)
     {
         $data = $request->validated();
-
-        $category->clearMediaCollection('images');
-
-        $request->file('images') ? $category->addMedia($request->file('images'))->toMediaCollection('images') : '' ;
+    
+        if ($request->file('images')) {
+            $category->clearMediaCollection('images');
+            $category->addMedia($request->file('images'))->toMediaCollection('images');
+        }
 
         $category->update($data);
 
@@ -79,9 +78,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        $category->parts()->each(function ($part) {
-            $part->delete();
-        });
+        $category->parts()->update(['category_id' => null]);
 
         $category->delete();
 

@@ -62,11 +62,6 @@
                                 </thead>
                                 <tbody class="bg-white text-gray-500">
                                 <tr v-for="coupon in coupons" :key="coupon.index" :class="coupon.used == 0 ? 'hover:bg-red-300 hover:text-white' : 'hover:bg-teal-200 hover:text-white'">
-                                    <!-- <td class="px-6 py-4 whitespace-no-wrap">
-                                        <label for="">
-                                            <input type="checkbox" class="form-checkbox border-2">
-                                        </label>
-                                    </td> -->
                                     <td class="px-6 py-4 whitespace-no-wrap capitalize">
                                         {{ coupon.name }}
                                     </td>

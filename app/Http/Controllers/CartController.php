@@ -12,16 +12,12 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cartCollection = Cart::getContent();
-        $cartQuantity = Cart::getTotalQuantity();
-        $cartTotalPrice = Cart::getTotal();
-
         return inertia()->render(
             'Store/carts/index',
             [
-                'cartCollection' => $cartCollection,
-                'cartQuantity' => $cartQuantity,
-                'cartTotalPrice' => $cartTotalPrice,
+                'cartCollection' => Cart::getContent(),
+                'cartQuantity' => Cart::getTotalQuantity(),
+                'cartTotalPrice' => Cart::getTotal(),
             ]
         );
     }
@@ -31,32 +27,37 @@ class CartController extends Controller
         $supplier = Supplier::find($request->supplier_id);
         
         $category = Category::find($request->category_id);
+
         $part = Part::find($request->id);
 
         if ($request->part_type_id == 1) {
-            if (isset($part->sale) > 0) {  // price if part has sale
+            if (isset($part->sale) > 0) { // price if part has sale
                 $price = $part->oem_price - (($part->sale / 100) * $part->oem_price);
-            } elseif (isset($category->sale) > 0) {
-                $price = $part->oem_price - (($category->sale / 100) * $part->oem_price);
-            } else {
-                $price = $part->oem_price;
             }
-        } elseif ($request->part_type_id == 2) {
+
+            if (isset($category->sale) > 0) {
+                $price = $part->oem_price - (($category->sale / 100) * $part->oem_price);
+            }
+
+            $price = $part->oem_price;
+        }
+        if ($request->part_type_id == 2) {
             if (isset($part->sale) > 0) { // price if part has sale
                 $price = $part->aftermarket_price - (($part->sale / 100) * $part->aftermarket_price);
-            } elseif (isset($category->sale) > 0) {
+            }
+            if (isset($category->sale) > 0) {
                 $price = $request->aftermarket_price - (($category->sale / 100) * $request->aftermarket_price);
-            } else {
-                $price = $request->aftermarket_price;
             }
+
+            $price = $request->aftermarket_price;
         } else {
-            if (isset($part->sale) > 0) { // price if part has sale
+            if (isset($part->sale) > 0) {  // price if part has sale
                 $price = $part->used_price - (($part->sale / 100) * $part->used_price);
-            } elseif (isset($category->sale) > 0) {
-                $price = $request->used_price - (($category->sale / 100) * $request->used_price);
-            } else {
-                $price = $request->used_price;
             }
+            if (isset($category->sale) > 0) {
+                $price = $request->used_price - (($category->sale / 100) * $request->used_price);
+            }
+            $price = $request->used_price;
         }
         if ($request->quantity) {
             Cart::add([
@@ -91,7 +92,7 @@ class CartController extends Controller
 
     public function update(Request $request)
     {
-        \Cart::update(
+        Cart::update(
             $request->id,
             [
                 'quantity' => [
@@ -106,7 +107,7 @@ class CartController extends Controller
 
     public function remove($id)
     {
-        \Cart::remove($id);
+        Cart::remove($id);
         session()->flash('toast', [
             'type' => 'error',
             'message' => 'item was removed',
@@ -117,7 +118,7 @@ class CartController extends Controller
 
     public function clear()
     {
-        \Cart::clear();
+        Cart::clear();
 
         session()->flash('toast', [
             'type' => 'error',

@@ -10,36 +10,22 @@ class CouponCodeController extends Controller
 {
     public function index()
     {
-        $coupons = CouponCode::all();
-        $descountType = DiscountType::all();
-
         return inertia()->render(
             'Dashboard/coupons/index',
-            [
-                'coupons' => $coupons,
-                'descountType' => $descountType,
-            ]
+            ['coupons' => CouponCode::all(),]
         );
     }
 
     public function create()
     {
-        $descountType = DiscountType::all();
-
-        return inertia()->render('Dashboard/coupons/create', ['descountType' => $descountType,]);
+        return inertia()->render('Dashboard/coupons/create', ['descountType' => DiscountType::all()]);
     }
 
     public function store(StoreCouponCodeRequest $request)
     {
-        $request->validated();
+        $data = $request->validated();
 
-        CouponCode::create([
-            'name' => $request->name,
-            'value' => $request->value,
-            'quantity' => $request->quantity,
-            'expiration_at' => $request->expiration_at,
-            'descount_type_id' => $request->descount_type_id,
-        ]);
+        CouponCode::create($data);
 
         session()->flash('toast', [
             'type' => 'success',
@@ -51,9 +37,10 @@ class CouponCodeController extends Controller
 
     public function edit(CouponCode $coupon)
     {
-        $descountType = DiscountType::all();
-
-        return inertia()->render('Dashboard/coupons/edit', ['descountType' => $descountType,'coupon' => $coupon]);
+        return inertia()->render('Dashboard/coupons/edit', [
+            'descountType' => DiscountType::all(),
+            'coupon' => $coupon,
+        ]);
     }
 
     public function update(StoreCouponCodeRequest $request, CouponCode $coupon)

@@ -57,7 +57,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white text-gray-500 text-sm md:text-base">
-                                <tr v-for="details in order_details" :key="details.index">
+                                <tr v-for="details in order.order_details" :key="details.index">
                                     <td class="px-6 py-4 whitespace-no-wrap"> 
                                         {{ details.part.id }}
                                     </td>
@@ -74,12 +74,12 @@
                                         {{ details.part_type }}
                                     </td>
                                     <td  class="px-6 py-4 whitespace-no-wrap">
-                                        <span v-if="details.part.type.name != 'used'">{{ details.price }}</span>
+                                        <span v-if="details.price">{{ details.price }}</span>
                                         <span v-else>no price</span>
                                     </td>
                                    
                                     <td class="px-6 py-4 whitespace-no-wrap">
-                                        <span v-if="details.part.type.name != 'used'">{{ details.price * details.quantity }}</span>
+                                        <span v-if="details.price">{{ details.price * details.quantity }}</span>
                                         <span v-else>no price</span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap uppercase">
@@ -105,7 +105,7 @@
     import moment from 'moment';
     export default {
         components: {Layout},
-        props:['order_details'],
+        props:['order'],
         methods:  {
         ago(details) {
             return moment(details.created_at).format('lll');

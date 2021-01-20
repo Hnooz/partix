@@ -19,30 +19,31 @@ class OrderController extends Controller
             $orders = Order::where('order_status_id', 1)->get();
 
             return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
-        } elseif (request()->has('2')) {
+        }
+        if (request()->has('2')) {
             $orders = Order::where('order_status_id', 2)->get();
 
             return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
-        } elseif (request()->has('3')) {
+        }
+        if (request()->has('3')) {
             $orders = Order::where('order_status_id', 3)->get();
 
             return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
-        } elseif (request()->has('4')) {
+        }
+        if (request()->has('4')) {
             $orders = Order::where('order_status_id', 4)->get();
 
             return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
-        } else {
-            $orders = Order::latest()->get();
-
-            return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
         }
+
+        $orders = Order::latest()->get();
+
+        return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
     }
 
     public function show(Order $order)
     {
-        $order_details = OrderDetails::where('order_id', $order->id)->get();
-
-        return inertia()->render('Dashboard/orders/show', ['order_details' => $order_details]);
+        return inertia()->render('Dashboard/orders/show', ['order' => $order]);
     }
 
     public function store(Request $request)
@@ -129,7 +130,7 @@ class OrderController extends Controller
     {
         $order_status = OrderStatus::all();
 
-        return inertia()->render('Dashboard/orders/edit', ['order' => $order, 'order_status' => $order_status]);
+        return inertia()->render('Dashboard/orders/edit', ['order' => $order, 'order_status' => OrderStatus::all()]);
     }
 
     public function update(Request $request, Order $order)
@@ -146,85 +147,10 @@ class OrderController extends Controller
         return redirect()->route('orders.index');
     }
 
-    public function storeZeroPriceOrder(Request $request)
+    public function storeZeroPriceOrder(Request $request, Order $order)
     {
-        $mutable = Carbon::now(); //CUREENT DATE
-        $data = $request->validate([
-            'customer_name' => 'required',
-            'customer_phone' => 'required',
-            'customer_address' => 'required',
-        ]);
-
-        $coupon = CouponCode::where('name', $request->coupon)->get(); //COUPON FROM REQUEST
-
-        if (isset($coupon[0]->name) != $request->coupon) { // check coupon expiration TIME
-            session()->flash('toast', [
-                'type' => 'error',
-                'message' => 'invalid coupon code name',
-            ]);
-
-            return redirect()->back();
-        }
-
-        if (isset($coupon[0])) {
-            $expiration = Carbon::createFromFormat('Y-m-d', $coupon[0]->expiration_at)->toDateTimeString();
-                
-            if ($coupon[0]->quantity < 1 || $expiration <= $mutable) { // check coupon expiration TIME
-                session()->flash('toast', [
-                    'type' => 'error',
-                    'message' => 'invalid coupon code | quantity = 0 or it\'s expired s',
-                ]);
-
-                return redirect()->back();
-            }
-
-            $order = Order::create([
-                'customer_name' => $request->customer_name,
-                'customer_phone' => $request->customer_phone,
-                'customer_address' => $request->customer_address,
-                'order_status_id' => 1,
-                'coupon_id' => $coupon[0]->id,
-            ]);
-
-            $coupon[0]->quantity = $coupon[0]->quantity - 1;
-            if ($coupon[0]->quantity == 0) {
-                $coupon[0]->used = '0';
-            }
-            $coupon[0]->save();
-        } else {
-            $order = Order::create([
-                'customer_name' => $request->customer_name,
-                'customer_phone' => $request->customer_phone,
-                'customer_address' => $request->customer_address,
-                'order_status_id' => 1,
-            ]);
-        }
-        $part_type = PartType::find($request->part_type_id);
-        $details = OrderDetails::create([
-            'order_id' => $order->id,
-            'part_id' => $request->id,
-            'part_type' => $part_type->name,
-            'quantity' => 1,
-            'price' => 0,
-        ]);
-
-        session()->flash('toast', [
-            'type' => 'success',
-            'message' => 'orders done',
-        ]);
+        $order->storeOrderWhenPriceZero($request);
 
         return redirect()->back();
-        // dd($order);
-    }
-
-    public function getTotalPrice(Request $request)
-    {
-        $details = OrderDetails::where('order_id', $request->id)->get();
-        $total = 0;
-        foreach ($details as $detail) {
-            $total = $total + $detail->price * $detail->quantity;
-        }
-
-        return response()->json($total);
     }
 }
