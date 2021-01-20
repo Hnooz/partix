@@ -13,13 +13,13 @@ class WishListController extends Controller
         if ($wish_list->get(request('id')) !== null) {
             return \redirect()->back();
         } else {
-            $part = Part::where('id', request('id'))->get();
+            $part = Part::find(request('id'));
             $id = request('id');
             $name = request('name');
             $price = request('oem_price');
             $qty = 1;
             $attributs = [
-                $url = $part->each->append('url'),
+                $url = $part->append('url'),
             ];
 
             $wish_list->add($id, $name, $price, $qty, $attributs);

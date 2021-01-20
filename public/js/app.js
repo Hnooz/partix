@@ -5725,6 +5725,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -5753,6 +5757,15 @@ __webpack_require__.r(__webpack_exports__);
 
       return this.parts.filter(function (part) {
         return part.name.toLowerCase().includes(_this.search.toLowerCase()) || part.number.includes(_this.search) || part.name_ar.includes(_this.search);
+      });
+    },
+    calcOemPrice: function calcOemPrice() {
+      return this.parts.map(function (part) {
+        if (part.sale) {
+          return (part.oem_price - part.sale / 100 * part.oem_price).toFixed();
+        }
+
+        return (part.oem_price - part.category.sale / 100 * part.oem_price).toFixed();
       });
     }
   },
@@ -6141,13 +6154,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     calcOemPrice: function calcOemPrice() {
-      return (this.part.oem_price - this.part.sale / 100 * this.part.oem_price).toFixed();
+      if (this.part.sale) {
+        return (this.form.oem_price - this.part.sale / 100 * this.form.oem_price).toFixed();
+      }
+
+      return (this.part.oem_price - this.part.category.sale / 100 * this.part.oem_price).toFixed();
     },
     calcAftermarketPrice: function calcAftermarketPrice() {
-      return (this.part.aftermarket_price - this.part.sale / 100 * this.part.aftermarket_price).toFixed();
+      if (this.part.sale) {
+        return (this.form.aftermarket_price - this.part.sale / 100 * this.form.aftermarket_price).toFixed();
+      }
+
+      return (this.part.aftermarket_price - this.part.category.sale / 100 * this.part.aftermarket_price).toFixed();
     },
     calcUsedPrice: function calcUsedPrice() {
-      return (this.part.used_price - this.part.sale / 100 * this.part.used_price).toFixed();
+      if (this.part.sale) {
+        return (this.form.used_price - this.part.sale / 100 * this.form.used_price).toFixed();
+      }
+
+      return (this.part.used_price - this.part.category.sale / 100 * this.part.used_price).toFixed();
     },
     calcQuantity: function calcQuantity() {
       if (this.cartItem == null) {
@@ -6176,9 +6201,7 @@ __webpack_require__.r(__webpack_exports__);
       var both = Object.assign(form, item);
 
       if (this.cartItem != null) {
-        this.$inertia.put("/store/cart/".concat(this.cartItem.id), both).then(function () {
-          return location.reload();
-        });
+        this.$inertia.put("/store/cart/".concat(this.cartItem.id), both);
       } else {
         var newadd = this.form;
         newadd.quantity = this.quantity;
@@ -6202,14 +6225,14 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     oem: function oem() {
-      if (this.form.price == 0) {
+      if (this.form.oem_price == 0) {
         this.toggleModal = true;
       }
 
       this.form.part_type_id = 1;
     },
     aftermark: function aftermark() {
-      if (this.form.second_price == 0) {
+      if (this.form.aftermarket_price == 0) {
         this.toggleModal = true;
       }
 
@@ -6328,6 +6351,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -6351,6 +6378,15 @@ __webpack_require__.r(__webpack_exports__);
 
       return this.parts.filter(function (part) {
         return part.name.toLowerCase().includes(_this.search.toLowerCase());
+      });
+    },
+    calcOemPrice: function calcOemPrice() {
+      return this.parts.map(function (part) {
+        if (part.sale) {
+          return (part.oem_price - part.sale / 100 * part.oem_price).toFixed();
+        }
+
+        return (part.oem_price - part.category.sale / 100 * part.oem_price).toFixed();
       });
     }
   },
@@ -6633,6 +6669,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -6656,6 +6696,15 @@ __webpack_require__.r(__webpack_exports__);
 
       return this.parts.filter(function (part) {
         return part.name.toLowerCase().includes(_this.search.toLowerCase());
+      });
+    },
+    calcOemPrice: function calcOemPrice() {
+      return this.parts.map(function (part) {
+        if (part.sale) {
+          return (part.oem_price - part.sale / 100 * part.oem_price).toFixed();
+        }
+
+        return (part.oem_price - part.category.sale / 100 * part.oem_price).toFixed();
       });
     }
   },
@@ -6769,6 +6818,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -6792,6 +6845,15 @@ __webpack_require__.r(__webpack_exports__);
 
       return this.cars.filter(function (part) {
         return part.name.toLowerCase().includes(_this.search.toLowerCase());
+      });
+    },
+    calcOemPrice: function calcOemPrice() {
+      return this.parts.map(function (part) {
+        if (part.sale) {
+          return (part.oem_price - part.sale / 100 * part.oem_price).toFixed();
+        }
+
+        return (part.oem_price - part.category.sale / 100 * part.oem_price).toFixed();
       });
     }
   },
@@ -59326,30 +59388,60 @@ var render = function() {
                           "p",
                           {
                             staticClass:
-                              "break-all font-medium text-gray-600 text-xs "
+                              "break-all font-medium text-gray-600 text-xs"
                           },
                           [
-                            _c("span", { attrs: { dir: "auto" } }, [
-                              _vm._v(_vm._s(_vm.__("number")))
-                            ]),
-                            _vm._v(_vm._s(part.number))
+                            _vm._v(
+                              _vm._s(
+                                _vm.$page.locale == "en"
+                                  ? part.cars[0].brand
+                                  : part.cars[0].brand_ar
+                              )
+                            )
                           ]
                         ),
                         _vm._v(" "),
                         _c(
                           "p",
                           {
-                            staticClass: "text-gray-800 text-xl font-semibold"
+                            staticClass:
+                              "break-all font-medium text-gray-600 text-xs "
                           },
                           [
-                            _vm._v(_vm._s(part.oem_price)),
-                            _c(
-                              "span",
-                              { staticClass: "px-2 text-gray-500 text-sm" },
-                              [_vm._v(_vm._s(_vm.__("QAR")))]
-                            )
+                            _c("span", { attrs: { dir: "auto" } }, [
+                              _vm._v(_vm._s(_vm.__("number")) + ":")
+                            ]),
+                            _vm._v(_vm._s(part.number))
                           ]
-                        )
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "flex items-center" }, [
+                          _c(
+                            "p",
+                            {
+                              staticClass: "text-gray-800 text-xl font-semibold"
+                            },
+                            [
+                              _vm._v(_vm._s(_vm.calcOemPrice[0])),
+                              _c(
+                                "span",
+                                { staticClass: "px-2 text-gray-500 text-sm" },
+                                [_vm._v(_vm._s(_vm.__("QAR")))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          part.sale > 0
+                            ? _c(
+                                "p",
+                                { staticClass: "line-through  text-gray-600" },
+                                [
+                                  _vm._v(_vm._s(part.oem_price) + " "),
+                                  _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                                ]
+                              )
+                            : _vm._e()
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("input", {
@@ -59941,68 +60033,50 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                _vm.form.oem_price != 0 ||
-                                _vm.form.aftermarket_price != 0 ||
-                                _vm.form.used_price != 0,
-                              expression:
-                                "(form.oem_price != 0) || (form.aftermarket_price != 0) || (form.used_price != 0)"
-                            }
-                          ],
-                          staticClass: "capitalize my-8"
-                        },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white whitespace-no-wrap",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.addCart(_vm.part)
-                                }
+                      _c("div", { staticClass: "capitalize my-8" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white whitespace-no-wrap",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.addCart(_vm.part)
                               }
-                            },
-                            [
-                              _c("span", { staticClass: "mx-12 capitalize" }, [
-                                _vm._v(_vm._s(_vm.__("add to cart")))
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "svg",
-                                {
-                                  staticClass: "h-6 mx-6 w-6",
+                            }
+                          },
+                          [
+                            _c("span", { staticClass: "mx-12 capitalize" }, [
+                              _vm._v(_vm._s(_vm.__("add to cart")))
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "h-6 mx-6 w-6",
+                                attrs: {
+                                  fill: "none",
+                                  stroke: "currentColor",
+                                  viewBox: "0 0 24 24",
+                                  xmlns: "http://www.w3.org/2000/svg"
+                                }
+                              },
+                              [
+                                _c("path", {
                                   attrs: {
-                                    fill: "none",
-                                    stroke: "currentColor",
-                                    viewBox: "0 0 24 24",
-                                    xmlns: "http://www.w3.org/2000/svg"
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round",
+                                    "stroke-width": "2",
+                                    d:
+                                      "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                                   }
-                                },
-                                [
-                                  _c("path", {
-                                    attrs: {
-                                      "stroke-linecap": "round",
-                                      "stroke-linejoin": "round",
-                                      "stroke-width": "2",
-                                      d:
-                                        "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                                    }
-                                  })
-                                ]
-                              )
-                            ]
-                          )
-                        ]
-                      )
+                                })
+                              ]
+                            )
+                          ]
+                        )
+                      ])
                     ]
                   ),
                   _vm._v(" "),
@@ -60396,7 +60470,7 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm.part.type.name == "oem"
+                _vm.form.part_type_id == 1
                   ? _c(
                       "p",
                       {
@@ -60428,7 +60502,7 @@ var render = function() {
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.part.type.name == "aftermarket"
+                _vm.form.part_type_id == 2
                   ? _c(
                       "p",
                       {
@@ -60462,7 +60536,7 @@ var render = function() {
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.part.type.name == "used"
+                _vm.form.part_type_id == 3
                   ? _c(
                       "p",
                       {
@@ -61485,7 +61559,7 @@ var render = function() {
                         "p",
                         {
                           staticClass:
-                            "bg-teal-400 font-semibold md:h-12 md:px-1 md:rounded-none px-2 md:py-3 rounded-br-lg shadow-lg md:text-base text-xs text-white md:w-12"
+                            "bg-teal-400 flex font-semibold justify-center md:h-12 md:px-1 md:py-3 md:rounded-none md:text-base md:w-12 px-2 rounded-br-lg shadow-lg text-white text-xs"
                         },
                         [_vm._v(_vm._s(part.sale) + "%")]
                       )
@@ -61546,16 +61620,37 @@ var render = function() {
                 _c(
                   "p",
                   {
-                    staticClass:
-                      "text-gray-800 md:text-xl text-xs font-semibold"
+                    staticClass: "break-all font-medium text-gray-600 text-xs "
                   },
                   [
-                    _vm._v(_vm._s(part.oem_price) + " "),
-                    _c("span", { staticClass: "px-2 text-gray-500 text-sm" }, [
-                      _vm._v(_vm._s(_vm.__("QAR")))
-                    ])
+                    _c("span", { attrs: { dir: "auto" } }, [
+                      _vm._v(_vm._s(_vm.__("number")) + ":")
+                    ]),
+                    _vm._v(_vm._s(part.number))
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex items-center" }, [
+                  _c(
+                    "p",
+                    { staticClass: "text-gray-800 text-xl font-semibold" },
+                    [
+                      _vm._v(_vm._s(_vm.calcOemPrice[0])),
+                      _c(
+                        "span",
+                        { staticClass: "px-2 text-gray-500 text-sm" },
+                        [_vm._v(_vm._s(_vm.__("QAR")))]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  part.sale > 0
+                    ? _c("p", { staticClass: "line-through  text-gray-600" }, [
+                        _vm._v(_vm._s(part.oem_price) + " "),
+                        _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                      ])
+                    : _vm._e()
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "bg-teal-700 py-2" }, [
@@ -62459,7 +62554,7 @@ var render = function() {
                         "p",
                         {
                           staticClass:
-                            "bg-teal-400 font-semibold md:h-12 md:px-1 md:rounded-none px-2 md:py-3 rounded-br-lg shadow-lg md:text-base text-xs text-white md:w-12"
+                            "bg-teal-400 flex justify-center font-semibold md:h-12 md:px-1 md:rounded-none px-2 md:py-3 rounded-br-lg shadow-lg md:text-base text-xs text-white md:w-12"
                         },
                         [_vm._v(_vm._s(part.sale) + "%")]
                       )
@@ -62520,16 +62615,37 @@ var render = function() {
                 _c(
                   "p",
                   {
-                    staticClass:
-                      "text-gray-800 md:text-xl text-xs font-semibold"
+                    staticClass: "break-all font-medium text-gray-600 text-xs "
                   },
                   [
-                    _vm._v(_vm._s(part.oem_price) + " "),
-                    _c("span", { staticClass: "px-2 text-gray-500 text-sm" }, [
-                      _vm._v(_vm._s(_vm.__("QAR")))
-                    ])
+                    _c("span", { attrs: { dir: "auto" } }, [
+                      _vm._v(_vm._s(_vm.__("number")) + ":")
+                    ]),
+                    _vm._v(_vm._s(part.number))
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex items-center" }, [
+                  _c(
+                    "p",
+                    { staticClass: "text-gray-800 text-xl font-semibold" },
+                    [
+                      _vm._v(_vm._s(_vm.calcOemPrice[0])),
+                      _c(
+                        "span",
+                        { staticClass: "px-2 text-gray-500 text-sm" },
+                        [_vm._v(_vm._s(_vm.__("QAR")))]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  part.sale > 0
+                    ? _c("p", { staticClass: "line-through  text-gray-600" }, [
+                        _vm._v(_vm._s(part.oem_price) + " "),
+                        _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                      ])
+                    : _vm._e()
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "bg-teal-700 py-2" }, [
@@ -62847,7 +62963,7 @@ var render = function() {
                         "p",
                         {
                           staticClass:
-                            "bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-bl-full shadow-lg text-sm text-white w-12"
+                            "bg-teal-400 flex justify-center font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-bl-full shadow-lg text-sm text-white w-12"
                         },
                         [_vm._v("-" + _vm._s(part.sale) + "%")]
                       )
@@ -62891,14 +63007,54 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "p",
-                  { staticClass: "text-gray-800 md:text-xl font-semibold" },
+                  {
+                    staticClass: "break-all font-medium text-gray-600 text-xs"
+                  },
                   [
-                    _vm._v(_vm._s(part.oem_price) + " "),
-                    _c("span", { staticClass: "px-2 text-gray-500 text-sm" }, [
-                      _vm._v(_vm._s(_vm.__("QAR")))
-                    ])
+                    _vm._v(
+                      _vm._s(
+                        _vm.$page.locale == "en"
+                          ? part.cars[0].brand
+                          : part.cars[0].brand_ar
+                      )
+                    )
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass: "break-all font-medium text-gray-600 text-xs "
+                  },
+                  [
+                    _c("span", { attrs: { dir: "auto" } }, [
+                      _vm._v(_vm._s(_vm.__("number")) + ":")
+                    ]),
+                    _vm._v(_vm._s(part.number))
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex items-center" }, [
+                  _c(
+                    "p",
+                    { staticClass: "text-gray-800 text-xl font-semibold" },
+                    [
+                      _vm._v(_vm._s(_vm.calcOemPrice[0])),
+                      _c(
+                        "span",
+                        { staticClass: "px-2 text-gray-500 text-sm" },
+                        [_vm._v(_vm._s(_vm.__("QAR")))]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  part.sale > 0
+                    ? _c("p", { staticClass: "line-through  text-gray-600" }, [
+                        _vm._v(_vm._s(part.oem_price) + " "),
+                        _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                      ])
+                    : _vm._e()
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "bg-teal-700 py-2" }, [
@@ -64131,7 +64287,9 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", [
                       _c("span", { staticClass: "block text-gray-600" }, [
-                        _vm._v(_vm._s(item.price.toFixed()) + "$")
+                        _vm._v(
+                          _vm._s((item.price * item.quantity).toFixed()) + "$"
+                        )
                       ]),
                       _vm._v(" "),
                       _c(
@@ -64261,30 +64419,6 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "flex text-white" }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "w-6 h-6",
-                  attrs: {
-                    fill: "none",
-                    stroke: "currentColor",
-                    viewBox: "0 0 24 24",
-                    xmlns: "http://www.w3.org/2000/svg"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "round",
-                      "stroke-width": "2",
-                      d:
-                        "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    }
-                  })
-                ]
-              ),
-              _vm._v(" "),
               _c("button", { staticClass: "mx-2", attrs: { type: "button" } }, [
                 _c(
                   "svg",
@@ -64316,7 +64450,7 @@ var render = function() {
                   staticClass:
                     "-mt-3 absolute bg-red-500 flex font-bold h-4 items-center justify-center mx-6 rounded-full text-white text-xs w-4"
                 },
-                [_vm._v("3")]
+                [_vm._v(_vm._s(_vm.wishlistQuantity))]
               ),
               _vm._v(" "),
               _c(
@@ -66107,13 +66241,18 @@ var render = function() {
             { key: item.index, staticClass: "flex justify-between mt-6" },
             [
               _c("div", { staticClass: "flex" }, [
-                _c("img", {
-                  staticClass: "h-20 w-20 object-cover rounded border-2",
-                  attrs: {
-                    src: __webpack_require__(/*! ../../images/oops-404-error-with-a-broken-robot-animate.svg */ "./resources/js/images/oops-404-error-with-a-broken-robot-animate.svg"),
-                    alt: ""
-                  }
-                }),
+                item.attributes[0].url.length > 0
+                  ? _c("img", {
+                      staticClass: "h-20 w-20 object-cover rounded border-2",
+                      attrs: { src: item.attributes[0].url[0], alt: "" }
+                    })
+                  : _c("img", {
+                      staticClass: "h-20 w-20 object-cover rounded border-2",
+                      attrs: {
+                        src: __webpack_require__(/*! ../../images/oops-404-error-with-a-broken-robot-animate.svg */ "./resources/js/images/oops-404-error-with-a-broken-robot-animate.svg"),
+                        alt: ""
+                      }
+                    }),
                 _vm._v(" "),
                 _c("div", { staticClass: "mx-3" }, [
                   _c("h3", { staticClass: "text-sm text-gray-600" }, [

@@ -98,7 +98,7 @@
                                 </button>
                             </div>
 
-                            <div class="capitalize my-8" v-show="(form.oem_price != 0) || (form.aftermarket_price != 0) || (form.used_price != 0)">
+                            <div class="capitalize my-8">
                                 <button  @click="addCart(part)" class="bg-teal-800 flex font-semibold focus:outline-none outline-none py-3 text-white whitespace-no-wrap" type="button">
                                     <span class="mx-12 capitalize">{{__('add to cart')}}</span> 
                                     <svg class="h-6 mx-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -173,17 +173,17 @@
         <div class="px-4">
             <a href="#" class="font-bold  text-xs md:text-base text-teal-500 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
             <!-- <p class="break-all font-medium text-gray-600 text-xs">{{part.brands.name}}</p> -->
-            <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="part.type.name == 'oem'">
+            <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="form.part_type_id == 1">
                 {{calcOemPrice}}<span class="text-gray-500 text-xs">{{__('QAR')}}</span>
                 <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.oem_price}}{{__('QAR')}}</span> 
             </p>
 
-            <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="part.type.name == 'aftermarket'">
+            <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="form.part_type_id == 2">
                 {{calcAftermarketPrice}}<span class="text-gray-500 text-xs">{{__('QAR')}}</span>
                 <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.aftermarket_price}}{{__('QAR')}}</span> 
             </p>
 
-            <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="part.type.name == 'used'">
+            <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="form.part_type_id == 3">
                 {{calcUsedPrice}}<span class="text-gray-500 text-xs">{{__('QAR')}}</span>
                 <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.used_price}}{{__('QAR')}}</span> 
             </p>
@@ -365,14 +365,23 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
         computed: {
             calcOemPrice()
             {
-              return  (this.part.oem_price - (this.part.sale / 100) * this.part.oem_price).toFixed();
+                if (this.part.sale) {                    
+                    return  (this.form.oem_price - ((this.part.sale / 100) * this.form.oem_price)).toFixed();
+                }
+              return  (this.part.oem_price - (this.part.category.sale / 100) * this.part.oem_price).toFixed();
             },
             calcAftermarketPrice()
             {
-              return  (this.part.aftermarket_price - (this.part.sale / 100) * this.part.aftermarket_price).toFixed();
+                if (this.part.sale) {                    
+                    return  (this.form.aftermarket_price - ((this.part.sale / 100) * this.form.aftermarket_price)).toFixed();
+                }
+              return  (this.part.aftermarket_price - (this.part.category.sale / 100) * this.part.aftermarket_price).toFixed();
             },
             calcUsedPrice(){
-                return  (this.part.used_price - (this.part.sale / 100) * this.part.used_price).toFixed();
+                if (this.part.sale) {                    
+                    return  (this.form.used_price - ((this.part.sale / 100) * this.form.used_price)).toFixed();
+                }
+                return  (this.part.used_price - (this.part.category.sale / 100) * this.part.used_price).toFixed();
             },
             calcQuantity()
             {
@@ -406,7 +415,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             const both = Object.assign(form , item);
 
             if (this.cartItem != null) {
-                this.$inertia.put(`/store/cart/${this.cartItem.id}`, both).then(() => location.reload());
+                this.$inertia.put(`/store/cart/${this.cartItem.id}`, both);
             } else {
                 const newadd = this.form;
                 newadd.quantity = this.quantity;
@@ -431,7 +440,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
         },
         oem()
         {         
-            if (this.form.price == 0) {
+            if (this.form.oem_price == 0) {
                 this.toggleModal = true;
             }   
             
@@ -439,7 +448,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
         },
         aftermark()
         {            
-            if (this.form.second_price == 0) {
+            if (this.form.aftermarket_price == 0) {
                 this.toggleModal = true;
             }
             this.form.part_type_id = 2;

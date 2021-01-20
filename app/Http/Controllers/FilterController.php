@@ -49,7 +49,7 @@ class FilterController extends Controller
         $wishlistQuantity = $wish_list->getTotalQuantity();
         $wishlistContent = $wish_list->getContent();
 
-        if (isset($part)) {
+        if (isset($id)) {
             return inertia()->render(
                 'Store/filteredPart',
                 [

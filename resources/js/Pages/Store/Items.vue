@@ -50,7 +50,7 @@
     <div class="container grid grid-cols-2 md:grid-cols-4 md:px-16 mx-auto py-10">            
         <div class="bg-white mb-10 mx-3 overflow-hidden md:rounded-tr-lg shadow-lg rounded-lg" v-for="(part, index) in filteredList" :key="index">
             <div class="flex justify-between" :class="part.sale > 0 ? '':'py-2 md:pt-10'">
-                <p v-if="part.sale > 0" class="bg-teal-400 font-semibold md:h-12 md:px-1 md:rounded-none px-2 md:py-3 rounded-br-lg shadow-lg md:text-base text-xs text-white md:w-12">{{part.sale}}%</p>
+                <p v-if="part.sale > 0" class="bg-teal-400 flex font-semibold justify-center md:h-12 md:px-1 md:py-3 md:rounded-none md:text-base md:w-12 px-2 rounded-br-lg shadow-lg text-white text-xs">{{part.sale}}%</p>
             </div>
             
             <a :href="`/store/details/${part.id}`">
@@ -61,7 +61,11 @@
             <div class="px-4 py-2">
                 <a :href="`/store/details/${part.id}`" class="font-bold text-xs md:text-base text-teal-500 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
                 <p class="break-all font-medium text-gray-600 text-xs">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].brand_ar}}</p>
-                <p class="text-gray-800 md:text-xl text-xs font-semibold">{{part.oem_price}}&nbsp;<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p>
+                <p class="break-all font-medium text-gray-600 text-xs "><span dir="auto">{{__('number')}}:</span>{{part.number}}</p>
+                <div class="flex items-center">
+                    <p class="text-gray-800 text-xl font-semibold">{{calcOemPrice[0]}}<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p>
+                    <p v-if="part.sale > 0" class="line-through  text-gray-600">{{part.oem_price}} <span>{{__('QAR')}}</span> </p>
+                </div>
             </div>
 
             <div class="bg-teal-700 py-2">
@@ -116,7 +120,16 @@ export default {
       return this.parts.filter(part => {
         return part.name.toLowerCase().includes(this.search.toLowerCase())
       })
-    }
+    },
+    calcOemPrice()
+    {
+        return this.parts.map(part => {
+            if (part.sale) {                    
+            return  (part.oem_price - ((part.sale / 100) * part.oem_price)).toFixed();
+            }
+            return  (part.oem_price - (part.category.sale / 100) * part.oem_price).toFixed();
+        })
+    },
   },
 
     methods: {
