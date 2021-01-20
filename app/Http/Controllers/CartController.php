@@ -30,34 +30,30 @@ class CartController extends Controller
 
         $part = Part::find($request->id);
 
-        if ($request->part_type_id == 1) {
+        if ($part->part_type_id == 1) {
             if (isset($part->sale) > 0) { // price if part has sale
                 $price = $part->oem_price - (($part->sale / 100) * $part->oem_price);
-            }
-
-            if (isset($category->sale) > 0) {
+            } elseif (isset($category->sale) > 0) {
                 $price = $part->oem_price - (($category->sale / 100) * $part->oem_price);
+            } else {
+                $price = $part->oem_price;
             }
-
-            $price = $part->oem_price;
-        }
-        if ($request->part_type_id == 2) {
+        } elseif ($part->part_type_id == 2) {
             if (isset($part->sale) > 0) { // price if part has sale
                 $price = $part->aftermarket_price - (($part->sale / 100) * $part->aftermarket_price);
-            }
-            if (isset($category->sale) > 0) {
+            } elseif (isset($category->sale) > 0) {
                 $price = $request->aftermarket_price - (($category->sale / 100) * $request->aftermarket_price);
+            } else {
+                $price = $request->aftermarket_price;
             }
-
-            $price = $request->aftermarket_price;
         } else {
             if (isset($part->sale) > 0) {  // price if part has sale
                 $price = $part->used_price - (($part->sale / 100) * $part->used_price);
-            }
-            if (isset($category->sale) > 0) {
+            } elseif (isset($category->sale) > 0) {
                 $price = $request->used_price - (($category->sale / 100) * $request->used_price);
+            } else {
+                $price = $request->used_price;
             }
-            $price = $request->used_price;
         }
         if ($request->quantity) {
             Cart::add([
@@ -86,21 +82,58 @@ class CartController extends Controller
                 ],
             ]);
         }
-        
+        session()->flash('toast', [
+            'type' => 'success',
+            'message' => 'item was added to cart',
+        ]);
+
         return redirect()->back();
     }
 
     public function update(Request $request)
     {
+        $category = Category::find($request->category_id);
+
+        if ($request->part_type_id == 1) {
+            if (isset($part->sale) > 0) { // price if part has sale
+                $price = $request->oem_price - (($request->sale / 100) * $request->oem_price);
+            } elseif (isset($category->sale) > 0) {
+                $price = $request->oem_price - (($category->sale / 100) * $request->oem_price);
+            } else {
+                $price = $part->oem_price;
+            }
+        } elseif ($request->part_type_id == 2) {
+            if (isset($request->sale) > 0) { // price if part has sale
+                $price = $request->aftermarket_price - (($request->sale / 100) * $request->aftermarket_price);
+            } elseif (isset($category->sale) > 0) {
+                $price = $request->aftermarket_price - (($category->sale / 100) * $request->aftermarket_price);
+            } else {
+                $price = $request->aftermarket_price;
+            }
+        } else {
+            if (isset($request->sale) > 0) {  // price if part has sale
+                $price = $request->used_price - (($request->sale / 100) * $request->used_price);
+            } elseif (isset($category->sale) > 0) {
+                $price = $request->used_price - (($category->sale / 100) * $request->used_price);
+            } else {
+                $price = $request->used_price;
+            }
+        }
         Cart::update(
             $request->id,
             [
+                'price' => $price,
                 'quantity' => [
                     'relative' => false,
                     'value' => $request->quantity,
                 ],
             ]
         );
+
+        session()->flash('toast', [
+            'type' => 'success',
+            'message' => 'item was updated',
+        ]);
 
         return redirect()->back();
     }

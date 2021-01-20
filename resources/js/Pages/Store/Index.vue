@@ -66,8 +66,8 @@
                         <p class="break-all font-medium text-gray-600 text-xs">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].brand_ar}}</p>
                         <p class="break-all font-medium text-gray-600 text-xs "><span dir="auto">{{__('number')}}:</span>{{part.number}}</p>
                         <div class="flex items-center">
-                            <p class="text-gray-800 text-xl font-semibold">{{calcOemPrice[0]}}<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p>
-                            <p v-if="part.sale > 0" class="line-through  text-gray-600">{{part.oem_price}} <span>{{__('QAR')}}</span> </p>
+                            <!-- <p class="text-gray-800 text-xl font-semibold">{{calcOemPrice[0]}}<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p> -->
+                            <p  class="text-gray-600">{{part.oem_price}} <span>{{__('QAR')}}</span> </p>
                         </div>
                     </div>
                     <input type="text" name="supplier_id"  hidden>
