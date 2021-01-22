@@ -57,7 +57,7 @@ class PartController extends Controller
     {
         $data = $request->validated();
 
-        $part = Part::create($data);
+        $part = Part::create(Arr::except($data, ['cars','images']));
 
         if ($request->filled('cars')) {
             $part->cars()->attach(json_decode($data['cars']));

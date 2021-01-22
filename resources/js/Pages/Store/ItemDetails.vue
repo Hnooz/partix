@@ -54,7 +54,7 @@
                             </p>
                         </div>
                         <div>
-                            <span class="bg-white mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{$page.locale == 'en' ? car.brand : car.brand_ar}}</span>
+                            <span class="bg-white leading-10 mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{$page.locale == 'en' ? car.brand : car.brand_ar}}</span>
                         </div>
                         <form @submit.prevent="submit">
                             <div class="my-4">
@@ -148,11 +148,11 @@
         <div class="px-4">
             <a href="#" class="font-bold  text-xs md:text-base text-teal-500 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
             <div class="my-3">
-                <span class="bg-white mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{$page.locale == 'en' ? car.brand : car.brand_ar}}</span>
+                <span class="bg-blue-100 leading-10 mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{$page.locale == 'en' ? car.brand : car.brand_ar}}</span>
             </div>                           
             <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="form.part_type_id == 1">
-                {{calcOemPrice}}<span class="text-gray-500 text-xs">{{__('QAR')}}</span>
-                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.oem_price}}{{__('QAR')}}</span> 
+                {{calcOemPrice}} <span class="text-gray-500 text-xs">{{__('QAR')}}</span>
+                <span v-if="part.sale > 0" class="line-through px-2 text-gray-500 text-xs">{{part.oem_price}} {{__('QAR')}}</span> 
             </p>
 
             <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="form.part_type_id == 2">

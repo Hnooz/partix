@@ -3887,9 +3887,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3899,6 +3896,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['order'],
   methods: {
     ago: function ago(details) {
+      console.log(details.part.cars[0].brand);
       return moment__WEBPACK_IMPORTED_MODULE_1___default()(details.created_at).format('lll');
     }
   }
@@ -4262,15 +4260,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5514,14 +5503,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5550,15 +5531,6 @@ __webpack_require__.r(__webpack_exports__);
 
       return this.parts.filter(function (part) {
         return part.name.toLowerCase().includes(_this.search.toLowerCase()) || part.number.includes(_this.search) || part.name_ar.includes(_this.search);
-      });
-    },
-    calcOemPrice: function calcOemPrice() {
-      return this.parts.map(function (part) {
-        if (part.sale) {
-          return (part.oem_price - part.sale / 100 * part.oem_price).toFixed();
-        }
-
-        return (part.oem_price - part.category.sale / 100 * part.oem_price).toFixed();
       });
     }
   },
@@ -6128,6 +6100,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -6142,7 +6118,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['parts', 'cartQuantity', 'cartCollection', 'cartTotalPrice', 'wishlistQuantity', 'wishlistContent'],
   data: function data() {
     return {
-      search: ''
+      search: '',
+      wishlist: 0
     };
   },
   computed: {
@@ -6152,20 +6129,15 @@ __webpack_require__.r(__webpack_exports__);
       return this.parts.filter(function (part) {
         return part.name.toLowerCase().includes(_this.search.toLowerCase());
       });
-    },
-    calcOemPrice: function calcOemPrice() {
-      return this.parts.map(function (part) {
-        if (part.sale) {
-          return (part.oem_price - part.sale / 100 * part.oem_price).toFixed();
-        }
-
-        return (part.oem_price - part.category.sale / 100 * part.oem_price).toFixed();
-      });
     }
   },
   methods: {
     addCart: function addCart(part) {
       this.$inertia.post('/store/carts', part);
+    },
+    addWishlist: function addWishlist(part) {
+      // this.wishlist = part.id;
+      this.$inertia.post('/store/wishlist', part);
     }
   }
 });
@@ -6446,6 +6418,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -6470,20 +6445,14 @@ __webpack_require__.r(__webpack_exports__);
       return this.parts.filter(function (part) {
         return part.name.toLowerCase().includes(_this.search.toLowerCase());
       });
-    },
-    calcOemPrice: function calcOemPrice() {
-      return this.parts.map(function (part) {
-        if (part.sale) {
-          return (part.oem_price - part.sale / 100 * part.oem_price).toFixed();
-        }
-
-        return (part.oem_price - part.category.sale / 100 * part.oem_price).toFixed();
-      });
     }
   },
   methods: {
     addCart: function addCart(part) {
       this.$inertia.post('/store/carts', part);
+    },
+    addWishlist: function addWishlist(part) {
+      this.$inertia.post('/store/wishlist', part);
     }
   }
 });
@@ -6503,6 +6472,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_UI_BaseNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/UI/BaseNav */ "./resources/js/components/UI/BaseNav.vue");
 /* harmony import */ var _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/UI/SelectSection */ "./resources/js/components/UI/SelectSection.vue");
 /* harmony import */ var _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/UI/BaseFooter */ "./resources/js/components/UI/BaseFooter.vue");
+//
+//
+//
+//
 //
 //
 //
@@ -6619,21 +6592,14 @@ __webpack_require__.r(__webpack_exports__);
       return this.cars.filter(function (part) {
         return part.name.toLowerCase().includes(_this.search.toLowerCase());
       });
-    } // calcOemPrice()
-    // {
-    //     return this.cars.map(part => {
-    //         if (part.sale) {   
-    //             console.log((part.oem_price - ((part.sale / 100) * part.oem_price)));                 
-    //         return  (part.oem_price - ((part.sale / 100) * part.oem_price)).toFixed();
-    //         }
-    //         return  (part.oem_price - (part.category.sale / 100) * part.oem_price).toFixed();
-    //     })
-    // },
-
+    }
   },
   methods: {
     addCart: function addCart(part) {
       this.$inertia.post('/store/carts', part);
+    },
+    addWishlist: function addWishlist(part) {
+      this.$inertia.post('/store/wishlist', part);
     }
   }
 });
@@ -53778,7 +53744,7 @@ var render = function() {
                           "th",
                           {
                             staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
                             staticStyle: { "text-align": "start" }
                           },
                           [
@@ -53792,7 +53758,7 @@ var render = function() {
                           "th",
                           {
                             staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
                             staticStyle: { "text-align": "start" }
                           },
                           [
@@ -53808,7 +53774,7 @@ var render = function() {
                           "th",
                           {
                             staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
                             staticStyle: { "text-align": "start" }
                           },
                           [
@@ -53824,7 +53790,7 @@ var render = function() {
                           "th",
                           {
                             staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
                             staticStyle: { "text-align": "start" }
                           },
                           [
@@ -53840,7 +53806,7 @@ var render = function() {
                           "th",
                           {
                             staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
                             staticStyle: { "text-align": "start" }
                           },
                           [
@@ -53856,7 +53822,7 @@ var render = function() {
                           "th",
                           {
                             staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
                             staticStyle: { "text-align": "start" }
                           },
                           [
@@ -53874,7 +53840,7 @@ var render = function() {
                           "th",
                           {
                             staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
                             staticStyle: { "text-align": "start" }
                           },
                           [
@@ -53890,7 +53856,7 @@ var render = function() {
                           "th",
                           {
                             staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
                             staticStyle: { "text-align": "start" }
                           },
                           [
@@ -53914,7 +53880,7 @@ var render = function() {
                         return _c("tr", { key: details.index }, [
                           _c(
                             "td",
-                            { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                            { staticClass: "px-3 py-4 whitespace-no-wrap" },
                             [
                               _vm._v(
                                 " \n                                    " +
@@ -53928,7 +53894,7 @@ var render = function() {
                             "td",
                             {
                               staticClass:
-                                "px-6 py-4 whitespace-no-wrap capitalize"
+                                "px-3 py-4 whitespace-no-wrap capitalize"
                             },
                             [
                               _c(
@@ -53948,25 +53914,18 @@ var render = function() {
                             "td",
                             {
                               staticClass:
-                                "px-6 py-4 whitespace-no-wrap capitalize"
+                                "px-3 py-4 whitespace-no-wrap capitalize"
                             },
-                            _vm._l(details.part.cars, function(car) {
-                              return _c("h1", { key: car.id }, [
-                                details.part.cars.length <= 2
-                                  ? _c("span", [
-                                      _vm._v(_vm._s(car.brand) + " ")
-                                    ])
-                                  : _c("span", [
-                                      _vm._v(_vm._s(car.brand[0]) + " ")
-                                    ])
+                            [
+                              _c("span", [
+                                _vm._v(_vm._s(details.part.cars[0].brand) + " ")
                               ])
-                            }),
-                            0
+                            ]
                           ),
                           _vm._v(" "),
                           _c(
                             "td",
-                            { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                            { staticClass: "px-3 py-4 whitespace-no-wrap" },
                             [
                               _vm._v(
                                 "\n                                    " +
@@ -53978,7 +53937,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "td",
-                            { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                            { staticClass: "px-3 py-4 whitespace-no-wrap" },
                             [
                               details.price
                                 ? _c("span", [_vm._v(_vm._s(details.price))])
@@ -53988,7 +53947,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "td",
-                            { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                            { staticClass: "px-3 py-4 whitespace-no-wrap" },
                             [
                               details.price
                                 ? _c("span", [
@@ -54004,7 +53963,7 @@ var render = function() {
                             "td",
                             {
                               staticClass:
-                                "px-6 py-4 whitespace-no-wrap uppercase"
+                                "px-3 py-4 whitespace-no-wrap uppercase"
                             },
                             [
                               _vm._v(
@@ -54017,7 +53976,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "td",
-                            { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                            { staticClass: "px-3 py-4 whitespace-no-wrap" },
                             [
                               _vm._v(
                                 "\n                                    " +
@@ -58499,13 +58458,10 @@ var render = function() {
                             _c(
                               "svg",
                               {
-                                staticClass: "w-6 h-6",
-                                class: _vm.wishlist
-                                  ? "text-red-600"
-                                  : "text-gray-600",
+                                staticClass: "w-6 h-6 text-red-600",
                                 attrs: {
-                                  viewBox: "0 0 24 24",
-                                  fill: "none",
+                                  fill: "currentColor",
+                                  viewBox: "0 0 20 20",
                                   xmlns: "http://www.w3.org/2000/svg"
                                 }
                               },
@@ -58513,10 +58469,9 @@ var render = function() {
                                 _c("path", {
                                   attrs: {
                                     "fill-rule": "evenodd",
-                                    "clip-rule": "evenodd",
                                     d:
-                                      "M12.0122 5.57169L10.9252 4.48469C8.77734 2.33681 5.29493 2.33681 3.14705 4.48469C0.999162 6.63258 0.999162 10.115 3.14705 12.2629L11.9859 21.1017L11.9877 21.0999L12.014 21.1262L20.8528 12.2874C23.0007 10.1395 23.0007 6.65711 20.8528 4.50923C18.705 2.36134 15.2226 2.36134 13.0747 4.50923L12.0122 5.57169ZM11.9877 18.2715L16.9239 13.3352L18.3747 11.9342L18.3762 11.9356L19.4386 10.8732C20.8055 9.50635 20.8055 7.29028 19.4386 5.92344C18.0718 4.55661 15.8557 4.55661 14.4889 5.92344L12.0133 8.39904L12.006 8.3918L12.005 8.39287L9.51101 5.89891C8.14417 4.53207 5.92809 4.53207 4.56126 5.89891C3.19442 7.26574 3.19442 9.48182 4.56126 10.8487L7.10068 13.3881L7.10248 13.3863L11.9877 18.2715Z",
-                                    fill: "currentColor"
+                                      "M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z",
+                                    "clip-rule": "evenodd"
                                   }
                                 })
                               ]
@@ -58607,10 +58562,26 @@ var render = function() {
                         ),
                         _vm._v(" "),
                         _c("div", { staticClass: "flex items-center" }, [
-                          _c("p", { staticClass: "text-gray-600" }, [
-                            _vm._v(_vm._s(part.oem_price) + " "),
-                            _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
-                          ])
+                          part.part_type_id == "1"
+                            ? _c("p", { staticClass: "text-gray-600" }, [
+                                _vm._v(_vm._s(part.oem_price) + " "),
+                                _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          part.part_type_id == "2"
+                            ? _c("p", { staticClass: "text-gray-600" }, [
+                                _vm._v(_vm._s(part.aftermarket_price) + " "),
+                                _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          part.part_type_id == "3"
+                            ? _c("p", { staticClass: "text-gray-600" }, [
+                                _vm._v(_vm._s(part.used_price) + " "),
+                                _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                              ])
+                            : _vm._e()
                         ])
                       ]),
                       _vm._v(" "),
@@ -58944,7 +58915,7 @@ var render = function() {
                         {
                           key: car.id,
                           staticClass:
-                            "bg-white mx-1 px-3 py-2 rounded-full text-gray-600"
+                            "bg-white leading-10 mx-1 px-3 py-2 rounded-full text-gray-600"
                         },
                         [
                           _vm._v(
@@ -59605,7 +59576,7 @@ var render = function() {
                       {
                         key: car.id,
                         staticClass:
-                          "bg-white mx-1 px-3 py-2 rounded-full text-gray-600"
+                          "bg-blue-100 leading-10 mx-1 px-3 py-2 rounded-full text-gray-600"
                       },
                       [
                         _vm._v(
@@ -59627,7 +59598,9 @@ var render = function() {
                           "font-semibold md:text-xl text-gray-800 text-xs"
                       },
                       [
-                        _vm._v("\n             " + _vm._s(_vm.calcOemPrice)),
+                        _vm._v(
+                          "\n             " + _vm._s(_vm.calcOemPrice) + " "
+                        ),
                         _c("span", { staticClass: "text-gray-500 text-xs" }, [
                           _vm._v(_vm._s(_vm.__("QAR")))
                         ]),
@@ -59642,6 +59615,7 @@ var render = function() {
                               [
                                 _vm._v(
                                   _vm._s(_vm.part.oem_price) +
+                                    " " +
                                     _vm._s(_vm.__("QAR"))
                                 )
                               ]
@@ -60744,25 +60718,55 @@ var render = function() {
                 "bg-white mb-10 mx-3 overflow-hidden md:rounded-tr-lg shadow-lg rounded-lg"
             },
             [
-              _c(
-                "div",
-                {
-                  staticClass: "flex justify-between",
-                  class: part.sale > 0 ? "" : "py-2 md:pt-10"
-                },
-                [
-                  part.sale > 0
-                    ? _c(
-                        "p",
-                        {
-                          staticClass:
-                            "bg-teal-400 flex font-semibold justify-center md:h-12 md:px-1 md:py-3 md:rounded-none md:text-base md:w-12 px-2 rounded-br-lg shadow-lg text-white text-xs"
-                        },
-                        [_vm._v(_vm._s(part.sale) + "%")]
-                      )
-                    : _vm._e()
-                ]
-              ),
+              _c("div", { staticClass: "pb-12" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "float-left px-2 py-3 h-12 w-12 focus:outline-none outline-none",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.addWishlist(part)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "w-6 h-6 text-red-600",
+                        attrs: {
+                          fill: "currentColor",
+                          viewBox: "0 0 20 20",
+                          xmlns: "http://www.w3.org/2000/svg"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "fill-rule": "evenodd",
+                            d:
+                              "M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z",
+                            "clip-rule": "evenodd"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                part.sale > 0
+                  ? _c(
+                      "p",
+                      {
+                        staticClass:
+                          "float-right bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-br-lg shadow-lg text-sm text-white w-12"
+                      },
+                      [_vm._v("-" + _vm._s(part.sale) + "%")]
+                    )
+                  : _vm._e()
+              ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/store/details/" + part.id } }, [
                 !part.url[0]
@@ -60828,10 +60832,26 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "flex items-center" }, [
-                  _c("p", { staticClass: "text-gray-600" }, [
-                    _vm._v(_vm._s(part.oem_price) + " "),
-                    _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
-                  ])
+                  part.part_type_id == "1"
+                    ? _c("p", { staticClass: "text-gray-600" }, [
+                        _vm._v(_vm._s(part.oem_price) + " "),
+                        _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  part.part_type_id == "2"
+                    ? _c("p", { staticClass: "text-gray-600" }, [
+                        _vm._v(_vm._s(part.aftermarket_price) + " "),
+                        _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  part.part_type_id == "3"
+                    ? _c("p", { staticClass: "text-gray-600" }, [
+                        _vm._v(_vm._s(part.used_price) + " "),
+                        _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                      ])
+                    : _vm._e()
                 ])
               ]),
               _vm._v(" "),
@@ -61724,25 +61744,55 @@ var render = function() {
                 "bg-white mb-10 mx-3 overflow-hidden md:rounded-tr-lg shadow-lg rounded-lg"
             },
             [
-              _c(
-                "div",
-                {
-                  staticClass: "flex justify-between",
-                  class: part.sale > 0 ? "" : "py-2 md:pt-10"
-                },
-                [
-                  part.sale > 0
-                    ? _c(
-                        "p",
-                        {
-                          staticClass:
-                            "bg-teal-400 flex justify-center font-semibold md:h-12 md:px-1 md:rounded-none px-2 md:py-3 rounded-br-lg shadow-lg md:text-base text-xs text-white md:w-12"
-                        },
-                        [_vm._v(_vm._s(part.sale) + "%")]
-                      )
-                    : _vm._e()
-                ]
-              ),
+              _c("div", { staticClass: "pb-12" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "float-left px-2 py-3 h-12 w-12 focus:outline-none outline-none",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.addWishlist(part)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "w-6 h-6 text-red-600",
+                        attrs: {
+                          fill: "currentColor",
+                          viewBox: "0 0 20 20",
+                          xmlns: "http://www.w3.org/2000/svg"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "fill-rule": "evenodd",
+                            d:
+                              "M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z",
+                            "clip-rule": "evenodd"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                part.sale > 0
+                  ? _c(
+                      "p",
+                      {
+                        staticClass:
+                          "float-right bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-br-lg shadow-lg text-sm text-white w-12"
+                      },
+                      [_vm._v("-" + _vm._s(part.sale) + "%")]
+                    )
+                  : _vm._e()
+              ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/store/details/" + part.id } }, [
                 !part.url[0]
@@ -61808,10 +61858,26 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "flex items-center" }, [
-                  _c("p", { staticClass: "text-gray-600" }, [
-                    _vm._v(_vm._s(part.oem_price) + " "),
-                    _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
-                  ])
+                  part.part_type_id == "1"
+                    ? _c("p", { staticClass: "text-gray-600" }, [
+                        _vm._v(_vm._s(part.oem_price) + " "),
+                        _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  part.part_type_id == "2"
+                    ? _c("p", { staticClass: "text-gray-600" }, [
+                        _vm._v(_vm._s(part.aftermarket_price) + " "),
+                        _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  part.part_type_id == "3"
+                    ? _c("p", { staticClass: "text-gray-600" }, [
+                        _vm._v(_vm._s(part.used_price) + " "),
+                        _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                      ])
+                    : _vm._e()
                 ])
               ]),
               _vm._v(" "),
@@ -62118,25 +62184,55 @@ var render = function() {
                 "bg-white mb-10 mx-3 overflow-hidden md:rounded-tr-lg shadow-lg rounded-lg"
             },
             [
-              _c(
-                "div",
-                {
-                  staticClass: "flex justify-between",
-                  class: part.sale > 0 ? "" : "pt-12"
-                },
-                [
-                  part.sale > 0
-                    ? _c(
-                        "p",
-                        {
-                          staticClass:
-                            "bg-teal-400 flex justify-center font-semibold h-12 md:px-1 md:rounded-none px-2 py-3  shadow-lg text-sm text-white w-12"
-                        },
-                        [_vm._v("-" + _vm._s(part.sale) + "%")]
-                      )
-                    : _vm._e()
-                ]
-              ),
+              _c("div", { staticClass: "pb-12" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "float-left px-2 py-3 h-12 w-12 focus:outline-none outline-none",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.addWishlist(part)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "w-6 h-6 text-red-600",
+                        attrs: {
+                          fill: "currentColor",
+                          viewBox: "0 0 20 20",
+                          xmlns: "http://www.w3.org/2000/svg"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "fill-rule": "evenodd",
+                            d:
+                              "M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z",
+                            "clip-rule": "evenodd"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                part.sale > 0
+                  ? _c(
+                      "p",
+                      {
+                        staticClass:
+                          "float-right bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-br-lg shadow-lg text-sm text-white w-12"
+                      },
+                      [_vm._v("-" + _vm._s(part.sale) + "%")]
+                    )
+                  : _vm._e()
+              ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/store/details/" + part.id } }, [
                 !part.url[0]
@@ -62202,10 +62298,26 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "flex items-center" }, [
-                  _c("p", { staticClass: "text-gray-600" }, [
-                    _vm._v(_vm._s(part.oem_price) + " "),
-                    _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
-                  ])
+                  part.part_type_id == "1"
+                    ? _c("p", { staticClass: "text-gray-600" }, [
+                        _vm._v(_vm._s(part.oem_price) + " "),
+                        _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  part.part_type_id == "2"
+                    ? _c("p", { staticClass: "text-gray-600" }, [
+                        _vm._v(_vm._s(part.aftermarket_price) + " "),
+                        _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  part.part_type_id == "3"
+                    ? _c("p", { staticClass: "text-gray-600" }, [
+                        _vm._v(_vm._s(part.used_price) + " "),
+                        _c("span", [_vm._v(_vm._s(_vm.__("QAR")))])
+                      ])
+                    : _vm._e()
                 ])
               ]),
               _vm._v(" "),

@@ -47,8 +47,8 @@ class StoreController extends Controller
                 'parts' => $parts,
                 'cars' => Car::all(),
                 'cartQuantity' => Cart::getTotalQuantity(),
-                'cartTotalPrice' => Cart::getContent(),
-                'cartCollection' => Cart::getTotal(),
+                'cartTotalPrice' => Cart::getTotal(),
+                'cartCollection' => Cart::getContent(),
                 'wishlistQuantity' => $wishlistQuantity,
                 'wishlistContent' => $wishlistContent,
             ]

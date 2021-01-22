@@ -49,8 +49,11 @@
         <!-- main section -->
     <div class="container grid grid-cols-2 md:grid-cols-4 md:px-16 mx-auto py-10">            
         <div class="bg-white mb-10 mx-3 overflow-hidden md:rounded-tr-lg shadow-lg rounded-lg" v-for="(part, index) in filteredList" :key="index">
-            <div class="flex justify-between" :class="part.sale > 0 ? '':'py-2 md:pt-10'">
-                <p v-if="part.sale > 0" class="bg-teal-400 flex font-semibold justify-center md:h-12 md:px-1 md:py-3 md:rounded-none md:text-base md:w-12 px-2 rounded-br-lg shadow-lg text-white text-xs">{{part.sale}}%</p>
+            <div class="pb-12" >
+                <button type="button" @click="addWishlist(part)"  class="float-left px-2 py-3 h-12 w-12 focus:outline-none outline-none">
+                    <svg class="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                </button>
+                <p v-if="part.sale > 0" class="float-right bg-teal-400 font-semibold h-12 md:px-1 md:rounded-none px-2 py-3 rounded-br-lg shadow-lg text-sm text-white w-12">-{{part.sale}}%</p>
             </div>
             
             <a :href="`/store/details/${part.id}`">
@@ -62,9 +65,10 @@
                 <a :href="`/store/details/${part.id}`" class="font-bold text-xs md:text-base text-teal-500 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
                 <p class="break-all font-medium text-gray-600 text-xs">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].brand_ar}}</p>
                 <p class="break-all font-medium text-gray-600 text-xs "><span dir="auto">{{__('number')}}:</span>{{part.number}}</p>
-                <div class="flex items-center">
-                    <!-- <p class="text-gray-800 text-xl font-semibold">{{calcOemPrice[0]}}<span class="px-2 text-gray-500 text-sm">{{__('QAR')}}</span></p> -->
-                    <p class="text-gray-600">{{part.oem_price}} <span>{{__('QAR')}}</span> </p>
+                 <div class="flex items-center">                           
+                    <p v-if="part.part_type_id == '1'" class="text-gray-600">{{part.oem_price}} <span>{{__('QAR')}}</span> </p>
+                    <p v-if="part.part_type_id == '2'" class="text-gray-600">{{part.aftermarket_price}} <span>{{__('QAR')}}</span> </p>
+                    <p v-if="part.part_type_id == '3'" class="text-gray-600">{{part.used_price}} <span>{{__('QAR')}}</span> </p>
                 </div>
             </div>
 
@@ -112,6 +116,7 @@ export default {
     data() {
         return {
             search:'',
+            wishlist:0,
         }
     },
 
@@ -120,23 +125,18 @@ export default {
       return this.parts.filter(part => {
         return part.name.toLowerCase().includes(this.search.toLowerCase())
       })
-    },
-    calcOemPrice()
-    {
-        return this.parts.map(part => {
-            if (part.sale) {                    
-            return  (part.oem_price - ((part.sale / 100) * part.oem_price)).toFixed();
-            }
-            return  (part.oem_price - (part.category.sale / 100) * part.oem_price).toFixed();
-        })
-    },
+    },   
   },
 
     methods: {
         addCart(part) {
         this.$inertia.post('/store/carts', part);
         },
-
+         addWishlist(part) 
+        {
+            // this.wishlist = part.id;
+            this.$inertia.post('/store/wishlist', part);
+        },
     },
 }
 </script>
