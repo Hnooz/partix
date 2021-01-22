@@ -31,12 +31,12 @@
                 <div class="flex">
                     <div>
                         <div class="bg-white flex h-70 items-center justify-center w-70">
-                            <img class="h-40 object-center object-cover w-40" :src="part.url[0]" alt="">
+                            <img class="h-40 object-center object-cover w-40" :src="img" alt="">
                         </div>
                        <div class="flex justify-around mt-6">
                         <slide-image class="max-w-xs" :arrows="true" :slidesToShow=2>
                             <div class="flex justify-center bg-white mx-2" v-for="url in part.url" :key="url.index">
-                                <img class="h-12 mx-auto my-2 object-center object-cover w-12" :src="url" alt="">
+                                <img class="h-12 mx-auto my-2 object-center object-cover w-12" :src="url" alt="" @click="changImage(url)">
                             </div>
                         </slide-image> 
                        </div>
@@ -321,6 +321,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
             ],
         data() {
             return {
+                img:'',
                 toggleModal:false,
                 quantity:1,                
                 form: {
@@ -341,6 +342,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
         },
         created() {
             this.form = this.part;
+            this.img = this.part.url[0]
         },
         computed: {
             calcOemPrice()
@@ -394,7 +396,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
 
             const both = Object.assign(form , item);
 
-            if (this.cartItem != null) {
+            if (this.cartItem != null && this.cartItem.attributes['part_type_id'] == this.form.part_type_id) {
                 this.$inertia.put(`/store/cart/${this.cartItem.id}`, both);
             } else {
                 const newadd = this.form;
@@ -415,15 +417,13 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
                  this.quantity-- ; 
              } else {
                   this.cartItem.quantity--; 
-             }
-                        
+             }                        
         },
         oem()
         {         
             if (this.form.oem_price == 0) {
                 this.toggleModal = true;
-            }   
-            
+            }               
             this.form.part_type_id = 1;
         },
         aftermark()
@@ -439,9 +439,11 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
                 this.toggleModal = true;
             }       
             this.form.part_type_id = 3;
+        },
+        changImage(url)
+        {
+            this.img = url
         }
-
-
     },
     }
 </script>

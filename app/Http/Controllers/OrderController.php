@@ -109,7 +109,7 @@ class OrderController extends Controller
             $part_type = PartType::find($cart->attributes->part_type_id);
             $details = OrderDetails::create([
                 'order_id' => $order->id,
-                'part_id' => $cart->id,
+                'part_id' => $cart->attributes->partId,
                 'part_type' => $part_type->name,
                 'quantity' => $cart->quantity,
                 'price' => round($cart->price),

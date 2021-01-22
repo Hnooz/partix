@@ -8,15 +8,18 @@
             <base-panel class="md:max-w-3xl mt-4">
                 <form @submit.prevent="submit">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div>
-                            <base-input label="Phone" name="customer_phone" v-model="form.customer_phone" :error="$page.errors.customer_phone" tabindex="1" required></base-input>
+                         <div>
+                            <base-input label="Phone" name="customer_phone" v-model="form.customer_name" :error="$page.errors.customer_name" tabindex="1" required></base-input>
                         </div>
                         <div>
-                            <base-input type="text" label="Address" name="address" v-model="form.address"  tabindex="2" required></base-input>
+                            <base-input label="Phone" name="customer_phone" v-model="form.customer_phone" :error="$page.errors.customer_phone" tabindex="2" required></base-input>
+                        </div>
+                        <div>
+                            <base-input type="text" label="Address" name="address" v-model="form.customer_address" :error="$page.errors.customer_address"  tabindex="3" required></base-input>
                         </div>
                         <div>
                             <label class="text-gray-700">Status</label>
-                                <select  name="order_status_id"  v-model="form.order_status_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.order_status_id" required tabindex="3">
+                                <select  name="order_status_id"  v-model="form.order_status_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.order_status_id" required tabindex="4">
                                    <option value="0">select super</option>
                                     <option v-for="status in order_status" :key="status.index" :value="status.id">{{status.name}}</option>
                                 </select>
@@ -42,8 +45,9 @@
         data() {
             return {
                 form: {
-                    address: '',
+                    customer_address: '',
                     customer_phone: '',
+                    customer_name: '',
                     order_status_id: '',
                 }
             }

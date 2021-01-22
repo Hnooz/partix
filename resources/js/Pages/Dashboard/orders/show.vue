@@ -59,7 +59,7 @@
                                 <tbody class="bg-white text-gray-500 text-sm md:text-base">
                                 <tr v-for="details in order.order_details" :key="details.index">
                                     <td class="px-3 py-4 whitespace-no-wrap"> 
-                                        {{ details.part.id }}
+                                        {{ details.id }}
                                     </td>
                                     <td class="px-3 py-4 whitespace-no-wrap capitalize">
                                         <a :href="'/dashboard/parts/' + details.part.slug" >{{ details.part.name }}</a>

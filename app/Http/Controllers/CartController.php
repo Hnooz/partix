@@ -30,7 +30,7 @@ class CartController extends Controller
 
         $part = Part::find($request->id);
 
-        if ($part->part_type_id == 1) {
+        if ($request->part_type_id == 1) {
             if (isset($part->sale) > 0) { // price if part has sale
                 $price = $part->oem_price - (($part->sale / 100) * $part->oem_price);
             } elseif (isset($category->sale) > 0) {
@@ -38,7 +38,7 @@ class CartController extends Controller
             } else {
                 $price = $part->oem_price;
             }
-        } elseif ($part->part_type_id == 2) {
+        } elseif ($request->part_type_id == 2) {
             if (isset($part->sale) > 0) { // price if part has sale
                 $price = $part->aftermarket_price - (($part->sale / 100) * $part->aftermarket_price);
             } elseif (isset($category->sale) > 0) {
@@ -57,11 +57,12 @@ class CartController extends Controller
         }
         if ($request->quantity) {
             Cart::add([
-                'id' => $request->id,
+                'id' => $request->id.$request->name.$request->part_type_id,
                 'name' => $request->name,
                 'price' => $price,
                 'quantity' => $request->quantity,
                 'attributes' => [
+                    'partId' => $part->id,
                     'slug' => $request->slug,
                     'supplier' => isset($supplier->name),
                     'part_type_id' => $request->part_type_id,
@@ -70,11 +71,12 @@ class CartController extends Controller
             ]);
         } else {
             Cart::add([
-                'id' => $request->id,
+                'id' => $request->id.$request->name.$request->part_type_id,
                 'name' => $request->name,
                 'price' => $price,
                 'quantity' => 1,
                 'attributes' => [
+                    'partId' => $part->id,
                     'slug' => $request->slug,
                     'supplier' => isset($supplier->name),
                     'part_type_id' => $request->part_type_id,
@@ -155,7 +157,7 @@ class CartController extends Controller
 
         session()->flash('toast', [
             'type' => 'error',
-            'message' => `cart was cleared successfuly`,
+            'message' => 'cart was cleared successfuly',
         ]);
 
         return redirect()->route('store.index');

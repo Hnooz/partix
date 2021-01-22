@@ -80,7 +80,7 @@ class StoreController extends Controller
     public function details(Part $part)
     {
         $wish_list = app('wishlist');
-        $cartItem = Cart::get($part->id);
+        $cartItem = Cart::get($part->id.$part->name.$part->part_type_id);
         $latest_category = Category::latest()->limit(3)->get();
         $wishlistQuantity = $wish_list->getTotalQuantity();
         $wishlistContent = $wish_list->getContent();

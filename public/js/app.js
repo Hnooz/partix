@@ -3579,6 +3579,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3588,8 +3591,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        address: '',
+        customer_address: '',
         customer_phone: '',
+        customer_name: '',
         order_status_id: ''
       }
     };
@@ -5871,6 +5875,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['part', 'category', 'cartQuantity', 'cartCollection', 'cartItem', 'part_type', 'latest_category', 'cartTotalPrice', 'wishlistQuantity', 'wishlistContent'],
   data: function data() {
     return {
+      img: '',
       toggleModal: false,
       quantity: 1,
       form: {
@@ -5896,6 +5901,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.form = this.part;
+    this.img = this.part.url[0];
   },
   computed: {
     calcOemPrice: function calcOemPrice() {
@@ -5945,7 +5951,7 @@ __webpack_require__.r(__webpack_exports__);
       var item = this.cartItem;
       var both = Object.assign(form, item);
 
-      if (this.cartItem != null) {
+      if (this.cartItem != null && this.cartItem.attributes['part_type_id'] == this.form.part_type_id) {
         this.$inertia.put("/store/cart/".concat(this.cartItem.id), both);
       } else {
         var newadd = this.form;
@@ -5989,6 +5995,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.form.part_type_id = 3;
+    },
+    changImage: function changImage(url) {
+      this.img = url;
     }
   }
 });
@@ -52912,8 +52921,31 @@ var render = function() {
                         attrs: {
                           label: "Phone",
                           name: "customer_phone",
-                          error: _vm.$page.errors.customer_phone,
+                          error: _vm.$page.errors.customer_name,
                           tabindex: "1",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.form.customer_name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "customer_name", $$v)
+                          },
+                          expression: "form.customer_name"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("base-input", {
+                        attrs: {
+                          label: "Phone",
+                          name: "customer_phone",
+                          error: _vm.$page.errors.customer_phone,
+                          tabindex: "2",
                           required: ""
                         },
                         model: {
@@ -52936,15 +52968,16 @@ var render = function() {
                           type: "text",
                           label: "Address",
                           name: "address",
-                          tabindex: "2",
+                          error: _vm.$page.errors.customer_address,
+                          tabindex: "3",
                           required: ""
                         },
                         model: {
-                          value: _vm.form.address,
+                          value: _vm.form.customer_address,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "address", $$v)
+                            _vm.$set(_vm.form, "customer_address", $$v)
                           },
-                          expression: "form.address"
+                          expression: "form.customer_address"
                         }
                       })
                     ],
@@ -52972,7 +53005,7 @@ var render = function() {
                           name: "order_status_id",
                           error: _vm.$page.errors.order_status_id,
                           required: "",
-                          tabindex: "3"
+                          tabindex: "4"
                         },
                         on: {
                           change: function($event) {
@@ -53884,7 +53917,7 @@ var render = function() {
                             [
                               _vm._v(
                                 " \n                                    " +
-                                  _vm._s(details.part.id) +
+                                  _vm._s(details.id) +
                                   "\n                                "
                               )
                             ]
@@ -58805,7 +58838,7 @@ var render = function() {
                     [
                       _c("img", {
                         staticClass: "h-40 object-center object-cover w-40",
-                        attrs: { src: _vm.part.url[0], alt: "" }
+                        attrs: { src: _vm.img, alt: "" }
                       })
                     ]
                   ),
@@ -58831,7 +58864,12 @@ var render = function() {
                               _c("img", {
                                 staticClass:
                                   "h-12 mx-auto my-2 object-center object-cover w-12",
-                                attrs: { src: url, alt: "" }
+                                attrs: { src: url, alt: "" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.changImage(url)
+                                  }
+                                }
                               })
                             ]
                           )
