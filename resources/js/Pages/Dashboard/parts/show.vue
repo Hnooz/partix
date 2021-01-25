@@ -45,7 +45,7 @@
                             </div>
                             <div class="my-4">
                                 <h1 class="font-semibold my-2 text-teal-700">
-                                    {{__('category')}} : <span class="text-gray-600">{{$page.locale == 'en' ?  part.category.name : part.category.name_ar}}</span>
+                                    {{__('category')}} : <span class="text-gray-600" v-if="part.category =! null">{{$page.locale == 'en' ?  part.category.name : part.category.name_ar}}</span>
                                 </h1>
                             </div>
                             <div class="">   

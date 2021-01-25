@@ -52,7 +52,7 @@ class Order extends Model
         $mutable = Carbon::now(); //CUREENT DATE
         $data = $request->validate([
             'customer_name' => 'required',
-            'customer_phone' => 'required',
+            'customer_phone' => 'required|min:8|max:8',
             'customer_address' => 'required',
         ]);
 

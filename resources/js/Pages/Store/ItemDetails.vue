@@ -9,8 +9,8 @@
     <div class="bg-teal-800 py-5 hidden md:block">
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-16 text-white">
             <div class="flex">
-                <h1>{{$page.locale == 'en' ? part.category.super_category.name : part.category.super_category.name_ar}} |</h1>
-                <a :href="'/store/items/'+part.category_id" class="font-normal capitalize">&nbsp;{{$page.locale == 'en' ? part.category.name : part.category.name_ar}}&nbsp;</a> 
+                <h1 v-if="part.category != null">{{$page.locale == 'en' ? part.category.super_category.name : part.category.super_category.name_ar}} |</h1>
+                <a :href="'/store/items/'+part.category_id" class="font-normal capitalize" v-if="part.category != null">&nbsp;{{$page.locale == 'en' ? part.category.name : part.category.name_ar}}&nbsp;</a> 
                 <span class="font-normal capitalize"> | {{ $page.locale == 'en' ? part.name : part.name_ar}}</span>
             </div>
             <div class="flex items-center">
@@ -31,7 +31,7 @@
                 <div class="flex">
                     <div>
                         <div class="bg-white flex h-70 items-center justify-center w-70">
-                            <img class="h-40 object-center object-cover w-40" :src="img" alt="">
+                            <img class="h-full object-center object-cover w-full" :src="img" alt="">
                         </div>
                        <div class="flex justify-around mt-6">
                         <slide-image class="max-w-xs" :arrows="true" :slidesToShow=2>
@@ -45,7 +45,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="capitalize font-semibold text-3xl text-teal-700">{{$page.locale == 'en' ? part.name : part.name_ar}}</p>                              
-                                <p class="capitalize font-medium text-teal-400 text-xl">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].brand_ar}}</p>                            
+                                <p class="capitalize font-medium text-teal-400 text-xl" v-if="part.cars.length > 0">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].brand_ar}}</p>                            
                             </div>
                         </div>
                         <div class="">
@@ -54,15 +54,17 @@
                             </p>
                         </div>
                         <div>
-                            <span class="bg-white leading-10 mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{$page.locale == 'en' ? car.brand : car.brand_ar}}</span>
+                            <h1 v-if="part.cars.length > 0">
+                                <span class="bg-white leading-10 mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{$page.locale == 'en' ? car.brand : car.brand_ar}}</span>
+                            </h1>
                         </div>
                         <form @submit.prevent="submit">
                             <div class="my-4">
                                 <h1 class="text-red-500 text-sm"><span class="capitalize text-base text-gray-600">{{__('hint')}}:</span> {{__('you can order directly if part type price = 0')}}</h1>
                                 <h1 class="capitalize my-3 text-gray-600">{{__('chose type')}} :</h1>
-                                <button type="button" @click="oem()" class="bg-gray-800 capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white">oem {{part.oem_price}}$</button>
-                                <button type="button" @click="aftermark()" class="bg-gray-800 capitalize focus:outline-none my-2 outline-none px-3 py-1 rounded-lg text-white">aftermarket {{part.aftermarket_price}}$</button>
-                                <button type="button" @click="used()" class="bg-gray-800 block capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white">used {{part.used_price}}$</button>
+                                <button type="button" @click="oem()" class="border-2 border-gray-800 capitalize focus:outline-none hover:bg-gray-800 hover:text-white outline-none px-3 py-1 rounded-lg text-gray-800">oem {{part.oem_price}}$</button>
+                                <button type="button" @click="aftermark()" class="border-2 border-gray-800 capitalize focus:outline-none hover:bg-gray-800 hover:text-white outline-none my-3 px-3 py-1 rounded-lg text-gray-800">aftermarket {{part.aftermarket_price}}$</button>
+                                <button type="button" @click="used()" class="border-2 border-gray-800 capitalize focus:outline-none hover:bg-gray-800 hover:text-white outline-none px-3 py-1 rounded-lg text-gray-800">used {{part.used_price}}$</button>
                             </div>
                             <div class="flex items-center">
                                 <h1 class="capitalize text-teal-900">{{__('quantity')}}:</h1>
@@ -86,12 +88,7 @@
                                 </button>
                             </div>
                         </form>
-                        <div class="flex">
-                            <a href="#" class="bg-blue-700 flex items-center p-2 rounded text-white"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.19795 21.5H13.198V13.4901H16.8021L17.198 9.50977H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H17.198V2.5H14.198C11.4365 2.5 9.19795 4.73858 9.19795 7.5V9.50977H7.19795L6.80206 13.4901H9.19795V21.5Z" fill="currentColor" /></svg></a>
-                            <a href="#" class="bg-blue-400 flex items-center mx-1 p-2 rounded text-white"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 3C9.10457 3 10 3.89543 10 5V8H16C17.1046 8 18 8.89543 18 10C18 11.1046 17.1046 12 16 12H10V14C10 15.6569 11.3431 17 13 17H16C17.1046 17 18 17.8954 18 19C18 20.1046 17.1046 21 16 21H13C9.13401 21 6 17.866 6 14V5C6 3.89543 6.89543 3 8 3Z" fill="currentColor" /></svg></a>
-                            <a href="#" class="bg-green-500 p-2 rounded"><svg class="h-6 w-6" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 418.135 418.135" style="enable-background:new 0 0 418.135 418.135;" xml:space="preserve"><g>	<path style="fill:#fff;" d="M198.929,0.242C88.5,5.5,1.356,97.466,1.691,208.02c0.102,33.672,8.231,65.454,22.571,93.536L2.245,408.429c-1.191,5.781,4.023,10.843,9.766,9.483l104.723-24.811c26.905,13.402,57.125,21.143,89.108,21.631c112.869,1.724,206.982-87.897,210.5-200.724C420.113,93.065,320.295-5.538,198.929,0.242z M323.886,322.197c-30.669,30.669-71.446,47.559-114.818,47.559c-25.396,0-49.71-5.698-72.269-16.935l-14.584-7.265l-64.206,15.212l13.515-65.607l-7.185-14.07c-11.711-22.935-17.649-47.736-17.649-73.713c0-43.373,16.89-84.149,47.559-114.819c30.395-30.395,71.837-47.56,114.822-47.56C252.443,45,293.218,61.89,323.887,92.558c30.669,30.669,47.559,71.445,47.56,114.817C371.446,250.361,354.281,291.803,323.886,322.197z"/><path style="fill:#fff;" d="M309.712,252.351l-40.169-11.534c-5.281-1.516-10.968-0.018-14.816,3.903l-9.823,10.008c-4.142,4.22-10.427,5.576-15.909,3.358c-19.002-7.69-58.974-43.23-69.182-61.007c-2.945-5.128-2.458-11.539,1.158-16.218l8.576-11.095c3.36-4.347,4.069-10.185,1.847-15.21l-16.9-38.223c-4.048-9.155-15.747-11.82-23.39-5.356c-11.211,9.482-24.513,23.891-26.13,39.854c-2.851,28.144,9.219,63.622,54.862,106.222c52.73,49.215,94.956,55.717,122.449,49.057c15.594-3.777,28.056-18.919,35.921-31.317C323.568,266.34,319.334,255.114,309.712,252.351z"/></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></a>
-                            <a href="#" class="bg-red-600 flex items-center mx-1 p-2 rounded text-white"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 7H19C19.5523 7 20 7.44771 20 8V16C20 16.5523 19.5523 17 19 17H5C4.44772 17 4 16.5523 4 16V8C4 7.44772 4.44772 7 5 7ZM2 8C2 6.34315 3.34315 5 5 5H19C20.6569 5 22 6.34315 22 8V16C22 17.6569 20.6569 19 19 19H5C3.34315 19 2 17.6569 2 16V8ZM10 9L14 12L10 15V9Z" fill="currentColor" /></svg></a>
-                        </div>
+                        
                     </div>
                     
                 </div>
@@ -148,7 +145,7 @@
         <div class="px-4">
             <a href="#" class="font-bold  text-xs md:text-base text-teal-500 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
             <div class="my-3">
-                <span class="bg-blue-100 leading-10 mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{$page.locale == 'en' ? car.brand : car.brand_ar}}</span>
+                <span class="bg-blue-100 leading-10 mx-1 px-3 py-2 rounded-full text-sm text-gray-600" v-for="car in part.cars" :key="car.id">{{$page.locale == 'en' ? car.brand : car.brand_ar}}</span>
             </div>                           
             <p class="font-semibold md:text-xl text-gray-800 text-xs" v-if="form.part_type_id == 1">
                 {{calcOemPrice}} <span class="text-gray-500 text-xs">{{__('QAR')}}</span>
@@ -169,9 +166,9 @@
         <div class="px-4">
             <h1 class="text-red-500 text-xs"><span class="capitalize text-sm text-gray-600">{{__('hint')}}:</span> {{__('you can order directly if part type price = 0')}}</h1>
             <h1 class="capitalize text-gray-600 text-sm">{{__('chose type')}} :</h1>
-            <button type="button" @click="oem()" class="bg-gray-800 capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white text-xs">oem {{part.oem_price}}$</button>
-            <button type="button" @click="aftermark()" class="bg-gray-800 capitalize focus:outline-none my-2 outline-none px-3 py-1 rounded-lg text-white text-xs">aftermarket {{part.aftermarket_price}}$</button>
-            <button type="button" @click="used()" class="bg-gray-800 block capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white text-xs">used {{part.used_price}}$</button>
+            <button type="button" @click="oem()" class="border-2 border-gray-800 capitalize focus:outline-none hover:bg-gray-800 hover:text-white outline-none px-3 py-1 rounded-lg text-gray-800 text-xs">oem {{part.oem_price}}$</button>
+            <button type="button" @click="aftermark()" class="border-2 border-gray-800 capitalize focus:outline-none hover:bg-gray-800 hover:text-white outline-none my-2 px-3 py-1 rounded-lg text-gray-800 text-xs">aftermarket {{part.aftermarket_price}}$</button>
+            <button type="button" @click="used()" class="block border-2 border-gray-800 capitalize focus:outline-none hover:bg-gray-800 hover:text-white outline-none px-3 py-1 rounded-lg text-gray-800 text-xs">used {{part.used_price}}$</button>
         </div>
 
         <div class="flex items-center px-4">
@@ -210,72 +207,77 @@
     </div>
 
    <div v-if="toggleModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
-        <div class="relative w-auto my-6 mx-auto max-w-6xl">        
+        <div class="max-w-sm mx-auto my-6 relative w-full">        
           <div class="relative flex flex-col w-full outline-none focus:outline-none">          
             <div class="-m-10 p-6 flex-auto">            
                 <div class="">
-                    <div x-data="{ cartOpen: false , isOpen: false }">
+                    <div>
                         <main class="">
                             <div class="bg-white mt-16 px-6 py-8 shadow-lg">
                                 <div class="flex justify-between">
                                     <h3 class="text-teal-800 text-2xl font-medium">{{__('Checkout')}}</h3>
                                     <button class="focus:outline-none outline-none" @click="toggleModal = !toggleModal">X</button>
+                                </div>   
+                                <div>
+                                    <div>
+                                   <form class="mt-8 pb-4" @submit.prevent="submit">
+                                        <div class="mt-8">
+                                            <h4 class="text-sm text-teal-700 font-medium">{{__('name')}}</h4>
+                                            <div class="mt-6 flex">
+                                                <label class="block flex-1">
+                                                    <input type="text" name="customer_name" v-model="modelForm.customer_name" :error="$page.errors.customer_name" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('name')" required>
+                                                    <span class="text-red-500 text-xs mt-4" v-if="$page.errors.customer_name">{{ $page.errors.customer_name[0] }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mt-8">
+                                            <h4 class="text-sm text-teal-700 font-medium">{{__('Delivery address')}}</h4>
+                                            <div class="mt-6 flex">
+                                                <label class="block flex-1">
+                                                    <input type="text" name="customer_address" v-model="modelForm.customer_address" :error="$page.errors.customer_address" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('Address')" required>
+                                                    <span class="text-red-500 text-xs mt-4" v-if="$page.errors.customer_address">{{ $page.errors.customer_address[0] }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mt-8">
+                                            <h4 class="text-sm text-teal-700 font-medium">{{__('Phone')}}</h4>
+                                            <div class="mt-6 flex">
+                                                <label class="block w-3/12">
+                                                    <select class="form-select text-gray-700 mt-1 block w-full">
+                                                        <option>+974</option>
+                                                    </select>
+                                                </label>
+                                                <label class="block flex-1 ml-3">
+                                                    <input type="number" max="8" min="8" name="customer_phone" v-model="modelForm.customer_phone" :error="$page.errors.customer_phone" class="form-input mt-1 block w-full text-gray-700" placeholder="your number" required>
+                                                    <span class="text-red-500 text-xs mt-4" v-if="$page.errors.customer_phone">{{ $page.errors.customer_phone[0] }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mt-8">
+                                            <h4 class="text-sm text-teal-700 font-medium capitalize">{{__('coupon code')}}</h4>
+                                            <div class="mt-6 flex">
+                                                <label class="block flex-1">
+                                                    <input type="text" name="coupon" v-model="modelForm.coupon" :error="$page.errors.coupon" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('add promocode')">
+                                                    <span class="text-red-500 text-xs mt-4" v-if="$page.errors.coupon">{{ $page.errors.coupon[0] }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between mt-8">
+                                            <a href="/store" class="flex items-center text-teal-700 text-sm font-medium rounded hover:underline focus:outline-none">
+                                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
+                                                <span class="mx-2">{{__('Back To Shop')}}</span>
+                                            </a>
+                                            <button class="flex items-center px-3 py-2 bg-teal-800 text-white text-sm font-medium rounded-md hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
+                                                <span>{{__('Payment')}}</span>
+                                                <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                            </button>
+                                        </div>
+                                    </form> 
                                 </div>
+                                </div>                                                            
                                 
-                                <div class="">
-                                    <div class="">
-                                        <form class="mt-8 pb-4" @submit.prevent="submit">
-                                            <div class="mt-8">
-                                                <h4 class="text-sm text-teal-700 font-medium">{{__('name')}}</h4>
-                                                <div class="mt-6 flex">
-                                                    <label class="block flex-1">
-                                                        <input type="text" name="customer_name" v-model="modelForm.customer_name" :error="$page.errors.customer_name" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('name')" required>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="mt-8">
-                                                <h4 class="text-sm text-teal-700 font-medium">{{__('Delivery address')}}</h4>
-                                                <div class="mt-6 flex">
-                                                    <label class="block flex-1">
-                                                        <input type="text" name="customer_address" v-model="modelForm.customer_address" :error="$page.errors.customer_address" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('Address')" required>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="mt-8">
-                                                <h4 class="text-sm text-teal-700 font-medium">{{__('Phone')}}</h4>
-                                                <div class="mt-6 flex">
-                                                    <label class="block w-3/12">
-                                                        <select class="form-select text-gray-700 mt-1 block w-full">
-                                                            <option>+974</option>
-                                                        </select>
-                                                    </label>
-                                                    <label class="block flex-1 ml-3">
-                                                        <input type="number" name="customer_phone" v-model="modelForm.customer_phone" :error="$page.errors.customer_phone" class="form-input mt-1 block w-full text-gray-700" placeholder="your number" required>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="mt-8">
-                                                <h4 class="text-sm text-teal-700 font-medium capitalize">{{__('coupon code')}}</h4>
-                                                <div class="mt-6 flex">
-                                                    <label class="block flex-1">
-                                                        <input type="text" name="coupon" v-model="modelForm.coupon" :error="$page.errors.coupon" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('add promocode')">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-center justify-between mt-8">
-                                                <a href="/store" class="flex items-center text-teal-700 text-sm font-medium rounded hover:underline focus:outline-none">
-                                                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
-                                                    <span class="mx-2">{{__('Back To Shop')}}</span>
-                                                </a>
-                                                <button class="flex items-center px-3 py-2 bg-teal-800 text-white text-sm font-medium rounded-md hover:bg-teal-700 focus:outline-none focus:bg-teal-700">
-                                                    <span>{{__('Payment')}}</span>
-                                                    <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
                                     
-                                </div>
+                                                                                                
                             </div>
                         </main>
                     </div>

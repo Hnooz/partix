@@ -27,7 +27,7 @@
                 <ul class="leading-relaxed text-sm">
                     <li class="capitalize font-medium text-2xl text-teal-500">{{__('structure')}}</li>
                     <span class="-my-2 absolute bg-teal-500 h-1 w-8"></span>
-                    <li><a href="#">{{__('home')}}</a></li>
+                    <li><a href="/store">{{__('home')}}</a></li>
                     <li><a href="#">{{__('about us')}}</a></li>
                     <li><a href="#">{{__('contact')}}</a></li>
                 </ul>

@@ -90,7 +90,7 @@ class PartController extends Controller
     {
         $data = $request->validated();
 
-        $part->update(Arr::except($data, 'cars'));
+        $part->update(Arr::except($data, ['cars','images']));
         
         if ($request->filled('cars')) {
             $part->cars()->sync(json_decode($data['cars']));

@@ -43,9 +43,11 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     Route::resource('parts', 'PartController')->except('show');
     Route::get('parts/{slug}', 'PartController@show')->name('parts.show');
     //cars and brands
+    Route::post('brands/import', 'ImportController@brands')->name('brands.import');
     Route::get('brands/{brand}/cars/create', 'BrandCarsController@show')->name('brands.cars');
     Route::post('brands/{brand}/cars', 'BrandCarsController@store')->name('brands.cars.store');
     Route::resource('brands', 'BrandController');
+    Route::post('cars/import', 'ImportController@cars')->name('cars.import');
     Route::resource('cars', 'CarController');
 });
 

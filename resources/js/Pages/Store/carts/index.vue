@@ -20,6 +20,7 @@
                             <div class="mt-6 flex">
                                 <label class="block flex-1">
                                     <input type="text" name="customer_address" v-model="form.customer_address" :error="$page.errors.customer_address" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('Address')" required>
+                                    <span class="text-red-500 text-xs mt-4" v-if="$page.errors.customer_address">{{ $page.errors.customer_address[0] }}</span>
                                 </label>
                             </div>
                         </div>
@@ -33,6 +34,7 @@
                                 </label>
                                 <label class="block flex-1 ml-3">
                                     <input type="number" name="customer_phone" v-model="form.customer_phone" :error="$page.errors.customer_phone" class="form-input mt-1 block w-full text-gray-700" placeholder="your number" required>
+                                    <span class="text-red-500 text-xs mt-4" v-if="$page.errors.customer_phone">{{ $page.errors.customer_phone[0] }}</span>
                                 </label>
                             </div>
                         </div>
@@ -41,6 +43,7 @@
                             <div class="mt-6 flex">
                                 <label class="block flex-1">
                                     <input type="text" name="coupon" v-model="form.coupon" :error="$page.errors.coupon" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('add promocode')">
+                                    <span class="text-red-500 text-xs mt-4" v-if="$page.errors.coupon">{{ $page.errors.coupon[0] }}</span>
                                 </label>
                             </div>
                         </div>

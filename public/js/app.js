@@ -2517,13 +2517,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: ['brands'],
+  data: function data() {
+    return {
+      files: ''
+    };
+  },
   methods: {
+    uploadExcel: function uploadExcel() {
+      var data = new FormData();
+      data.append('files', this.files);
+      axios.post('/dashboard/brands/import', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        var status = JSON.parse(response.status);
+
+        if (status == '200') {
+          window.location.pathname = response.data.redirect;
+        }
+      })["catch"](function () {
+        console.log('FAILURE!!');
+      });
+    },
+    handleFileUpload: function handleFileUpload() {
+      this.files = this.$refs.files.files[0];
+    },
     Delete: function Delete(brand) {
       this.$inertia["delete"]("/dashboard/brands/".concat(brand.id));
     },
@@ -2959,16 +2994,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: ['cars'],
+  data: function data() {
+    return {
+      files: ''
+    };
+  },
   methods: {
-    // submit() {
-    //     this.$inertia.get('/dashboard/parts/export');
-    // },
+    uploadExcel: function uploadExcel() {
+      var data = new FormData();
+      data.append('files', this.files);
+      axios.post('/dashboard/cars/import', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        var status = JSON.parse(response.status);
+
+        if (status == '200') {
+          window.location.pathname = response.data.redirect;
+        }
+      })["catch"](function () {
+        console.log('FAILURE!!');
+      });
+    },
+    handleFileUpload: function handleFileUpload() {
+      this.files = this.$refs.files.files[0];
+    },
     Delete: function Delete(car) {
       this.$inertia["delete"]("/dashboard/cars/".concat(car.id));
     },
@@ -5506,7 +5571,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -5565,6 +5629,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_UI_SlideImage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/UI/SlideImage */ "./resources/js/components/UI/SlideImage.vue");
 /* harmony import */ var _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/UI/BaseFooter */ "./resources/js/components/UI/BaseFooter.vue");
 /* harmony import */ var _Shared_StoreLayout_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Shared/StoreLayout.vue */ "./resources/js/Shared/StoreLayout.vue");
+//
+//
 //
 //
 //
@@ -6112,7 +6178,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -6165,6 +6230,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_UI_BaseNav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/UI/BaseNav */ "./resources/js/components/UI/BaseNav.vue");
 /* harmony import */ var _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/UI/BaseFooter */ "./resources/js/components/UI/BaseFooter.vue");
 /* harmony import */ var _Shared_StoreLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Shared/StoreLayout */ "./resources/js/Shared/StoreLayout.vue");
+//
+//
+//
 //
 //
 //
@@ -6429,7 +6497,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -6481,9 +6548,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_UI_BaseNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/UI/BaseNav */ "./resources/js/components/UI/BaseNav.vue");
 /* harmony import */ var _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/UI/SelectSection */ "./resources/js/components/UI/SelectSection.vue");
 /* harmony import */ var _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/UI/BaseFooter */ "./resources/js/components/UI/BaseFooter.vue");
-//
-//
-//
 //
 //
 //
@@ -49558,35 +49622,91 @@ var render = function() {
             ),
             _vm._v(" "),
             _c(
-              "button",
+              "form",
               {
-                staticClass:
-                  "bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white",
-                attrs: { type: "submit" }
+                staticClass: "flex justify-end",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.uploadExcel($event)
+                  }
+                }
               },
               [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c(
-                    "svg",
-                    {
-                      staticClass: "w-4 h-4 md:w-6 md:h-6",
-                      attrs: {
-                        fill: "none",
-                        stroke: "currentColor",
-                        viewBox: "0 0 24 24",
-                        xmlns: "http://www.w3.org/2000/svg"
+                _c(
+                  "div",
+                  { staticClass: "flex justify-end" },
+                  [
+                    _c(
+                      "base-button",
+                      {
+                        staticClass:
+                          "bg-teal-800 hover:bg-teal-700 rounded-none"
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "w-4 h-4 md:w-6 md:h-6",
+                            attrs: {
+                              fill: "none",
+                              stroke: "currentColor",
+                              viewBox: "0 0 24 24",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                "stroke-linecap": "round",
+                                "stroke-linejoin": "round",
+                                "stroke-width": "2",
+                                d:
+                                  "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "relative" }, [
+                  _c("input", {
+                    ref: "files",
+                    staticClass:
+                      "mt-1 block w-full cursor-pointer absolute opacity-0",
+                    attrs: {
+                      id: "files",
+                      type: "file",
+                      accept: "file/*",
+                      label: "Files",
+                      name: "files[]",
+                      error: _vm.$page.errors.files,
+                      tabindex: "7",
+                      multiple: "",
+                      required: ""
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.handleFileUpload()
                       }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-teal-800 focus:outline-none hover:bg-teal-700 md:mx-0 md:px-2 mx-2 outline-none px-6 py-3 rounded-tr text-white",
+                      attrs: { type: "button" }
                     },
                     [
-                      _c("path", {
-                        attrs: {
-                          "stroke-linecap": "round",
-                          "stroke-linejoin": "round",
-                          "stroke-width": "2",
-                          d:
-                            "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                        }
-                      })
+                      _c("span", { staticClass: "whitespace-no-wrap" }, [
+                        _vm._v("upload excel")
+                      ])
                     ]
                   )
                 ])
@@ -50855,35 +50975,91 @@ var render = function() {
             ),
             _vm._v(" "),
             _c(
-              "button",
+              "form",
               {
-                staticClass:
-                  "bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white",
-                attrs: { type: "submit" }
+                staticClass: "flex justify-end",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.uploadExcel($event)
+                  }
+                }
               },
               [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c(
-                    "svg",
-                    {
-                      staticClass: "w-4 h-4 md:w-6 md:h-6",
-                      attrs: {
-                        fill: "none",
-                        stroke: "currentColor",
-                        viewBox: "0 0 24 24",
-                        xmlns: "http://www.w3.org/2000/svg"
+                _c(
+                  "div",
+                  { staticClass: "flex justify-end" },
+                  [
+                    _c(
+                      "base-button",
+                      {
+                        staticClass:
+                          "bg-teal-800 hover:bg-teal-700 rounded-none"
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "w-4 h-4 md:w-6 md:h-6",
+                            attrs: {
+                              fill: "none",
+                              stroke: "currentColor",
+                              viewBox: "0 0 24 24",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                "stroke-linecap": "round",
+                                "stroke-linejoin": "round",
+                                "stroke-width": "2",
+                                d:
+                                  "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "relative" }, [
+                  _c("input", {
+                    ref: "files",
+                    staticClass:
+                      "mt-1 block w-full cursor-pointer absolute opacity-0",
+                    attrs: {
+                      id: "files",
+                      type: "file",
+                      accept: "file/*",
+                      label: "Files",
+                      name: "files[]",
+                      error: _vm.$page.errors.files,
+                      tabindex: "7",
+                      multiple: "",
+                      required: ""
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.handleFileUpload()
                       }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-teal-800 focus:outline-none hover:bg-teal-700 md:mx-0 md:px-2 mx-2 outline-none px-6 py-3 rounded-tr text-white",
+                      attrs: { type: "button" }
                     },
                     [
-                      _c("path", {
-                        attrs: {
-                          "stroke-linecap": "round",
-                          "stroke-linejoin": "round",
-                          "stroke-width": "2",
-                          d:
-                            "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                        }
-                      })
+                      _c("span", { staticClass: "whitespace-no-wrap" }, [
+                        _vm._v("upload excel")
+                      ])
                     ]
                   )
                 ])
@@ -56184,15 +56360,17 @@ var render = function() {
                               _vm._s(_vm.__("category")) +
                               " : "
                           ),
-                          _c("span", { staticClass: "text-gray-600" }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm.$page.locale == "en"
-                                  ? _vm.part.category.name
-                                  : _vm.part.category.name_ar
-                              )
-                            )
-                          ])
+                          (_vm.part.category = !null)
+                            ? _c("span", { staticClass: "text-gray-600" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$page.locale == "en"
+                                      ? _vm.part.category.name
+                                      : _vm.part.category.name_ar
+                                  )
+                                )
+                              ])
+                            : _vm._e()
                         ]
                       )
                     ]),
@@ -58567,23 +58745,6 @@ var render = function() {
                           "p",
                           {
                             staticClass:
-                              "break-all font-medium text-gray-600 text-xs"
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(
-                                _vm.$page.locale == "en"
-                                  ? part.cars[0].brand
-                                  : part.cars[0].brand_ar
-                              )
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "p",
-                          {
-                            staticClass:
                               "break-all font-medium text-gray-600 text-xs "
                           },
                           [
@@ -58720,34 +58881,38 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "flex" }, [
-              _c("h1", [
-                _vm._v(
-                  _vm._s(
-                    _vm.$page.locale == "en"
-                      ? _vm.part.category.super_category.name
-                      : _vm.part.category.super_category.name_ar
-                  ) + " |"
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "font-normal capitalize",
-                  attrs: { href: "/store/items/" + _vm.part.category_id }
-                },
-                [
-                  _vm._v(
-                    " " +
+              _vm.part.category != null
+                ? _c("h1", [
+                    _vm._v(
                       _vm._s(
                         _vm.$page.locale == "en"
-                          ? _vm.part.category.name
-                          : _vm.part.category.name_ar
-                      ) +
-                      " "
+                          ? _vm.part.category.super_category.name
+                          : _vm.part.category.super_category.name_ar
+                      ) + " |"
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.part.category != null
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "font-normal capitalize",
+                      attrs: { href: "/store/items/" + _vm.part.category_id }
+                    },
+                    [
+                      _vm._v(
+                        " " +
+                          _vm._s(
+                            _vm.$page.locale == "en"
+                              ? _vm.part.category.name
+                              : _vm.part.category.name_ar
+                          ) +
+                          " "
+                      )
+                    ]
                   )
-                ]
-              ),
+                : _vm._e(),
               _vm._v(" "),
               _c("span", { staticClass: "font-normal capitalize" }, [
                 _vm._v(
@@ -58837,7 +59002,7 @@ var render = function() {
                     },
                     [
                       _c("img", {
-                        staticClass: "h-40 object-center object-cover w-40",
+                        staticClass: "h-full object-center object-cover w-full",
                         attrs: { src: _vm.img, alt: "" }
                       })
                     ]
@@ -58904,22 +59069,24 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "p",
-                          {
-                            staticClass:
-                              "capitalize font-medium text-teal-400 text-xl"
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(
-                                _vm.$page.locale == "en"
-                                  ? _vm.part.cars[0].brand
-                                  : _vm.part.cars[0].brand_ar
-                              )
+                        _vm.part.cars.length > 0
+                          ? _c(
+                              "p",
+                              {
+                                staticClass:
+                                  "capitalize font-medium text-teal-400 text-xl"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$page.locale == "en"
+                                      ? _vm.part.cars[0].brand
+                                      : _vm.part.cars[0].brand_ar
+                                  )
+                                )
+                              ]
                             )
-                          ]
-                        )
+                          : _vm._e()
                       ])
                     ]
                   ),
@@ -58945,29 +59112,33 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    _vm._l(_vm.part.cars, function(car) {
-                      return _c(
-                        "span",
-                        {
-                          key: car.id,
-                          staticClass:
-                            "bg-white leading-10 mx-1 px-3 py-2 rounded-full text-gray-600"
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm.$page.locale == "en"
-                                ? car.brand
-                                : car.brand_ar
+                  _c("div", [
+                    _vm.part.cars.length > 0
+                      ? _c(
+                          "h1",
+                          _vm._l(_vm.part.cars, function(car) {
+                            return _c(
+                              "span",
+                              {
+                                key: car.id,
+                                staticClass:
+                                  "bg-white leading-10 mx-1 px-3 py-2 rounded-full text-gray-600"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$page.locale == "en"
+                                      ? car.brand
+                                      : car.brand_ar
+                                  )
+                                )
+                              ]
                             )
-                          )
-                        ]
-                      )
-                    }),
-                    0
-                  ),
+                          }),
+                          0
+                        )
+                      : _vm._e()
+                  ]),
                   _vm._v(" "),
                   _c(
                     "form",
@@ -59009,7 +59180,7 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "bg-gray-800 capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white",
+                              "border-2 border-gray-800 capitalize focus:outline-none hover:bg-gray-800 hover:text-white outline-none px-3 py-1 rounded-lg text-gray-800",
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
@@ -59024,7 +59195,7 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "bg-gray-800 capitalize focus:outline-none my-2 outline-none px-3 py-1 rounded-lg text-white",
+                              "border-2 border-gray-800 capitalize focus:outline-none hover:bg-gray-800 hover:text-white outline-none my-3 px-3 py-1 rounded-lg text-gray-800",
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
@@ -59045,7 +59216,7 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "bg-gray-800 block capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white",
+                              "border-2 border-gray-800 capitalize focus:outline-none hover:bg-gray-800 hover:text-white outline-none px-3 py-1 rounded-lg text-gray-800",
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
@@ -59213,166 +59384,7 @@ var render = function() {
                         )
                       ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "flex" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-blue-700 flex items-center p-2 rounded text-white",
-                        attrs: { href: "#" }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            staticClass: "h-6 w-6",
-                            attrs: {
-                              viewBox: "0 0 24 24",
-                              fill: "none",
-                              xmlns: "http://www.w3.org/2000/svg"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M9.19795 21.5H13.198V13.4901H16.8021L17.198 9.50977H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H17.198V2.5H14.198C11.4365 2.5 9.19795 4.73858 9.19795 7.5V9.50977H7.19795L6.80206 13.4901H9.19795V21.5Z",
-                                fill: "currentColor"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-blue-400 flex items-center mx-1 p-2 rounded text-white",
-                        attrs: { href: "#" }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            staticClass: "h-6 w-6",
-                            attrs: {
-                              viewBox: "0 0 24 24",
-                              fill: "none",
-                              xmlns: "http://www.w3.org/2000/svg"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                "fill-rule": "evenodd",
-                                "clip-rule": "evenodd",
-                                d:
-                                  "M8 3C9.10457 3 10 3.89543 10 5V8H16C17.1046 8 18 8.89543 18 10C18 11.1046 17.1046 12 16 12H10V14C10 15.6569 11.3431 17 13 17H16C17.1046 17 18 17.8954 18 19C18 20.1046 17.1046 21 16 21H13C9.13401 21 6 17.866 6 14V5C6 3.89543 6.89543 3 8 3Z",
-                                fill: "currentColor"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "bg-green-500 p-2 rounded",
-                        attrs: { href: "#" }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            staticClass: "h-6 w-6",
-                            staticStyle: {
-                              "enable-background": "new 0 0 418.135 418.135"
-                            },
-                            attrs: {
-                              version: "1.1",
-                              id: "Layer_1",
-                              xmlns: "http://www.w3.org/2000/svg",
-                              "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                              viewBox: "0 0 418.135 418.135",
-                              "xml:space": "preserve"
-                            }
-                          },
-                          [
-                            _c("g", [
-                              _c("path", {
-                                staticStyle: { fill: "#fff" },
-                                attrs: {
-                                  d:
-                                    "M198.929,0.242C88.5,5.5,1.356,97.466,1.691,208.02c0.102,33.672,8.231,65.454,22.571,93.536L2.245,408.429c-1.191,5.781,4.023,10.843,9.766,9.483l104.723-24.811c26.905,13.402,57.125,21.143,89.108,21.631c112.869,1.724,206.982-87.897,210.5-200.724C420.113,93.065,320.295-5.538,198.929,0.242z M323.886,322.197c-30.669,30.669-71.446,47.559-114.818,47.559c-25.396,0-49.71-5.698-72.269-16.935l-14.584-7.265l-64.206,15.212l13.515-65.607l-7.185-14.07c-11.711-22.935-17.649-47.736-17.649-73.713c0-43.373,16.89-84.149,47.559-114.819c30.395-30.395,71.837-47.56,114.822-47.56C252.443,45,293.218,61.89,323.887,92.558c30.669,30.669,47.559,71.445,47.56,114.817C371.446,250.361,354.281,291.803,323.886,322.197z"
-                                }
-                              }),
-                              _c("path", {
-                                staticStyle: { fill: "#fff" },
-                                attrs: {
-                                  d:
-                                    "M309.712,252.351l-40.169-11.534c-5.281-1.516-10.968-0.018-14.816,3.903l-9.823,10.008c-4.142,4.22-10.427,5.576-15.909,3.358c-19.002-7.69-58.974-43.23-69.182-61.007c-2.945-5.128-2.458-11.539,1.158-16.218l8.576-11.095c3.36-4.347,4.069-10.185,1.847-15.21l-16.9-38.223c-4.048-9.155-15.747-11.82-23.39-5.356c-11.211,9.482-24.513,23.891-26.13,39.854c-2.851,28.144,9.219,63.622,54.862,106.222c52.73,49.215,94.956,55.717,122.449,49.057c15.594-3.777,28.056-18.919,35.921-31.317C323.568,266.34,319.334,255.114,309.712,252.351z"
-                                }
-                              })
-                            ]),
-                            _c("g"),
-                            _c("g"),
-                            _c("g"),
-                            _c("g"),
-                            _c("g"),
-                            _c("g"),
-                            _c("g"),
-                            _c("g"),
-                            _c("g"),
-                            _c("g"),
-                            _c("g"),
-                            _c("g"),
-                            _c("g"),
-                            _c("g"),
-                            _c("g")
-                          ]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-red-600 flex items-center mx-1 p-2 rounded text-white",
-                        attrs: { href: "#" }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            staticClass: "h-6 w-6",
-                            attrs: {
-                              viewBox: "0 0 24 24",
-                              fill: "none",
-                              xmlns: "http://www.w3.org/2000/svg"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                "fill-rule": "evenodd",
-                                "clip-rule": "evenodd",
-                                d:
-                                  "M5 7H19C19.5523 7 20 7.44771 20 8V16C20 16.5523 19.5523 17 19 17H5C4.44772 17 4 16.5523 4 16V8C4 7.44772 4.44772 7 5 7ZM2 8C2 6.34315 3.34315 5 5 5H19C20.6569 5 22 6.34315 22 8V16C22 17.6569 20.6569 19 19 19H5C3.34315 19 2 17.6569 2 16V8ZM10 9L14 12L10 15V9Z",
-                                fill: "currentColor"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    )
-                  ])
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -59614,7 +59626,7 @@ var render = function() {
                       {
                         key: car.id,
                         staticClass:
-                          "bg-blue-100 leading-10 mx-1 px-3 py-2 rounded-full text-gray-600"
+                          "bg-blue-100 leading-10 mx-1 px-3 py-2 rounded-full text-sm text-gray-600"
                       },
                       [
                         _vm._v(
@@ -59753,7 +59765,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "bg-gray-800 capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white text-xs",
+                      "border-2 border-gray-800 capitalize focus:outline-none hover:bg-gray-800 hover:text-white outline-none px-3 py-1 rounded-lg text-gray-800 text-xs",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -59768,7 +59780,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "bg-gray-800 capitalize focus:outline-none my-2 outline-none px-3 py-1 rounded-lg text-white text-xs",
+                      "border-2 border-gray-800 capitalize focus:outline-none hover:bg-gray-800 hover:text-white outline-none my-2 px-3 py-1 rounded-lg text-gray-800 text-xs",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -59787,7 +59799,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "bg-gray-800 block capitalize focus:outline-none outline-none px-3 py-1 rounded-lg text-white text-xs",
+                      "block border-2 border-gray-800 capitalize focus:outline-none hover:bg-gray-800 hover:text-white outline-none px-3 py-1 rounded-lg text-gray-800 text-xs",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -60006,7 +60018,7 @@ var render = function() {
             [
               _c(
                 "div",
-                { staticClass: "relative w-auto my-6 mx-auto max-w-6xl" },
+                { staticClass: "max-w-sm mx-auto my-6 relative w-full" },
                 [
                   _c(
                     "div",
@@ -60017,515 +60029,565 @@ var render = function() {
                     [
                       _c("div", { staticClass: "-m-10 p-6 flex-auto" }, [
                         _c("div", {}, [
-                          _c(
-                            "div",
-                            {
-                              attrs: {
-                                "x-data": "{ cartOpen: false , isOpen: false }"
-                              }
-                            },
-                            [
-                              _c("main", {}, [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "bg-white mt-16 px-6 py-8 shadow-lg"
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "flex justify-between" },
-                                      [
-                                        _c(
-                                          "h3",
-                                          {
-                                            staticClass:
-                                              "text-teal-800 text-2xl font-medium"
-                                          },
-                                          [_vm._v(_vm._s(_vm.__("Checkout")))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "focus:outline-none outline-none",
-                                            on: {
-                                              click: function($event) {
-                                                _vm.toggleModal = !_vm.toggleModal
-                                              }
+                          _c("div", [
+                            _c("main", {}, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "bg-white mt-16 px-6 py-8 shadow-lg"
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "flex justify-between" },
+                                    [
+                                      _c(
+                                        "h3",
+                                        {
+                                          staticClass:
+                                            "text-teal-800 text-2xl font-medium"
+                                        },
+                                        [_vm._v(_vm._s(_vm.__("Checkout")))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "focus:outline-none outline-none",
+                                          on: {
+                                            click: function($event) {
+                                              _vm.toggleModal = !_vm.toggleModal
                                             }
-                                          },
-                                          [_vm._v("X")]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", {}, [
-                                      _c("div", {}, [
-                                        _c(
-                                          "form",
-                                          {
-                                            staticClass: "mt-8 pb-4",
-                                            on: {
-                                              submit: function($event) {
-                                                $event.preventDefault()
-                                                return _vm.submit($event)
-                                              }
+                                          }
+                                        },
+                                        [_vm._v("X")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", [
+                                    _c("div", [
+                                      _c(
+                                        "form",
+                                        {
+                                          staticClass: "mt-8 pb-4",
+                                          on: {
+                                            submit: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.submit($event)
                                             }
-                                          },
-                                          [
-                                            _c("div", { staticClass: "mt-8" }, [
-                                              _c(
-                                                "h4",
-                                                {
-                                                  staticClass:
-                                                    "text-sm text-teal-700 font-medium"
-                                                },
-                                                [_vm._v(_vm._s(_vm.__("name")))]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                { staticClass: "mt-6 flex" },
-                                                [
-                                                  _c(
-                                                    "label",
-                                                    {
-                                                      staticClass:
-                                                        "block flex-1"
-                                                    },
-                                                    [
-                                                      _c("input", {
-                                                        directives: [
-                                                          {
-                                                            name: "model",
-                                                            rawName: "v-model",
-                                                            value:
-                                                              _vm.modelForm
-                                                                .customer_name,
-                                                            expression:
-                                                              "modelForm.customer_name"
-                                                          }
-                                                        ],
-                                                        staticClass:
-                                                          "form-input mt-1 block w-full text-gray-700",
-                                                        attrs: {
-                                                          type: "text",
-                                                          name: "customer_name",
-                                                          error:
-                                                            _vm.$page.errors
-                                                              .customer_name,
-                                                          placeholder: _vm.__(
-                                                            "name"
-                                                          ),
-                                                          required: ""
-                                                        },
-                                                        domProps: {
-                                                          value:
-                                                            _vm.modelForm
-                                                              .customer_name
-                                                        },
-                                                        on: {
-                                                          input: function(
-                                                            $event
-                                                          ) {
-                                                            if (
-                                                              $event.target
-                                                                .composing
-                                                            ) {
-                                                              return
-                                                            }
-                                                            _vm.$set(
-                                                              _vm.modelForm,
-                                                              "customer_name",
-                                                              $event.target
-                                                                .value
-                                                            )
-                                                          }
-                                                        }
-                                                      })
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("div", { staticClass: "mt-8" }, [
-                                              _c(
-                                                "h4",
-                                                {
-                                                  staticClass:
-                                                    "text-sm text-teal-700 font-medium"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      _vm.__("Delivery address")
-                                                    )
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                { staticClass: "mt-6 flex" },
-                                                [
-                                                  _c(
-                                                    "label",
-                                                    {
-                                                      staticClass:
-                                                        "block flex-1"
-                                                    },
-                                                    [
-                                                      _c("input", {
-                                                        directives: [
-                                                          {
-                                                            name: "model",
-                                                            rawName: "v-model",
-                                                            value:
-                                                              _vm.modelForm
-                                                                .customer_address,
-                                                            expression:
-                                                              "modelForm.customer_address"
-                                                          }
-                                                        ],
-                                                        staticClass:
-                                                          "form-input mt-1 block w-full text-gray-700",
-                                                        attrs: {
-                                                          type: "text",
-                                                          name:
-                                                            "customer_address",
-                                                          error:
-                                                            _vm.$page.errors
-                                                              .customer_address,
-                                                          placeholder: _vm.__(
-                                                            "Address"
-                                                          ),
-                                                          required: ""
-                                                        },
-                                                        domProps: {
-                                                          value:
-                                                            _vm.modelForm
-                                                              .customer_address
-                                                        },
-                                                        on: {
-                                                          input: function(
-                                                            $event
-                                                          ) {
-                                                            if (
-                                                              $event.target
-                                                                .composing
-                                                            ) {
-                                                              return
-                                                            }
-                                                            _vm.$set(
-                                                              _vm.modelForm,
-                                                              "customer_address",
-                                                              $event.target
-                                                                .value
-                                                            )
-                                                          }
-                                                        }
-                                                      })
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("div", { staticClass: "mt-8" }, [
-                                              _c(
-                                                "h4",
-                                                {
-                                                  staticClass:
-                                                    "text-sm text-teal-700 font-medium"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(_vm.__("Phone"))
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                { staticClass: "mt-6 flex" },
-                                                [
-                                                  _c(
-                                                    "label",
-                                                    {
-                                                      staticClass:
-                                                        "block w-3/12"
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "select",
-                                                        {
-                                                          staticClass:
-                                                            "form-select text-gray-700 mt-1 block w-full"
-                                                        },
-                                                        [
-                                                          _c("option", [
-                                                            _vm._v("+974")
-                                                          ])
-                                                        ]
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "label",
-                                                    {
-                                                      staticClass:
-                                                        "block flex-1 ml-3"
-                                                    },
-                                                    [
-                                                      _c("input", {
-                                                        directives: [
-                                                          {
-                                                            name: "model",
-                                                            rawName: "v-model",
-                                                            value:
-                                                              _vm.modelForm
-                                                                .customer_phone,
-                                                            expression:
-                                                              "modelForm.customer_phone"
-                                                          }
-                                                        ],
-                                                        staticClass:
-                                                          "form-input mt-1 block w-full text-gray-700",
-                                                        attrs: {
-                                                          type: "number",
-                                                          name:
-                                                            "customer_phone",
-                                                          error:
-                                                            _vm.$page.errors
-                                                              .customer_phone,
-                                                          placeholder:
-                                                            "your number",
-                                                          required: ""
-                                                        },
-                                                        domProps: {
-                                                          value:
-                                                            _vm.modelForm
-                                                              .customer_phone
-                                                        },
-                                                        on: {
-                                                          input: function(
-                                                            $event
-                                                          ) {
-                                                            if (
-                                                              $event.target
-                                                                .composing
-                                                            ) {
-                                                              return
-                                                            }
-                                                            _vm.$set(
-                                                              _vm.modelForm,
-                                                              "customer_phone",
-                                                              $event.target
-                                                                .value
-                                                            )
-                                                          }
-                                                        }
-                                                      })
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("div", { staticClass: "mt-8" }, [
-                                              _c(
-                                                "h4",
-                                                {
-                                                  staticClass:
-                                                    "text-sm text-teal-700 font-medium capitalize"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      _vm.__("coupon code")
-                                                    )
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                { staticClass: "mt-6 flex" },
-                                                [
-                                                  _c(
-                                                    "label",
-                                                    {
-                                                      staticClass:
-                                                        "block flex-1"
-                                                    },
-                                                    [
-                                                      _c("input", {
-                                                        directives: [
-                                                          {
-                                                            name: "model",
-                                                            rawName: "v-model",
-                                                            value:
-                                                              _vm.modelForm
-                                                                .coupon,
-                                                            expression:
-                                                              "modelForm.coupon"
-                                                          }
-                                                        ],
-                                                        staticClass:
-                                                          "form-input mt-1 block w-full text-gray-700",
-                                                        attrs: {
-                                                          type: "text",
-                                                          name: "coupon",
-                                                          error:
-                                                            _vm.$page.errors
-                                                              .coupon,
-                                                          placeholder: _vm.__(
-                                                            "add promocode"
-                                                          )
-                                                        },
-                                                        domProps: {
-                                                          value:
-                                                            _vm.modelForm.coupon
-                                                        },
-                                                        on: {
-                                                          input: function(
-                                                            $event
-                                                          ) {
-                                                            if (
-                                                              $event.target
-                                                                .composing
-                                                            ) {
-                                                              return
-                                                            }
-                                                            _vm.$set(
-                                                              _vm.modelForm,
-                                                              "coupon",
-                                                              $event.target
-                                                                .value
-                                                            )
-                                                          }
-                                                        }
-                                                      })
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ]),
+                                          }
+                                        },
+                                        [
+                                          _c("div", { staticClass: "mt-8" }, [
+                                            _c(
+                                              "h4",
+                                              {
+                                                staticClass:
+                                                  "text-sm text-teal-700 font-medium"
+                                              },
+                                              [_vm._v(_vm._s(_vm.__("name")))]
+                                            ),
                                             _vm._v(" "),
                                             _c(
                                               "div",
-                                              {
-                                                staticClass:
-                                                  "flex items-center justify-between mt-8"
-                                              },
+                                              { staticClass: "mt-6 flex" },
                                               [
                                                 _c(
-                                                  "a",
+                                                  "label",
                                                   {
-                                                    staticClass:
-                                                      "flex items-center text-teal-700 text-sm font-medium rounded hover:underline focus:outline-none",
-                                                    attrs: { href: "/store" }
+                                                    staticClass: "block flex-1"
+                                                  },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.modelForm
+                                                              .customer_name,
+                                                          expression:
+                                                            "modelForm.customer_name"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "form-input mt-1 block w-full text-gray-700",
+                                                      attrs: {
+                                                        type: "text",
+                                                        name: "customer_name",
+                                                        error:
+                                                          _vm.$page.errors
+                                                            .customer_name,
+                                                        placeholder: _vm.__(
+                                                          "name"
+                                                        ),
+                                                        required: ""
+                                                      },
+                                                      domProps: {
+                                                        value:
+                                                          _vm.modelForm
+                                                            .customer_name
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.$set(
+                                                            _vm.modelForm,
+                                                            "customer_name",
+                                                            $event.target.value
+                                                          )
+                                                        }
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _vm.$page.errors
+                                                      .customer_name
+                                                      ? _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "text-red-500 text-xs mt-4"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                _vm.$page.errors
+                                                                  .customer_name[0]
+                                                              )
+                                                            )
+                                                          ]
+                                                        )
+                                                      : _vm._e()
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("div", { staticClass: "mt-8" }, [
+                                            _c(
+                                              "h4",
+                                              {
+                                                staticClass:
+                                                  "text-sm text-teal-700 font-medium"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.__("Delivery address")
+                                                  )
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "mt-6 flex" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass: "block flex-1"
+                                                  },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.modelForm
+                                                              .customer_address,
+                                                          expression:
+                                                            "modelForm.customer_address"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "form-input mt-1 block w-full text-gray-700",
+                                                      attrs: {
+                                                        type: "text",
+                                                        name:
+                                                          "customer_address",
+                                                        error:
+                                                          _vm.$page.errors
+                                                            .customer_address,
+                                                        placeholder: _vm.__(
+                                                          "Address"
+                                                        ),
+                                                        required: ""
+                                                      },
+                                                      domProps: {
+                                                        value:
+                                                          _vm.modelForm
+                                                            .customer_address
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.$set(
+                                                            _vm.modelForm,
+                                                            "customer_address",
+                                                            $event.target.value
+                                                          )
+                                                        }
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _vm.$page.errors
+                                                      .customer_address
+                                                      ? _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "text-red-500 text-xs mt-4"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                _vm.$page.errors
+                                                                  .customer_address[0]
+                                                              )
+                                                            )
+                                                          ]
+                                                        )
+                                                      : _vm._e()
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("div", { staticClass: "mt-8" }, [
+                                            _c(
+                                              "h4",
+                                              {
+                                                staticClass:
+                                                  "text-sm text-teal-700 font-medium"
+                                              },
+                                              [_vm._v(_vm._s(_vm.__("Phone")))]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "mt-6 flex" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass: "block w-3/12"
                                                   },
                                                   [
                                                     _c(
-                                                      "svg",
+                                                      "select",
                                                       {
-                                                        staticClass: "h-5 w-5",
-                                                        attrs: {
-                                                          fill: "none",
-                                                          "stroke-linecap":
-                                                            "round",
-                                                          "stroke-linejoin":
-                                                            "round",
-                                                          "stroke-width": "2",
-                                                          viewBox: "0 0 24 24",
-                                                          stroke: "currentColor"
-                                                        }
+                                                        staticClass:
+                                                          "form-select text-gray-700 mt-1 block w-full"
                                                       },
                                                       [
-                                                        _c("path", {
-                                                          attrs: {
-                                                            d:
-                                                              "M7 16l-4-4m0 0l4-4m-4 4h18"
-                                                          }
-                                                        })
-                                                      ]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "span",
-                                                      { staticClass: "mx-2" },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            _vm.__(
-                                                              "Back To Shop"
-                                                            )
-                                                          )
-                                                        )
+                                                        _c("option", [
+                                                          _vm._v("+974")
+                                                        ])
                                                       ]
                                                     )
                                                   ]
                                                 ),
                                                 _vm._v(" "),
                                                 _c(
-                                                  "button",
+                                                  "label",
                                                   {
                                                     staticClass:
-                                                      "flex items-center px-3 py-2 bg-teal-800 text-white text-sm font-medium rounded-md hover:bg-teal-700 focus:outline-none focus:bg-teal-700"
+                                                      "block flex-1 ml-3"
                                                   },
                                                   [
-                                                    _c("span", [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _vm.__("Payment")
-                                                        )
-                                                      )
-                                                    ]),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "svg",
-                                                      {
-                                                        staticClass:
-                                                          "h-5 w-5 mx-2",
-                                                        attrs: {
-                                                          fill: "none",
-                                                          "stroke-linecap":
-                                                            "round",
-                                                          "stroke-linejoin":
-                                                            "round",
-                                                          "stroke-width": "2",
-                                                          viewBox: "0 0 24 24",
-                                                          stroke: "currentColor"
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.modelForm
+                                                              .customer_phone,
+                                                          expression:
+                                                            "modelForm.customer_phone"
                                                         }
+                                                      ],
+                                                      staticClass:
+                                                        "form-input mt-1 block w-full text-gray-700",
+                                                      attrs: {
+                                                        type: "number",
+                                                        max: "8",
+                                                        min: "8",
+                                                        name: "customer_phone",
+                                                        error:
+                                                          _vm.$page.errors
+                                                            .customer_phone,
+                                                        placeholder:
+                                                          "your number",
+                                                        required: ""
                                                       },
-                                                      [
-                                                        _c("path", {
-                                                          attrs: {
-                                                            d:
-                                                              "M17 8l4 4m0 0l-4 4m4-4H3"
+                                                      domProps: {
+                                                        value:
+                                                          _vm.modelForm
+                                                            .customer_phone
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
                                                           }
-                                                        })
-                                                      ]
-                                                    )
+                                                          _vm.$set(
+                                                            _vm.modelForm,
+                                                            "customer_phone",
+                                                            $event.target.value
+                                                          )
+                                                        }
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _vm.$page.errors
+                                                      .customer_phone
+                                                      ? _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "text-red-500 text-xs mt-4"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                _vm.$page.errors
+                                                                  .customer_phone[0]
+                                                              )
+                                                            )
+                                                          ]
+                                                        )
+                                                      : _vm._e()
                                                   ]
                                                 )
                                               ]
                                             )
-                                          ]
-                                        )
-                                      ])
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("div", { staticClass: "mt-8" }, [
+                                            _c(
+                                              "h4",
+                                              {
+                                                staticClass:
+                                                  "text-sm text-teal-700 font-medium capitalize"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(_vm.__("coupon code"))
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "mt-6 flex" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass: "block flex-1"
+                                                  },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.modelForm
+                                                              .coupon,
+                                                          expression:
+                                                            "modelForm.coupon"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "form-input mt-1 block w-full text-gray-700",
+                                                      attrs: {
+                                                        type: "text",
+                                                        name: "coupon",
+                                                        error:
+                                                          _vm.$page.errors
+                                                            .coupon,
+                                                        placeholder: _vm.__(
+                                                          "add promocode"
+                                                        )
+                                                      },
+                                                      domProps: {
+                                                        value:
+                                                          _vm.modelForm.coupon
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.$set(
+                                                            _vm.modelForm,
+                                                            "coupon",
+                                                            $event.target.value
+                                                          )
+                                                        }
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _vm.$page.errors.coupon
+                                                      ? _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "text-red-500 text-xs mt-4"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                _vm.$page.errors
+                                                                  .coupon[0]
+                                                              )
+                                                            )
+                                                          ]
+                                                        )
+                                                      : _vm._e()
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "flex items-center justify-between mt-8"
+                                            },
+                                            [
+                                              _c(
+                                                "a",
+                                                {
+                                                  staticClass:
+                                                    "flex items-center text-teal-700 text-sm font-medium rounded hover:underline focus:outline-none",
+                                                  attrs: { href: "/store" }
+                                                },
+                                                [
+                                                  _c(
+                                                    "svg",
+                                                    {
+                                                      staticClass: "h-5 w-5",
+                                                      attrs: {
+                                                        fill: "none",
+                                                        "stroke-linecap":
+                                                          "round",
+                                                        "stroke-linejoin":
+                                                          "round",
+                                                        "stroke-width": "2",
+                                                        viewBox: "0 0 24 24",
+                                                        stroke: "currentColor"
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("path", {
+                                                        attrs: {
+                                                          d:
+                                                            "M7 16l-4-4m0 0l4-4m-4 4h18"
+                                                        }
+                                                      })
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "span",
+                                                    { staticClass: "mx-2" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm.__("Back To Shop")
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "flex items-center px-3 py-2 bg-teal-800 text-white text-sm font-medium rounded-md hover:bg-teal-700 focus:outline-none focus:bg-teal-700"
+                                                },
+                                                [
+                                                  _c("span", [
+                                                    _vm._v(
+                                                      _vm._s(_vm.__("Payment"))
+                                                    )
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "svg",
+                                                    {
+                                                      staticClass:
+                                                        "h-5 w-5 mx-2",
+                                                      attrs: {
+                                                        fill: "none",
+                                                        "stroke-linecap":
+                                                          "round",
+                                                        "stroke-linejoin":
+                                                          "round",
+                                                        "stroke-width": "2",
+                                                        viewBox: "0 0 24 24",
+                                                        stroke: "currentColor"
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("path", {
+                                                        attrs: {
+                                                          d:
+                                                            "M17 8l4 4m0 0l-4 4m4-4H3"
+                                                        }
+                                                      })
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
                                     ])
-                                  ]
-                                )
-                              ])
-                            ]
-                          )
+                                  ])
+                                ]
+                              )
+                            ])
+                          ])
                         ])
                       ])
                     ]
@@ -60843,22 +60905,6 @@ var render = function() {
                 _c(
                   "p",
                   {
-                    staticClass: "break-all font-medium text-gray-600 text-xs"
-                  },
-                  [
-                    _vm._v(
-                      _vm._s(
-                        _vm.$page.locale == "en"
-                          ? part.cars[0].brand
-                          : part.cars[0].brand_ar
-                      )
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  {
                     staticClass: "break-all font-medium text-gray-600 text-xs "
                   },
                   [
@@ -61119,7 +61165,21 @@ var render = function() {
                                   )
                                 }
                               }
-                            })
+                            }),
+                            _vm._v(" "),
+                            _vm.$page.errors.customer_address
+                              ? _c(
+                                  "span",
+                                  { staticClass: "text-red-500 text-xs mt-4" },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.$page.errors.customer_address[0]
+                                      )
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
                           ])
                         ])
                       ]),
@@ -61175,7 +61235,19 @@ var render = function() {
                                   )
                                 }
                               }
-                            })
+                            }),
+                            _vm._v(" "),
+                            _vm.$page.errors.customer_phone
+                              ? _c(
+                                  "span",
+                                  { staticClass: "text-red-500 text-xs mt-4" },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.$page.errors.customer_phone[0])
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
                           ])
                         ])
                       ]),
@@ -61222,7 +61294,15 @@ var render = function() {
                                   )
                                 }
                               }
-                            })
+                            }),
+                            _vm._v(" "),
+                            _vm.$page.errors.coupon
+                              ? _c(
+                                  "span",
+                                  { staticClass: "text-red-500 text-xs mt-4" },
+                                  [_vm._v(_vm._s(_vm.$page.errors.coupon[0]))]
+                                )
+                              : _vm._e()
                           ])
                         ])
                       ]),
@@ -61869,22 +61949,6 @@ var render = function() {
                 _c(
                   "p",
                   {
-                    staticClass: "break-all font-medium text-gray-600 text-xs"
-                  },
-                  [
-                    _vm._v(
-                      _vm._s(
-                        _vm.$page.locale == "en"
-                          ? part.cars[0].brand
-                          : part.cars[0].brand_ar
-                      )
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  {
                     staticClass: "break-all font-medium text-gray-600 text-xs "
                   },
                   [
@@ -62046,9 +62110,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("SelectSection"),
-      _vm._v(" "),
-      _c("div", { staticClass: "bg-teal-700 py-5 hidden md:block" }, [
+      _c("div", { staticClass: "bg-teal-800 py-5 hidden md:block" }, [
         _c(
           "div",
           {
@@ -62301,22 +62363,6 @@ var render = function() {
                     _vm._v(
                       _vm._s(
                         _vm.$page.locale == "en" ? part.name : part.name_ar
-                      )
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  {
-                    staticClass: "break-all font-medium text-gray-600 text-xs"
-                  },
-                  [
-                    _vm._v(
-                      _vm._s(
-                        _vm.$page.locale == "en"
-                          ? part.cars[0].brand
-                          : part.cars[0].brand_ar
                       )
                     )
                   ]
@@ -62896,7 +62942,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [
+                  _c("a", { attrs: { href: "/store" } }, [
                     _vm._v(_vm._s(_vm.__("home")))
                   ])
                 ]),
@@ -93106,8 +93152,8 @@ module.exports = "/images/oops-404-error-with-a-broken-robot-animate.svg?844f72a
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/hnooz/Documents/Projects/partix/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/hnooz/Documents/Projects/partix/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /home/hnooz/Documents/Projects/laravel/Under devolopment/partix/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/hnooz/Documents/Projects/laravel/Under devolopment/partix/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

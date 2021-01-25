@@ -54,7 +54,7 @@ class OrderController extends Controller
 
         $data = $request->validate([
             'customer_name' => 'required',
-            'customer_phone' => 'required',
+            'customer_phone' => 'required|min:8|max:8',
             'customer_address' => 'required',
         ]);
 

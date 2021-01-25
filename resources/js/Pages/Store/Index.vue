@@ -57,8 +57,7 @@
                         <img v-else class="h-24 mt-12 mx-auto object-cover object-center w-24" :src="part.url[0]">
                     </a>
                     <div class="px-4 py-2">
-                        <a :href="'/store/details/' + part.id" class="font-bold text-teal-500 uppercase">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
-                        <p class="break-all font-medium text-gray-600 text-xs">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].brand_ar}}</p>
+                        <a :href="'/store/details/' + part.id" class="font-bold text-teal-500 uppercase">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>                    
                         <p class="break-all font-medium text-gray-600 text-xs "><span dir="auto">{{__('number')}}:</span>{{part.number}}</p>
                         <div class="flex items-center">                           
                             <p v-if="part.part_type_id == '1'" class="text-gray-600">{{part.oem_price}} <span>{{__('QAR')}}</span> </p>

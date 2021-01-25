@@ -132,7 +132,7 @@ import Edit from '../suppliers/Edit'
                     });
 
             },
-             uploadExcel() 
+            uploadExcel() 
             {
             const data = new FormData();
             data.append('files', this.files);

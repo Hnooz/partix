@@ -71,5 +71,7 @@ class BrandController extends Controller
             'type' => 'error',
             'message' => 'Brand deleted successfully',
         ]);
+
+        return redirect()->back();
     }
 }

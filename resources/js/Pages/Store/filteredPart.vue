@@ -5,10 +5,8 @@
         :cartTotalPrice="cartTotalPrice" :wishlistQuantity="wishlistQuantity" 
         :wishlistContent="wishlistContent"/>
 
-    <SelectSection/>
-
     <!-- filter search -->
-    <div class="bg-teal-700 py-5 hidden md:block">
+    <div class="bg-teal-800 py-5 hidden md:block">
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-10 text-white">
             <div>
                 <h1>{{__('filtered part')}}</h1>
@@ -63,7 +61,6 @@
 
             <div class="px-4 py-2">
                 <a :href="`/store/details/${part.id}`" class="font-bold text-sm md:text-base text-teal-500 uppercase">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>
-                <p class="break-all font-medium text-gray-600 text-xs">{{$page.locale == 'en' ? part.cars[0].brand : part.cars[0].brand_ar}}</p>
                 <p class="break-all font-medium text-gray-600 text-xs "><span dir="auto">{{__('number')}}:</span>{{part.number}}</p>
                  <div class="flex items-center">                           
                     <p v-if="part.part_type_id == '1'" class="text-gray-600">{{part.oem_price}} <span>{{__('QAR')}}</span> </p>

@@ -5,9 +5,7 @@
             <div class="justify-between md:flex">
                 <div class="items-center md:flex">
                     <h2 class="font-bold md:text-3xl text-xl text-teal-600 capitalize">{{__('cars')}}</h2>
-                </div>
-                
-
+                </div>                
                 <div class="flex items-center">
                     <inertia-link href="/dashboard/cars/create"
                                   class="bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap capitalize">
@@ -15,11 +13,21 @@
                         {{__('add')}} {{__('car')}}
                     </inertia-link>
                     <!-- <form @submit.prevent="submit"> -->
-                        <button class="bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white" type="submit">
-                            <a href="#">
-                                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg> 
-                            </a>
-                        </button>
+                        <form @submit.prevent="uploadExcel" class="flex justify-end">
+                        <div class="flex justify-end">
+                            <base-button class="bg-teal-800 hover:bg-teal-700 rounded-none">
+                                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </base-button>
+                        </div>
+                        <div class="relative">
+                            
+                            <input id="files" type="file" ref="files" accept="file/*" label="Files" name="files[]" @change="handleFileUpload()" class="mt-1 block w-full cursor-pointer absolute opacity-0" :error="$page.errors.files" tabindex="7" multiple required>
+                            
+                            <button type="button" class="bg-teal-800 focus:outline-none hover:bg-teal-700 md:mx-0 md:px-2 mx-2 outline-none px-6 py-3 rounded-tr text-white">
+                                <span class="whitespace-no-wrap">upload excel</span>                               
+                            </button>
+                        </div>
+                    </form>
                     <!-- </form> -->
                     
                     
@@ -123,10 +131,38 @@
     export default {
         components: {Layout},
          props: ['cars'],
+         data() {
+             return {
+                 files:''
+             }
+         },
             methods: {
-            // submit() {
-            //     this.$inertia.get('/dashboard/parts/export');
-            // },
+             uploadExcel() 
+            {
+            const data = new FormData();
+            data.append('files', this.files);
+
+            axios.post( '/dashboard/cars/import',
+                data,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then(function(response){
+               const status = JSON.parse(response.status);
+
+                    if (status == '200') {
+                        window.location.pathname = response.data.redirect;
+                    }
+            })
+            .catch(function(){
+            console.log('FAILURE!!');
+            });
+            },
+            handleFileUpload(){
+                this.files = this.$refs.files.files[0];
+            },
             Delete(car) {
                 this.$inertia.delete(`/dashboard/cars/${car.id}`);
             },
