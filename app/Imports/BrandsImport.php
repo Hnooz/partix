@@ -17,7 +17,6 @@ class BrandsImport implements ToModel
         return new Brand([
             'name' => $row[0],
             'name_ar' => $row[1],
-            'created_at' => $row[2],
         ]);
     }
 }

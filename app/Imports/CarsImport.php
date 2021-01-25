@@ -23,7 +23,6 @@ class CarsImport implements ToModel
             'engine_ar' => $row[5],
             'year' => $row[6],
             'brand_id' => $row[7],
-            'created_at' => $row[8],
         ]);
     }
 }

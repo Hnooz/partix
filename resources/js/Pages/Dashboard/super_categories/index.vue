@@ -35,7 +35,7 @@
                                 <tbody class="bg-white text-gray-700">
                                 <tr class="border-b border-gray-200" v-for="(super_category, index) in super_categories" :key="index">
                                     <td class="px-6 py-4 whitespace-no-wrap">
-                                        {{ super_category.id }}
+                                        {{ id++ }}
                                     </td>
 
                                     <td  class="px-6 py-4 whitespace-no-wrap">
@@ -70,6 +70,7 @@ import Layout from '../../../Shared/Layout'
                 // show:0,
                 form: {
                     name: '',
+                    id:1,
                 },
             }
         },

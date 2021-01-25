@@ -118,7 +118,7 @@
                                 <tbody class="bg-white text-gray-500 text-sm md:text-base">
                                 <tr v-for="part in filteredList" :key="part.index">                                
                                     <td class="px-3 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        {{ part.id }}
+                                        {{ id++ }}
                                     </td>
                                     <td class="px-3 py-4 whitespace-no-wrap border-b border-gray-200">
                                         {{ part.name }}
@@ -167,6 +167,7 @@
                 files:'',
                 isOpen:false,
                 search:'',
+                id:1,
             }
         },
 

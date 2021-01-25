@@ -55,7 +55,7 @@
                                 <tbody class="bg-white text-gray-700">
                                 <tr class="border-b border-gray-200" v-for="(supplier, index) in suppliers" :key="index">
                                     <td class="px-6 py-4 whitespace-no-wrap">
-                                        {{ supplier.id }}
+                                        {{ id++ }}
                                     </td>
 
                                     <td  class="px-6 py-4 whitespace-no-wrap">
@@ -117,6 +117,7 @@ import Edit from '../suppliers/Edit'
             return {
                 toggleModal:false,
                 files:'',
+                id:1,
                    form:{
                         name: '',
                         name_ar: '',

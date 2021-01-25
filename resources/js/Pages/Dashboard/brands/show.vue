@@ -54,7 +54,7 @@
                                 <tbody class="bg-white text-gray-500 text-sm md:text-base">
                                 <tr v-for="car in brand.cars" :key="car.index">
                                     <td class="px-6 py-4 whitespace-no-wrap"> 
-                                        {{ car.id }}
+                                        {{ id++ }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap capitalize">
                                         {{ car.brand }}
@@ -88,6 +88,11 @@
     export default {
         components: {Layout},
         props:['cars', 'brand'],
+        data() {
+            return {
+                id:1,
+            }
+        },
         methods:  {
         ago(car) {
             return moment(car.created_at).format('lll');

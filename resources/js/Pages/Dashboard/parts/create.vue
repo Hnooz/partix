@@ -51,6 +51,7 @@
                                     <option value="" disabled>select category</option>
                                     <option v-for="category in categories" :key="category.index" :value="category.id">{{category.name}}</option>
                                 </select>
+                                
                         </div>
                         <div>
                             <label class="text-gray-700">{{__('supplier')}}</label>
@@ -69,6 +70,7 @@
                         <div>
                             <label class="text-gray-700">{{__('images')}} (<span class="text-red-500 text-sm">minimum image required 4</span>)</label>
                             <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full" :error="$page.errors.images" tabindex="7" multiple required>
+                            <span class="text-xs text-red-500 mt-4" v-if="$page.errors.images">{{ $page.errors.images[0] }}</span>
                         </div>
                         
                     </div>

@@ -123,7 +123,8 @@ class OrderController extends Controller
             'message' => 'you have ordered successfully',
         ]);
 
-        return redirect()->route('store.index');
+        return inertia()->render('Store/message');
+        // return redirect()->route('store.message');
     }
 
     public function edit(Order $order)
@@ -145,6 +146,19 @@ class OrderController extends Controller
         ]);
 
         return redirect()->route('orders.index');
+    }
+
+    public function destroy(Order $order)
+    {
+        $order->orderDetails()->delete();
+        $order->delete();
+
+        session()->flash('toast', [
+            'type' => 'error',
+            'message' => 'order was deleted successfully',
+        ]);
+
+        return redirect()->back();
     }
 
     public function storeZeroPriceOrder(Request $request, Order $order)

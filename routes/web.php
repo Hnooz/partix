@@ -15,6 +15,7 @@ Route::group(['middleware' => 'is_delivery', 'prefix' => '/dashboard'], function
     Route::get('/orders/{order}/edit', 'OrderController@edit')->name('orders.edit');
     Route::put('/orders/{order}', 'OrderController@update')->name('orders.update');
     Route::get('/orders/{order}', 'OrderController@show')->name('orders.show');
+    Route::delete('orders/{order}', 'OrderController@destroy')->name('orders.destroy');
 });
 
 //dashboard route
@@ -62,7 +63,7 @@ Route::group(['prefix' => 'store'], function () {
     Route::get('/details/{part}', 'StoreController@details')->name('store.details');
     Route::post('/search', 'StoreController@search')->name('store.search');
     Route::get('/404', 'StoreController@notfound')->name('store.notfound');
-
+    
     // filter route
     Route::get('/filtered_part/{id}', 'FilterController@getFilteredParts')->name('filtered_part');
     Route::post('/filtered_parts', 'FilterController@filteredParts')->name('filtered_parts');

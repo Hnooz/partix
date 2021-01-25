@@ -72,10 +72,10 @@
                                         style="text-align: start">
                                         {{__('order status')}}
                                     </th>
-                                    <th class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                                    <!-- <th class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         {{__('created at')}}
-                                    </th>
+                                    </th> -->
                                     <th class="px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                                         style="text-align: start">
                                         {{__('action')}}
@@ -107,9 +107,9 @@
                                         <span v-if="order.order_status_id == 1" class="bg-gray-500 capitalize px-2 py-1 rounded text-sm text-white">{{ order.status.name }}</span>
                                         <span v-if="order.order_status_id == 4" class="bg-red-500 capitalize px-2 py-1 rounded text-sm text-white">{{ order.status.name }}</span>
                                     </td>
-                                    <td class="px-3 py-4 whitespace-no-wrap">
+                                    <!-- <td class="px-3 py-4 whitespace-no-wrap">
                                         {{ ago(order) }}
-                                    </td>
+                                    </td> -->
 
                                     <td class="flex px-3 py-4 whitespace-no-wrap text-sm leading-5 font-medium">
                                         <inertia-link :href="'/dashboard/orders/'+order.id+'/edit'" class="h-6 text-blue-500 w-6">
@@ -118,9 +118,10 @@
                                         <inertia-link :href="'/dashboard/orders/'+order.id">
                                             <svg class="h-6 text-yellow-500 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
                                         </inertia-link>
-                                        <a href="#">
+                                        <button @click="Delete(order)"><svg class="h-6 text-red-500 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg></button>
+                                        <!-- <a href="#">
                                             <svg class="h-6 text-red-500 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                                        </a>
+                                        </a> -->
                                     </td>
                                 </tr>
                                 </tbody>
@@ -147,10 +148,12 @@
             }
         },
         methods:  {
-        ago(order) {
-            
+        ago(order) {            
             return moment(order.created_at).format('Y-M-D');
-        }
+        },
+        Delete(order) {
+                this.$inertia.delete(`/dashboard/orders/${order.id}`);
+            },
     },
     }
 </script>

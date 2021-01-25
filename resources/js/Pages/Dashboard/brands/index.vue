@@ -62,7 +62,7 @@
                                 <tbody class="bg-white text-gray-500 text-sm md:text-base">
                                     <tr v-for="brand in brands" :key="brand.index">
                                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                            {{ brand.id }}
+                                            {{ id++ }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                             {{brand.name }}
@@ -95,6 +95,7 @@
          data() {
              return {
                  files:'',
+                 id:1,
              }
          },
             methods: {

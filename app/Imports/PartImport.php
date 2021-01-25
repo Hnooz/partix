@@ -27,7 +27,6 @@ class PartImport implements ToModel
             'supplier_id' => $row[9],
             'part_type_id' => $row[10],
             'category_id' => $row[11],
-            'created_at' => $row[12],
         ]);
     }
 }
