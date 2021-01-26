@@ -252,15 +252,6 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="mt-8">
-                                            <h4 class="text-sm text-teal-700 font-medium capitalize">{{__('coupon code')}}</h4>
-                                            <div class="mt-6 flex">
-                                                <label class="block flex-1">
-                                                    <input type="text" name="coupon" v-model="modelForm.coupon" :error="$page.errors.coupon" class="form-input mt-1 block w-full text-gray-700" :placeholder="__('add promocode')">
-                                                    <span class="text-red-500 text-xs mt-4" v-if="$page.errors.coupon">{{ $page.errors.coupon[0] }}</span>
-                                                </label>
-                                            </div>
-                                        </div>
                                         <div class="flex items-center justify-between mt-8">
                                             <a href="/store" class="flex items-center text-teal-700 text-sm font-medium rounded hover:underline focus:outline-none">
                                                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
@@ -273,10 +264,7 @@
                                         </div>
                                     </form> 
                                 </div>
-                                </div>                                                            
-                                
-                                    
-                                                                                                
+                                </div>                                                                                                                            
                             </div>
                         </main>
                     </div>
@@ -383,11 +371,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
                 const formItem = this.modelForm;
 
                 const both = Object.assign(form , formItem);
-                this.$inertia.post('/store/orders/zeroprice', both).then(() => {
-                    this.toggleModal = false;
-                    this.modelForm = '';
-                    location.reload();
-                });
+                this.$inertia.post('/store/orders/zeroprice', both);
             },
             
         addCart() {

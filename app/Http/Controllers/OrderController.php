@@ -59,6 +59,15 @@ class OrderController extends Controller
         ]);
 
         $coupon = CouponCode::where('name', $request->coupon)->get(); //COUPON FROM REQUEST
+
+        if (isset($coupon[0]->name) != $request->coupon) { // check coupon expiration TIME
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => 'invalid coupon code name',
+            ]);
+
+            return redirect()->back();
+        }
         
         if (Cart::isEmpty()) { // CHECK IF CART IS EMPTY
             session()->flash('toast', [
@@ -164,6 +173,6 @@ class OrderController extends Controller
     {
         $order->storeOrderWhenPriceZero($request);
 
-        return redirect()->route('store.message');
+        return inertia()->render('Store/message');
     }
 }
