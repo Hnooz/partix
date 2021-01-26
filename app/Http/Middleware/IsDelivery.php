@@ -22,6 +22,6 @@ class IsDelivery
             }
         }
         
-        return redirect('dashboard/orders');
+        return redirect('store');
     }
 }

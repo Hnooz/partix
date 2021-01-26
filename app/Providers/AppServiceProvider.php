@@ -48,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
 
         Inertia::share('auth.user', function () {
             return[
+                'isAdmin' => Auth::user(),
                 'loggedIn' => Auth::check(),
             ];
         });

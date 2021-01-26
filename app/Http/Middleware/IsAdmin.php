@@ -22,6 +22,6 @@ class IsAdmin
             }
         }
 
-        return \redirect()->back();
+        return redirect('store');
     }
 }

@@ -5938,7 +5938,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -6079,6 +6078,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.part_type_id = 3;
     },
     changImage: function changImage(url) {
+      console.log(url);
       this.img = url;
     }
   }
@@ -7314,44 +7314,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -59584,39 +59546,63 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "flex items-center justify-center" }, [
-            _c("a", { staticClass: "-mt-10 px-10", attrs: { href: "#" } }, [
-              _c("img", {
-                staticClass:
-                  "h-24 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-24",
-                attrs: { src: _vm.part.url[0], alt: _vm.part.name.slice(0, 5) }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _c("a", { attrs: { href: "#" } }, [
+          _c(
+            "div",
+            { staticClass: "flex h-64 items-center justify-center w-70" },
+            [
+              _c("div", { staticClass: "h-48 w-64", attrs: { href: "#" } }, [
+                _c("img", {
+                  staticClass:
+                    "h-full md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-full",
+                  attrs: { src: _vm.img, alt: _vm.part.name.slice(0, 5) }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("img", {
+                  staticClass:
+                    "border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto my-1 object-center object-cover w-12",
+                  attrs: {
+                    src: _vm.part.url[0],
+                    alt: _vm.part.name.slice(0, 5)
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.changImage(_vm.part.url[0])
+                    }
+                  }
+                }),
+                _vm._v(" "),
                 _c("img", {
                   staticClass:
                     "border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto my-1 object-center object-cover w-12",
                   attrs: {
                     src: _vm.part.url[1],
                     alt: _vm.part.name.slice(0, 5)
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.changImage(_vm.part.url[1])
+                    }
                   }
-                })
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "#" } }, [
+                }),
+                _vm._v(" "),
                 _c("img", {
                   staticClass:
                     "border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-12",
                   attrs: {
                     src: _vm.part.url[2],
                     alt: _vm.part.name.slice(0, 5)
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.changImage(_vm.part.url[2])
+                    }
                   }
                 })
               ])
-            ])
-          ]),
+            ]
+          ),
           _vm._v(" "),
           _c(
             "form",
@@ -64376,6 +64362,10 @@ var render = function() {
                   "inertia-link",
                   {
                     staticClass: "flex items-center",
+                    class:
+                      _vm.$page.auth.user.isAdmin.is_admin == 0
+                        ? "hidden"
+                        : "visible",
                     attrs: { href: "/dashboard" }
                   },
                   [
@@ -64474,6 +64464,10 @@ var render = function() {
                   "inertia-link",
                   {
                     staticClass: "flex items-center",
+                    class:
+                      _vm.$page.auth.user.isAdmin.is_admin == 0
+                        ? "hidden"
+                        : "visible",
                     attrs: { href: "/dashboard/users" }
                   },
                   [
@@ -64523,6 +64517,10 @@ var render = function() {
                   "inertia-link",
                   {
                     staticClass: "flex items-center",
+                    class:
+                      _vm.$page.auth.user.isAdmin.is_admin == 0
+                        ? "hidden"
+                        : "visible",
                     attrs: { href: "/dashboard/suppliers" }
                   },
                   [
@@ -64572,6 +64570,10 @@ var render = function() {
                   "inertia-link",
                   {
                     staticClass: "flex items-center",
+                    class:
+                      _vm.$page.auth.user.isAdmin.is_admin == 0
+                        ? "hidden"
+                        : "visible",
                     attrs: { href: "/dashboard/parts" }
                   },
                   [
@@ -64612,15 +64614,21 @@ var render = function() {
               "li",
               {
                 staticClass: "px-2 pb-4",
-                class: _vm.route().current("cars.*")
-                  ? "text-teal-600"
-                  : "text-white hover:text-teal-600"
+                class:
+                  _vm.route().current("brands.*") ||
+                  _vm.route().current("cars.*")
+                    ? "text-teal-600"
+                    : "text-white hover:text-teal-600"
               },
               [
                 _c(
                   "inertia-link",
                   {
                     staticClass: "flex items-center",
+                    class:
+                      _vm.$page.auth.user.isAdmin.is_admin == 0
+                        ? "hidden"
+                        : "visible",
                     attrs: { href: "/dashboard/brands" }
                   },
                   [
@@ -64676,6 +64684,10 @@ var render = function() {
                   "inertia-link",
                   {
                     staticClass: "flex items-center",
+                    class:
+                      _vm.$page.auth.user.isAdmin.is_admin == 0
+                        ? "hidden"
+                        : "visible",
                     attrs: { href: "/dashboard/super_categories" }
                   },
                   [
@@ -64756,6 +64768,10 @@ var render = function() {
                   "inertia-link",
                   {
                     staticClass: "flex items-center",
+                    class:
+                      _vm.$page.auth.user.isAdmin.is_admin == 0
+                        ? "hidden"
+                        : "visible",
                     attrs: { href: "/dashboard/categories" }
                   },
                   [
@@ -64831,6 +64847,10 @@ var render = function() {
                   "inertia-link",
                   {
                     staticClass: "flex items-center",
+                    class:
+                      _vm.$page.auth.user.isAdmin.is_admin == 0
+                        ? "hidden"
+                        : "visible",
                     attrs: { href: "/dashboard/coupons" }
                   },
                   [
@@ -64914,53 +64934,6 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("ul", { staticClass: "md:hidden md:mt-48 mt-10 mx-8" }, [
-            _c(
-              "li",
-              {
-                staticClass:
-                  "flex px-2 py-3 text-white hover:text-teal-600 rounded mt-2"
-              },
-              [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "w-6",
-                    attrs: {
-                      fill: "none",
-                      stroke: "currentColor",
-                      viewBox: "0 0 24 24",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round",
-                        "stroke-width": "2",
-                        d:
-                          "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                      }
-                    }),
-                    _c("path", {
-                      attrs: {
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round",
-                        "stroke-width": "2",
-                        d: "M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                      }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "mx-2 capitalize", attrs: { href: "#" } },
-                  [_vm._v(_vm._s(_vm.__("profile")))]
-                )
-              ]
-            ),
-            _vm._v(" "),
             _c(
               "li",
               {

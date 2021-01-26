@@ -127,17 +127,16 @@
         <div class="flex justify-between">
             <p class="flex justify-center bg-teal-400 font-semibold h-10 w-10 md:h-12 md:px-1 md:rounded-none px-1 py-3 rounded-br-lg shadow-lg text-sm text-white md:w-12">{{part.sale}}%</p>
         </div>
-        <div class="flex items-center justify-center">
-            <a class="-mt-10 px-10" href="#">
-                <img class="h-24 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-24" :src="part.url[0]" :alt="part.name.slice(0,5)">
-            </a>
+        <div class="flex h-64 items-center justify-center w-70">
+            <div class="h-48 w-64" href="#">
+                <img class="h-full md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-full" :src="img" :alt="part.name.slice(0,5)">
+            </div>
             <div>
-                <a href="#">
-                <img class="border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto my-1 object-center object-cover w-12" :src="part.url[1]" :alt="part.name.slice(0,5)">
-            </a>
-            <a href="#">
-                <img class="border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-12" :src="part.url[2]" :alt="part.name.slice(0,5)">
-            </a>
+                <img class="border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto my-1 object-center object-cover w-12" :src="part.url[0]" @click="changImage(part.url[0])" :alt="part.name.slice(0,5)">
+                <img class="border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto my-1 object-center object-cover w-12" :src="part.url[1]" @click="changImage(part.url[1])" :alt="part.name.slice(0,5)">
+           
+                <img class="border border-teal-400 h-12 md:h-24 md:mt-12 md:w-24 mx-auto object-center object-cover w-12" :src="part.url[2]" @click="changImage(part.url[2])" :alt="part.name.slice(0,5)">
+           
             </div>
         </div>
         
@@ -444,6 +443,7 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
         },
         changImage(url)
         {
+            console.log(url);
             this.img = url
         }
     },
