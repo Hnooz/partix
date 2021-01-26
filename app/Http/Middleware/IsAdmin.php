@@ -21,7 +21,7 @@ class IsAdmin
                 return $next($request);
             }
         }
-        
-        return redirect('store')->with('error', "You don't have admin access.");
+
+        return \redirect()->back();
     }
 }

@@ -105,9 +105,4 @@ class StoreController extends Controller
 
         return response()->json(['data' => $part, 'redirect' => '/store/details/']);
     }
-
-    public function notfound()
-    {
-        return inertia()->render('Store/404');
-    }
 }

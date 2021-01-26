@@ -62,7 +62,7 @@ Route::group(['prefix' => 'store'], function () {
     Route::post('/orders/zeroprice', 'OrderController@storeZeroPriceOrder')->name('orders.storeZeroPriceOrder');
     Route::get('/details/{part}', 'StoreController@details')->name('store.details');
     Route::post('/search', 'StoreController@search')->name('store.search');
-    Route::get('/404', 'StoreController@notfound')->name('store.notfound');
+    Route::get('/message/{order}', 'ErrorAndMessageController@message')->name('store.message');
     
     // filter route
     Route::get('/filtered_part/{id}', 'FilterController@getFilteredParts')->name('filtered_part');

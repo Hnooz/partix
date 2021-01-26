@@ -248,7 +248,7 @@
                                                     </select>
                                                 </label>
                                                 <label class="block flex-1 ml-3">
-                                                    <input type="number" max="8" min="8" name="customer_phone" v-model="modelForm.customer_phone" :error="$page.errors.customer_phone" class="form-input mt-1 block w-full text-gray-700" placeholder="your number" required>
+                                                    <input type="number" name="customer_phone" v-model="modelForm.customer_phone" :error="$page.errors.customer_phone" class="form-input mt-1 block w-full text-gray-700" placeholder="your number" required>
                                                     <span class="text-red-500 text-xs mt-4" v-if="$page.errors.customer_phone">{{ $page.errors.customer_phone[0] }}</span>
                                                 </label>
                                             </div>

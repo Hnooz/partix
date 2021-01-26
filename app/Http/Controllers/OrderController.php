@@ -123,8 +123,7 @@ class OrderController extends Controller
             'message' => 'you have ordered successfully',
         ]);
 
-        return inertia()->render('Store/message');
-        // return redirect()->route('store.message');
+        return redirect()->route('store.message', [$order->id]);
     }
 
     public function edit(Order $order)
@@ -165,6 +164,6 @@ class OrderController extends Controller
     {
         $order->storeOrderWhenPriceZero($request);
 
-        return redirect()->back();
+        return redirect()->route('store.message');
     }
 }

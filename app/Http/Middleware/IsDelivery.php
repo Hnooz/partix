@@ -22,6 +22,6 @@ class IsDelivery
             }
         }
         
-        return redirect('store')->with('error', "You don't have delivery access.");
+        return redirect('dashboard/orders');
     }
 }
