@@ -10,6 +10,7 @@ class WishListController extends Controller
     public function add()
     {
         $wish_list = app('wishlist');
+        
         if ($wish_list->get(request('id')) !== null) {
             return \redirect()->back();
         } else {

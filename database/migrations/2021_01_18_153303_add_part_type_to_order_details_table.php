@@ -14,7 +14,7 @@ class AddPartTypeToOrderDetailsTable extends Migration
     public function up()
     {
         Schema::table('order_details', function (Blueprint $table) {
-            $table->string('part_type');
+            $table->string('part_type')->nullable();
         });
     }
 

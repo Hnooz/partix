@@ -51,7 +51,7 @@
         </form>
     </div>
         <!-- main section -->
-    <div class="container grid grid-cols-2 md:grid-cols-4 md:px-16 mx-auto py-10">            
+    <div class="container grid grid-cols-2 md:grid-cols-4 md:px-16 mx-auto py-10">
         <div class="bg-white mb-10 mx-3 overflow-hidden md:rounded-tr-lg shadow-lg rounded-lg" v-for="(part, index) in filteredList" :key="index">
             <div class="pb-12" >
                 <button type="button" @click="addWishlist(part)"  class="float-left px-2 py-3 h-12 w-12 focus:outline-none outline-none">
@@ -68,7 +68,7 @@
            <div class="px-4 py-2">
                 <a :href="`/store/details/${part.id}`" class="font-bold text-xs md:text-base text-teal-500 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</a>                
                 <p class="break-all font-medium text-gray-600 text-xs "><span dir="auto">{{__('number')}}:</span>{{part.number}}</p>
-                 <div class="flex items-center">                           
+                 <div class="flex items-center">
                     <p v-if="part.part_type_id == '1'" class="text-gray-600">{{part.oem_price}} <span>{{__('QAR')}}</span> </p>
                     <p v-if="part.part_type_id == '2'" class="text-gray-600">{{part.aftermarket_price}} <span>{{__('QAR')}}</span> </p>
                     <p v-if="part.part_type_id == '3'" class="text-gray-600">{{part.used_price}} <span>{{__('QAR')}}</span> </p>
@@ -88,13 +88,14 @@
                 </button>
             </div>
         </div>
-        
     </div>
 
-        <p v-if="parts.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">{{__('there is no parts in this category')}}~_~!</p>
-        <div v-if="parts.length == 0" class="flex justify-center mb-10">
-            <img class="w-70 h-70" src="../../images/empty-animate.svg" alt="">
-        </div>
+    <paginator-components :data="parts"></paginator-components>
+
+    <p v-if="parts.data.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">{{__('there is no parts in this category')}}~_~!</p>
+    <div v-if="parts.data.length == 0" class="flex justify-center mb-10">
+        <img class="w-70 h-70" src="../../images/empty-animate.svg" alt="">
+    </div>
 
 <BaseFooter/>
     </store-layout>
@@ -103,12 +104,14 @@
 <script>
 import StoreLayout from '../../Shared/StoreLayout'
 import BaseNav from "../../components/UI/BaseNav";
+import PaginatorComponents from "../../components/PaginatorComponents";
 import SelectSection from '../../components/UI/SelectSection'
 import BaseFooter from '../../components/UI/BaseFooter'
 export default {
     components: {
         StoreLayout,
         BaseNav,
+        PaginatorComponents,
         SelectSection,
         BaseFooter,
         
@@ -125,16 +128,16 @@ export default {
     },
 
     computed: {
-    filteredList() {
-      return this.parts.filter(part => {
-        return part.name.toLowerCase().includes(this.search.toLowerCase())
-      })
+        filteredList() {
+            return this.parts.data.filter(part => {
+                return part.name.toLowerCase().includes(this.search.toLowerCase())
+            })
+        },
     },
-  },
 
     methods: {
         addCart(part) {
-        this.$inertia.post('/store/carts', part);
+            this.$inertia.post('/store/carts', part);
         },
         addWishlist(part) 
         {            
