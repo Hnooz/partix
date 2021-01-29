@@ -1,11 +1,7 @@
 <template>
     <store-layout>
-    <BaseNav 
-        :cartItemQuantity="cartQuantity" :cartItem="cartCollection" 
-        :cartTotalPrice="cartTotalPrice" :wishlistQuantity="wishlistQuantity" 
-        :wishlistContent="wishlistContent"/>
-    <!-- <SelectSection /> -->
-         <!-- filter search -->
+    <BaseNav />
+
     <div class="bg-teal-800 py-5 hidden md:block">
         <div class="capitalize container flex font-semibold items-center justify-between mx-auto px-16 text-white">
             <div class="flex">
@@ -299,14 +295,8 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
         },
         props:[
             'part','category', 
-            'cartQuantity', 
-            'cartCollection' ,
             'cartItem',
-            'part_type',
             'latest_category',
-            'cartTotalPrice',
-            'wishlistQuantity',
-            'wishlistContent'
             ],
         data() {
             return {

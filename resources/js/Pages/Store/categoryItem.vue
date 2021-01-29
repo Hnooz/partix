@@ -1,9 +1,6 @@
 <template>
     <store-layout>
-    <BaseNav 
-        :cartItemQuantity="cartQuantity" :cartItem="cartCollection" 
-        :cartTotalPrice="cartTotalPrice" :wishlistQuantity="wishlistQuantity" 
-        :wishlistContent="wishlistContent"/>
+    <BaseNav />
 
     <SelectSection />
 
@@ -90,7 +87,7 @@
         </div>
     </div>
 
-    <paginator-components :data="parts"></paginator-components>
+    <paginator-component :data="parts"></paginator-component>
 
     <p v-if="parts.data.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">{{__('there is no parts in this category')}}~_~!</p>
     <div v-if="parts.data.length == 0" class="flex justify-center mb-10">
@@ -104,23 +101,19 @@
 <script>
 import StoreLayout from '../../Shared/StoreLayout'
 import BaseNav from "../../components/UI/BaseNav";
-import PaginatorComponents from "../../components/PaginatorComponents";
+import PaginatorComponent from "../../components/PaginatorComponent";
 import SelectSection from '../../components/UI/SelectSection'
 import BaseFooter from '../../components/UI/BaseFooter'
 export default {
     components: {
         StoreLayout,
         BaseNav,
-        PaginatorComponents,
+        PaginatorComponent,
         SelectSection,
         BaseFooter,
         
     },
-    props:[
-            'parts', 'category', 'cartQuantity',
-            'cartCollection', 'cartTotalPrice',
-            'wishlistQuantity',
-            'wishlistContent'],
+    props:['parts', 'category',],
     data() {
         return {
             search:'',

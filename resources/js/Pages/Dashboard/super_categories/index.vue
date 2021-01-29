@@ -39,7 +39,7 @@
                                     </td>
 
                                     <td  class="px-6 py-4 whitespace-no-wrap">
-                                        {{super_category.name}}
+                                        {{ super_category.name}}
                                     </td>
 
                                     <td  class="flex px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium">
@@ -67,24 +67,13 @@ import Layout from '../../../Shared/Layout'
         props:['super_categories'],
         data() {
             return {
-                // show:0,
-                form: {
-                    name: '',
-                    id:1,
-                },
+                id:1,
             }
         },
         methods: {
-            submit() {
-                this.$inertia.post('/dashboard/super_categories', this.form);
-                this.form = '';
-            },
             Delete(super_category){
                      this.$inertia.delete(`/dashboard/super_categories/${super_category.id}`);
             },
-            // showInput(category){
-            //     this.show = category.id
-            // }
         }
     }
 </script>

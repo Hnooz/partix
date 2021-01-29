@@ -8,7 +8,7 @@
         </div>
         <hr class="my-3">
         <form>
-            <div class="flex justify-between mt-6" v-for="item in data" :key="item.index">
+            <div class="flex justify-between mt-6" v-for="item in $page.wishlist.content" :key="item.index">
                 <div class="flex">
                     <img v-if="item.attributes[0].url.length > 0" class="h-20 w-20 object-cover rounded border-2" :src="item.attributes[0].url[0]" alt="">
                     <img v-else class="h-20 w-20 object-cover rounded border-2" src="../../images/oops-404-error-with-a-broken-robot-animate.svg" alt="">
@@ -30,7 +30,6 @@
     export default {
         props:{
            openWishlist:Boolean,
-           data:Object
         },
 
         methods: {

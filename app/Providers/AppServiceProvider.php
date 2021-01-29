@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Cart;
 use App\Order;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -56,6 +57,24 @@ class AppServiceProvider extends ServiceProvider
         Inertia::share('order', function () {
             return[
                 'total' => Order::where('order_status_id', 1)->count(),
+            ];
+        });
+
+        Inertia::share('carts', function () {
+            return[
+                'content' => Cart::getContent(),
+                'totalPrice' => Cart::getTotal(),
+                'quantity' => Cart::getTotalQuantity(),
+            ];
+        });
+
+        Inertia::share('wishlist', function () {
+            $wish_list = app('wishlist');
+
+            return[
+                'content' => $wish_list->getContent(),
+                'totalPrice' => $wish_list->getTotal(),
+                'quantity' => $wish_list->getTotalQuantity(),
             ];
         });
     }

@@ -3692,8 +3692,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_PaginatorComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/PaginatorComponent */ "./resources/js/components/PaginatorComponent.vue");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -3829,14 +3830,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
+
  // import moment from 'moment';
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"],
+    PaginatorComponent: _components_PaginatorComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: ['orders'],
   data: function data() {
@@ -3846,7 +3847,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     ago: function ago(order) {
-      return moment__WEBPACK_IMPORTED_MODULE_1___default()(order.created_at).format('Y-M-D');
+      return moment__WEBPACK_IMPORTED_MODULE_2___default()(order.created_at).format('Y-M-D');
     },
     Delete: function Delete(order) {
       this.$inertia["delete"]("/dashboard/orders/".concat(order.id));
@@ -4342,6 +4343,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
+/* harmony import */ var _components_PaginatorComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/PaginatorComponent */ "./resources/js/components/PaginatorComponent.vue");
+//
 //
 //
 //
@@ -4501,24 +4504,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"],
+    PaginatorComponent: _components_PaginatorComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: ['parts'],
   data: function data() {
     return {
       files: '',
       isOpen: false,
-      search: '',
-      id: 1
+      search: '' // id:1,
+
     };
   },
   computed: {
     filteredList: function filteredList() {
       var _this = this;
 
-      return this.parts.filter(function (part) {
+      return this.parts.data.filter(function (part) {
         return part.name.toLowerCase().includes(_this.search.toLowerCase());
       });
     }
@@ -4925,24 +4930,13 @@ __webpack_require__.r(__webpack_exports__);
   props: ['super_categories'],
   data: function data() {
     return {
-      // show:0,
-      form: {
-        name: '',
-        id: 1
-      }
+      id: 1
     };
   },
   methods: {
-    submit: function submit() {
-      this.$inertia.post('/dashboard/super_categories', this.form);
-      this.form = '';
-    },
     Delete: function Delete(super_category) {
       this.$inertia["delete"]("/dashboard/super_categories/".concat(super_category.id));
-    } // showInput(category){
-    //     this.show = category.id
-    // }
-
+    }
   }
 });
 
@@ -5583,10 +5577,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -5602,11 +5592,10 @@ __webpack_require__.r(__webpack_exports__);
     BaseFooter: _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__["default"],
     StoreLayout: _Shared_StoreLayout_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
-  props: ['parts', 'cartQuantity', 'cartCollection', 'cartTotalPrice', 'categories', 'super_category', 'wishlistQuantity', 'wishlistContent'],
+  props: ['parts', 'categories', 'super_category'],
   data: function data() {
     return {
-      search: '',
-      wishlist: false
+      search: ''
     };
   },
   computed: {
@@ -5922,10 +5911,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -5941,7 +5926,7 @@ __webpack_require__.r(__webpack_exports__);
     SlideImage: _components_UI_SlideImage__WEBPACK_IMPORTED_MODULE_3__["default"],
     BaseFooter: _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  props: ['part', 'category', 'cartQuantity', 'cartCollection', 'cartItem', 'part_type', 'latest_category', 'cartTotalPrice', 'wishlistQuantity', 'wishlistContent'],
+  props: ['part', 'category', 'cartItem', 'latest_category'],
   data: function data() {
     return {
       img: '',
@@ -6079,8 +6064,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_StoreLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Shared/StoreLayout */ "./resources/js/Shared/StoreLayout.vue");
 /* harmony import */ var _components_UI_BaseNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/UI/BaseNav */ "./resources/js/components/UI/BaseNav.vue");
-/* harmony import */ var _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/UI/SelectSection */ "./resources/js/components/UI/SelectSection.vue");
-/* harmony import */ var _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/UI/BaseFooter */ "./resources/js/components/UI/BaseFooter.vue");
+/* harmony import */ var _components_PaginatorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/PaginatorComponent */ "./resources/js/components/PaginatorComponent.vue");
+/* harmony import */ var _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/UI/SelectSection */ "./resources/js/components/UI/SelectSection.vue");
+/* harmony import */ var _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/UI/BaseFooter */ "./resources/js/components/UI/BaseFooter.vue");
 //
 //
 //
@@ -6176,6 +6162,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -6184,10 +6171,11 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     StoreLayout: _Shared_StoreLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     BaseNav: _components_UI_BaseNav__WEBPACK_IMPORTED_MODULE_1__["default"],
-    SelectSection: _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_2__["default"],
-    BaseFooter: _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__["default"]
+    PaginatorComponent: _components_PaginatorComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
+    SelectSection: _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_3__["default"],
+    BaseFooter: _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  props: ['parts', 'cartQuantity', 'cartCollection', 'cartTotalPrice', 'wishlistQuantity', 'wishlistContent'],
+  props: ['parts'],
   data: function data() {
     return {
       search: '',
@@ -6198,7 +6186,7 @@ __webpack_require__.r(__webpack_exports__);
     filteredList: function filteredList() {
       var _this = this;
 
-      return this.parts.filter(function (part) {
+      return this.parts.data.filter(function (part) {
         return part.name.toLowerCase().includes(_this.search.toLowerCase());
       });
     }
@@ -6391,12 +6379,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_StoreLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Shared/StoreLayout */ "./resources/js/Shared/StoreLayout.vue");
 /* harmony import */ var _components_UI_BaseNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/UI/BaseNav */ "./resources/js/components/UI/BaseNav.vue");
-/* harmony import */ var _components_PaginatorComponents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/PaginatorComponents */ "./resources/js/components/PaginatorComponents.vue");
+/* harmony import */ var _components_PaginatorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/PaginatorComponent */ "./resources/js/components/PaginatorComponent.vue");
 /* harmony import */ var _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/UI/SelectSection */ "./resources/js/components/UI/SelectSection.vue");
 /* harmony import */ var _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/UI/BaseFooter */ "./resources/js/components/UI/BaseFooter.vue");
-//
-//
-//
 //
 //
 //
@@ -6506,11 +6491,11 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     StoreLayout: _Shared_StoreLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     BaseNav: _components_UI_BaseNav__WEBPACK_IMPORTED_MODULE_1__["default"],
-    PaginatorComponents: _components_PaginatorComponents__WEBPACK_IMPORTED_MODULE_2__["default"],
+    PaginatorComponent: _components_PaginatorComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
     SelectSection: _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_3__["default"],
     BaseFooter: _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  props: ['parts', 'category', 'cartQuantity', 'cartCollection', 'cartTotalPrice', 'wishlistQuantity', 'wishlistContent'],
+  props: ['parts', 'category'],
   data: function data() {
     return {
       search: ''
@@ -6640,9 +6625,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -6654,7 +6636,7 @@ __webpack_require__.r(__webpack_exports__);
     SelectSection: _components_UI_SelectSection__WEBPACK_IMPORTED_MODULE_2__["default"],
     BaseFooter: _components_UI_BaseFooter__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
-  props: ['parts', 'cars', 'cartQuantity', 'cartCollection', 'cartTotalPrice', 'wishlistQuantity', 'wishlistContent'],
+  props: ['parts', 'cars'],
   data: function data() {
     return {
       search: ''
@@ -6850,10 +6832,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaginatorComponents.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PaginatorComponents.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaginatorComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PaginatorComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7202,11 +7184,7 @@ __webpack_require__.r(__webpack_exports__);
     Wishlist: _UI_wishlist__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
-    cartItemQuantity: Number,
-    cartItem: Object,
-    cartTotalPrice: Number,
-    wishlistQuantity: Number,
-    wishlistContent: Object
+    wishlistQuantity: Number
   },
   data: function data() {
     return {
@@ -7932,8 +7910,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    openWishlist: Boolean,
-    data: Object
+    openWishlist: Boolean
   },
   methods: {
     Delete: function Delete(item) {
@@ -53281,7 +53258,7 @@ var render = function() {
             [
               _c("h1", [
                 _vm._v(
-                  _vm._s(this.$page.order.total) + " " + _vm._s(_vm.__("order"))
+                  _vm._s(_vm.$page.order.total) + " " + _vm._s(_vm.__("order"))
                 )
               ]),
               _vm._v(" "),
@@ -53465,369 +53442,382 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "mt-4" }, [
-        _c("div", { staticClass: "flex flex-col" }, [
-          _c(
-            "div",
-            { staticClass: "-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6" },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
-                },
-                [
-                  _c("table", { staticClass: "min-w-full" }, [
-                    _c("thead", { staticClass: "bg-gray-100" }, [
-                      _c("tr", [
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.__("name")) +
-                                " \n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.__("address")) +
-                                " \n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.__("phone")) +
-                                "\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.__("total")) +
-                                " " +
-                                _vm._s(_vm.__("price")) +
-                                "\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.__("coupon value")) +
-                                "\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.__("order status")) +
-                                "\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.__("action")) +
-                                "\n                                "
-                            )
-                          ]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "tbody",
-                      {
-                        staticClass:
-                          "bg-white text-gray-500 text-sm md:text-base"
-                      },
-                      _vm._l(_vm.orders, function(order) {
-                        return _c("tr", { key: order.index }, [
+        _c(
+          "div",
+          { staticClass: "flex flex-col" },
+          [
+            _c(
+              "div",
+              { staticClass: "-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6" },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
+                  },
+                  [
+                    _c("table", { staticClass: "min-w-full" }, [
+                      _c("thead", { staticClass: "bg-gray-100" }, [
+                        _c("tr", [
                           _c(
-                            "td",
-                            { staticClass: "px-6 py-4 whitespace-no-wrap" },
-                            [_c("h1", [_vm._v(_vm._s(order.customer_name))])]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "px-3 py-4 whitespace-no-wrap" },
-                            [_c("h1", [_vm._v(_vm._s(order.customer_address))])]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "px-3 py-4 whitespace-no-wrap" },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(order.customer_phone) +
-                                  "\n                                "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "px-3 py-4 whitespace-no-wrap" },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(order.price) +
-                                  "\n                                "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "px-3 py-4 whitespace-no-wrap" },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(
-                                    order.coupon ? order.coupon.value : "0"
-                                  ) +
-                                  "\n                                "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "px-3 py-4 whitespace-no-wrap" },
-                            [
-                              order.order_status_id == 2
-                                ? _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "bg-teal-300 capitalize px-2 py-1 rounded text-sm text-white"
-                                    },
-                                    [_vm._v(_vm._s(order.status.name))]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              order.order_status_id == 3
-                                ? _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "bg-orange-500 px-2 py-1 rounded text-sm text-white"
-                                    },
-                                    [_vm._v(_vm._s(order.status.name))]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              order.order_status_id == 1
-                                ? _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "bg-gray-500 capitalize px-2 py-1 rounded text-sm text-white"
-                                    },
-                                    [_vm._v(_vm._s(order.status.name))]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              order.order_status_id == 4
-                                ? _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "bg-red-500 capitalize px-2 py-1 rounded text-sm text-white"
-                                    },
-                                    [_vm._v(_vm._s(order.status.name))]
-                                  )
-                                : _vm._e()
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
+                            "th",
                             {
                               staticClass:
-                                "flex px-3 py-4 whitespace-no-wrap text-sm leading-5 font-medium"
+                                "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
                             },
                             [
-                              _c(
-                                "inertia-link",
-                                {
-                                  staticClass: "h-6 text-blue-500 w-6",
-                                  attrs: {
-                                    href:
-                                      "/dashboard/orders/" + order.id + "/edit"
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "svg",
-                                    {
-                                      staticClass: "w-6 h-6",
-                                      attrs: {
-                                        fill: "currentColor",
-                                        viewBox: "0 0 20 20",
-                                        xmlns: "http://www.w3.org/2000/svg"
-                                      }
-                                    },
-                                    [
-                                      _c("path", {
-                                        attrs: {
-                                          "fill-rule": "evenodd",
-                                          d:
-                                            "M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z",
-                                          "clip-rule": "evenodd"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "inertia-link",
-                                {
-                                  attrs: {
-                                    href: "/dashboard/orders/" + order.id
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "svg",
-                                    {
-                                      staticClass: "h-6 text-yellow-500 w-6",
-                                      attrs: {
-                                        fill: "currentColor",
-                                        viewBox: "0 0 20 20",
-                                        xmlns: "http://www.w3.org/2000/svg"
-                                      }
-                                    },
-                                    [
-                                      _c("path", {
-                                        attrs: {
-                                          d: "M10 12a2 2 0 100-4 2 2 0 000 4z"
-                                        }
-                                      }),
-                                      _c("path", {
-                                        attrs: {
-                                          "fill-rule": "evenodd",
-                                          d:
-                                            "M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z",
-                                          "clip-rule": "evenodd"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.Delete(order)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "svg",
-                                    {
-                                      staticClass: "h-6 text-red-500 w-6",
-                                      attrs: {
-                                        fill: "currentColor",
-                                        viewBox: "0 0 20 20",
-                                        xmlns: "http://www.w3.org/2000/svg"
-                                      }
-                                    },
-                                    [
-                                      _c("path", {
-                                        attrs: {
-                                          "fill-rule": "evenodd",
-                                          d:
-                                            "M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z",
-                                          "clip-rule": "evenodd"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ]
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.__("name")) +
+                                  " \n                                "
                               )
-                            ],
-                            1
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.__("address")) +
+                                  " \n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.__("phone")) +
+                                  "\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.__("total")) +
+                                  " " +
+                                  _vm._s(_vm.__("price")) +
+                                  "\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.__("coupon value")) +
+                                  "\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.__("order status")) +
+                                  "\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.__("action")) +
+                                  "\n                                "
+                              )
+                            ]
                           )
                         ])
-                      }),
-                      0
-                    )
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        {
+                          staticClass:
+                            "bg-white text-gray-500 text-sm md:text-base"
+                        },
+                        _vm._l(_vm.orders.data, function(order) {
+                          return _c("tr", { key: order.index }, [
+                            _c(
+                              "td",
+                              { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                              [_c("h1", [_vm._v(_vm._s(order.customer_name))])]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticClass: "px-3 py-4 whitespace-no-wrap" },
+                              [
+                                _c("h1", [
+                                  _vm._v(_vm._s(order.customer_address))
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticClass: "px-3 py-4 whitespace-no-wrap" },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(order.customer_phone) +
+                                    "\n                                "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticClass: "px-3 py-4 whitespace-no-wrap" },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(order.price) +
+                                    "\n                                "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticClass: "px-3 py-4 whitespace-no-wrap" },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(
+                                      order.coupon ? order.coupon.value : "0"
+                                    ) +
+                                    "\n                                "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticClass: "px-3 py-4 whitespace-no-wrap" },
+                              [
+                                order.order_status_id == 2
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "bg-teal-300 capitalize px-2 py-1 rounded text-sm text-white"
+                                      },
+                                      [_vm._v(_vm._s(order.status.name))]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                order.order_status_id == 3
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "bg-orange-500 px-2 py-1 rounded text-sm text-white"
+                                      },
+                                      [_vm._v(_vm._s(order.status.name))]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                order.order_status_id == 1
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "bg-gray-500 capitalize px-2 py-1 rounded text-sm text-white"
+                                      },
+                                      [_vm._v(_vm._s(order.status.name))]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                order.order_status_id == 4
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "bg-red-500 capitalize px-2 py-1 rounded text-sm text-white"
+                                      },
+                                      [_vm._v(_vm._s(order.status.name))]
+                                    )
+                                  : _vm._e()
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "flex px-3 py-4 whitespace-no-wrap text-sm leading-5 font-medium"
+                              },
+                              [
+                                _c(
+                                  "inertia-link",
+                                  {
+                                    staticClass: "h-6 text-blue-500 w-6",
+                                    attrs: {
+                                      href:
+                                        "/dashboard/orders/" +
+                                        order.id +
+                                        "/edit"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass: "w-6 h-6",
+                                        attrs: {
+                                          fill: "currentColor",
+                                          viewBox: "0 0 20 20",
+                                          xmlns: "http://www.w3.org/2000/svg"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            "fill-rule": "evenodd",
+                                            d:
+                                              "M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z",
+                                            "clip-rule": "evenodd"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "inertia-link",
+                                  {
+                                    attrs: {
+                                      href: "/dashboard/orders/" + order.id
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass: "h-6 text-yellow-500 w-6",
+                                        attrs: {
+                                          fill: "currentColor",
+                                          viewBox: "0 0 20 20",
+                                          xmlns: "http://www.w3.org/2000/svg"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d: "M10 12a2 2 0 100-4 2 2 0 000 4z"
+                                          }
+                                        }),
+                                        _c("path", {
+                                          attrs: {
+                                            "fill-rule": "evenodd",
+                                            d:
+                                              "M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z",
+                                            "clip-rule": "evenodd"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.Delete(order)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass: "h-6 text-red-500 w-6",
+                                        attrs: {
+                                          fill: "currentColor",
+                                          viewBox: "0 0 20 20",
+                                          xmlns: "http://www.w3.org/2000/svg"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            "fill-rule": "evenodd",
+                                            d:
+                                              "M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z",
+                                            "clip-rule": "evenodd"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        }),
+                        0
+                      )
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("paginator-component", { attrs: { data: _vm.orders } })
+          ],
+          1
+        )
       ])
     ])
   ])
@@ -55744,381 +55734,391 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "mt-4" }, [
-        _c("div", { staticClass: "flex flex-col" }, [
-          _c(
-            "div",
-            { staticClass: "-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6" },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
-                },
-                [
-                  _c("table", { staticClass: "min-w-full" }, [
-                    _c("thead", { staticClass: "bg-gray-100" }, [
-                      _c("tr", [
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    #ID\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3  py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.__("name")) +
-                                "\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                 " +
-                                _vm._s(_vm.__("number")) +
-                                "\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.__("price")) +
-                                "\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.__("category")) +
-                                "\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.__("type")) +
-                                "\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-3  py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
-                            staticStyle: { "text-align": "start" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.__("action")) +
-                                "\n                                "
-                            )
-                          ]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "tbody",
-                      {
-                        staticClass:
-                          "bg-white text-gray-500 text-sm md:text-base"
-                      },
-                      _vm._l(_vm.filteredList, function(part) {
-                        return _c("tr", { key: part.index }, [
+        _c(
+          "div",
+          { staticClass: "flex flex-col" },
+          [
+            _c(
+              "div",
+              { staticClass: "-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6" },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
+                  },
+                  [
+                    _c("table", { staticClass: "min-w-full" }, [
+                      _c("thead", { staticClass: "bg-gray-100" }, [
+                        _c("tr", [
                           _c(
-                            "td",
+                            "th",
                             {
                               staticClass:
-                                "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    #ID\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-3  py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
                             },
                             [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(_vm.id++) +
+                                  _vm._s(_vm.__("name")) +
                                   "\n                                "
                               )
                             ]
                           ),
                           _vm._v(" "),
                           _c(
-                            "td",
+                            "th",
                             {
                               staticClass:
-                                "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                                "px-3  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
                             },
                             [
                               _vm._v(
-                                "\n                                    " +
-                                  _vm._s(part.name) +
+                                "\n                                 " +
+                                  _vm._s(_vm.__("number")) +
                                   "\n                                "
                               )
                             ]
                           ),
                           _vm._v(" "),
                           _c(
-                            "td",
+                            "th",
                             {
                               staticClass:
-                                "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                                "px-3  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
                             },
                             [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(part.number) +
+                                  _vm._s(_vm.__("price")) +
                                   "\n                                "
                               )
                             ]
                           ),
                           _vm._v(" "),
                           _c(
-                            "td",
+                            "th",
                             {
                               staticClass:
-                                "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                                "px-3  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
                             },
                             [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(part.oem_price) +
-                                  "  || " +
-                                  _vm._s(part.aftermarket_price) +
-                                  " || " +
-                                  _vm._s(part.used_price) +
-                                  "\n\n                                "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          part.category
-                            ? _c(
-                                "td",
-                                {
-                                  staticClass:
-                                    "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                    " +
-                                      _vm._s(part.category.name) +
-                                      "\n                                "
-                                  )
-                                ]
-                              )
-                            : _c(
-                                "td",
-                                {
-                                  staticClass:
-                                    "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
-                                },
-                                [
-                                  _c("span", { staticClass: "text-red-600" }, [
-                                    _vm._v("no category")
-                                  ])
-                                ]
-                              ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            {
-                              staticClass:
-                                "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
-                            },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(part.type.name) +
+                                  _vm._s(_vm.__("category")) +
                                   "\n                                "
                               )
                             ]
                           ),
                           _vm._v(" "),
                           _c(
-                            "td",
+                            "th",
                             {
                               staticClass:
-                                "flex px-3 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium"
+                                "px-3  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
                             },
                             [
-                              _c(
-                                "inertia-link",
-                                {
-                                  attrs: {
-                                    href:
-                                      "/dashboard/parts/" + part.id + "/edit"
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "svg",
-                                    {
-                                      staticClass: "w-6 h-6 text-blue-500",
-                                      attrs: {
-                                        fill: "none",
-                                        stroke: "currentColor",
-                                        viewBox: "0 0 24 24",
-                                        xmlns: "http://www.w3.org/2000/svg"
-                                      }
-                                    },
-                                    [
-                                      _c("path", {
-                                        attrs: {
-                                          "stroke-linecap": "round",
-                                          "stroke-linejoin": "round",
-                                          "stroke-width": "2",
-                                          d:
-                                            "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                                        }
-                                      }),
-                                      _c("path", {
-                                        attrs: {
-                                          "stroke-linecap": "round",
-                                          "stroke-linejoin": "round",
-                                          "stroke-width": "2",
-                                          d: "M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "inertia-link",
-                                {
-                                  attrs: {
-                                    href: "/dashboard/parts/" + part.slug
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "svg",
-                                    {
-                                      staticClass: "h-6 text-yellow-500 w-6",
-                                      attrs: {
-                                        fill: "currentColor",
-                                        viewBox: "0 0 20 20",
-                                        xmlns: "http://www.w3.org/2000/svg"
-                                      }
-                                    },
-                                    [
-                                      _c("path", {
-                                        attrs: {
-                                          d: "M10 12a2 2 0 100-4 2 2 0 000 4z"
-                                        }
-                                      }),
-                                      _c("path", {
-                                        attrs: {
-                                          "fill-rule": "evenodd",
-                                          d:
-                                            "M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z",
-                                          "clip-rule": "evenodd"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.Delete(part)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "svg",
-                                    {
-                                      staticClass: "h-6 text-red-500 w-6",
-                                      attrs: {
-                                        fill: "currentColor",
-                                        viewBox: "0 0 20 20",
-                                        xmlns: "http://www.w3.org/2000/svg"
-                                      }
-                                    },
-                                    [
-                                      _c("path", {
-                                        attrs: {
-                                          "fill-rule": "evenodd",
-                                          d:
-                                            "M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z",
-                                          "clip-rule": "evenodd"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ]
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.__("type")) +
+                                  "\n                                "
                               )
-                            ],
-                            1
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-3  py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                              staticStyle: { "text-align": "start" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.__("action")) +
+                                  "\n                                "
+                              )
+                            ]
                           )
                         ])
-                      }),
-                      0
-                    )
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        {
+                          staticClass:
+                            "bg-white text-gray-500 text-sm md:text-base"
+                        },
+                        _vm._l(_vm.filteredList, function(part) {
+                          return _c("tr", { key: part.index }, [
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(part.id) +
+                                    "\n                                "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(part.name) +
+                                    "\n                                "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(part.number) +
+                                    "\n                                "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(part.oem_price) +
+                                    "  || " +
+                                    _vm._s(part.aftermarket_price) +
+                                    " || " +
+                                    _vm._s(part.used_price) +
+                                    "\n\n                                "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            part.category
+                              ? _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    " +
+                                        _vm._s(part.category.name) +
+                                        "\n                                "
+                                    )
+                                  ]
+                                )
+                              : _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      { staticClass: "text-red-600" },
+                                      [_vm._v("no category")]
+                                    )
+                                  ]
+                                ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(part.type.name) +
+                                    "\n                                "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "flex px-3 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium"
+                              },
+                              [
+                                _c(
+                                  "inertia-link",
+                                  {
+                                    attrs: {
+                                      href:
+                                        "/dashboard/parts/" + part.id + "/edit"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass: "w-6 h-6 text-blue-500",
+                                        attrs: {
+                                          fill: "none",
+                                          stroke: "currentColor",
+                                          viewBox: "0 0 24 24",
+                                          xmlns: "http://www.w3.org/2000/svg"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            "stroke-linecap": "round",
+                                            "stroke-linejoin": "round",
+                                            "stroke-width": "2",
+                                            d:
+                                              "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                                          }
+                                        }),
+                                        _c("path", {
+                                          attrs: {
+                                            "stroke-linecap": "round",
+                                            "stroke-linejoin": "round",
+                                            "stroke-width": "2",
+                                            d:
+                                              "M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "inertia-link",
+                                  {
+                                    attrs: {
+                                      href: "/dashboard/parts/" + part.slug
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass: "h-6 text-yellow-500 w-6",
+                                        attrs: {
+                                          fill: "currentColor",
+                                          viewBox: "0 0 20 20",
+                                          xmlns: "http://www.w3.org/2000/svg"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d: "M10 12a2 2 0 100-4 2 2 0 000 4z"
+                                          }
+                                        }),
+                                        _c("path", {
+                                          attrs: {
+                                            "fill-rule": "evenodd",
+                                            d:
+                                              "M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z",
+                                            "clip-rule": "evenodd"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.Delete(part)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass: "h-6 text-red-500 w-6",
+                                        attrs: {
+                                          fill: "currentColor",
+                                          viewBox: "0 0 20 20",
+                                          xmlns: "http://www.w3.org/2000/svg"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            "fill-rule": "evenodd",
+                                            d:
+                                              "M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z",
+                                            "clip-rule": "evenodd"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        }),
+                        0
+                      )
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("paginator-component", { attrs: { data: _vm.parts } })
+          ],
+          1
+        )
       ])
     ])
   ])
@@ -58454,15 +58454,7 @@ var render = function() {
       _c(
         "store-layout",
         [
-          _c("BaseNav", {
-            attrs: {
-              cartItemQuantity: _vm.cartQuantity,
-              cartItem: _vm.cartCollection,
-              cartTotalPrice: _vm.cartTotalPrice,
-              wishlistQuantity: _vm.wishlistQuantity,
-              wishlistContent: _vm.wishlistContent
-            }
-          }),
+          _c("BaseNav"),
           _vm._v(" "),
           _c("SelectSection"),
           _vm._v(" "),
@@ -58845,15 +58837,7 @@ var render = function() {
   return _c(
     "store-layout",
     [
-      _c("BaseNav", {
-        attrs: {
-          cartItemQuantity: _vm.cartQuantity,
-          cartItem: _vm.cartCollection,
-          cartTotalPrice: _vm.cartTotalPrice,
-          wishlistQuantity: _vm.wishlistQuantity,
-          wishlistContent: _vm.wishlistContent
-        }
-      }),
+      _c("BaseNav"),
       _vm._v(" "),
       _c("div", { staticClass: "bg-teal-800 py-5 hidden md:block" }, [
         _c(
@@ -60543,15 +60527,7 @@ var render = function() {
   return _c(
     "store-layout",
     [
-      _c("BaseNav", {
-        attrs: {
-          cartItemQuantity: _vm.cartQuantity,
-          cartItem: _vm.cartCollection,
-          cartTotalPrice: _vm.cartTotalPrice,
-          wishlistQuantity: _vm.wishlistQuantity,
-          wishlistContent: _vm.wishlistContent
-        }
-      }),
+      _c("BaseNav"),
       _vm._v(" "),
       _c("SelectSection"),
       _vm._v(" "),
@@ -60865,9 +60841,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                    " +
+                      "\n                 " +
                         _vm._s(_vm.__("Buy")) +
-                        "\n                "
+                        "\n             "
                     )
                   ]
                 ),
@@ -60886,9 +60862,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                    " +
+                      "\n                 " +
                         _vm._s(_vm.__("add to cart")) +
-                        "\n                    "
+                        "\n                 "
                     ),
                     _c(
                       "svg",
@@ -60914,7 +60890,9 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _vm.parts.length == 0
+      _c("paginator-component", { attrs: { data: _vm.parts } }),
+      _vm._v(" "),
+      _vm.parts.data.length == 0
         ? _c(
             "p",
             {
@@ -60924,7 +60902,7 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.parts.length == 0
+      _vm.parts.data.length == 0
         ? _c("div", { staticClass: "flex justify-center mb-10" }, [
             _c("img", {
               staticClass: "w-70 h-70",
@@ -61562,15 +61540,7 @@ var render = function() {
   return _c(
     "store-layout",
     [
-      _c("BaseNav", {
-        attrs: {
-          cartItemQuantity: _vm.cartQuantity,
-          cartItem: _vm.cartCollection,
-          cartTotalPrice: _vm.cartTotalPrice,
-          wishlistQuantity: _vm.wishlistQuantity,
-          wishlistContent: _vm.wishlistContent
-        }
-      }),
+      _c("BaseNav"),
       _vm._v(" "),
       _c("SelectSection"),
       _vm._v(" "),
@@ -61958,7 +61928,7 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _c("paginator-components", { attrs: { data: _vm.parts } }),
+      _c("paginator-component", { attrs: { data: _vm.parts } }),
       _vm._v(" "),
       _vm.parts.data.length == 0
         ? _c(
@@ -62013,15 +61983,7 @@ var render = function() {
   return _c(
     "store-layout",
     [
-      _c("BaseNav", {
-        attrs: {
-          cartItemQuantity: _vm.cartQuantity,
-          cartItem: _vm.cartCollection,
-          cartTotalPrice: _vm.cartTotalPrice,
-          wishlistQuantity: _vm.wishlistQuantity,
-          wishlistContent: _vm.wishlistContent
-        }
-      }),
+      _c("BaseNav"),
       _vm._v(" "),
       _c("div", { staticClass: "bg-teal-800 py-5 hidden md:block" }, [
         _c(
@@ -62789,10 +62751,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaginatorComponents.vue?vue&type=template&id=281c746c&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PaginatorComponents.vue?vue&type=template&id=281c746c& ***!
-  \**********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaginatorComponent.vue?vue&type=template&id=19f31f97&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PaginatorComponent.vue?vue&type=template&id=19f31f97& ***!
+  \*********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -62813,10 +62775,10 @@ var render = function() {
             _c(
               "inertia-link",
               {
-                staticClass: "mx-1 px-3 py-2 bg-white rounded-md",
+                staticClass: "mx-1 px-3 py-2  rounded-md",
                 class: _vm.data.prev_page_url
-                  ? "text-gray-700 hover:bg-teal-600 hover:text-white"
-                  : "cursor-not-allowed text-gray-500",
+                  ? "bg-teal-700 text-white hover:bg-white hover:text-teal-700 hover:border-teal-700 border-2"
+                  : "cursor-not-allowed text-gray-500 bg-white",
                 attrs: { href: _vm.data.prev_page_url }
               },
               [_vm._v("\n            previous\n        ")]
@@ -62825,10 +62787,10 @@ var render = function() {
             _c(
               "inertia-link",
               {
-                staticClass: "mx-1 px-3 py-2 bg-white rounded-md",
+                staticClass: "mx-1 px-3 py-2  rounded-md",
                 class: _vm.data.next_page_url
-                  ? "text-gray-700 hover:bg-teal-600 hover:text-white"
-                  : "cursor-not-allowed text-gray-500",
+                  ? "bg-teal-700 text-white hover:bg-white hover:text-teal-700 hover:border-teal-700 border-2"
+                  : "cursor-not-allowed text-gray-500 bg-white",
                 attrs: { href: _vm.data.next_page_url }
               },
               [_vm._v("\n            Next\n        ")]
@@ -63423,7 +63385,7 @@ var render = function() {
                             staticClass:
                               "-mt-12 absolute bg-red-400 flex font-bold h-5 justify-center rounded-full text-sm w-5"
                           },
-                          [_vm._v(_vm._s(_vm.wishlistQuantity))]
+                          [_vm._v(_vm._s(_vm.$page.wishlist.quantity))]
                         ),
                         _vm._v(" "),
                         _c(
@@ -63465,12 +63427,12 @@ var render = function() {
                             staticClass:
                               "-mt-12 mx-10 absolute bg-red-400 flex font-bold h-5 justify-center rounded-full text-sm w-5"
                           },
-                          [_vm._v(_vm._s(_vm.cartItemQuantity))]
+                          [_vm._v(_vm._s(_vm.$page.carts.quantity))]
                         ),
                         _vm._v(" "),
                         _c("span", { staticClass: "font-bold text-sm" }, [
                           _vm._v(
-                            _vm._s(_vm.cartTotalPrice.toFixed()) +
+                            _vm._s(_vm.$page.carts.totalPrice.toFixed()) +
                               " " +
                               _vm._s(_vm.__("QAR"))
                           )
@@ -63575,7 +63537,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "form",
-              _vm._l(_vm.cartItem, function(item) {
+              _vm._l(_vm.$page.carts.content, function(item) {
                 return _c(
                   "div",
                   { key: item.index, staticClass: "flex justify-between mt-6" },
@@ -63735,9 +63697,7 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c("Wishlist", {
-          attrs: { data: _vm.wishlistContent, openWishlist: _vm.wishlistOpen }
-        })
+        _c("Wishlist", { attrs: { openWishlist: _vm.wishlistOpen } })
       ],
       1
     ),
@@ -63843,7 +63803,7 @@ var render = function() {
                   staticClass:
                     "-mt-3 absolute bg-red-500 flex font-bold h-4 items-center justify-center mx-6 rounded-full text-white text-xs w-4"
                 },
-                [_vm._v(_vm._s(_vm.wishlistQuantity))]
+                [_vm._v(_vm._s(_vm.$page.wishlist.quantity))]
               ),
               _vm._v(" "),
               _c(
@@ -63882,7 +63842,7 @@ var render = function() {
                   staticClass:
                     "-mt-3 absolute bg-red-500 flex font-bold h-4 items-center justify-center mx-16 rounded-full text-white text-xs w-4"
                 },
-                [_vm._v(_vm._s(_vm.cartItemQuantity))]
+                [_vm._v(_vm._s(_vm.$page.carts.quantity))]
               )
             ])
           ]
@@ -63937,7 +63897,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "form",
-              _vm._l(_vm.cartItem, function(item) {
+              _vm._l(_vm.$page.carts.content, function(item) {
                 return _c(
                   "div",
                   { key: item.index, staticClass: "flex justify-between mt-6" },
@@ -64095,9 +64055,7 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c("Wishlist", {
-          attrs: { data: _vm.wishlistContent, openWishlist: _vm.wishlistOpen }
-        })
+        _c("Wishlist", { attrs: { openWishlist: _vm.wishlistOpen } })
       ],
       1
     )
@@ -65586,7 +65544,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "form",
-        _vm._l(_vm.data, function(item) {
+        _vm._l(_vm.$page.wishlist.content, function(item) {
           return _c(
             "div",
             { key: item.index, staticClass: "flex justify-between mt-6" },
@@ -92219,17 +92177,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/PaginatorComponents.vue":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/PaginatorComponents.vue ***!
-  \*********************************************************/
+/***/ "./resources/js/components/PaginatorComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/PaginatorComponent.vue ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PaginatorComponents_vue_vue_type_template_id_281c746c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PaginatorComponents.vue?vue&type=template&id=281c746c& */ "./resources/js/components/PaginatorComponents.vue?vue&type=template&id=281c746c&");
-/* harmony import */ var _PaginatorComponents_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PaginatorComponents.vue?vue&type=script&lang=js& */ "./resources/js/components/PaginatorComponents.vue?vue&type=script&lang=js&");
+/* harmony import */ var _PaginatorComponent_vue_vue_type_template_id_19f31f97___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PaginatorComponent.vue?vue&type=template&id=19f31f97& */ "./resources/js/components/PaginatorComponent.vue?vue&type=template&id=19f31f97&");
+/* harmony import */ var _PaginatorComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PaginatorComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/PaginatorComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -92239,9 +92197,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PaginatorComponents_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PaginatorComponents_vue_vue_type_template_id_281c746c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PaginatorComponents_vue_vue_type_template_id_281c746c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _PaginatorComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PaginatorComponent_vue_vue_type_template_id_19f31f97___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PaginatorComponent_vue_vue_type_template_id_19f31f97___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -92251,38 +92209,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/PaginatorComponents.vue"
+component.options.__file = "resources/js/components/PaginatorComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/PaginatorComponents.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/PaginatorComponents.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/PaginatorComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/PaginatorComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginatorComponents_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PaginatorComponents.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaginatorComponents.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginatorComponents_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginatorComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PaginatorComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaginatorComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginatorComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/PaginatorComponents.vue?vue&type=template&id=281c746c&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/components/PaginatorComponents.vue?vue&type=template&id=281c746c& ***!
-  \****************************************************************************************/
+/***/ "./resources/js/components/PaginatorComponent.vue?vue&type=template&id=19f31f97&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/PaginatorComponent.vue?vue&type=template&id=19f31f97& ***!
+  \***************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginatorComponents_vue_vue_type_template_id_281c746c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PaginatorComponents.vue?vue&type=template&id=281c746c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaginatorComponents.vue?vue&type=template&id=281c746c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginatorComponents_vue_vue_type_template_id_281c746c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginatorComponent_vue_vue_type_template_id_19f31f97___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PaginatorComponent.vue?vue&type=template&id=19f31f97& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaginatorComponent.vue?vue&type=template&id=19f31f97&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginatorComponent_vue_vue_type_template_id_19f31f97___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginatorComponents_vue_vue_type_template_id_281c746c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginatorComponent_vue_vue_type_template_id_19f31f97___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

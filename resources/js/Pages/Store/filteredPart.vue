@@ -1,9 +1,6 @@
 <template>
     <store-layout>
-    <BaseNav 
-        :cartItemQuantity="cartQuantity" :cartItem="cartCollection" 
-        :cartTotalPrice="cartTotalPrice" :wishlistQuantity="wishlistQuantity" 
-        :wishlistContent="wishlistContent"/>
+    <BaseNav />
 
     <!-- filter search -->
     <div class="bg-teal-800 py-5 hidden md:block">
@@ -105,10 +102,7 @@ export default {
         
     },
     props:[ 
-            'parts', 'cars', 'cartQuantity', 
-            'cartCollection', 'cartTotalPrice',
-            'wishlistQuantity',
-            'wishlistContent'
+            'parts', 'cars',
             ],
     data() {
         return {

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Cart;
 use App\Car;
 use App\Part;
 use App\Brand;
@@ -40,14 +39,8 @@ class FilterController extends Controller
 
     public function getFilteredParts($id)
     {
-        $wish_list = app('wishlist');
         $cars = Car::find($id);
-        $cartQuantity = Cart::getTotalQuantity();
-        $cartCollection = Cart::getContent();
-        $cartTotalPrice = Cart::getTotal();
         $parts = Part::with('cars')->where('id', $id)->get();
-        $wishlistQuantity = $wish_list->getTotalQuantity();
-        $wishlistContent = $wish_list->getContent();
 
         if ($id) {
             return inertia()->render(
@@ -55,11 +48,6 @@ class FilterController extends Controller
                 [
                     'parts' => $parts,
                     'cars' => $cars->parts,
-                    'cartQuantity' => $cartQuantity,
-                    'cartCollection' => $cartCollection,
-                    'cartTotalPrice' => $cartTotalPrice,
-                    'wishlistQuantity' => $wishlistQuantity,
-                    'wishlistContent' => $wishlistContent,
                 ]
             );
         }

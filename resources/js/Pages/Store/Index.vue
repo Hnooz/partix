@@ -1,11 +1,7 @@
 <template>
     <div :dir="this.$page.locale == 'ar' ? 'rtl' : 'ltr'">
         <store-layout>
-        <BaseNav 
-            :cartItemQuantity="cartQuantity" :cartItem="cartCollection" 
-            :cartTotalPrice="cartTotalPrice" 
-            :wishlistQuantity="wishlistQuantity" 
-            :wishlistContent="wishlistContent"/>
+        <BaseNav />
         <SelectSection/>
 
          <!-- filter search -->
@@ -102,15 +98,13 @@ export default {
         StoreLayout
         },
         props:[
-            'parts', 'cartQuantity', 'cartCollection',
-            'cartTotalPrice', 'categories', 
-            'super_category','wishlistQuantity',
-            'wishlistContent'
+            'parts',
+            'categories', 
+            'super_category',
         ],
     data() {
     return {
         search:'',
-        wishlist:false,
     }
 },
 

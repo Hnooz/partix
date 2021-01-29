@@ -118,7 +118,7 @@
                                 <tbody class="bg-white text-gray-500 text-sm md:text-base">
                                 <tr v-for="part in filteredList" :key="part.index">                                
                                     <td class="px-3 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        {{ id++ }}
+                                        {{ part.id }}
                                     </td>
                                     <td class="px-3 py-4 whitespace-no-wrap border-b border-gray-200">
                                         {{ part.name }}
@@ -149,6 +149,7 @@
                             </table>
                         </div>
                     </div>
+                    <paginator-component :data="parts"></paginator-component>
                 </div>
             </div>
         </div>
@@ -158,22 +159,25 @@
 
 <script>
     import Layout from "../../../Shared/Layout";
-
+    import PaginatorComponent from '../../../components/PaginatorComponent';
     export default {
-        components: {Layout},
+        components: {
+            Layout,
+            PaginatorComponent,
+        },
         props: ['parts'],
         data() {
             return {
                 files:'',
                 isOpen:false,
                 search:'',
-                id:1,
+                // id:1,
             }
         },
 
         computed: {
         filteredList() {
-        return this.parts.filter(part => {
+        return this.parts.data.filter(part => {
             return part.name.toLowerCase().includes(this.search.toLowerCase())
         })
         }

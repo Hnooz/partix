@@ -32,7 +32,7 @@ class PartController extends Controller
         }
 
         return inertia()->render('Dashboard/parts/index', [
-            'parts' => $parts->get(),
+            'parts' => $parts->paginate(20),
         ]);
     }
 
