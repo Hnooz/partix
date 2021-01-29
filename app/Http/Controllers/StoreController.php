@@ -58,7 +58,7 @@ class StoreController extends Controller
     public function categoryItems(Category $category)
     {
         $wish_list = app('wishlist');
-        $parts = Part::with('category')->where('category_id', $category->id)->get();
+        $parts = Part::with('category')->where('category_id', $category->id)->paginate(10);
         $wishlistQuantity = $wish_list->getTotalQuantity();
         $wishlistContent = $wish_list->getContent();
 
@@ -68,8 +68,8 @@ class StoreController extends Controller
                 'parts' => $parts,
                 'cars' => Car::all(),
                 'cartQuantity' => Cart::getTotalQuantity(),
-                'cartTotalPrice' => Cart::getContent(),
-                'cartCollection' => Cart::getTotal(),
+                'cartTotalPrice' => Cart::getTotal(),
+                'cartCollection' => Cart::getContent(),
                 'category' => $category,
                 'wishlistQuantity' => $wishlistQuantity,
                 'wishlistContent' => $wishlistContent,
