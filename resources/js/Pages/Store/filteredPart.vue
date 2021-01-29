@@ -80,10 +80,12 @@
             </div>
         </div>
     </div>
-        <p  v-if="cars.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">there is no parts ~_~!</p>
-        <div v-if="cars.length == 0" class="flex justify-center mb-10">
-            <img class="w-70 h-70" src="../../images/empty-animate.svg" alt="">
-        </div>
+    <paginator-component :data="parts"></paginator-component>
+
+    <p  v-if="parts.data.length == 0" class="capitalize text-2xl text-center text-teal-500 tran">there is no parts ~_~!</p>
+    <div v-if="parts.data.length == 0" class="flex justify-center mb-10">
+        <img class="w-70 h-70" src="../../images/empty-animate.svg" alt="">
+    </div>
 <BaseFooter/>
     </store-layout>
 </template>
@@ -91,19 +93,19 @@
 <script>
 import StoreLayout from '../../Shared/StoreLayout'
 import BaseNav from "../../components/UI/BaseNav";
+import PaginatorComponent from "../../components/PaginatorComponent";
 import SelectSection from '../../components/UI/SelectSection'
 import BaseFooter from '../../components/UI/BaseFooter'
 export default {
     components: {
         StoreLayout,
         BaseNav,
+        PaginatorComponent,
         SelectSection,
         BaseFooter,
         
     },
-    props:[ 
-            'parts', 'cars',
-            ],
+    props:['parts'],
     data() {
         return {
             search:'',
@@ -112,7 +114,7 @@ export default {
 
     computed: {
     filteredList() {
-      return this.cars.filter(part => {
+      return this.parts.data.filter(part => {
         return part.name.toLowerCase().includes(this.search.toLowerCase())
       })
     },

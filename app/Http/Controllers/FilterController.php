@@ -39,15 +39,13 @@ class FilterController extends Controller
 
     public function getFilteredParts($id)
     {
-        $cars = Car::find($id);
-        $parts = Part::with('cars')->where('id', $id)->get();
+        $parts = Part::with('cars')->where('id', $id)->paginate(15);
 
         if ($id) {
             return inertia()->render(
                 'Store/filteredPart',
                 [
                     'parts' => $parts,
-                    'cars' => $cars->parts,
                 ]
             );
         }

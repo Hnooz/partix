@@ -61,7 +61,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white text-gray-500">
-                                <tr v-for="coupon in coupons" :key="coupon.index" :class="coupon.used == 0 ? 'hover:bg-red-300 hover:text-white' : 'hover:bg-teal-200 hover:text-white'">
+                                <tr v-for="coupon in coupons.data" :key="coupon.index" :class="coupon.used == 0 ? 'hover:bg-red-300 hover:text-white' : 'hover:bg-teal-200 hover:text-white'">
                                     <td class="px-6 py-4 whitespace-no-wrap capitalize">
                                         {{ coupon.name }}
                                     </td>
@@ -90,6 +90,7 @@
                             </table>
                         </div>
                     </div>
+                    <paginator-component :data="coupons"></paginator-component>
                 </div>
             </div>
         </div>
@@ -99,6 +100,7 @@
 
 <script>
     import Layout from "../../../Shared/Layout";
+    import PaginatorComponent from "../../../components/PaginatorComponent";
     import moment from 'moment';
 
     export default {
@@ -106,7 +108,10 @@
                 'coupons',
                 'descountType'
             ],
-        components: {Layout},
+        components: {
+            Layout,
+            PaginatorComponent,
+        },
         data() {
             return {
                 form: {

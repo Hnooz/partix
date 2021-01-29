@@ -12,7 +12,7 @@ class CouponCodeController extends Controller
     {
         return inertia()->render(
             'Dashboard/coupons/index',
-            ['coupons' => CouponCode::all(),]
+            ['coupons' => CouponCode::paginate(15),]
         );
     }
 

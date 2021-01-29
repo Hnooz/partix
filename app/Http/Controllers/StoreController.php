@@ -26,7 +26,7 @@ class StoreController extends Controller
 
     public function items()
     {
-        $parts = Part::with('category')->paginate(20);
+        $parts = Part::with('category')->paginate(15);
 
         return inertia()->render(
             'Store/Items',
@@ -38,7 +38,7 @@ class StoreController extends Controller
 
     public function categoryItems(Category $category)
     {
-        $parts = Part::with('category')->where('category_id', $category->id)->paginate(20);
+        $parts = Part::with('category')->where('category_id', $category->id)->paginate(15);
 
         return inertia()->render(
             'Store/categoryItem',

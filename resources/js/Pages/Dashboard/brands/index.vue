@@ -60,7 +60,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white text-gray-500 text-sm md:text-base">
-                                    <tr v-for="brand in brands" :key="brand.index">
+                                    <tr v-for="brand in brands.data" :key="brand.index">
                                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                             {{ id++ }}
                                         </td>
@@ -79,6 +79,7 @@
                             </table>
                         </div>
                     </div>
+                    <paginator-component :data="brands"></paginator-component>
                 </div>
             </div>
         </div>
@@ -88,9 +89,12 @@
 
 <script>
     import Layout from "../../../Shared/Layout";
-
+    import PaginatorComponent from "../../../components/PaginatorComponent";
     export default {
-        components: {Layout},
+        components: {
+            Layout,
+            PaginatorComponent
+        },
          props: ['brands'],
          data() {
              return {

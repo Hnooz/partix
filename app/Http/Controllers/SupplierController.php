@@ -9,7 +9,7 @@ class SupplierController extends Controller
 {
     public function index()
     {
-        $suppliers = Supplier::all();
+        $suppliers = Supplier::paginate(15);
 
         return inertia()->render('Dashboard/suppliers/index', [
             'suppliers' => $suppliers,

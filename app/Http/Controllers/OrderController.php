@@ -16,27 +16,27 @@ class OrderController extends Controller
     public function index()
     {
         if (request()->has('1')) {
-            $orders = Order::where('order_status_id', 1)->paginate(20);
+            $orders = Order::where('order_status_id', 1)->paginate(15);
 
             return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
         }
         if (request()->has('2')) {
-            $orders = Order::where('order_status_id', 2)->paginate(20);
+            $orders = Order::where('order_status_id', 2)->paginate(15);
 
             return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
         }
         if (request()->has('3')) {
-            $orders = Order::where('order_status_id', 3)->paginate(20);
+            $orders = Order::where('order_status_id', 3)->paginate(15);
 
             return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
         }
         if (request()->has('4')) {
-            $orders = Order::where('order_status_id', 4)->paginate(20);
+            $orders = Order::where('order_status_id', 4)->paginate(15);
 
             return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
         }
 
-        $orders = Order::latest()->paginate(20);
+        $orders = Order::latest()->paginate(15);
 
         return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
     }

@@ -10,7 +10,7 @@ class BrandController extends Controller
     public function index()
     {
         return inertia()->render('Dashboard/brands/index', [
-            'brands' => Brand::all(),
+            'brands' => Brand::paginate(15),
         ]);
     }
 

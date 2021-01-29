@@ -10,7 +10,7 @@ class CarController extends Controller
 {
     public function index()
     {
-        $cars = Car::with('brands')->get();
+        $cars = Car::with('brands')->paginate(15);
 
         return inertia()->render('Dashboard/cars/index', [
             'cars' => $cars,
