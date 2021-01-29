@@ -68,7 +68,7 @@ class OrderController extends Controller
 
             return redirect()->back();
         }
-        
+
         if (Cart::isEmpty()) { // CHECK IF CART IS EMPTY
             session()->flash('toast', [
                 'type' => 'error',
@@ -84,7 +84,7 @@ class OrderController extends Controller
             if ($coupon[0]->quantity < 1 || $expiration <= $mutable) { // check coupon expiration TIME
                 session()->flash('toast', [
                     'type' => 'error',
-                    'message' => 'invalid coupon code | quantity = 0 or it\'s expired s',
+                    'message' => 'coupon expired',
                 ]);
 
                 return redirect()->back();

@@ -62402,7 +62402,13 @@ var render = function() {
     [
       _c("p", { staticClass: "capitalize text-gray-600" }, [
         _vm._v(
-          '"your order has been submitted our agent will contact you soon"'
+          '"' +
+            _vm._s(
+              _vm.__(
+                "your order has been submitted our agent will contact you soon"
+              )
+            ) +
+            '"'
         )
       ]),
       _vm._v(" "),
