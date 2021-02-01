@@ -224,59 +224,47 @@ export default {
             }
         }
     },
-    beforeMount () {
-        window.addEventListener('scroll', this.handleScroll);
-    },
-        methods: {
-            submit(){
-                let self = this;
+    methods: {
+        submit(){
+            let self = this;
 
-                axios({
-                    method: 'post',
-                    url: '/store/search',
-                    data: {
-                        name: this.form.name,
-                    }
-                }).then((response) => {
-                     const status = JSON.parse(response.status);
-                        if (status == '200') {
-                        window.location.pathname = response.data.redirect + response.data.data[0].id;
-                    }
-                }).catch(function() {
-                     window.location.pathname = '/store/404';
-                });
-            },
-            increment(item)
-            {
-                item.quantity++;
-                this.$inertia.put(`/store/cart/${item.id}`, item);
-            },
-
-            decrement(item)
-            {
-                item.quantity--;
-                this.$inertia.put(`/store/cart/${item.id}`, item);
-            },
-            Delete(item) {
-                this.$inertia.delete(`/store/carts/${item.id}`);
-            },
-            logout() {
-                axios.post('logout')
-                    .then(() => location.reload());
-            },
-            handleScroll(){
-                if(window.pageYOffset>0){
-
-                    if(this.view.atTopOfPage) this.view.atTopOfPage = false
-                }else{
-
-                    if(!this.view.atTopOfPage) this.view.atTopOfPage = true
+            axios({
+                method: 'post',
+                url: '/store/search',
+                data: {
+                    name: this.form.name,
                 }
-            },
-            close(){
-                this.isOpen = false
-            }
+            }).then((response) => {
+                    const status = JSON.parse(response.status);
+                    if (status == '200') {
+                    window.location.pathname = response.data.redirect + response.data.data[0].id;
+                }
+            }).catch(function() {
+                    window.location.pathname = '/store/404';
+            });
+        },
+        increment(item)
+        {
+            item.quantity++;
+            this.$inertia.put(`/store/cart/${item.id}`, item);
+        },
+
+        decrement(item)
+        {
+            item.quantity--;
+            this.$inertia.put(`/store/cart/${item.id}`, item);
+        },
+        Delete(item) {
+            this.$inertia.delete(`/store/carts/${item.id}`);
+        },
+        logout() {
+            axios.post('logout')
+                .then(() => location.reload());
+        },
+        close(){
+            this.isOpen = false
         }
+    }
     }
 </script>
 

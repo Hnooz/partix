@@ -33,13 +33,15 @@ class DashboardController extends Controller
         $rejected_order = Order::where('order_status_id', 4)->count();
 
         $orders = Order::all();             // orders data
-        $allorders = Order::all()->count(); // orders count
+
         $todayOrders = Order::whereBetween('created_at', [$mutable.' 00:00:00',$mutable.' 23:59:59'])->get(); // today orders
+        
         $newOrders = Order::whereBetween('created_at', [$startOfWeek,$endOfWeek])->count(); // new orders peer week
-        if ($allorders == 0.0) { // check if orders are empty
+        
+        if ($orders->count() == 0.0) { // check if orders are empty
             $thisWeekOrders = 0;
         } else {
-            $thisWeekOrders = ($newOrders / $allorders) * 100;
+            $thisWeekOrders = ($newOrders / $orders->count()) * 100;
         }
         
         $customerAddress = Order::orderBy('address')->count(); // customers depend on address
@@ -88,14 +90,11 @@ class DashboardController extends Controller
             $order_details = OrderDetails::where('order_id', $de_order->id)->get();
             foreach ($order_details as $order_detail) {
                 foreach ($order_detail->part->cars as $car) {
-                    // $order_car_brands = $car->brands;
-                    // dd($car->brands->name);
                     array_push($order_car_brands, $car->brands->name);
                 };
-                // dd($order_detail->part->cars[0]->brands);
             };
         }
-        // dd($order_car_brands);
+        // dd($thisWeekOrders);
         return inertia()->render('Dashboard/Index', [
             'brands' => $brands,
             'pending_order' => $pending_order,

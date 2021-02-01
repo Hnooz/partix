@@ -7198,9 +7198,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  beforeMount: function beforeMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
   methods: {
     submit: function submit() {
       var self = this;
@@ -7235,13 +7232,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('logout').then(function () {
         return location.reload();
       });
-    },
-    handleScroll: function handleScroll() {
-      if (window.pageYOffset > 0) {
-        if (this.view.atTopOfPage) this.view.atTopOfPage = false;
-      } else {
-        if (!this.view.atTopOfPage) this.view.atTopOfPage = true;
-      }
     },
     close: function close() {
       this.isOpen = false;
@@ -65615,11 +65605,21 @@ var render = function() {
                       }
                     }),
                 _vm._v(" "),
-                _c("div", { staticClass: "mx-3" }, [
-                  _c("h3", { staticClass: "text-sm text-gray-600" }, [
-                    _vm._v(_vm._s(item.name))
-                  ])
-                ])
+                _c(
+                  "div",
+                  { staticClass: "mx-3" },
+                  [
+                    _c(
+                      "inertia-link",
+                      {
+                        staticClass: "text-sm text-gray-600",
+                        attrs: { href: "/store/details/" + item.id }
+                      },
+                      [_vm._v(_vm._s(item.name))]
+                    )
+                  ],
+                  1
+                )
               ]),
               _vm._v(" "),
               _c("div", [
