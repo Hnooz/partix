@@ -19,20 +19,23 @@ class PartController extends Controller
         if (request()->has('latest')) {
             $parts->orderBy('created_at', 'desc');
         }
+
         if (request()->has('a')) {
             $parts->orderBy('name');
         }
+        
         if (request()->has('z')) {
             $parts->orderBy('name', 'desc');
         }
+        
         if (request()->has('oldest')) {
             $parts->orderBy('created_at');
-        } else {
-            $parts->orderBy('id');
         }
 
+        dd($parts);
+
         return inertia()->render('Dashboard/parts/index', [
-            'parts' => $parts->paginate(15),
+            'parts' => $parts->paginate(2),
         ]);
     }
 
