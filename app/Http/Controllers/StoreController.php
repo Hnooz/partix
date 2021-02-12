@@ -17,7 +17,8 @@ class StoreController extends Controller
         return inertia()->render(
             'Store/Index',
             [
-                'parts' => Part::take(10)->get(),
+        
+                'parts' => Part::where('name', 'Hammett Bennett')->get(),
                 'categories' => Category::all(),
                 'super_category' => $super_category,
             ]
