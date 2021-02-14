@@ -23,6 +23,7 @@ class PartController extends Controller
                 'parts' => $parts,
             ]);
         }
+
         if (request()->has('a')) {
             $parts = Part::orderBy('name')->paginate(15);
 
@@ -30,6 +31,7 @@ class PartController extends Controller
                 'parts' => $parts,
             ]);
         }
+        
         if (request()->has('z')) {
             $parts = Part::orderBy('name', 'desc')->paginate(15);
 
@@ -37,6 +39,7 @@ class PartController extends Controller
                 'parts' => $parts,
             ]);
         }
+        
         if (request()->has('oldest')) {
             $parts = Part::orderBy('created_at')->paginate(15);
 

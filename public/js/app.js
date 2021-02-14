@@ -55318,7 +55318,7 @@ var render = function() {
     _c("div", { staticClass: "flex justify-between px-5" }, [
       _c(
         "h1",
-        { staticClass: "md:text-base my-2 text-gray-500 text-sm capitalize" },
+        { staticClass: "my-2 text-sm text-gray-500 capitalize md:text-base" },
         [_vm._v(_vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("parts")))]
       ),
       _vm._v(" "),
@@ -55340,7 +55340,7 @@ var render = function() {
             [
               _c(
                 "base-button",
-                { staticClass: "bg-teal-800 hover:bg-teal-700 rounded-none" },
+                { staticClass: "bg-teal-800 rounded-none hover:bg-teal-700" },
                 [
                   _c(
                     "svg",
@@ -55375,7 +55375,7 @@ var render = function() {
             _c("input", {
               ref: "files",
               staticClass:
-                "mt-1 block w-full cursor-pointer absolute opacity-0",
+                "absolute block w-full mt-1 opacity-0 cursor-pointer",
               attrs: {
                 id: "files",
                 type: "file",
@@ -55398,7 +55398,7 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "bg-teal-800 focus:outline-none hover:bg-teal-700 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded-tr text-white",
+                  "px-6 py-2 mx-2 text-white bg-teal-800 rounded-tr outline-none focus:outline-none hover:bg-teal-700 md:mx-0 md:px-2",
                 attrs: { type: "button" }
               },
               [
@@ -55413,13 +55413,13 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "mx-5" }, [
-      _c("div", { staticClass: "justify-between items-center md:flex" }, [
+      _c("div", { staticClass: "items-center justify-between md:flex" }, [
         _c("div", { staticClass: "items-center md:flex" }, [
           _c(
             "h2",
             {
               staticClass:
-                "font-bold md:text-3xl text-xl text-teal-600 capitalize"
+                "text-xl font-bold text-teal-600 capitalize md:text-3xl"
             },
             [_vm._v(_vm._s(_vm.__("parts")))]
           ),
@@ -55428,7 +55428,7 @@ var render = function() {
             "div",
             {
               staticClass:
-                "capitalize flex items-center md:mx-10 md:text-base text-gray-500 text-xs whitespace-no-wrap"
+                "flex items-center text-xs text-gray-500 capitalize whitespace-no-wrap md:mx-10 md:text-base"
             },
             [
               _c("h1", [_vm._v("123 " + _vm._s(_vm.__("part")))]),
@@ -55444,7 +55444,7 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "capitalize inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500",
+                              "inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 capitalize bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500",
                             attrs: {
                               type: "button",
                               id: "options-menu",
@@ -55466,7 +55466,7 @@ var render = function() {
                             _c(
                               "svg",
                               {
-                                staticClass: "-mr-1 ml-2 h-5 w-5",
+                                staticClass: "w-5 h-5 ml-2 -mr-1",
                                 attrs: {
                                   xmlns: "http://www.w3.org/2000/svg",
                                   viewBox: "0 0 20 20",
@@ -55494,7 +55494,7 @@ var render = function() {
                             "div",
                             {
                               staticClass:
-                                "origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5",
+                                "absolute right-0 w-32 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5",
                               class: _vm.isOpen
                                 ? "transition ease-out duration-100"
                                 : "transition ease-in duration-75"
@@ -55588,7 +55588,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "p-1 focus:outline-none text-gray-400",
+                      staticClass: "p-1 text-gray-400 focus:outline-none",
                       attrs: { type: "submit" }
                     },
                     [
@@ -55628,7 +55628,7 @@ var render = function() {
                   }
                 ],
                 staticClass:
-                  "focus:outline-none px-5 placeholder-gray-400 py-2 shadow-md rounded-md text-sm text-gray-600",
+                  "px-5 py-2 pl-10 text-sm text-gray-600 placeholder-gray-400 rounded-md shadow-md focus:outline-none",
                 attrs: { type: "search", autocomplete: "off" },
                 domProps: { value: _vm.search },
                 on: {
@@ -55651,7 +55651,7 @@ var render = function() {
                 "inertia-link",
                 {
                   staticClass:
-                    "bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-4 py-1 rounded text-white text-xs whitespace-no-wrap",
+                    "flex items-center px-4 py-1 text-xs font-medium text-white whitespace-no-wrap bg-teal-800 rounded hover:bg-teal-700 md:px-4 md:mx-1 md:py-2 md:text-base",
                   attrs: { href: "/dashboard/parts/create" }
                 },
                 [
@@ -55688,7 +55688,7 @@ var render = function() {
                 "button",
                 {
                   staticClass:
-                    "bg-teal-800 focus:outline-none hover:bg-teal-700 md:px-2  outline-none px-6 py-2 rounded text-white",
+                    "px-6 py-2 text-white bg-teal-800 rounded outline-none focus:outline-none hover:bg-teal-700 md:px-2",
                   attrs: { type: "submit" }
                 },
                 [
@@ -55732,13 +55732,13 @@ var render = function() {
           [
             _c(
               "div",
-              { staticClass: "-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6" },
+              { staticClass: "py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6" },
               [
                 _c(
                   "div",
                   {
                     staticClass:
-                      "align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
+                      "inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg"
                   },
                   [
                     _c("table", { staticClass: "min-w-full" }, [
@@ -55748,7 +55748,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -55762,7 +55762,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3  py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -55778,7 +55778,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -55794,7 +55794,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -55810,7 +55810,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -55826,7 +55826,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3  py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -55842,7 +55842,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3  py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -55860,7 +55860,7 @@ var render = function() {
                         "tbody",
                         {
                           staticClass:
-                            "bg-white text-gray-500 text-sm md:text-base"
+                            "text-sm text-gray-500 bg-white md:text-base"
                         },
                         _vm._l(_vm.filteredList, function(part) {
                           return _c("tr", { key: part.index }, [
@@ -55977,7 +55977,7 @@ var render = function() {
                               "td",
                               {
                                 staticClass:
-                                  "flex px-3 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium"
+                                  "flex px-3 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200"
                               },
                               [
                                 _c(
@@ -56035,7 +56035,7 @@ var render = function() {
                                     _c(
                                       "svg",
                                       {
-                                        staticClass: "h-6 text-yellow-500 w-6",
+                                        staticClass: "w-6 h-6 text-yellow-500",
                                         attrs: {
                                           fill: "currentColor",
                                           viewBox: "0 0 20 20",
@@ -56074,7 +56074,7 @@ var render = function() {
                                     _c(
                                       "svg",
                                       {
-                                        staticClass: "h-6 text-red-500 w-6",
+                                        staticClass: "w-6 h-6 text-red-500",
                                         attrs: {
                                           fill: "currentColor",
                                           viewBox: "0 0 20 20",
