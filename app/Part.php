@@ -8,15 +8,16 @@ use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Part extends Model implements HasMedia
 {
-    use Notifiable,AppendImage, InteractsWithMedia;
+    use Notifiable,AppendImage, InteractsWithMedia, SoftDeletes;
 
     protected $guarded = [];
     protected $appends = ['url'];
     protected $with = ['category','type','cars'];
-
+    protected $dates = ['deleted_at'];
     protected static function boot()
     {
         parent::boot();

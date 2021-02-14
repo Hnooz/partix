@@ -14,26 +14,42 @@ class PartController extends Controller
 {
     public function index()
     {
-        $parts = (new Part)->newQuery();
+        // $parts = (new Part)->newQuery();
         
         if (request()->has('latest')) {
-            $parts->orderBy('created_at', 'desc');
+            $parts = Part::orderBy('created_at', 'desc')->paginate(15);
+
+            return inertia()->render('Dashboard/parts/index', [
+                'parts' => $parts,
+            ]);
         }
         if (request()->has('a')) {
-            $parts->orderBy('name');
+            $parts = Part::orderBy('name')->paginate(15);
+
+            return inertia()->render('Dashboard/parts/index', [
+                'parts' => $parts,
+            ]);
         }
         if (request()->has('z')) {
-            $parts->orderBy('name', 'desc');
+            $parts = Part::orderBy('name', 'desc')->paginate(15);
+
+            return inertia()->render('Dashboard/parts/index', [
+                'parts' => $parts,
+            ]);
         }
         if (request()->has('oldest')) {
-            $parts->orderBy('created_at');
-        } else {
-            $parts->orderBy('id');
-        }
+            $parts = Part::orderBy('created_at')->paginate(15);
 
-        return inertia()->render('Dashboard/parts/index', [
-            'parts' => $parts->paginate(15),
-        ]);
+            return inertia()->render('Dashboard/parts/index', [
+                'parts' => $parts,
+            ]);
+        } else {
+            $parts = Part::latest()->paginate(15);
+
+            return inertia()->render('Dashboard/parts/index', [
+                'parts' => $parts,
+            ]);
+        }
     }
 
     public function create()
