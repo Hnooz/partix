@@ -18,7 +18,11 @@ class StoreController extends Controller
             'Store/Index',
             [
         
+<<<<<<< HEAD
                 'parts' => Part::take(10)->get(),
+=======
+                'parts' => Part::take($this->PAGINATION_SIZE)->get(),
+>>>>>>> d25c71f3eb7d93366f63dc66203ef2ce78e27497
                 'categories' => Category::all(),
                 'super_category' => $super_category,
             ]
@@ -27,7 +31,7 @@ class StoreController extends Controller
 
     public function items()
     {
-        $parts = Part::with('category')->paginate(15);
+        $parts = Part::with('category')->paginate($this->PAGINATION_SIZE);
 
         return inertia()->render(
             'Store/Items',
@@ -39,7 +43,7 @@ class StoreController extends Controller
 
     public function categoryItems(Category $category)
     {
-        $parts = Part::with('category')->where('category_id', $category->id)->paginate(15);
+        $parts = Part::with('category')->where('category_id', $category->id)->paginate($this->PAGINATION_SIZE);
 
         return inertia()->render(
             'Store/categoryItem',
@@ -64,8 +68,16 @@ class StoreController extends Controller
 
     public function search(Request $request)
     {
-        $part = Part::where('name', $request->name)->orWhere('number', $request->name)->orWhere('name_ar', $request->name)->get();
+        request()->validate([
+            'name' => 'required|min:1',
+        ]);
 
-        return response()->json(['data' => $part, 'redirect' => '/store/details/']);
+        $part = Part::where('name', 'LIKE', "%{$request->name}%")
+            ->orWhere('number', 'LIKE', "%{$request->name}%")
+            ->orWhere('name_ar', $request->name)
+            ->take(5)
+            ->get();
+
+        return response()->json(['data' => $part]);
     }
 }

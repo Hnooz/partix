@@ -36,7 +36,7 @@ class FilterController extends Controller
 
         return response()->json($engines);
     }
-
+    
     public function getFilteredParts($id)
     {
         $parts = Part::with('cars')->where('id', $id)->paginate(15);
