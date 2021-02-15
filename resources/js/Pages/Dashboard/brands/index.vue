@@ -41,10 +41,10 @@
                             <table class="min-w-full">
                                 <thead class="bg-gray-100">
                                 <tr>
-                                    <!-- <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
                                         style="text-align: start">
                                         #ID
-                                    </th> -->
+                                    </th>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
                                         style="text-align: start">
                                         {{__('name')}}
@@ -61,9 +61,9 @@
                                 </thead>
                                 <tbody class="text-sm text-gray-500 bg-white md:text-base">
                                     <tr v-for="brand in brands.data" :key="brand.index">
-                                        <!-- <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                             {{ id++ }}
-                                        </td> -->
+                                        </td>
                                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                             {{brand.name }}
                                         </td>
@@ -76,7 +76,6 @@
                                         </td>
                                     </tr>
                                 </tbody>
-                                <!-- <p v-if="showcar">Lorem ipsum dolor, sit amet consectetur adipisicing elit. A doloribus perspiciatis animi dolores voluptatibus et libero quidem tempora expedita. Cumque alias rem pariatur praesentium commodi voluptas, laudantium enim quibusdam veritatis?</p> -->
                             </table>
                         </div>
                     </div>

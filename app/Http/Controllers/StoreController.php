@@ -18,7 +18,7 @@ class StoreController extends Controller
             'Store/Index',
             [
         
-                'parts' => Part::where('name', 'Hammett Bennett')->get(),
+                'parts' => Part::take(10)->get(),
                 'categories' => Category::all(),
                 'super_category' => $super_category,
             ]
