@@ -176,12 +176,12 @@
         },
 
         computed: {
-        filteredList() {
-        return this.parts.data.filter(part => {
-            return part.name.toLowerCase().includes(this.search.toLowerCase())
-        })
-        }
-    },
+            filteredList() {
+                return this.parts.data.filter(part => {
+                    return part.name.toLowerCase().includes(this.search.toLowerCase())
+                });
+            }
+        },
         methods: {
             submit() {
             
