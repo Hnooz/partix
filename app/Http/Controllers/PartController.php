@@ -14,10 +14,8 @@ class PartController extends Controller
 {
     public function index()
     {
-        // $parts = (new Part)->newQuery();
-        
         if (request()->has('latest')) {
-            $parts = Part::orderBy('created_at', 'desc')->paginate(15);
+            $parts = Part::orderBy('created_at', 'desc')->paginate($this->PAGINATION_SIZE);
 
             return inertia()->render('Dashboard/parts/index', [
                 'parts' => $parts,
@@ -25,7 +23,7 @@ class PartController extends Controller
         }
 
         if (request()->has('a')) {
-            $parts = Part::orderBy('name')->paginate(15);
+            $parts = Part::orderBy('name')->paginate($this->PAGINATION_SIZE);
 
             return inertia()->render('Dashboard/parts/index', [
                 'parts' => $parts,
@@ -33,7 +31,7 @@ class PartController extends Controller
         }
         
         if (request()->has('z')) {
-            $parts = Part::orderBy('name', 'desc')->paginate(15);
+            $parts = Part::orderBy('name', 'desc')->paginate($this->PAGINATION_SIZE);
 
             return inertia()->render('Dashboard/parts/index', [
                 'parts' => $parts,
@@ -41,13 +39,13 @@ class PartController extends Controller
         }
         
         if (request()->has('oldest')) {
-            $parts = Part::orderBy('created_at')->paginate(15);
+            $parts = Part::orderBy('created_at')->paginate($this->PAGINATION_SIZE);
 
             return inertia()->render('Dashboard/parts/index', [
                 'parts' => $parts,
             ]);
         } else {
-            $parts = Part::latest()->paginate(15);
+            $parts = Part::latest()->paginate($this->PAGINATION_SIZE);
 
             return inertia()->render('Dashboard/parts/index', [
                 'parts' => $parts,

@@ -14,6 +14,11 @@
 
 <script>
 export default {
-    props: ['data'],
+    props: ['data','next', 'prev'],
+    data() {
+        return {
+            // url:''
+        }
+    },
 }
 </script>

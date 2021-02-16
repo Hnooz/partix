@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Cart;
+use App\Car;
 use App\Part;
 use App\Category;
 use App\SuperCategory;
@@ -18,11 +19,7 @@ class StoreController extends Controller
             'Store/Index',
             [
         
-<<<<<<< HEAD
-                'parts' => Part::take(10)->get(),
-=======
                 'parts' => Part::take($this->PAGINATION_SIZE)->get(),
->>>>>>> d25c71f3eb7d93366f63dc66203ef2ce78e27497
                 'categories' => Category::all(),
                 'super_category' => $super_category,
             ]
@@ -72,12 +69,18 @@ class StoreController extends Controller
             'name' => 'required|min:1',
         ]);
 
+        // $car = Car::where('brand','LIKE',  "%{$request->name}%")->firstOrFail()->parts;
+
+        // if (!in_array($car, $request->name)) {
         $part = Part::where('name', 'LIKE', "%{$request->name}%")
             ->orWhere('number', 'LIKE', "%{$request->name}%")
             ->orWhere('name_ar', $request->name)
             ->take(5)
             ->get();
 
+        //     return response()->json(['data' => $part]);
+        // }
+        
         return response()->json(['data' => $part]);
     }
 }

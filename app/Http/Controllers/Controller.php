@@ -11,5 +11,5 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public $PAGINATION_SIZE = 15;
+    public $PAGINATION_SIZE = 10;
 }

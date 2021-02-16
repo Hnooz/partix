@@ -35,7 +35,7 @@
                                 </div>
                                 <div v-if="isOpen" :class="isOpen ? 'transition ease-out duration-100':'transition ease-in duration-75'" class="absolute right-0 w-32 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                                     <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                    <a href="/dashboard/parts?latest" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Latest</a>
+                                    <a  href="/dashboard/parts?latest" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Latest</a>
                                     <a href="/dashboard/parts?oldest" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Oldest</a>
                                     <a href="/dashboard/parts?a" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">A-Z</a>
                                     <a href="/dashboard/parts?z" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Z-A</a>
@@ -180,6 +180,9 @@
                 return part.name.toLowerCase().includes(this.search.toLowerCase())
         });
         },
+        // test(){
+        //         return  window.location.href.split('page='+this.data.current_page).join('page='+(this.data.current_page+1))
+        // }
     },
         methods: {
             submit() {
