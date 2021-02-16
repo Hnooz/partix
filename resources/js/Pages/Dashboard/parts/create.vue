@@ -3,12 +3,12 @@
 
         <div class="mt-8">
             <div class="flex">
-                <h2 class="text-3xl text-teal-700 font-bold capitalize">{{__('parts')}}/<span class="text-gray-500">{{__('create')}}</span></h2>
+                <h2 class="text-3xl font-bold text-teal-700 capitalize">{{__('parts')}}/<span class="text-gray-500">{{__('create')}}</span></h2>
             </div>
 
-            <base-panel class="md:max-w-3xl mt-4">
+            <base-panel class="mt-4 md:max-w-3xl">
                 <form @submit.prevent="submit" enctype="multipart/form-data">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                         <div>
                             <base-input :label="__('name')"  name="name"  v-model="part.name" :error="$page.errors.name" tabindex="1"></base-input>
                         </div>
@@ -43,11 +43,11 @@
                                     <input class="vs__search" v-bind="attributes" v-on="events"/>
                                 </template>
                             </base-select>
-                            <span class="text-red-500 text-xs mt-4" v-if="$page.errors.cars">{{ $page.errors.cars[0] }}</span>
+                            <span class="mt-4 text-xs text-red-500" v-if="$page.errors.cars">{{ $page.errors.cars[0] }}</span>
                         </div>
                         <div>
                             <label class="text-gray-700">{{__('category')}}</label>
-                                <select  name="category_id"  v-model="part.category_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.category_id" required tabindex="7">
+                                <select  name="category_id"  v-model="part.category_id" class="w-full mt-1 text-gray-500 form-select"   :error="$page.errors.category_id" required tabindex="7">
                                     <option value="" disabled>select category</option>
                                     <option v-for="category in categories" :key="category.index" :value="category.id">{{category.name}}</option>
                                 </select>
@@ -55,22 +55,22 @@
                         </div>
                         <div>
                             <label class="text-gray-700">{{__('supplier')}}</label>
-                                <select  name="supplier_id"  v-model="part.supplier_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.supplier_id" required tabindex="8">
+                                <select  name="supplier_id"  v-model="part.supplier_id" class="w-full mt-1 text-gray-500 form-select"   :error="$page.errors.supplier_id" required tabindex="8">
                                     <option value="" disabled>select supplier</option>
                                     <option v-for="supplier in suppliers" :key="supplier.index" :value="supplier.id">{{supplier.name}}</option>
                                 </select>
                         </div>
                         <div>
                             <label class="text-gray-700">{{__('type')}}</label>
-                                <select  name="part_type_id"  v-model="part.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type_id" required tabindex="9">
+                                <select  name="part_type_id"  v-model="part.part_type_id" class="w-full mt-1 text-gray-500 form-select"   :error="$page.errors.part_type_id" required tabindex="9">
                                     <option value="" disabled>select type</option>
                                     <option v-for="type in part_types" :key="type.index" :value="type.id">{{type.name}}</option>
                                 </select>
                         </div>
                         <div>
-                            <label class="text-gray-700">{{__('images')}} (<span class="text-red-500 text-sm">minimum image required 4</span>)</label>
-                            <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full" :error="$page.errors.images" tabindex="7" multiple required>
-                            <span class="text-xs text-red-500 mt-4" v-if="$page.errors.images">{{ $page.errors.images[0] }}</span>
+                            <label class="text-gray-700">{{__('images')}} (<span class="text-sm text-red-500">minimum image required 4</span>)</label>
+                            <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="block w-full mt-1 border-gray-300 form-input focus:border-indigo-400 focus:shadow-none focus:bg-white" :error="$page.errors.images" tabindex="7" multiple>
+                            <span class="mt-4 text-xs text-red-500" v-if="$page.errors.images">{{ $page.errors.images[0] }}</span>
                         </div>
                         
                     </div>

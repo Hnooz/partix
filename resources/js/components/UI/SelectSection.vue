@@ -1,69 +1,69 @@
 <template>
 <div>
-    <div class="bg-teal-900 py-6 bg-cover bg-center w-full bg_image">
-        <div class="container mx-auto px-8">
-            <ul class="flex font-semibold py-3 text-white uppercase">
+    <div class="w-full py-6 bg-teal-900 bg-center bg-cover bg_image">
+        <div class="container px-8 mx-auto">
+            <ul class="flex py-3 font-semibold text-white uppercase">
 
                 <li class="text-teal-500">
                     <a href="/store">{{__('home')}}</a>
-                    <span class="absolute bg-teal-600 block h-1 w-5"></span>
+                    <span class="absolute block w-5 h-1 bg-teal-600"></span>
                 </li>
 
-                <li class="hover:text-teal-500 mx-3">
+                <li class="mx-3 hover:text-teal-500">
                     <a href="#">{{__('blog')}}</a>
-                    <span class="absolute bg-teal-600 h-1 w-5 hidden"></span>
+                    <span class="absolute hidden w-5 h-1 bg-teal-600"></span>
                 </li>
 
                 <li class="hover:text-teal-500">
                     <a href="#">{{__('about us')}}</a>
-                    <span class="absolute bg-teal-600 h-1 w-5 hidden"></span>
+                    <span class="absolute hidden w-5 h-1 bg-teal-600"></span>
                 </li>
 
-                <li class="hover:text-teal-500 mx-3">
+                <li class="mx-3 hover:text-teal-500">
                     <a href="#">{{__('contact')}}</a>
-                    <span class="absolute bg-teal-600 h-1 w-5 hidden"></span>
+                    <span class="absolute hidden w-5 h-1 bg-teal-600"></span>
                 </li>
 
             </ul>
             <div class="my-16 text-center">
-                <div class="leading-none my-8">
-                    <h1 class="uppercase font-semibold text-3xl text-white">
+                <div class="my-8 leading-none">
+                    <h1 class="text-3xl font-semibold text-white uppercase">
                         {{__('select your')}} <span class="text-teal-600">{{__('car')}}</span> 
                     </h1>
                     <p class="font-medium text-gray-300">{{__('Get your parts as fast as you can imagine')}}</p>
                 </div>
                 <div>
-                    <form @submit.prevent="submit" class="flex flex-col lg:flex-row items-center justify-center">
+                    <form @submit.prevent="submit" class="flex flex-col items-center justify-center lg:flex-row">
                         <div class="grid gap-3 md:grid-cols-2">
                             <label class="w-70" for="">
-                                <select v-model="brand" @change="getModel()"  name="brand" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full">
+                                <select v-model="brand" @change="getModel()"  name="brand" class="w-full py-4 text-white capitalize bg-teal-900 border-0 border-teal-900 rounded opacity-75 focus:shadow-none form-select">
                                     <option value="0">{{__('select Brand')}}</option>
                                     <option v-for="brand in brands" :key="brand.index" :value="brand.id">{{$page.locale == 'en' ? brand.name : brand.name_ar}}</option>
                                 </select>
                             </label>
                             <label for="model" class="w-70">
-                                <select v-model="model" @change="getYear()" name="model" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select py-4 rounded text-white w-full">
+                                <select v-model="model" @change="getYear()" name="model" class="w-full py-4 text-white capitalize bg-teal-900 border-0 border-teal-900 rounded opacity-75 focus:shadow-none form-select">
                                     <option value="0">{{__('select Model')}}</option>
                                     <option v-for="car in models" :key="car.index" :value="car.id">{{$page.locale == 'en' ? car.model : car.model_ar}}</option>
                                 </select>
                             </label>
                             <label for="" class="w-70">
-                                <select v-model="year" @change="getEngine()" name="year" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full">
+                                <select v-model="year" @change="getEngine()" name="year" class="w-full py-4 my-1 text-white capitalize bg-teal-900 border-0 border-teal-900 rounded opacity-75 focus:shadow-none form-select">
                                     <option value="0">{{__('select Year')}}</option>
                                     <option v-for="car in years" :key="car.index" :value="car.id">{{car.year}}</option>
                                 </select>
                             </label>
                             <label for="" class="w-70">
-                                <select v-model="engine" name="engine" class="bg-teal-900 focus:shadow-none opacity-75 border-0 border-teal-900 capitalize form-select my-1 py-4 rounded text-white w-full">
+                                <select v-model="engine" name="engine" class="w-full py-4 my-1 text-white capitalize bg-teal-900 border-0 border-teal-900 rounded opacity-75 focus:shadow-none form-select">
                                     <option value="0">{{__('select Engine')}}</option>
                                     <option v-for="car in engines" :key="car.index" :value="car.id">{{$page.locale == 'en' ? car.engine : car.engine_ar}}</option>
                                 </select>
                             </label>
                         </div>
                         
-                        <label class="mx-4 mt-4 lg:mt-0 block" for="">
-                            <base-button class="bg-teal-600 hover:bg-teal-500 focus:outline-none capitalize px-8 py-1 rounded text-white">{{__('search')}}</base-button>
-                            <!-- <button class="bg-teal-500 focus:outline-none  capitalize px-8 py-1 rounded text-white">Go</button> -->
+                        <label class="block mx-4 mt-4 lg:mt-0" for="">
+                            <base-button class="px-8 py-1 text-white capitalize bg-teal-600 rounded hover:bg-teal-500 focus:outline-none">{{__('search')}}</base-button>
+                            <!-- <button class="px-8 py-1 text-white capitalize bg-teal-500 rounded focus:outline-none">Go</button> -->
                         </label>
                     </form>
                 </div>
@@ -150,7 +150,6 @@ import BaseButton from '../UI/BaseButton'
                 .then(function(response){
                     this.engines = response.data
                 }.bind(this));
-
             },
         },
         created() {

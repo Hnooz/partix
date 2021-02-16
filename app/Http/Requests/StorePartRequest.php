@@ -36,7 +36,7 @@ class StorePartRequest extends FormRequest
             'supplier_id' => 'required|max:255',
             'part_type_id' => 'required|max:255',
             'sale' => 'sometimes|nullable',
-            'images' => 'sometimes|min:4',
+            'images' => 'sometimes',
             'cars' => 'sometimes',
             'cars.*' => 'required_with:cars|exists:cars,id',
         ];

@@ -39,6 +39,7 @@ class FilterController extends Controller
     
     public function getFilteredParts($id)
     {
+        dd($id);
         $parts = Part::with('cars')->where('id', $id)->paginate(15);
 
         if ($id) {

@@ -3,12 +3,12 @@
 
         <div class="mt-8 capitalize">
             <div class="flex">
-                <h2 class="text-3xl text-teal-700 font-bold">{{__('parts')}}/<span class="text-gray-500">{{__('Edit')}}</span></h2>
+                <h2 class="text-3xl font-bold text-teal-700">{{__('parts')}}/<span class="text-gray-500">{{__('Edit')}}</span></h2>
             </div>
 
-            <base-panel class="md:max-w-3xl mt-4">
+            <base-panel class="mt-4 md:max-w-3xl">
                 <form @submit.prevent="submit" enctype="multipart/form-data">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                         <div>
                             <base-input :label="__('name')"  name="name"  v-model="form.name" :error="$page.errors.name" tabindex="1" required></base-input>
                         </div>
@@ -43,32 +43,32 @@
                                     <input class="vs__search" v-bind="attributes" v-on="events"/>
                                 </template>
                             </base-select>
-                            <span class="text-red-500 text-xs mt-4" v-if="$page.errors.cars">{{ $page.errors.cars[0] }}</span>
+                            <span class="mt-4 text-xs text-red-500" v-if="$page.errors.cars">{{ $page.errors.cars[0] }}</span>
                         </div>
                         <div>
                             <label class="text-gray-700">{{__('category')}}</label>
-                                <select  name="category_id"  v-model="form.category_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.category_id" tabindex="7">
+                                <select  name="category_id"  v-model="form.category_id" class="w-full mt-1 text-gray-500 form-select"   :error="$page.errors.category_id" tabindex="7">
                                     <option value="0">select category</option>
                                     <option v-for="category in categories" :key="category.index" :value="category.id">{{category.name}}</option>
                                 </select>
                         </div>
                         <div>
                             <label class="text-gray-700">{{__('supplier')}}</label>
-                                <select  name="supplier_id"  v-model="form.supplier_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.supplier_id" required tabindex="8">
+                                <select  name="supplier_id"  v-model="form.supplier_id" class="w-full mt-1 text-gray-500 form-select"   :error="$page.errors.supplier_id" required tabindex="8">
                                     <option value="0">select supplier</option>
                                     <option v-for="supplier in suppliers" :key="supplier.index" :value="supplier.id">{{supplier.name}}</option>
                                 </select>
                         </div>
                         <div>
                             <label class="text-gray-700">{{__('type')}}</label>
-                                <select  name="part_type_id"  v-model="form.part_type_id" class="form-select text-gray-500 w-full mt-1"   :error="$page.errors.part_type_id" required tabindex="9">
+                                <select  name="part_type_id"  v-model="form.part_type_id" class="w-full mt-1 text-gray-500 form-select"   :error="$page.errors.part_type_id" required tabindex="9">
                                     <option value="0">select type</option>
                                     <option v-for="type in part_types" :key="type.index" :value="type.id">{{type.name}}</option>
                                 </select>
                         </div>
                         <div>
                             <label class="text-gray-700">{{__('images')}}</label>
-                            <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full" :error="$page.errors.file" tabindex="7" multiple>
+                            <input id="images" type="file" ref="images" accept="image/*" label="Images" name="images[]" @change="handleFileUpload()" class="block w-full mt-1 border-gray-300 form-input focus:border-indigo-400 focus:shadow-none focus:bg-white" :error="$page.errors.file" tabindex="7" multiple>
                         </div>
                         
                         
@@ -148,11 +148,10 @@
             data.append('sale', this.form.sale);
             data.append('cars', JSON.stringify(this.form.cars));
             data.append('supplier_id', this.form.supplier_id);
+            data.append('part_type_id', this.form.part_type_id);
             if (this.form.category_id ) {
                 data.append('category_id', this.form.category_id);
             }
-            
-            data.append('part_type_id', this.form.part_type_id);
             if (this.form.images) {
                 for( let i = 0; i < this.form.images.length; i++ )
                 {
@@ -163,7 +162,6 @@
             data.append('_method', 'put');
             this.$inertia.post(`/dashboard/parts/${this.part.id}`, data);
             },
-
             handleFileUpload(){
                 this.form.images = this.$refs.images.files;
             }

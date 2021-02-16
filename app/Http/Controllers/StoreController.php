@@ -71,15 +71,11 @@ class StoreController extends Controller
 
         // $car = Car::where('brand','LIKE',  "%{$request->name}%")->firstOrFail()->parts;
 
-        // if (!in_array($car, $request->name)) {
         $part = Part::where('name', 'LIKE', "%{$request->name}%")
             ->orWhere('number', 'LIKE', "%{$request->name}%")
             ->orWhere('name_ar', $request->name)
             ->take(5)
             ->get();
-
-        //     return response()->json(['data' => $part]);
-        // }
         
         return response()->json(['data' => $part]);
     }
