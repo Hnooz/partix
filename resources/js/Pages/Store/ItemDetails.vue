@@ -5,7 +5,7 @@
     <div class="hidden py-5 bg-teal-800 md:block">
         <div class="container flex items-center justify-between px-16 mx-auto font-semibold text-white capitalize">
             <div class="flex">
-                <h1 v-if="part.category != null">{{$page.locale == 'en' ? part.category.super_category.name : part.category.super_category.name_ar}} |</h1>
+                <h1 v-if="part.category.super_category">{{$page.locale == 'en' ? part.category.super_category.name : part.category.super_category.name_ar}} |</h1>
                 <a :href="'/store/items/'+part.category_id" class="font-normal capitalize" v-if="part.category != null">&nbsp;{{$page.locale == 'en' ? part.category.name : part.category.name_ar}}&nbsp;</a> 
                 <span class="font-normal capitalize"> | {{ $page.locale == 'en' ? part.name : part.name_ar}}</span>
             </div>
@@ -452,7 +452,6 @@ import StoreLayout from '../../Shared/StoreLayout.vue'
         },
         changImage(url)
         {
-            console.log(url);
             this.img = url
         }
     },

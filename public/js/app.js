@@ -6278,7 +6278,6 @@ __webpack_require__.r(__webpack_exports__);
       this.form.part_type_id = 3;
     },
     changImage: function changImage(url) {
-      console.log(url);
       this.img = url;
     }
   }
@@ -60048,7 +60047,7 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "flex" }, [
-              _vm.part.category != null
+              _vm.part.category.super_category
                 ? _c("h1", [
                     _vm._v(
                       _vm._s(
