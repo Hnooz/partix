@@ -43,14 +43,20 @@ class DashboardController extends Controller
         } else {
             $thisWeekOrders = ($newOrders / $orders->count()) * 100;
         }
-        
-        $customerAddress = Order::orderBy('address')->count(); // customers depend on address
-        $newCustomers = Order::whereBetween('created_at', [$startOfWeek,$endOfWeek])->count(); // customer peer week
 
-        $total = 0; // sales total
-        $oneOrderTotal = 0; // one order total price perr day
-        $orderTotalPrice = []; // array of total order prices
-        $orderIds = []; // array of order ids
+        // customers depend on address
+        $customerAddress = Order::orderBy('address')->count();
+        // customer peer week
+        $newCustomers = Order::whereBetween('created_at', [$startOfWeek,$endOfWeek])->count();
+        
+        // sales total
+        $total = 0;
+        // one order total price perr day
+        $oneOrderTotal = 0;
+        // array of total order prices
+        $orderTotalPrice = [];
+        // array of order ids
+        $orderIds = [];
 
         // total of sales
         foreach ($orders as $order) {

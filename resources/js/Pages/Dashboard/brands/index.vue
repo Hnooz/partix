@@ -49,7 +49,7 @@
                                 <tr>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
                                         style="text-align: start">
-                                        +
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                                     </th>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
                                         style="text-align: start">
@@ -72,7 +72,9 @@
                                 <tbody class="text-sm text-gray-500 bg-white md:text-base">
                                     <tr v-for="brand in brands.data" :key="brand.index">
                                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                            <button @click="showCars(brand)" class="outline-none focus:outline-none">+</button>
+                                            <button @click="showCars(brand)" class="outline-none focus:outline-none">
+                                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                                            </button>
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                             {{brand.id}}
@@ -91,12 +93,14 @@
                                 </tbody>
                             </table>
                             
-                            <table class="min-w-full" v-else>
+                            <table :class="!hideTable ? 'translate-y-0 ease-out' : 'translate-y-full ease-in'" class="min-w-full" v-else>
                                 <thead class="bg-gray-100">
                                 <tr>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
                                         style="text-align: start">
-                                        <button @click="hideTable = !hideTable" class="outline-none focus:outline-none">-</button>
+                                        <button @click="hideTable = !hideTable" class="outline-none focus:outline-none">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                                        </button>
                                     </th>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
                                         style="text-align: start">
@@ -131,7 +135,9 @@
                                 <tbody class="text-sm text-gray-500 bg-white md:text-base">
                                     <tr v-for="car in carsBelongsToBrand" :key="car.index">
                                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                            <button @click="hideTable = !hideTable" class="outline-none focus:outline-none">-</button>
+                                            <button @click="hideTable = !hideTable" class="outline-none focus:outline-none">
+                                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                                            </button>
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                             {{ car.id }}

@@ -3,7 +3,6 @@
 /public/storage
 /storage/*.key
 /vendor
-/pass
 .idea
 .env
 .env.backup

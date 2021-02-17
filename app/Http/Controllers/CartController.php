@@ -31,7 +31,8 @@ class CartController extends Controller
         $part = Part::find($request->id);
 
         if ($request->part_type_id == 1) {
-            if (isset($part->sale) > 0) { // price if part has sale
+            // price if part has sale
+            if (isset($part->sale) > 0) {
                 $price = $part->oem_price - (($part->sale / 100) * $part->oem_price);
             } elseif (isset($category->sale) > 0) {
                 $price = $part->oem_price - (($category->sale / 100) * $part->oem_price);
@@ -39,7 +40,8 @@ class CartController extends Controller
                 $price = $part->oem_price;
             }
         } elseif ($request->part_type_id == 2) {
-            if (isset($part->sale) > 0) { // price if part has sale
+            // price if part has sale
+            if (isset($part->sale) > 0) {
                 $price = $part->aftermarket_price - (($part->sale / 100) * $part->aftermarket_price);
             } elseif (isset($category->sale) > 0) {
                 $price = $request->aftermarket_price - (($category->sale / 100) * $request->aftermarket_price);
@@ -47,7 +49,8 @@ class CartController extends Controller
                 $price = $request->aftermarket_price;
             }
         } else {
-            if (isset($part->sale) > 0) {  // price if part has sale
+            // price if part has sale
+            if (isset($part->sale) > 0) {
                 $price = $part->used_price - (($part->sale / 100) * $part->used_price);
             } elseif (isset($category->sale) > 0) {
                 $price = $request->used_price - (($category->sale / 100) * $request->used_price);
@@ -97,7 +100,8 @@ class CartController extends Controller
         $category = Category::find($request->category_id);
 
         if ($request->part_type_id == 1) {
-            if (isset($part->sale) > 0) { // price if part has sale
+            // price if part has sale
+            if (isset($part->sale) > 0) {
                 $price = $request->oem_price - (($request->sale / 100) * $request->oem_price);
             } elseif (isset($category->sale) > 0) {
                 $price = $request->oem_price - (($category->sale / 100) * $request->oem_price);
@@ -105,7 +109,8 @@ class CartController extends Controller
                 $price = $part->oem_price;
             }
         } elseif ($request->part_type_id == 2) {
-            if (isset($request->sale) > 0) { // price if part has sale
+            // price if part has sale
+            if (isset($request->sale) > 0) {
                 $price = $request->aftermarket_price - (($request->sale / 100) * $request->aftermarket_price);
             } elseif (isset($category->sale) > 0) {
                 $price = $request->aftermarket_price - (($category->sale / 100) * $request->aftermarket_price);
@@ -113,7 +118,8 @@ class CartController extends Controller
                 $price = $request->aftermarket_price;
             }
         } else {
-            if (isset($request->sale) > 0) {  // price if part has sale
+            // price if part has sale
+            if (isset($request->sale) > 0) {
                 $price = $request->used_price - (($request->sale / 100) * $request->used_price);
             } elseif (isset($category->sale) > 0) {
                 $price = $request->used_price - (($category->sale / 100) * $request->used_price);

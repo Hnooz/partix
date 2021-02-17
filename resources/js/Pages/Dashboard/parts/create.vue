@@ -46,6 +46,15 @@
                             <span class="mt-4 text-xs text-red-500" v-if="$page.errors.cars">{{ $page.errors.cars[0] }}</span>
                         </div>
                         <div>
+                            <span class="text-gray-700">{{__('tag')}}</span>
+                            <base-select label="name" :options="tags" :reduce="tag => tag.id" v-model="part.tags" multiple>
+                                <template #search="{attributes, events}">
+                                    <input class="vs__search" v-bind="attributes" v-on="events"/>
+                                </template>
+                            </base-select>
+                            <span class="mt-4 text-xs text-red-500" v-if="$page.errors.tags">{{ $page.errors.tags[0] }}</span>
+                        </div>
+                        <div>
                             <label class="text-gray-700">{{__('category')}}</label>
                                 <select  name="category_id"  v-model="part.category_id" class="w-full mt-1 text-gray-500 form-select"   :error="$page.errors.category_id" required tabindex="7">
                                     <option value="" disabled>select category</option>
@@ -90,7 +99,7 @@
     import 'vue-select/dist/vue-select.css';
     export default {
         components: {Layout},
-        props:['cars','suppliers','categories','part_types', 'brands'],
+        props:['cars','tags','suppliers','categories','part_types', 'brands'],
         data() {
             return {
                 part: {
@@ -105,6 +114,7 @@
                     slug: '',
                     sale:'',
                     cars:[],
+                    tags:[],
                     supplier_id:'',
                     category_id:'',
                     part_type_id:'',
@@ -129,11 +139,13 @@
             data.append('slug', this.part.slug);
             data.append('sale', this.part.sale);
             data.append('cars', JSON.stringify(this.part.cars));
+            data.append('tags', JSON.stringify(this.part.tags));
             data.append('supplier_id', this.part.supplier_id);
+            data.append('part_type_id', this.part.part_type_id);
             if (this.part.category_id) {
                  data.append('category_id', this.part.category_id);
             }
-            data.append('part_type_id', this.part.part_type_id);
+            
             if (this.part.images) 
             {
                 for( let i = 0; i < this.part.images.length; i++ ){

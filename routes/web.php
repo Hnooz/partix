@@ -29,6 +29,8 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     //supplier route
     Route::post('suppliers/import', 'ImportController@suppliers')->name('suppliers.import');
     Route::resource('suppliers', 'SupplierController')->except(['show','create','edit']);
+    
+    Route::resource('tags', 'TagController')->except(['show','create','edit']);
 
     // coupons route
     Route::resource('coupons', 'CouponCodeController')->except(['show']);

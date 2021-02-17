@@ -39,6 +39,8 @@ class StorePartRequest extends FormRequest
             'images' => 'sometimes',
             'cars' => 'sometimes',
             'cars.*' => 'required_with:cars|exists:cars,id',
+            'tags' => 'sometimes',
+            'tags.*' => 'required_with:tags|exists:tags,id',
         ];
     }
 }

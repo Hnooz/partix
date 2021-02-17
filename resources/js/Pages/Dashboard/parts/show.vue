@@ -3,20 +3,20 @@
 
         <div class="mt-8 capitalize">
             <div class="flex">
-                <h2 class="text-3xl text-teal-700 font-bold">{{__('parts')}}/<span class="text-gray-500">{{__('show')}}</span></h2>
+                <h2 class="text-3xl font-bold text-teal-700">{{__('parts')}}/<span class="text-gray-500">{{__('show')}}</span></h2>
             </div>
 
             <base-panel class="mt-4">
-                <div class="container max-w-6xl mb-20 md:mt-16 md:mx-auto py-4">
-                    <div class="gap-y-10 grid grid-cols-1 md:grid-cols-2">
+                <div class="container max-w-6xl py-4 mb-20 md:mt-16 md:mx-auto">
+                    <div class="grid grid-cols-1 gap-y-10 md:grid-cols-2">
                         <div>
-                            <div class="border-2 border-teal-100 flex h-64 items-center justify-center md:h-70">
-                                <img class="max-w-full md:max-w-md object-center object-cover" :src="img" alt="">
+                            <div class="flex items-center justify-center h-64 border-2 border-teal-100 md:h-70">
+                                <img class="object-cover object-center max-w-full md:max-w-md" :src="img" alt="">
                             </div>
-                        <div class="justify-around md:flex mt-6">
+                        <div class="justify-around mt-6 md:flex">
                             <slide-image class="max-w-sm" :arrows="true" :slidesToShow=2>
-                                <div class="flex justify-center bg-white mx-2" v-for="url in part.url" :key="url.index">
-                                    <img class="h-24 object-center object-cover w-24" :src="url" alt="" @click="changImage(url)">
+                                <div class="flex justify-center mx-2 bg-white" v-for="url in part.url" :key="url.index">
+                                    <img class="object-cover object-center w-24 h-24" :src="url" alt="" @click="changImage(url)">
                                 </div>
                             </slide-image> 
                         </div>
@@ -24,27 +24,33 @@
                         <div class="mx-8">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="capitalize font-semibold text-3xl text-teal-700">{{$page.locale == 'en' ? part.name : part.name_ar}}</p>                                                                                        
+                                    <p class="text-3xl font-semibold text-teal-700 capitalize">{{$page.locale == 'en' ? part.name : part.name_ar}}</p>                                                                                        
                                 </div>
                             </div>
                             <div class="">
-                                <p class="bg-blue-100 my-5 p-5 text-gray-600 text-sm">
+                                <p class="p-5 my-5 text-sm text-gray-600 bg-blue-100">
                                     {{$page.locale == 'en' ? part.description : part.description_ar}}
                                 </p>
                             </div>
                             <div class="my-4">
-                                <h1 class="font-semibold my-2 text-teal-700">
+                                <h1 class="my-2 font-semibold text-teal-700">
                                     {{__('cars')}} :
                                 </h1>
-                                <span class="bg-blue-100 mx-1 px-3 py-2 rounded-full text-gray-600" v-for="car in part.cars" :key="car.id">{{$page.locale == 'en' ?  car.brand : car.brand_ar}}</span>
+                                <span class="px-3 py-2 mx-1 text-gray-600 bg-blue-100 rounded-full" v-for="car in part.cars" :key="car.id">{{$page.locale == 'en' ?  car.brand : car.brand_ar}}</span>
                             </div>
                             <div class="my-4">
-                                <h1 class="font-semibold my-2 text-teal-700">
+                                <h1 class="my-2 font-semibold text-teal-700">
+                                    {{__('tags')}} :
+                                </h1>
+                                <span class="px-3 py-2 mx-1 text-gray-600 bg-blue-100 rounded-full" v-for="tag in part.tags" :key="tag.id">{{$page.locale == 'en' ?  tag.name : tag.name_ar}}</span>
+                            </div>
+                            <div class="my-4">
+                                <h1 class="my-2 font-semibold text-teal-700">
                                     {{__('supplier')}} : <span class="text-gray-600">{{$page.locale == 'en' ?  part.supplier.name : part.supplier.name_ar}}</span>
                                 </h1>
                             </div>
                             <div class="my-4">
-                                <h1 class="font-semibold my-2 text-teal-700">
+                                <h1 class="my-2 font-semibold text-teal-700">
                                     {{__('category')}} : <span class="text-gray-600" v-if="part.category =! null">{{$page.locale == 'en' ?  part.category.name : part.category.name_ar}}</span>
                                 </h1>
                             </div>

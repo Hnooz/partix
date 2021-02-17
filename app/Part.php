@@ -16,8 +16,9 @@ class Part extends Model implements HasMedia
 
     protected $guarded = [];
     protected $appends = ['url'];
-    protected $with = ['category','type','cars'];
+    protected $with = ['category','type','cars','tags'];
     protected $dates = ['deleted_at'];
+
     protected static function boot()
     {
         parent::boot();
@@ -30,6 +31,10 @@ class Part extends Model implements HasMedia
     public function cars()
     {
         return $this->belongsToMany(Car::class);
+    }
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'tag_part');
     }
 
     public function category()
@@ -51,7 +56,7 @@ class Part extends Model implements HasMedia
     {
         return $this->hasMany(OrderDetails::class);
     }
-
+    
     public function setSlugAttribute($value)
     {
         $slug = Str::slug($value);

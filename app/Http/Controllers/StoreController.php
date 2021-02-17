@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Cart;
-use App\Car;
+use App\Tag;
 use App\Part;
 use App\Category;
 use App\SuperCategory;
@@ -68,15 +68,9 @@ class StoreController extends Controller
         request()->validate([
             'name' => 'required|min:1',
         ]);
-
-        // $car = Car::where('brand','LIKE',  "%{$request->name}%")->firstOrFail()->parts;
-
-        $part = Part::where('name', 'LIKE', "%{$request->name}%")
-            ->orWhere('number', 'LIKE', "%{$request->name}%")
-            ->orWhere('name_ar', $request->name)
-            ->take(5)
-            ->get();
+           
+        $cars = Tag::with('parts')->where('name', 'LIKE', "%{$request->name}%")->get();
         
-        return response()->json(['data' => $part]);
+        return response()->json(['data' => $cars]);
     }
 }

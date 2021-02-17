@@ -126,7 +126,7 @@ class OrderController extends Controller
         };
 
         Cart::clear();
-    
+        
         session()->flash('toast', [
             'type' => 'success',
             'message' => 'you have ordered successfully',

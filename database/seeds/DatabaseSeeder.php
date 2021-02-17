@@ -35,6 +35,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'bentley',
             'name_ar' => 'بينتيلي',
         ]);
+        \App\Tag::create([
+            'name' => 'part_tag',
+            'name_ar' => 'تاق التاق',
+        ]);
         \App\Car::create([
             'brand' => 'kia rio 23',
             'model' => 'rio 23',

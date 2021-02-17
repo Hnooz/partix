@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use App\Tag;
 use App\Part;
 use App\Category;
 use App\PartType;
@@ -57,6 +58,7 @@ class PartController extends Controller
     {
         return inertia()->render('Dashboard/parts/create', [
             'cars' => Car::all(),
+            'tags' => Tag::all(),
             'categories' => Category::all(),
             'suppliers' => Supplier::all(),
             'part_types' => PartType::all(),
@@ -74,10 +76,14 @@ class PartController extends Controller
     {
         $data = $request->validated();
 
-        $part = Part::create(Arr::except($data, ['cars','images']));
+        $part = Part::create(Arr::except($data, ['cars','images','tags']));
 
         if ($request->filled('cars')) {
             $part->cars()->attach(json_decode($data['cars']));
+        }
+
+        if ($request->filled('tags')) {
+            $part->tags()->attach(json_decode($data['tags']));
         }
 
         if ($request->file('images')) {
@@ -98,6 +104,7 @@ class PartController extends Controller
     {
         return inertia()->render('Dashboard/parts/edit', [
             'part' => $part, 'cars' => Car::all(),
+            'tags' => Tag::all(),
             'categories' => Category::all(), 'suppliers' => Supplier::all(),
             'part_types' => PartType::all(),
         ]);
@@ -107,10 +114,13 @@ class PartController extends Controller
     {
         $data = $request->validated();
 
-        $part->update(Arr::except($data, ['cars','images']));
+        $part->update(Arr::except($data, ['cars','images','tags']));
         
         if ($request->filled('cars')) {
             $part->cars()->sync(json_decode($data['cars']));
+        }
+        if ($request->filled('tags')) {
+            $part->tags()->sync(json_decode($data['tags']));
         }
         
         if ($request->file('images')) {

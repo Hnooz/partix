@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Car;
-use App\Part;
 use App\Brand;
 use Illuminate\Http\Request;
 
@@ -39,8 +38,9 @@ class FilterController extends Controller
     
     public function getFilteredParts($id)
     {
-        dd($id);
-        $parts = Part::with('cars')->where('id', $id)->paginate(15);
+        $cars = Car::where('id', $id)->first();
+
+        $parts = $cars->parts()->paginate(15);
 
         if ($id) {
             return inertia()->render(

@@ -45,6 +45,15 @@
                             </base-select>
                             <span class="mt-4 text-xs text-red-500" v-if="$page.errors.cars">{{ $page.errors.cars[0] }}</span>
                         </div>
+                         <div>
+                            <span class="text-gray-700">{{__('tag')}}</span>
+                            <base-select class="form-select" label="name" :options="tags" :reduce="tag => tag.id" v-model="form.tags" multiple>
+                                <template #search="{attributes, events}">
+                                    <input class="vs__search" v-bind="attributes" v-on="events"/>
+                                </template>
+                            </base-select>
+                            <span class="mt-4 text-xs text-red-500" v-if="$page.errors.tags">{{ $page.errors.tags[0] }}</span>
+                        </div>
                         <div>
                             <label class="text-gray-700">{{__('category')}}</label>
                                 <select  name="category_id"  v-model="form.category_id" class="w-full mt-1 text-gray-500 form-select"   :error="$page.errors.category_id" tabindex="7">
@@ -89,7 +98,7 @@
 
     export default {
         components: {Layout},
-        props:['part','cars', 'suppliers','categories', 'part_types'],
+        props:['part','cars','tags', 'suppliers','categories', 'part_types'],
         data() {
             return {
                 form: {
@@ -103,14 +112,12 @@
                     used_price:'',
                     sale:'',
                     cars:[],
+                    tags:[],
                     supplier_id:'',
                     category_id:'',
                     part_type_id:'',
                     images:''
                 },
-                   
-                // },
-               
             }
         }, 
         created() {
@@ -125,6 +132,7 @@
                     used_price: this.part.used_price,
                     sale:this.part.sale,
                     cars:this.part.cars.map(car => car.id),
+                    tags:this.part.tags.map(tag => tag.id),
                     supplier_id:this.part.supplier_id,
                     category_id:this.part.category_id,
                     part_type_id:this.part.part_type_id,
@@ -134,8 +142,8 @@
         methods: {
             submit() {
 
-                const data = new FormData();
-
+            const data = new FormData();
+            data.append('_method', 'put');
             data.append('name', this.form.name);
             data.append('name_ar', this.form.name_ar);
             data.append('number', this.form.number);
@@ -147,8 +155,10 @@
             data.append('slug', this.form.slug);
             data.append('sale', this.form.sale);
             data.append('cars', JSON.stringify(this.form.cars));
+            data.append('tags', JSON.stringify(this.form.tags));
             data.append('supplier_id', this.form.supplier_id);
             data.append('part_type_id', this.form.part_type_id);
+            
             if (this.form.category_id ) {
                 data.append('category_id', this.form.category_id);
             }
@@ -159,7 +169,7 @@
                     data.append('images[' + i + ']', images);
                 }
             }
-            data.append('_method', 'put');
+                        
             this.$inertia.post(`/dashboard/parts/${this.part.id}`, data);
             },
             handleFileUpload(){
