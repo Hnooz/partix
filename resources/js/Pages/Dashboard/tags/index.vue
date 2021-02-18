@@ -39,7 +39,7 @@
                                 <tbody class="text-gray-700 bg-white">
                                 <tr class="border-b border-gray-200" v-for="(tag, index) in tags.data" :key="index">
                                     <td class="px-6 py-4 whitespace-no-wrap">
-                                        {{ id++ }}
+                                        {{ tag.id }}
                                     </td>
 
                                     <td  class="px-6 py-4 whitespace-no-wrap">

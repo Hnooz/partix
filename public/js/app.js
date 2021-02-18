@@ -3803,15 +3803,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
- // import moment from 'moment';
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4527,10 +4519,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.parts.data.filter(function (part) {
         return part.name.toLowerCase().includes(_this.search.toLowerCase());
       });
-    } // test(){
-    //         return  window.location.href.split('page='+this.data.current_page).join('page='+(this.data.current_page+1))
-    // }
-
+    }
   },
   methods: {
     submit: function submit() {
@@ -7118,6 +7107,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -53771,11 +53770,11 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "mx-5" }, [
-      _c("div", { staticClass: "justify-between flex" }, [
-        _c("div", { staticClass: "items-center flex" }, [
+      _c("div", { staticClass: "flex justify-between" }, [
+        _c("div", { staticClass: "flex items-center" }, [
           _c(
             "h2",
-            { staticClass: "font-bold md:text-3xl text-xl text-teal-600" },
+            { staticClass: "text-xl font-bold text-teal-600 md:text-3xl" },
             [_vm._v(_vm._s(_vm.__("orders")))]
           ),
           _vm._v(" "),
@@ -53783,7 +53782,7 @@ var render = function() {
             "div",
             {
               staticClass:
-                "capitalize flex items-center mx-3 md:mx-16 md:text-base text-gray-500 text-xs whitespace-no-wrap"
+                "flex items-center mx-3 text-xs text-gray-500 capitalize whitespace-no-wrap md:mx-16 md:text-base"
             },
             [
               _c("h1", [
@@ -53803,7 +53802,7 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "capitalize inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500",
+                              "inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 capitalize bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500",
                             attrs: {
                               type: "button",
                               id: "options-menu",
@@ -53825,7 +53824,7 @@ var render = function() {
                             _c(
                               "svg",
                               {
-                                staticClass: "-mr-1 ml-2 h-5 w-5",
+                                staticClass: "w-5 h-5 ml-2 -mr-1",
                                 attrs: {
                                   xmlns: "http://www.w3.org/2000/svg",
                                   viewBox: "0 0 20 20",
@@ -53853,7 +53852,7 @@ var render = function() {
                             "div",
                             {
                               staticClass:
-                                "origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5",
+                                "absolute right-0 w-32 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5",
                               class: _vm.isOpen
                                 ? "transition ease-out duration-100"
                                 : "transition ease-in duration-75"
@@ -53876,7 +53875,7 @@ var render = function() {
                                       staticClass:
                                         "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
                                       attrs: {
-                                        href: "/dashboard/orders?1",
+                                        href: "/dashboard/orders?pending",
                                         role: "menuitem"
                                       }
                                     },
@@ -53889,7 +53888,7 @@ var render = function() {
                                       staticClass:
                                         "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
                                       attrs: {
-                                        href: "/dashboard/orders?2",
+                                        href: "/dashboard/orders?delivered",
                                         role: "menuitem"
                                       }
                                     },
@@ -53902,7 +53901,7 @@ var render = function() {
                                       staticClass:
                                         "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
                                       attrs: {
-                                        href: "/dashboard/orders?3",
+                                        href: "/dashboard/orders?awaiting",
                                         role: "menuitem"
                                       }
                                     },
@@ -53915,7 +53914,7 @@ var render = function() {
                                       staticClass:
                                         "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
                                       attrs: {
-                                        href: "/dashboard/orders?4",
+                                        href: "/dashboard/orders?rejected",
                                         role: "menuitem"
                                       }
                                     },
@@ -53939,7 +53938,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "bg-teal-500 focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2 mx-2 outline-none px-6 py-2 rounded text-white",
+                "px-6 py-2 mx-2 text-white bg-teal-500 rounded outline-none focus:outline-none hover:bg-teal-400 md:mx-0 md:px-2",
               attrs: { type: "submit" }
             },
             [
@@ -53978,13 +53977,13 @@ var render = function() {
           [
             _c(
               "div",
-              { staticClass: "-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6" },
+              { staticClass: "py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6" },
               [
                 _c(
                   "div",
                   {
                     staticClass:
-                      "align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
+                      "inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg"
                   },
                   [
                     _c("table", { staticClass: "min-w-full" }, [
@@ -53994,7 +53993,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -54010,7 +54009,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -54026,7 +54025,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -54042,7 +54041,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -54060,7 +54059,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -54076,7 +54075,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -54092,7 +54091,7 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-3 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider",
+                                "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
                               staticStyle: { "text-align": "start" }
                             },
                             [
@@ -54110,7 +54109,7 @@ var render = function() {
                         "tbody",
                         {
                           staticClass:
-                            "bg-white text-gray-500 text-sm md:text-base"
+                            "text-sm text-gray-500 bg-white md:text-base"
                         },
                         _vm._l(_vm.orders.data, function(order) {
                           return _c("tr", { key: order.index }, [
@@ -54177,7 +54176,7 @@ var render = function() {
                                       "span",
                                       {
                                         staticClass:
-                                          "bg-teal-300 capitalize px-2 py-1 rounded text-sm text-white"
+                                          "px-2 py-1 text-sm text-white capitalize bg-teal-300 rounded"
                                       },
                                       [_vm._v(_vm._s(order.status.name))]
                                     )
@@ -54188,7 +54187,7 @@ var render = function() {
                                       "span",
                                       {
                                         staticClass:
-                                          "bg-orange-500 px-2 py-1 rounded text-sm text-white"
+                                          "px-2 py-1 text-sm text-white bg-orange-500 rounded"
                                       },
                                       [_vm._v(_vm._s(order.status.name))]
                                     )
@@ -54199,7 +54198,7 @@ var render = function() {
                                       "span",
                                       {
                                         staticClass:
-                                          "bg-gray-500 capitalize px-2 py-1 rounded text-sm text-white"
+                                          "px-2 py-1 text-sm text-white capitalize bg-gray-500 rounded"
                                       },
                                       [_vm._v(_vm._s(order.status.name))]
                                     )
@@ -54210,7 +54209,7 @@ var render = function() {
                                       "span",
                                       {
                                         staticClass:
-                                          "bg-red-500 capitalize px-2 py-1 rounded text-sm text-white"
+                                          "px-2 py-1 text-sm text-white capitalize bg-red-500 rounded"
                                       },
                                       [_vm._v(_vm._s(order.status.name))]
                                     )
@@ -54222,13 +54221,13 @@ var render = function() {
                               "td",
                               {
                                 staticClass:
-                                  "flex px-3 py-4 whitespace-no-wrap text-sm leading-5 font-medium"
+                                  "flex px-3 py-4 text-sm font-medium leading-5 whitespace-no-wrap"
                               },
                               [
                                 _c(
                                   "inertia-link",
                                   {
-                                    staticClass: "h-6 text-blue-500 w-6",
+                                    staticClass: "w-6 h-6 text-blue-500",
                                     attrs: {
                                       href:
                                         "/dashboard/orders/" +
@@ -54272,7 +54271,7 @@ var render = function() {
                                     _c(
                                       "svg",
                                       {
-                                        staticClass: "h-6 text-yellow-500 w-6",
+                                        staticClass: "w-6 h-6 text-yellow-500",
                                         attrs: {
                                           fill: "currentColor",
                                           viewBox: "0 0 20 20",
@@ -54311,7 +54310,7 @@ var render = function() {
                                     _c(
                                       "svg",
                                       {
-                                        staticClass: "h-6 text-red-500 w-6",
+                                        staticClass: "w-6 h-6 text-red-500",
                                         attrs: {
                                           fill: "currentColor",
                                           viewBox: "0 0 20 20",
@@ -58562,7 +58561,7 @@ var render = function() {
                                 [
                                   _vm._v(
                                     "\n                                    " +
-                                      _vm._s(_vm.id++) +
+                                      _vm._s(tag.id) +
                                       "\n                                "
                                   )
                                 ]
@@ -64322,26 +64321,113 @@ var render = function() {
           "div",
           {
             staticClass:
-              "absolute inset-x-0 px-6 py-3 mx-5 mt-16 overflow-y-auto bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-transparent"
+              "absolute inset-x-0 z-10 max-h-screen px-6 py-3 mx-5 mt-16 overflow-y-auto bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-transparent"
           },
           _vm._l(_vm.data, function(tag) {
             return _c(
-              "h3",
-              { key: tag.id, staticClass: "block py-1", attrs: { href: "#" } },
-              _vm._l(tag.parts, function(part) {
-                return _c("p", { key: part.index }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass:
-                        "font-medium text-gray-700 dark:text-gray-100 hover:underline",
-                      attrs: { href: "/store/details/" + part.id }
-                    },
-                    [_vm._v(_vm._s(part.name))]
+              "div",
+              { key: tag.id, staticClass: "block py-1" },
+              [
+                _c(
+                  "h1",
+                  { staticClass: "text-xl font-semibold text-teal-800" },
+                  [
+                    _vm._v(
+                      "#" +
+                        _vm._s(
+                          _vm.$page.locale == "en" ? tag.name : tag.name_ar
+                        )
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._l(tag.parts, function(part) {
+                  return _c(
+                    "div",
+                    { key: part.index, staticClass: "flex mx-4 mb-3" },
+                    [
+                      !part.url[0]
+                        ? _c("img", {
+                            staticClass:
+                              "object-contain object-center w-20 h-20 border",
+                            attrs: {
+                              src: __webpack_require__(/*! ../images/LOGO-1.png */ "./resources/js/images/LOGO-1.png"),
+                              alt: "partix"
+                            }
+                          })
+                        : _c("img", {
+                            staticClass: "w-20 h-20",
+                            attrs: { src: part.url[0], alt: "" }
+                          }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "mx-3 font-medium leading-none text-teal-700"
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "font-semibold hover:underline",
+                              attrs: { href: "/store/details/" + part.id }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.$page.locale == "en"
+                                    ? part.name
+                                    : part.name_ar
+                                )
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "px-1 my-1" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$page.locale == "en"
+                                  ? part.category.name
+                                  : part.category.name_ar
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "capitalize" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$page.locale == "en"
+                                  ? part.type.name
+                                  : part.type.name_ar
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          part.part_type_id == 1
+                            ? _c("p", { staticClass: "px-1 my-1" }, [
+                                _vm._v("$" + _vm._s(part.oem_price))
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          part.part_type_id == 2
+                            ? _c("p", { staticClass: "px-1 my-1" }, [
+                                _vm._v("$" + _vm._s(part.aftermarket_price))
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          part.part_type_id == 3
+                            ? _c("p", { staticClass: "px-1 my-1" }, [
+                                _vm._v("$" + _vm._s(part.used_price))
+                              ])
+                            : _vm._e()
+                        ]
+                      )
+                    ]
                   )
-                ])
-              }),
-              0
+                })
+              ],
+              2
             )
           }),
           0

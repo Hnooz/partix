@@ -161,8 +161,9 @@
     "show":"عرض",
     "you can order directly if part type price = 0":"يمكنك الطلب مباشره اذا كان سعر القطعه 0",
     "chose type":"اختر نوع",
-    "your order has been submitted our agent will contact you soon":"تم تاكيد طلبك سيتم التواصل معك قريبا"
-    
+    "your order has been submitted our agent will contact you soon":"تم تاكيد طلبك سيتم التواصل معك قريبا",
+    "tags":"الوسوم",
+    "tag":"وسم"
   
 
 }

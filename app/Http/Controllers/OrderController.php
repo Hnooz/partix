@@ -15,22 +15,22 @@ class OrderController extends Controller
 {
     public function index()
     {
-        if (request()->has('1')) {
+        if (request()->has('pending')) {
             $orders = Order::where('order_status_id', 1)->paginate(15);
 
             return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
         }
-        if (request()->has('2')) {
+        if (request()->has('delivered')) {
             $orders = Order::where('order_status_id', 2)->paginate(15);
 
             return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
         }
-        if (request()->has('3')) {
+        if (request()->has('awaiting')) {
             $orders = Order::where('order_status_id', 3)->paginate(15);
 
             return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);
         }
-        if (request()->has('4')) {
+        if (request()->has('rejected')) {
             $orders = Order::where('order_status_id', 4)->paginate(15);
 
             return inertia()->render('Dashboard/orders/index', ['orders' => $orders]);

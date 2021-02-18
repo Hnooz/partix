@@ -69,8 +69,8 @@ class StoreController extends Controller
             'name' => 'required|min:1',
         ]);
            
-        $cars = Tag::with('parts')->where('name', 'LIKE', "%{$request->name}%")->get();
+        $tags = Tag::with('parts')->where('name', 'LIKE', "{$request->name}%")->orWhere('name_ar', 'LIKE', "{$request->name}%")->get();
         
-        return response()->json(['data' => $cars]);
+        return response()->json(['data' => $tags]);
     }
 }

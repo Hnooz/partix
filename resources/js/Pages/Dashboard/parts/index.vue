@@ -180,9 +180,6 @@
                 return part.name.toLowerCase().includes(this.search.toLowerCase())
         });
         },
-        // test(){
-        //         return  window.location.href.split('page='+this.data.current_page).join('page='+(this.data.current_page+1))
-        // }
     },
         methods: {
             submit() {
