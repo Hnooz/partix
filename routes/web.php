@@ -31,6 +31,7 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     Route::resource('suppliers', 'SupplierController')->except(['show','create','edit']);
 
     // tags
+    Route::post('tags/import', 'ImportController@tags')->name('tags.import');
     Route::resource('tags', 'TagController')->except(['show','create','edit']);
 
     // coupons route
@@ -41,7 +42,6 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     Route::resource('categories', 'CategoryController');
 
     // part with tags
-    // Route::get('parts/{part}/tags/create', 'PartTagsController@show')->name('parts.tags');
     Route::post('parts/{part}/tags', 'PartTagsController@store')->name('parts.tags.store');
 
     // part route

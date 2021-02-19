@@ -9,7 +9,22 @@
                                   class="flex items-center px-20 py-1 text-xs font-medium text-white whitespace-no-wrap bg-teal-800 rounded outline-none focus:outline-none hover:bg-teal-700 md:px-4 md:mx-1 md:py-2 md:text-base">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                         {{__('add')}} {{__('tag')}}
-                    </button>                             
+                    </button>    
+                    <form @submit.prevent="uploadExcel" class="flex justify-end" enctype="multipart/form-data">
+                        <div class="flex justify-end">
+                            <base-button class="bg-teal-800 rounded-none hover:bg-teal-700">
+                                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </base-button>
+                        </div>
+                        <div class="relative">
+                            
+                            <input id="files" type="file" ref="files" accept="file/*" label="Files" name="files[]" @change="handleFileUpload()" class="absolute block w-full mt-1 opacity-0 cursor-pointer" :error="$page.errors.files" tabindex="7" multiple required>
+                            
+                            <button type="button" class="px-6 py-3 mx-2 text-white bg-teal-800 rounded-tr outline-none focus:outline-none hover:bg-teal-700 md:mx-0 md:px-2">
+                                <span class="whitespace-no-wrap">upload tags</span>                               
+                            </button>
+                        </div>
+                    </form>                          
                 </div>
                 
             </div>
@@ -121,7 +136,32 @@ import Edit from '../tags/Edit'
                     this.toggleModal = false;
                     location.reload()
                     });
+            },
+            uploadExcel() 
+            {
+            const data = new FormData();
+            data.append('files', this.files);
 
+            axios.post( '/dashboard/tags/import',
+                data,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then(function(response){
+               const status = JSON.parse(response.status);
+
+                    if (status == '200') {
+                        window.location.pathname = response.data.redirect;
+                    }
+            })
+            .catch(function(){
+            console.log('FAILURE!!');
+            });
+            },
+            handleFileUpload(){
+                this.files = this.$refs.files.files[0];
             },
             Delete(tag){
                      this.$inertia.delete(`/dashboard/tags/${tag.id}`).then(() => location.reload());

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\CarsImport;
 use App\Imports\PartImport;
+use App\Imports\TagsImport;
 use Illuminate\Http\Request;
 use App\Imports\BrandsImport;
 use App\Imports\SuppliersImport;
@@ -36,5 +37,11 @@ class ImportController extends Controller
         $cars = Excel::import(new CarsImport, request()->file('files'));
 
         return response()->json(['data' => $cars, 'redirect' => 'dashboard/cars']);
+    }
+    public function tags()
+    {
+        $tags = Excel::import(new TagsImport, request()->file('files'));
+
+        return response()->json(['data' => $tags, 'redirect' => 'dashboard/tags']);
     }
 }

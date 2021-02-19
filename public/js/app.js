@@ -4586,6 +4586,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5431,6 +5438,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5461,6 +5483,26 @@ __webpack_require__.r(__webpack_exports__);
         _this.toggleModal = false;
         location.reload();
       });
+    },
+    uploadExcel: function uploadExcel() {
+      var data = new FormData();
+      data.append('files', this.files);
+      axios.post('/dashboard/tags/import', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        var status = JSON.parse(response.status);
+
+        if (status == '200') {
+          window.location.pathname = response.data.redirect;
+        }
+      })["catch"](function () {
+        console.log('FAILURE!!');
+      });
+    },
+    handleFileUpload: function handleFileUpload() {
+      this.files = this.$refs.files.files[0];
     },
     Delete: function Delete(tag) {
       this.$inertia["delete"]("/dashboard/tags/".concat(tag.id)).then(function () {
@@ -57098,6 +57140,22 @@ var render = function() {
                                 [
                                   _vm._v(
                                     "\n                                    " +
+                                      _vm._s(_vm.__("part")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-500 uppercase border-b border-gray-200 bg-gray-50",
+                                  staticStyle: { "text-align": "start" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
                                       _vm._s(_vm.__("name")) +
                                       "\n                                "
                                   )
@@ -57178,6 +57236,21 @@ var render = function() {
                                       _vm._v(
                                         "\n                                    " +
                                           _vm._s(tag.id) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass:
+                                        "px-6 py-4 whitespace-no-wrap"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(_vm.part) +
                                           "\n                                "
                                       )
                                     ]
@@ -59087,6 +59160,98 @@ var render = function() {
                   _vm._s(_vm.__("tag")) +
                   "\n                "
               )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticClass: "flex justify-end",
+              attrs: { enctype: "multipart/form-data" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.uploadExcel($event)
+                }
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "flex justify-end" },
+                [
+                  _c(
+                    "base-button",
+                    {
+                      staticClass: "bg-teal-800 rounded-none hover:bg-teal-700"
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "w-4 h-4 md:w-6 md:h-6",
+                          attrs: {
+                            fill: "none",
+                            stroke: "currentColor",
+                            viewBox: "0 0 24 24",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              "stroke-width": "2",
+                              d:
+                                "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "relative" }, [
+                _c("input", {
+                  ref: "files",
+                  staticClass:
+                    "absolute block w-full mt-1 opacity-0 cursor-pointer",
+                  attrs: {
+                    id: "files",
+                    type: "file",
+                    accept: "file/*",
+                    label: "Files",
+                    name: "files[]",
+                    error: _vm.$page.errors.files,
+                    tabindex: "7",
+                    multiple: "",
+                    required: ""
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.handleFileUpload()
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "px-6 py-3 mx-2 text-white bg-teal-800 rounded-tr outline-none focus:outline-none hover:bg-teal-700 md:mx-0 md:px-2",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("span", { staticClass: "whitespace-no-wrap" }, [
+                      _vm._v("upload tags")
+                    ])
+                  ]
+                )
+              ])
             ]
           )
         ])

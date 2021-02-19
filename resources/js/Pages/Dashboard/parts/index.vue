@@ -180,6 +180,10 @@
                                     </th>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
                                         style="text-align: start">
+                                        {{__('part')}}
+                                    </th>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                                        style="text-align: start">
                                         {{__('name')}}
                                     </th>
 
@@ -195,6 +199,9 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap">
                                         {{ tag.id }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        {{ part }}
                                     </td>
 
                                     <td  class="px-6 py-4 whitespace-no-wrap">
