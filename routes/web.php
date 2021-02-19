@@ -29,7 +29,8 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     //supplier route
     Route::post('suppliers/import', 'ImportController@suppliers')->name('suppliers.import');
     Route::resource('suppliers', 'SupplierController')->except(['show','create','edit']);
-    
+
+    // tags
     Route::resource('tags', 'TagController')->except(['show','create','edit']);
 
     // coupons route
@@ -39,12 +40,16 @@ Route::middleware('is_admin')->prefix('/dashboard')->group(function () {
     Route::resource('super_categories', 'SuperCategoryController')->except(['show']);
     Route::resource('categories', 'CategoryController');
 
+    // part with tags
+    // Route::get('parts/{part}/tags/create', 'PartTagsController@show')->name('parts.tags');
+    Route::post('parts/{part}/tags', 'PartTagsController@store')->name('parts.tags.store');
+
     // part route
     Route::post('parts/import', 'ImportController@parts')->name('parts.import');
     Route::get('parts/export', 'ExportController@parts')->name('parts.export');
-   
     Route::resource('parts', 'PartController')->except('show');
     Route::get('parts/{slug}', 'PartController@show')->name('parts.show');
+
     //cars and brands
     Route::post('brands/import', 'ImportController@brands')->name('brands.import');
     Route::get('brands/{brand}/cars/create', 'BrandCarsController@show')->name('brands.cars');

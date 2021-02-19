@@ -2,7 +2,7 @@
     <layout>
         <div class="flex justify-between px-5">
             <h1 class="my-2 text-sm text-gray-500 capitalize md:text-base">{{__('dashboard')}}/{{__('parts')}}</h1>
-            <form @submit.prevent="submit" class="flex">
+            <form v-if="hideTable" @submit.prevent="submit" class="flex">
             <div class="flex justify-end">
                 <base-button class="bg-teal-800 rounded-none hover:bg-teal-700">
                     <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
@@ -19,9 +19,10 @@
         <div class="mx-5">
             <div class="items-center justify-between md:flex">
                 <div class="items-center md:flex">
-                    <h2 class="text-xl font-bold text-teal-600 capitalize md:text-3xl">{{__('parts')}}</h2>
-                    <div class="flex items-center text-xs text-gray-500 capitalize whitespace-no-wrap md:mx-10 md:text-base">
-                         <h1>123 {{__('part')}}</h1>
+                    <h2 v-if="!hideTable" class="text-xl font-bold text-teal-600 capitalize md:text-3xl">{{ part +'/'+__('tags')}}</h2>
+                    <h2 v-else class="text-xl font-bold text-teal-600 capitalize md:text-3xl">{{__('parts')}}</h2>                    
+                    <div v-if="hideTable" class="flex items-center text-xs text-gray-500 capitalize whitespace-no-wrap md:mx-10 md:text-base">
+                         <h1>{{parts.data.length}} {{__('part')}}</h1>
                          <div class="flex items-center mx-8">
                              <label for="">
                                 <div class="relative inline-block text-left">
@@ -49,7 +50,7 @@
                 
                 <div class="flex">
 
-                <form>
+                <form v-if="hideTable">
                     <div class="relative">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                         <button type="submit" class="p-1 text-gray-400 focus:outline-none">
@@ -62,17 +63,24 @@
                     </div>
                 </form>
 
-                <div class="flex items-center capitalize">
+            <div class="flex items-center capitalize" v-if="hideTable">
                 <inertia-link href="/dashboard/parts/create"
                                 class="flex items-center px-4 py-1 text-xs font-medium text-white whitespace-no-wrap bg-teal-800 rounded hover:bg-teal-700 md:px-4 md:mx-1 md:py-2 md:text-base">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                     {{__('add part')}}
                 </inertia-link>
                 <button class="px-6 py-2 text-white bg-teal-800 rounded outline-none focus:outline-none hover:bg-teal-700 md:px-2" type="submit">
-                        <a href="/dashboard/parts/export">
-                            <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg> 
-                        </a>
-                    </button>
+                    <a href="/dashboard/parts/export">
+                        <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg> 
+                    </a>
+                </button>
+            </div>
+            <div v-if="!hideTable" class="flex">
+                <button type="button" @click="toggleModal = !toggleModal"
+                                class="flex items-center px-20 py-1 text-xs font-medium text-white whitespace-no-wrap bg-teal-800 rounded outline-none focus:outline-none hover:bg-teal-700 md:px-4 md:mx-1 md:py-2 md:text-base">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                    {{__('add')}} {{__('tag')}}
+                </button>                             
             </div>
             </div>
             
@@ -82,9 +90,13 @@
                     <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6">
                         <div
                             class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-                            <table class="min-w-full">
+                            <table class="min-w-full" v-if="hideTable">
                                 <thead class="bg-gray-100">
                                 <tr>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
+                                        style="text-align: start">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                                    </th>
                                     <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
                                         style="text-align: start">
                                         #ID
@@ -116,7 +128,12 @@
                                 </tr>
                                 </thead>
                                 <tbody class="text-sm text-gray-500 bg-white md:text-base">
-                                <tr v-for="part in filteredList" :key="part.index">                                
+                                <tr v-for="part in filteredList" :key="part.index">  
+                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                        <button @click="showTags(part)" class="outline-none focus:outline-none">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                                        </button>
+                                    </td>                              
                                     <td class="px-3 py-4 whitespace-no-wrap border-b border-gray-200">
                                         {{ part.id }}
                                     </td>
@@ -147,31 +164,114 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <!-- tags -->
+                            <table class="min-w-full" v-else>
+                                <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
+                                        style="text-align: start">
+                                        <button @click="hideTable = !hideTable" class="outline-none focus:outline-none">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                                        </button>
+                                    </th>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                                        style="text-align: start">
+                                        #ID
+                                    </th>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                                        style="text-align: start">
+                                        {{__('name')}}
+                                    </th>
+
+                                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-gray-700 bg-white">
+                                <tr class="border-b border-gray-200" v-for="(tag, index) in tagsBelongsToPart" :key="index">
+                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                        <button @click="hideTable = !hideTable" class="outline-none focus:outline-none">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                                        </button>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        {{ tag.id }}
+                                    </td>
+
+                                    <td  class="px-6 py-4 whitespace-no-wrap">
+                                        <Edit :tag="tag" />
+                                    </td>
+
+                                    <td  class="flex px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap">
+                                        <button class="outline-none focus:outline-none">
+                                            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            
                         </div>
                     </div>
                     <paginator-component :data="parts"></paginator-component>
                 </div>
             </div>
         </div>
-
+    <div v-if="toggleModal" class="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+        <div class="relative w-auto max-w-6xl mx-auto my-6">        
+          <div class="relative flex flex-col w-full outline-none focus:outline-none">               
+            <main class="">
+                <div class="px-6 py-8 bg-white shadow-lg">
+                    <div class="absolute top-0 right-0 mx-3 my-1">
+                        <button class="outline-none focus:outline-none" @click="toggleModal = !toggleModal">X</button>
+                    </div>                        
+                    <div class="">
+                        <form class="flex items-end" @submit.prevent="addTag">
+                            <div class="mx-2">
+                                <base-input  name="name" v-model="form.name" :error="$page.errors.name" :placeholder="__('tag name')" required></base-input>
+                            </div>
+                            <div class="mx-2">
+                                <base-input  name="name_ar" v-model="form.name_ar" :error="$page.errors.name_ar" :placeholder="__('tag name_ar')" required></base-input>
+                            </div>
+                            <div>
+                                <base-button class="bg-teal-700 hover:bg-teal-600">{{__('create')}}</base-button>
+                            </div>
+                        </form>                            
+                    </div>
+                </div>
+            </main>                   
+          </div>
+        </div>
+    </div>
+    <div v-if="toggleModal" class="fixed inset-0 z-40 bg-black opacity-25"></div>
     </layout>
 </template>
 
 <script>
     import Layout from "../../../Shared/Layout";
+    import Edit from '../../Dashboard/tags/Edit'
     import PaginatorComponent from '../../../components/PaginatorComponent';
     export default {
         components: {
             Layout,
+            Edit,
             PaginatorComponent,
         },
         props: ['parts'],
         data() {
             return {
+                toggleModal:false,
                 files:'',
                 isOpen:false,
                 search:'',
-                // id:1,
+               
+                hideTable:true,
+                tagsBelongsToPart:[],
+                part:'',
+                form:{
+                        name: '',
+                        name_ar: '',
+                         id:'',
+                }
             }
         },
         computed: {
@@ -182,31 +282,32 @@
         },
     },
         methods: {
-            submit() {
-            
-            const data = new FormData();
-
-            data.append('files', this.files);
-
-            axios.post( '/dashboard/parts/import',
-                data,
+            showTags(part)
                 {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+                    this.form.id = part.id;
+                    this.part = part.name;
+                    this.tagsBelongsToPart = part.tags;
+                    this.hideTable = !this.hideTable;
+                },
+            submit() {
+            const data = new FormData();
+            data.append('files', this.files);
+            axios.post( '/dashboard/parts/import',data,{
+                    headers: {'Content-Type': 'multipart/form-data'}
                 }
-              }
             ).then(function(response){
-               const status = JSON.parse(response.status);
-
-                    if (status == '200') {
-                        
-                        window.location.pathname = response.data.redirect;
-                    }
+            window.location.pathname = response.data.redirect;
             })
             .catch(function(){
             console.log('FAILURE!!');
             });
-
+            },
+            addTag() {
+                this.$inertia.post(`/dashboard/parts/${this.form.id}/tags`, this.form).then(() => {
+                this.form = '';
+                this.toggleModal = false;
+                location.reload()
+                });
             },
 
             handleFileUpload(){

@@ -93,7 +93,7 @@
                                 </tbody>
                             </table>
                             
-                            <table :class="!hideTable ? 'translate-y-0 ease-out' : 'translate-y-full ease-in'" class="min-w-full" v-else>
+                            <table class="min-w-full" v-else>
                                 <thead class="bg-gray-100">
                                 <tr>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
