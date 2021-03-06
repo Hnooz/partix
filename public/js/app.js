@@ -2617,6 +2617,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3803,6 +3810,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4593,6 +4607,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5039,6 +5060,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -5116,6 +5143,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
 /* harmony import */ var _components_PaginatorComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/PaginatorComponent */ "./resources/js/components/PaginatorComponent.vue");
 /* harmony import */ var _suppliers_Edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../suppliers/Edit */ "./resources/js/Pages/Dashboard/suppliers/Edit.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5344,6 +5378,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
 /* harmony import */ var _components_PaginatorComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/PaginatorComponent */ "./resources/js/components/PaginatorComponent.vue");
 /* harmony import */ var _tags_Edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tags/Edit */ "./resources/js/Pages/Dashboard/tags/Edit.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -50291,6 +50330,20 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
+                                    "\n                                    ID\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
+                                  staticStyle: { "text-align": "start" }
+                                },
+                                [
+                                  _vm._v(
                                     "\n                                     " +
                                       _vm._s(_vm.__("action")) +
                                       "\n                                "
@@ -50306,8 +50359,8 @@ var render = function() {
                               staticClass:
                                 "text-sm text-gray-500 bg-white md:text-base"
                             },
-                            _vm._l(_vm.brands.data, function(brand) {
-                              return _c("tr", { key: brand.index }, [
+                            _vm._l(_vm.brands.data, function(brand, index) {
+                              return _c("tr", { key: index }, [
                                 _c(
                                   "td",
                                   {
@@ -50362,8 +50415,8 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(brand.id) +
+                                      "\n                                        #" +
+                                        _vm._s(index + 1) +
                                         "\n                                    "
                                     )
                                   ]
@@ -50409,7 +50462,22 @@ var render = function() {
                                   "td",
                                   {
                                     staticClass:
-                                      "flex px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200"
+                                      "px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(brand.id) +
+                                        " \n                                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "flex px-6 py-4 border-b border-gray-200"
                                   },
                                   [
                                     _c(
@@ -54140,6 +54208,20 @@ var render = function() {
                             },
                             [
                               _vm._v(
+                                "\n                                    #ID\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
+                              staticStyle: { "text-align": "start" }
+                            },
+                            [
+                              _vm._v(
                                 "\n                                    " +
                                   _vm._s(_vm.__("name")) +
                                   " \n                                "
@@ -54253,8 +54335,14 @@ var render = function() {
                           staticClass:
                             "text-sm text-gray-500 bg-white md:text-base"
                         },
-                        _vm._l(_vm.orders.data, function(order) {
-                          return _c("tr", { key: order.index }, [
+                        _vm._l(_vm.orders.data, function(order, index) {
+                          return _c("tr", { key: index }, [
+                            _c(
+                              "td",
+                              { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                              [_c("h1", [_vm._v("#" + _vm._s(index + 1))])]
+                            ),
+                            _vm._v(" "),
                             _c(
                               "td",
                               { staticClass: "px-6 py-4 whitespace-no-wrap" },
@@ -56758,6 +56846,20 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
+                                    "\n                                    ID\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-3 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50",
+                                  staticStyle: { "text-align": "start" }
+                                },
+                                [
+                                  _vm._v(
                                     "\n                                    " +
                                       _vm._s(_vm.__("action")) +
                                       "\n                                "
@@ -56773,8 +56875,8 @@ var render = function() {
                               staticClass:
                                 "text-sm text-gray-500 bg-white md:text-base"
                             },
-                            _vm._l(_vm.filteredList, function(part) {
-                              return _c("tr", { key: part.index }, [
+                            _vm._l(_vm.filteredList, function(part, index) {
+                              return _c("tr", { key: index }, [
                                 _c(
                                   "td",
                                   {
@@ -56829,8 +56931,8 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    " +
-                                        _vm._s(part.id) +
+                                      "\n                                    #" +
+                                        _vm._s(index + 1) +
                                         "\n                                "
                                     )
                                   ]
@@ -56925,6 +57027,21 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    " +
                                         _vm._s(part.type.name) +
+                                        "\n                                "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-3 py-4 whitespace-no-wrap border-b border-gray-200"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    " +
+                                        _vm._s(part.id) +
                                         "\n                                "
                                     )
                                   ]
@@ -58133,7 +58250,7 @@ var render = function() {
   return _c("layout", [
     _c(
       "h1",
-      { staticClass: "md:text-base my-2 text-gray-500 text-sm capitalize" },
+      { staticClass: "my-2 text-sm text-gray-500 capitalize md:text-base" },
       [
         _vm._v(
           _vm._s(_vm.__("dashboard")) + "/" + _vm._s(_vm.__("super categories"))
@@ -58143,7 +58260,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "mt-8 capitalize" }, [
       _c("div", { staticClass: "flex justify-between" }, [
-        _c("h2", { staticClass: "md:text-3xl text-teal-600 font-bold" }, [
+        _c("h2", { staticClass: "font-bold text-teal-600 md:text-3xl" }, [
           _vm._v(_vm._s(_vm.__("super categories")))
         ]),
         _vm._v(" "),
@@ -58155,7 +58272,7 @@ var render = function() {
               "inertia-link",
               {
                 staticClass:
-                  "bg-teal-800 flex font-medium hover:bg-teal-700 items-center md:px-4 md:mx-1 md:py-2 md:text-base  px-20 py-1 rounded text-white text-xs whitespace-no-wrap",
+                  "flex items-center px-20 py-1 text-xs font-medium text-white whitespace-no-wrap bg-teal-800 rounded hover:bg-teal-700 md:px-4 md:mx-1 md:py-2 md:text-base",
                 attrs: { href: "/dashboard/super_categories/create" }
               },
               [
@@ -58198,13 +58315,13 @@ var render = function() {
         _c("div", { staticClass: "flex flex-col" }, [
           _c(
             "div",
-            { staticClass: "-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6" },
+            { staticClass: "py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6" },
             [
               _c(
                 "div",
                 {
                   staticClass:
-                    "align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
+                    "inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg"
                 },
                 [
                   _c("table", { staticClass: "min-w-full" }, [
@@ -58214,7 +58331,7 @@ var render = function() {
                           "th",
                           {
                             staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider",
+                              "px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50",
                             staticStyle: { "text-align": "start" }
                           },
                           [
@@ -58228,7 +58345,7 @@ var render = function() {
                           "th",
                           {
                             staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider",
+                              "px-6 py-3 text-xs font-medium leading-4 tracking-wider text-gray-500 uppercase border-b border-gray-200 bg-gray-50",
                             staticStyle: { "text-align": "start" }
                           },
                           [
@@ -58236,6 +58353,20 @@ var render = function() {
                               "\n                                    " +
                                 _vm._s(_vm.__("name")) +
                                 "\n                                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50",
+                            staticStyle: { "text-align": "start" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    ID\n                                "
                             )
                           ]
                         ),
@@ -58249,7 +58380,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "tbody",
-                      { staticClass: "bg-white text-gray-700" },
+                      { staticClass: "text-gray-700 bg-white" },
                       _vm._l(_vm.super_categories, function(
                         super_category,
                         index
@@ -58266,8 +58397,8 @@ var render = function() {
                               { staticClass: "px-6 py-4 whitespace-no-wrap" },
                               [
                                 _vm._v(
-                                  "\n                                    " +
-                                    _vm._s(_vm.id++) +
+                                  "\n                                    #" +
+                                    _vm._s(index + 1) +
                                     "\n                                "
                                 )
                               ]
@@ -58287,9 +58418,21 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "td",
+                              { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(super_category.id) +
+                                    "\n                                "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
                               {
                                 staticClass:
-                                  "flex px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium"
+                                  "flex px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap"
                               },
                               [
                                 _c(
@@ -58306,7 +58449,7 @@ var render = function() {
                                     _c(
                                       "svg",
                                       {
-                                        staticClass: "h-6 text-blue-500 w-6",
+                                        staticClass: "w-6 h-6 text-blue-500",
                                         attrs: {
                                           fill: "currentColor",
                                           viewBox: "0 0 20 20",
@@ -58336,7 +58479,7 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass:
-                                      "focus:outline-none outline-none",
+                                      "outline-none focus:outline-none",
                                     on: {
                                       click: function($event) {
                                         return _vm.Delete(super_category)
@@ -58733,6 +58876,20 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50",
+                              staticStyle: { "text-align": "start" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    ID\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
                           _c("th", {
                             staticClass:
                               "px-6 py-3 border-b border-gray-200 bg-gray-50"
@@ -58756,8 +58913,8 @@ var render = function() {
                                 { staticClass: "px-6 py-4 whitespace-no-wrap" },
                                 [
                                   _vm._v(
-                                    "\n                                    " +
-                                      _vm._s(supplier.id) +
+                                    "\n                                    #" +
+                                      _vm._s(index + 1) +
                                       "\n                                "
                                   )
                                 ]
@@ -58768,6 +58925,18 @@ var render = function() {
                                 { staticClass: "px-6 py-4 whitespace-no-wrap" },
                                 [_c("Edit", { attrs: { supplier: supplier } })],
                                 1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(supplier.id) +
+                                      "\n                                "
+                                  )
+                                ]
                               ),
                               _vm._v(" "),
                               _c(
@@ -59315,6 +59484,20 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50",
+                              staticStyle: { "text-align": "start" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    ID\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
                           _c("th", {
                             staticClass:
                               "px-6 py-3 border-b border-gray-200 bg-gray-50"
@@ -59338,8 +59521,8 @@ var render = function() {
                                 { staticClass: "px-6 py-4 whitespace-no-wrap" },
                                 [
                                   _vm._v(
-                                    "\n                                    " +
-                                      _vm._s(tag.id) +
+                                    "\n                                    #" +
+                                      _vm._s(index + 1) +
                                       "\n                                "
                                   )
                                 ]
@@ -59350,6 +59533,18 @@ var render = function() {
                                 { staticClass: "px-6 py-4 whitespace-no-wrap" },
                                 [_c("Edit", { attrs: { tag: tag } })],
                                 1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(tag.id) +
+                                      "\n                                "
+                                  )
+                                ]
                               ),
                               _vm._v(" "),
                               _c(

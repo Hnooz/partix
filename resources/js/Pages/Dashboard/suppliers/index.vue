@@ -48,6 +48,11 @@
                                         style="text-align: start">
                                         {{__('name')}}
                                     </th>
+                                    
+                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                                        style="text-align: start">
+                                        ID
+                                    </th>
 
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                                 </tr>
@@ -55,11 +60,13 @@
                                 <tbody class="text-gray-700 bg-white">
                                 <tr class="border-b border-gray-200" v-for="(supplier, index) in suppliers.data" :key="index">
                                     <td class="px-6 py-4 whitespace-no-wrap">
-                                        {{ supplier.id }}
+                                        #{{ index+1 }}
                                     </td>
-
                                     <td  class="px-6 py-4 whitespace-no-wrap">
                                         <Edit :supplier="supplier" />
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        {{ supplier.id }}
                                     </td>
 
                                     <td  class="flex px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap">

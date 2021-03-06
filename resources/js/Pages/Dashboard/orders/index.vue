@@ -50,6 +50,10 @@
                                 <tr>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
                                         style="text-align: start">
+                                        #ID
+                                    </th>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
+                                        style="text-align: start">
                                         {{__('name')}} 
                                     </th>
                                     <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-700 uppercase border-b border-gray-200 bg-gray-50"
@@ -79,9 +83,12 @@
                                 </tr>
                                 </thead>
                                 <tbody class="text-sm text-gray-500 bg-white md:text-base">
-                                <tr v-for="order in orders.data" :key="order.index">
+                                <tr v-for="(order, index) in orders.data" :key="index">
                                     <td class="px-6 py-4 whitespace-no-wrap">
-                                        <h1 >{{ order.customer_name }}</h1>                                        
+                                        <h1>#{{ index+1 }}</h1>                                        
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <h1>{{ order.customer_name }}</h1>                                        
                                     </td>
                                     <td class="px-3 py-4 whitespace-no-wrap">
                                         <h1 >{{ order.customer_address }}</h1>                                        

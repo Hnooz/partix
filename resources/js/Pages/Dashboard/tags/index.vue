@@ -47,20 +47,25 @@
                                         style="text-align: start">
                                         {{__('name')}}
                                     </th>
-
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                                        style="text-align: start">
+                                        ID
+                                    </th>
                                     <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                                 </tr>
                                 </thead>
                                 <tbody class="text-gray-700 bg-white">
                                 <tr class="border-b border-gray-200" v-for="(tag, index) in tags.data" :key="index">
                                     <td class="px-6 py-4 whitespace-no-wrap">
-                                        {{ tag.id }}
+                                        #{{ index+1 }}
                                     </td>
 
                                     <td  class="px-6 py-4 whitespace-no-wrap">
                                         <Edit :tag="tag" />
                                     </td>
-
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        {{ tag.id }}
+                                    </td>
                                     <td  class="flex px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap">
                                         <button @click="Delete(tag)" class="outline-none focus:outline-none">
                                             <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>

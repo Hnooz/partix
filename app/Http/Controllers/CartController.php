@@ -24,6 +24,14 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'id' => ['required'],
+            'name' => ['required'],
+            'slug' => ['required'],
+            'part_type_id' => ['required'],
+            'url' => ['required'],
+                
+        ]);
         $supplier = Supplier::find($request->supplier_id);
         
         $category = Category::find($request->category_id);
@@ -163,7 +171,7 @@ class CartController extends Controller
 
         session()->flash('toast', [
             'type' => 'error',
-            'message' => 'cart was cleared successfuly',
+            'message' => 'cart was cleared successfully',
         ]);
 
         return redirect()->route('store.index');
